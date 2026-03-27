@@ -1,12 +1,12 @@
 # escola liberal para Bilionário — Setup Guide
 
 ## 🚀 Site Ao Vivo
-**https://natozar.github.io/escola-conservadora/**
+**https://natozar.github.io/escola-liberal/**
 
 ## 📁 Arquitetura
 
 ```
-escola-conservadora/
+escola-liberal/
 ├── index.html          # Landing page (SEO, PWA install)
 ├── app.html            # Aplicação principal (293KB, single-file)
 ├── supabase-auth.js    # Autenticação + sync na nuvem

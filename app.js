@@ -211,6 +211,7 @@ function goMod(i){
   setNav('nM'+i)
 }
 function openL(mi,li){
+  if(!M[mi]||!M[mi].lessons[li])return;
   S.cMod=mi;S.cLes=li;const m=M[mi],l=m.lessons[li];
   document.getElementById('lvProg').textContent=`Aula ${li+1}/${m.lessons.length}`;
   let h=l.content;
@@ -237,6 +238,7 @@ function openL(mi,li){
   window.scrollTo(0,0)
 }
 function ans(mi,li,a){
+  if(!M[mi]||!M[mi].lessons[li]||!M[mi].lessons[li].quiz)return;
   const l=M[mi].lessons[li],ok=a===l.quiz.c,qk=`${mi}-${li}`;
   if(S.quiz[qk]!==undefined)return;
   S.quiz[qk]=ok;
@@ -459,7 +461,7 @@ const chatKB=[
   {k:['hayek','friedrich hayek','conhecimento disperso','caminho da servidão'],r:'<strong>Friedrich Hayek</strong> mostrou que nenhum planejador central pode ter todo o conhecimento necessário para coordenar a economia. O preço livre faz isso naturalmente. Sua obra "O Caminho da Servidão" é um alerta contra o totalitarismo.'},
   // Perguntas gerais
   {k:['escola austríaca','austríaca','austríacos'],r:'A <strong>Escola Austríaca de Economia</strong> defende mercado livre, propriedade privada, padrão-ouro e mínima intervenção estatal. Principais pensadores: Carl Menger, Ludwig von Mises, Friedrich Hayek, Murray Rothbard. É a base teórica deste curso.'},
-  {k:['como funciona','sobre o curso','módulos','aulas'],r:'O curso tem <strong>6 módulos com 10 aulas cada</strong>: 1) O que é Dinheiro, 2) Oferta e Demanda, 3) Empreendedorismo, 4) Finanças Pessoais, 5) História Econômica, 6) Pensamento Crítico. Cada aula tem conteúdo + quiz. Complete para ganhar XP e subir de nível!'},
+  {k:['como funciona','sobre o curso','módulos','aulas'],r:'O curso tem <strong>10 módulos com 10 aulas cada</strong> (100 aulas total): 1) O que é Dinheiro, 2) Oferta e Demanda, 3) Empreendedorismo, 4) Finanças Pessoais, 5) História Econômica, 6) Pensamento Crítico, 7) Números e Operações (Método Singapura), 8) Aprender a Pensar (Filosofia), 9) Inteligência Emocional, 10) Mentalidade de Crescimento. Cada aula tem conteúdo + quiz. Complete para ganhar XP e subir de nível!'},
   {k:['xp','nível','pontos','gamificação'],r:'Você ganha <strong>XP</strong> ao completar aulas (25-30 XP) e acertar quizzes (+15 XP). A cada nível, precisa de mais XP (nível × 100). Mantenha uma sequência diária para desbloquear conquistas especiais!'},
 ];
 
@@ -502,7 +504,11 @@ function getContextSugs(){
       ['Como empreender?','O que é lucro?','O que é destruição criativa?'],
       ['Como fazer orçamento?','O que são juros compostos?','Dívida é ruim?'],
       ['O que foi a Revolução Industrial?','O que causou a crise de 1929?','Socialismo funciona?'],
-      ['O que são falácias?','Quem foi Bastiat?','Qual o papel do Estado?']
+      ['O que são falácias?','Quem foi Bastiat?','Qual o papel do Estado?'],
+      ['O que é valor posicional?','Como funciona multiplicação visual?','O que são frações equivalentes?'],
+      ['O que é filosofia?','Quem foi Sócrates?','O que é a Alegoria da Caverna?'],
+      ['O que são emoções?','Como lidar com ansiedade?','O que é empatia?'],
+      ['O que é neuroplasticidade?','Mindset fixo vs crescimento?','O que são metas SMART?']
     ];
     return modSugs[S.cMod]||modSugs[0];
   }
@@ -1496,7 +1502,7 @@ function playSfx(type){
 // PRINT LESSON
 // ============================================================
 function printLesson(){
-  if(S.cMod===null||S.cLes===null)return;
+  if(S.cMod===null||S.cLes===null||!M[S.cMod]||!M[S.cMod].lessons[S.cLes])return;
   const m=M[S.cMod],l=m.lessons[S.cLes];
   const w=window.open('','_blank');
   w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${l.title} — escola liberal</title>
@@ -2195,6 +2201,7 @@ goDash=function(){
 };
 const _origGoMod=goMod;
 goMod=function(i){
+  if(!M[i])return;
   _origGoMod(i);
   updateBottomNav('mod');
   updateMobileHeader(M[i].icon+' '+M[i].title,true);
@@ -2202,6 +2209,7 @@ goMod=function(i){
 };
 const _origOpenL=openL;
 openL=function(mi,li){
+  if(!M[mi]||!M[mi].lessons[li])return;
   _origOpenL(mi,li);
   updateMobileHeader(M[mi].lessons[li].title,true);
   _mobileBackFn=()=>goMod(mi)
