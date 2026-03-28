@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' https://js.stripe.com https://cdn.jsdelivr.net https://api.qrserver.com https://www.googletagmanager.com https://www.google-analytics.com https://tagmanager.google.com; img-src 'self' data: https: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com https://js.stripe.com https://cdn.jsdelivr.net https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-src https://js.stripe.com https://accounts.google.com https://*.google.com; worker-src 'self' blob:;">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0f1729">
+<meta name="description" content="Plataforma homeschool Escola Liberal — 9 disciplinas, 140 aulas interativas com gamificação, quizzes e certificados. Bilíngue PT/EN.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -133,7 +134,9 @@
       <h2>Bem-vindo à Escola Liberal</h2>
       <p>Plataforma curricular homeschool com 9 disciplinas e 140 aulas interativas.</p>
       <label for="obName" style="font-weight:600;margin-bottom:.25rem;display:block">Qual é seu nome?</label>
-      <input class="onboard-input" id="obName" placeholder="Digite seu nome" maxlength="30" onkeydown="if(event.key==='Enter')obNext(1)" autocomplete="given-name">
+      <input class="onboard-input" id="obName" placeholder="Digite seu nome" maxlength="30" onkeydown="if(event.key==='Enter')document.getElementById('obEmail').focus()" autocomplete="given-name">
+      <label for="obEmail" style="font-weight:600;margin-bottom:.25rem;display:block;margin-top:.75rem">Seu email <span style="font-weight:400;color:var(--text-muted);font-size:.8rem">(para salvar progresso)</span></label>
+      <input class="onboard-input" id="obEmail" type="email" placeholder="seu@email.com" maxlength="60" onkeydown="if(event.key==='Enter')obNext(1)" autocomplete="email">
       <button class="btn btn-sage" onclick="obNext(1)" style="width:100%">Continuar →</button>
     </div>
     <div class="onboard-step" id="obStep2">
@@ -173,6 +176,19 @@
       </div>
       <button class="btn btn-sage" onclick="obFinish()" style="width:100%">Começar a Aprender 🚀</button>
     </div>
+  </div>
+</div>
+
+<!-- SAVE PROGRESS MODAL -->
+<div class="save-modal-overlay" id="saveModal" style="display:none">
+  <div class="save-modal">
+    <button class="save-modal-close" onclick="closeSaveModal()" aria-label="Fechar">&times;</button>
+    <div style="font-size:2.5rem;margin-bottom:.75rem">🎉</div>
+    <h2 style="font-size:1.3rem;margin-bottom:.5rem">Você está mandando bem!</h2>
+    <p style="color:var(--text-secondary);font-size:.9rem;margin-bottom:1.25rem;line-height:1.6">Já completou <strong id="saveModalCount">3</strong> aulas. Crie uma conta gratuita para salvar seu progresso na nuvem e acessar de qualquer dispositivo.</p>
+    <a href="auth.html" class="btn btn-sage" style="width:100%;margin-bottom:.75rem">Criar Conta Gratuita →</a>
+    <button class="btn btn-ghost" onclick="closeSaveModal()" style="width:100%;font-size:.85rem">Continuar sem conta</button>
+    <p style="color:var(--text-muted);font-size:.72rem;margin-top:.75rem">Sem conta, seu progresso fica apenas neste navegador.</p>
   </div>
 </div>
 

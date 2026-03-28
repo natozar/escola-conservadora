@@ -262,7 +262,7 @@ function nextL(){
   const mi=S.cMod,li=S.cLes;
   if(mi===null||mi===undefined||!M[mi]||!M[mi].lessons[li])return;
   const lk=`${mi}-${li}`;
-  if(!S.done[lk]){S.done[lk]=true;addXP(M[mi].lessons[li].xp);toast(`+${M[mi].lessons[li].xp} XP`);save()}
+  if(!S.done[lk]){S.done[lk]=true;addXP(M[mi].lessons[li].xp);toast(`+${M[mi].lessons[li].xp} XP`);save();checkSaveModal()}
   if(li<M[mi].lessons.length-1)openL(mi,li+1);else{
     const justCompleted=M[mi].lessons.every((_,i)=>S.done[`${mi}-${i}`]);
     goMod(mi);
@@ -824,7 +824,11 @@ function obNext(step){
   if(step===1){
     const name=document.getElementById('obName').value.trim();
     if(!name){document.getElementById('obName').focus();return}
-    S.name=name;save()
+    S.name=name;
+    const email=document.getElementById('obEmail').value.trim();
+    if(email)S.email=email;
+    save();
+    if(email)localStorage.setItem('escola_lead_email',email);
   }
   if(step===2&&!obAgeGroup){toast('Selecione sua faixa etária');return}
   if(step===3){
@@ -844,6 +848,26 @@ function obFinish(){
   el.classList.add('hide');
   setTimeout(()=>{el.style.display='none'},500);
   goDash()
+}
+
+// ============================================================
+// SAVE PROGRESS MODAL — triggers after N lessons completed
+// ============================================================
+const SAVE_MODAL_KEY='escola_save_modal_shown';
+const SAVE_MODAL_THRESHOLD=3;
+function checkSaveModal(){
+  // Don't show if: already shown, user has account, or under threshold
+  if(localStorage.getItem(SAVE_MODAL_KEY))return;
+  if(S.uid)return; // logged in via Supabase
+  const doneCount=Object.keys(S.done).length;
+  if(doneCount>=SAVE_MODAL_THRESHOLD){
+    document.getElementById('saveModalCount').textContent=doneCount;
+    document.getElementById('saveModal').style.display='flex';
+    localStorage.setItem(SAVE_MODAL_KEY,'1');
+  }
+}
+function closeSaveModal(){
+  document.getElementById('saveModal').style.display='none';
 }
 
 // ============================================================
