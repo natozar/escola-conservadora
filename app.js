@@ -461,7 +461,7 @@ const chatKB=[
   {k:['hayek','friedrich hayek','conhecimento disperso','caminho da servidão'],r:'<strong>Friedrich Hayek</strong> mostrou que nenhum planejador central pode ter todo o conhecimento necessário para coordenar a economia. O preço livre faz isso naturalmente. Sua obra "O Caminho da Servidão" é um alerta contra o totalitarismo.'},
   // Perguntas gerais
   {k:['escola austríaca','austríaca','austríacos'],r:'A <strong>Escola Austríaca de Economia</strong> defende mercado livre, propriedade privada, padrão-ouro e mínima intervenção estatal. Principais pensadores: Carl Menger, Ludwig von Mises, Friedrich Hayek, Murray Rothbard. É a base teórica deste curso.'},
-  {k:['como funciona','sobre o curso','módulos','aulas'],r:'O curso tem <strong>10 módulos com 10 aulas cada</strong> (100 aulas total): 1) O que é Dinheiro, 2) Oferta e Demanda, 3) Empreendedorismo, 4) Finanças Pessoais, 5) História Econômica, 6) Pensamento Crítico, 7) Números e Operações (Método Singapura), 8) Aprender a Pensar (Filosofia), 9) Inteligência Emocional, 10) Mentalidade de Crescimento. Cada aula tem conteúdo + quiz. Complete para ganhar XP e subir de nível!'},
+  {k:['como funciona','sobre o curso','módulos','aulas'],r:'O curso tem <strong>13 módulos com 10 aulas cada</strong> (130 aulas total) em 8 disciplinas: Economia (6 módulos), Matemática, Filosofia, Inteligência Emocional, Psicologia do Crescimento, Português e Redação, Ciências da Natureza e História do Brasil. Cada aula tem conteúdo + quiz. Complete para ganhar XP e subir de nível!'},
   {k:['xp','nível','pontos','gamificação'],r:'Você ganha <strong>XP</strong> ao completar aulas (25-30 XP) e acertar quizzes (+15 XP). A cada nível, precisa de mais XP (nível × 100). Mantenha uma sequência diária para desbloquear conquistas especiais!'},
 ];
 
@@ -508,7 +508,10 @@ function getContextSugs(){
       ['O que é valor posicional?','Como funciona multiplicação visual?','O que são frações equivalentes?'],
       ['O que é filosofia?','Quem foi Sócrates?','O que é a Alegoria da Caverna?'],
       ['O que são emoções?','Como lidar com ansiedade?','O que é empatia?'],
-      ['O que é neuroplasticidade?','Mindset fixo vs crescimento?','O que são metas SMART?']
+      ['O que é neuroplasticidade?','Mindset fixo vs crescimento?','O que são metas SMART?'],
+      ['O que são classes de palavras?','Como fazer uma redação nota 1000?','O que são figuras de linguagem?'],
+      ['O que é o método científico?','Como funcionam os átomos?','O que é uma cadeia alimentar?'],
+      ['Como o Brasil foi descoberto?','O que foi o Plano Real?','Quem foi Visconde de Mauá?']
     ];
     return modSugs[S.cMod]||modSugs[0];
   }

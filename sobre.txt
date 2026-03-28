@@ -16,7 +16,7 @@ PWA instalável, funciona offline, com gamificação (XP, níveis, badges, strea
 Objetivo: parceria com ANED (Associação Nacional de Educação Domiciliar).
 
 ============================================================
-5 DISCIPLINAS · 10 MÓDULOS · 100 AULAS
+8 DISCIPLINAS · 13 MÓDULOS · 130 AULAS
 ============================================================
 
 1. ECONOMIA — Escola Austríaca (6 módulos, 60 aulas)
@@ -46,6 +46,21 @@ Objetivo: parceria com ANED (Associação Nacional de Educação Domiciliar).
    - Módulo 9: Mentalidade de Crescimento (🧠, cor: coral)
    Método: Growth Mindset (Dweck, Duckworth, Bandura)
    Inclui: neuroplasticidade, grit, hábitos, metas SMART
+
+6. PORTUGUÊS E REDAÇÃO (1 módulo, 10 aulas)
+   - Módulo 10: Português e Redação (📝, cor: sage)
+   Método: Gramática aplicada + produção textual progressiva
+   Inclui: classes de palavras, interpretação, redação dissertativa, figuras de linguagem
+
+7. CIÊNCIAS DA NATUREZA (1 módulo, 10 aulas)
+   - Módulo 11: Ciências da Natureza (🔬, cor: mint)
+   Método: Investigação científica + experimentos mentais
+   Inclui: método científico, átomos, energia, célula, astronomia
+
+8. HISTÓRIA DO BRASIL (1 módulo, 10 aulas)
+   - Módulo 12: História do Brasil (🇧🇷, cor: coral)
+   Método: Perspectiva liberal/crítica com dados econômicos
+   Inclui: Colônia, Império, República, Era Vargas, Plano Real, Brasil contemporâneo
 
 ============================================================
 ESTRUTURA DE ARQUIVOS
