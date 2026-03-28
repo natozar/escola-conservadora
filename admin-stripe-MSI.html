@@ -1654,7 +1654,7 @@ function showSetupFlow(e) {
     if (!confirm('Já existe um autenticador configurado.\nReconfigurar vai invalidar o anterior. Continuar?')) return;
   }
   _setupSecret = generateTotpSecret();
-  const issuer = 'EscolaConservadora';
+  const issuer = 'EscolaLiberal';
   const account = 'admin';
   const otpUri = `otpauth://totp/${issuer}:${account}?secret=${_setupSecret}&issuer=${issuer}&algorithm=SHA1&digits=6&period=30`;
 

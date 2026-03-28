@@ -1,15 +1,18 @@
 // Incrementar versão sempre que os assets mudarem para forçar atualização do cache
-const CACHE_NAME = 'escola-liberal-v6';
+const CACHE_NAME = 'escola-liberal-v7';
 const ASSETS = [
   './',
   './index.html',
   './app.html',
   './app.css',
   './app.js',
+  './i18n.js',
   './lessons.json',
   './cookie-consent.js',
   './supabase-client.js',
   './stripe-billing.js',
+  './auth.html',
+  './perfil.html',
   './offline.html',
   './termos.html',
   './privacidade.html',

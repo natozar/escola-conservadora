@@ -91,7 +91,14 @@ function streak(){
 function ui(){
   const need=S.lvl*100;const li=getLevelInfo(S.lvl);
   document.getElementById('uLvl').textContent=S.lvl;
-  document.getElementById('xpBar').style.width=(S.xp/need*100)+'%';
+  const xpPct=Math.round(S.xp/need*100);
+  const xpBar=document.getElementById('xpBar');
+  xpBar.style.width=xpPct+'%';
+  xpBar.setAttribute('role','progressbar');
+  xpBar.setAttribute('aria-valuenow',S.xp);
+  xpBar.setAttribute('aria-valuemin','0');
+  xpBar.setAttribute('aria-valuemax',need);
+  xpBar.setAttribute('aria-label',`Experiência: ${S.xp}/${need} XP (${xpPct}%)`);
   document.getElementById('xpNow').textContent=S.xp;
   document.getElementById('xpMax').textContent=need;
   document.getElementById('sXP').textContent=totalXP();
@@ -217,7 +224,7 @@ function openL(mi,li){
   let h=l.content;
   if(l.quiz){
     h+=`<div class="qz"><h3>Quiz</h3><div class="qz-q">${l.quiz.q}</div><div class="qz-opts">`;
-    l.quiz.o.forEach((o,oi)=>{h+=`<button class="qz-o" onclick="ans(${mi},${li},${oi})" id="qo${oi}">${o}</button>`});
+    l.quiz.o.forEach((o,oi)=>{h+=`<button class="qz-o" tabindex="0" role="button" aria-label="Opção de resposta: ${o}" onclick="ans(${mi},${li},${oi})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ans(${mi},${li},${oi})}" id="qo${oi}">${o}</button>`});
     h+=`</div><div class="qz-fb" id="qfb"></div></div>`
   }
   document.getElementById('lvBody').innerHTML=h;
@@ -785,6 +792,8 @@ function goPerf(){
 // ============================================================
 const AVATARS=['🧑‍🎓','👨‍💼','👩‍💼','🦊','🦁','🐺','🦅','🐉','💎','🏆'];
 let obAvatar='🧑‍🎓';
+let obAgeGroup='';
+let obLangPref='pt';
 function initOnboard(){
   if(S.name!=='Aluno'){document.getElementById('onboard').style.display='none';return}
   document.getElementById('obAvatars').innerHTML=AVATARS.map((a,i)=>
@@ -797,17 +806,36 @@ function selectAvatar(a,el){
   document.querySelectorAll('.onboard-av').forEach(e=>e.classList.remove('selected'));
   el.classList.add('selected')
 }
+function selectAge(age,el){
+  obAgeGroup=age;
+  document.querySelectorAll('.ob-age-btn').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active')
+}
+function selectObLang(lang,el){
+  obLangPref=lang;
+  document.querySelectorAll('.ob-lang-btn').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active')
+}
 function obNext(step){
   if(step===1){
     const name=document.getElementById('obName').value.trim();
     if(!name){document.getElementById('obName').focus();return}
     S.name=name;save()
   }
+  if(step===2&&!obAgeGroup){toast('Selecione sua faixa etária');return}
+  if(step===3){
+    if(typeof setLang==='function')setLang(obLangPref);
+  }
   document.getElementById('obStep'+step).classList.remove('active');
   document.getElementById('obStep'+(step+1)).classList.add('active')
 }
 function obFinish(){
-  S.avatar=obAvatar;save();
+  S.avatar=obAvatar;
+  S.ageGroup=obAgeGroup;
+  S.lang=obLangPref;
+  save();
+  if(typeof setLang==='function')setLang(obLangPref);
+  if(typeof updateLangToggle==='function')updateLangToggle();
   const el=document.getElementById('onboard');
   el.classList.add('hide');
   setTimeout(()=>{el.style.display='none'},500);
@@ -1930,7 +1958,13 @@ function updateGlobalProgress(){
   const done=Object.keys(S.done).length;
   const total=M.reduce((s,m)=>s+m.lessons.length,0);
   const pct=total?Math.round(done/total*100):0;
-  document.getElementById('globalProgressFill').style.width=pct+'%'
+  const fillEl=document.getElementById('globalProgressFill');
+  fillEl.style.width=pct+'%';
+  fillEl.setAttribute('role','progressbar');
+  fillEl.setAttribute('aria-valuenow',pct);
+  fillEl.setAttribute('aria-valuemin','0');
+  fillEl.setAttribute('aria-valuemax','100');
+  fillEl.setAttribute('aria-label',`Progresso geral: ${pct}% concluído`)
 }
 
 // ============================================================
@@ -2277,6 +2311,17 @@ function vibrate(ms){
 document.addEventListener('click',e=>{
   if(e.target.closest('.btn,.qz-o,.ni,.bnav-item,.er-opt'))vibrate()
 },{passive:true});
+
+// ============================================================
+// SIDEBAR COLLAPSIBLE SECTIONS
+// ============================================================
+function toggleSideSection(id){
+  const sec=document.getElementById(id);
+  if(!sec)return;
+  sec.classList.toggle('collapsed');
+  const arrow=document.getElementById(id==='toolsSection'?'toolsArrow':'');
+  if(arrow)arrow.classList.toggle('rotated')
+}
 
 // ============================================================
 // LANGUAGE TOGGLE HELPER
