@@ -638,7 +638,7 @@ function toggleChat(){
 }
 
 function initChat(){
-  addBotMsg('Olá! 👋 Sou o <strong>Tutor Econômico</strong> da escola liberal. Pergunte qualquer coisa sobre economia, finanças ou o conteúdo das aulas!');
+  addBotMsg('Olá! 👋 Sou o <strong>Tutor IA</strong> da escola liberal. Pergunte qualquer coisa sobre as aulas — uso inteligência artificial para responder! 🤖');
   showSuggestions();
 }
 
@@ -684,20 +684,68 @@ function askSug(q){
   document.getElementById('chatIn').value=q;sendChat()
 }
 
-function sendChat(){
+async function sendChat(){
   const inp=document.getElementById('chatIn'),txt=inp.value.trim();
   if(!txt)return;
   addUserMsg(txt);inp.value='';
   document.getElementById('chatSugs').innerHTML='';
   // Typing indicator
-  const typing=document.createElement('div');typing.className='chat-msg bot typing';typing.id='typing';typing.textContent='Digitando...';
+  const typing=document.createElement('div');typing.className='chat-msg bot typing';typing.id='typing';typing.textContent='Pensando...';
   document.getElementById('chatBody').appendChild(typing);scrollChat();
-  setTimeout(()=>{
-    const el=document.getElementById('typing');if(el)el.remove();
-    const answer=findAnswer(txt);
-    addBotMsg(answer);
-    showSuggestions()
-  },600+Math.random()*800)
+
+  // Try AI tutor first, fallback to local KB if offline or no API
+  let answer;
+  try{
+    answer=await askAITutor(txt);
+  }catch(e){
+    console.warn('[Chat] AI tutor failed, using local KB:',e.message);
+    answer=findAnswer(txt);
+  }
+
+  const el=document.getElementById('typing');if(el)el.remove();
+  addBotMsg(answer);
+  showSuggestions();
+}
+
+async function askAITutor(message){
+  // Build context from current lesson
+  const moduleTitle=S.cMod!==null&&M[S.cMod]?M[S.cMod].title:null;
+  const lessonTitle=S.cLes!==null&&S.cMod!==null&&M[S.cMod]&&M[S.cMod].lessons[S.cLes]?M[S.cMod].lessons[S.cLes].title:null;
+  const lessonContent=S.cLes!==null&&S.cMod!==null&&M[S.cMod]&&M[S.cMod].lessons[S.cLes]&&M[S.cMod].lessons[S.cLes].content?M[S.cMod].lessons[S.cLes].content.replace(/<[^>]*>/g,' ').substring(0,1500):null;
+
+  const body={
+    message,
+    moduleTitle,
+    lessonTitle,
+    lessonContext:lessonContent,
+    ageGroup:S.ageGroup||'17+',
+    lang:typeof CURRENT_LANG!=='undefined'?CURRENT_LANG:'pt'
+  };
+
+  // Get auth token if available
+  const headers={'Content-Type':'application/json'};
+  if(typeof sbClient!=='undefined'&&sbClient){
+    try{
+      const{data}=await sbClient.auth.getSession();
+      if(data.session)headers['Authorization']='Bearer '+data.session.access_token;
+    }catch(e){}
+  }
+
+  const SUPABASE_URL=typeof window.SUPABASE_URL!=='undefined'?window.SUPABASE_URL:'https://hwjplecfqsckfiwxiedo.supabase.co';
+  const r=await fetch(SUPABASE_URL+'/functions/v1/ai-tutor',{method:'POST',headers,body:JSON.stringify(body)});
+
+  if(!r.ok){
+    const err=await r.json().catch(()=>({}));
+    if(err.error==='rate_limit')return err.message;
+    throw new Error(err.error||'API error '+r.status);
+  }
+
+  const data=await r.json();
+  let reply=data.reply||'Desculpe, não consegui responder.';
+  if(data.remaining!==undefined&&data.remaining<=3){
+    reply+=`<div style="font-size:.7rem;color:var(--text-muted);margin-top:.5rem">💬 ${data.remaining} mensagem${data.remaining!==1?'s':''} restante${data.remaining!==1?'s':''} hoje</div>`;
+  }
+  return reply;
 }
 
 function findAnswer(q){

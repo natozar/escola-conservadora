@@ -1,0 +1,34 @@
+{
+  "name": "escola-liberal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "cd qa && npx playwright test",
+    "validate": "npx html-validate index.html app.html auth.html perfil.html contato.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natozar/escola-liberal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natozar/escola-liberal/issues"
+  },
+  "homepage": "https://github.com/natozar/escola-liberal#readme",
+  "devDependencies": {
+    "@axe-core/cli": "^4.11.1",
+    "@playwright/test": "^1.58.2",
+    "chrome-launcher": "^1.2.1",
+    "html-validate": "^10.11.2",
+    "lighthouse": "^13.0.3",
+    "playwright": "^1.58.2",
+    "terser": "^5.46.1",
+    "vite": "^8.0.3"
+  }
+}

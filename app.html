@@ -635,16 +635,16 @@
   💬
   <span class="chat-badge" id="chatBadge" aria-label="1 mensagem não lida">1</span>
 </button>
-<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Tutor Econômico">
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Tutor IA">
   <div class="chat-head">
     <div class="chat-head-icon" aria-hidden="true">🎓</div>
-    <div class="chat-head-info"><h4>Tutor Econômico</h4><span>Tire suas dúvidas</span></div>
+    <div class="chat-head-info"><h4>Tutor IA 🤖</h4><span>Pergunte sobre qualquer aula</span></div>
     <button class="chat-close" onclick="toggleChat()" aria-label="Fechar tutor">✕</button>
   </div>
   <div class="chat-body" id="chatBody" role="log" aria-live="polite"></div>
   <div class="chat-suggestions" id="chatSugs" role="group" aria-label="Sugestões de perguntas"></div>
   <div class="chat-input-area">
-    <input class="chat-input" id="chatIn" placeholder="Pergunte sobre economia..." onkeydown="if(event.key==='Enter')sendChat()" aria-label="Digite sua pergunta">
+    <input class="chat-input" id="chatIn" placeholder="Pergunte qualquer coisa sobre as aulas..." onkeydown="if(event.key==='Enter')sendChat()" aria-label="Digite sua pergunta">
     <button class="chat-send" id="chatSendBtn" onclick="sendChat()" aria-label="Enviar pergunta">➤</button>
   </div>
 </div>

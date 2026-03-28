@@ -1,4 +1,4 @@
-name: CI — Lint, Validate & Test
+name: Build & Deploy
 
 on:
   push:
@@ -6,8 +6,17 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  validate:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,45 +31,50 @@ jobs:
       - name: Validate HTML
         run: npx html-validate index.html app.html auth.html perfil.html contato.html || true
 
-      - name: Check for console.error patterns
-        run: |
-          echo "Checking for common JS issues..."
-          ! grep -rn "debugger" app.js i18n.js supabase-client.js stripe-billing.js || true
-
-      - name: Verify lessons split integrity
+      - name: Verify lessons integrity
         run: |
           node -e "
             const fs=require('fs');
             const index=JSON.parse(fs.readFileSync('lessons/index.json','utf8'));
-            console.log('Index modules:', index.length);
+            console.log('Index:', index.length, 'modules');
             let ok=true;
-            index.forEach((_,i) => {
+            index.forEach((_,i)=>{
               const f='lessons/mod-'+i+'.json';
               if(!fs.existsSync(f)){console.error('MISSING:',f);ok=false}
-              else{const m=JSON.parse(fs.readFileSync(f,'utf8'));console.log('  mod-'+i+':', m.title, m.lessons.length, 'lessons')}
             });
             if(!ok) process.exit(1);
             console.log('All module files present.');
           "
 
-  lighthouse:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v4
+      - name: Build with Vite
+        run: npm run build
 
       - name: Check bundle sizes
         run: |
-          echo "=== Bundle Size Check ==="
-          MAX_JS=160000
-          MAX_CSS=95000
-          MAX_INDEX=80000
-          JS_SIZE=$(wc -c < app.js)
-          CSS_SIZE=$(wc -c < app.css)
-          IDX_SIZE=$(wc -c < lessons/index.json)
-          echo "app.js: ${JS_SIZE} bytes (max: ${MAX_JS})"
-          echo "app.css: ${CSS_SIZE} bytes (max: ${MAX_CSS})"
-          echo "lessons/index.json: ${IDX_SIZE} bytes (max: ${MAX_INDEX})"
-          if [ "$JS_SIZE" -gt "$MAX_JS" ]; then echo "WARN: app.js exceeds budget"; fi
-          if [ "$CSS_SIZE" -gt "$MAX_CSS" ]; then echo "WARN: app.css exceeds budget"; fi
-          if [ "$IDX_SIZE" -gt "$MAX_INDEX" ]; then echo "WARN: index.json exceeds budget"; fi
+          echo "=== Bundle Size Report ==="
+          for f in dist/app.js dist/i18n.js dist/supabase-client.js dist/stripe-billing.js dist/cookie-consent.js; do
+            if [ -f "$f" ]; then
+              SIZE=$(wc -c < "$f")
+              echo "$(basename $f): ${SIZE} bytes"
+            fi
+          done
+          CSS=$(find dist -name "*.css" | head -1)
+          if [ -n "$CSS" ]; then echo "CSS: $(wc -c < "$CSS") bytes"; fi
+
+      - name: Upload artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
