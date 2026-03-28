@@ -266,13 +266,20 @@ async function mergeLocalToCloud() {
     const localState = typeof S !== 'undefined' ? S : null;
     if (!localState) return;
 
-    // 3. Decidir merge: quem tem mais progresso vence
+    // 3. Decidir merge: weighted score (lessons×3 + XP) + timestamp tiebreaker
     const localDone = localState.done ? Object.keys(localState.done).length : 0;
     const cloudDone = cloudProgress?.completed_lessons
       ? Object.keys(cloudProgress.completed_lessons).length
       : 0;
+    const localXP = localState.xp || 0;
+    const cloudXP = cloudProgress?.xp || 0;
+    const localLast = localState.last ? new Date(localState.last).getTime() : 0;
+    const cloudLast = cloudProgress?.last_study_date ? new Date(cloudProgress.last_study_date).getTime() : 0;
+    const localScore = localDone * 3 + localXP;
+    const cloudScore = cloudDone * 3 + cloudXP;
+    const localWins = localScore > cloudScore || (localScore === cloudScore && localLast >= cloudLast);
 
-    if (localDone >= cloudDone) {
+    if (localWins) {
       // Local tem progresso igual ou maior → enviar para nuvem
       await syncProgressToCloud(localState);
       await syncNotesToCloud();

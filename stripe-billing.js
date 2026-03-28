@@ -310,20 +310,45 @@ function showSuccessBanner() {
   setTimeout(() => { banner.remove(); }, 8000);
 }
 
-function checkCheckoutResult() {
+async function verifySubscriptionStrict() {
+  const authClient = (typeof sbClient !== 'undefined') ? sbClient : null;
+  const authUser = (typeof currentUser !== 'undefined') ? currentUser : null;
+  if (!authClient || !authUser) return false;
+  try {
+    const { data } = await authClient
+      .from('subscriptions')
+      .select('plan, status, stripe_subscription_id, current_period_end')
+      .eq('user_id', currentUser.id)
+      .eq('status', 'active')
+      .single();
+    if (data && data.status === 'active') {
+      setSubscription({ plan: data.plan, status: data.status, since: new Date().toISOString(), stripeId: data.stripe_subscription_id });
+      return true;
+    }
+    return false;
+  } catch(e) { return false; }
+}
+
+async function checkCheckoutResult() {
   const params = new URLSearchParams(window.location.search);
   if (params.get('checkout') === 'success') {
-    setSubscription({ plan: 'premium', status: 'active', since: new Date().toISOString() });
-    // Show persistent banner (replaces toast)
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', showSuccessBanner);
-    } else {
-      showSuccessBanner();
-    }
-    // Clean URL without losing scroll position
+    // Don't trust URL param — verify with backend first
     window.history.replaceState({}, '', window.location.pathname);
-    // Verify with backend
-    verifySubscription();
+    const verified = await verifySubscriptionStrict();
+    if (verified) {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', showSuccessBanner);
+      } else { showSuccessBanner(); }
+    } else {
+      // Set pending, re-check every 30s for 5 min (Stripe webhook delay)
+      setSubscription({ plan: 'premium', status: 'pending_verification', since: new Date().toISOString() });
+      let attempts = 0;
+      const recheck = setInterval(async () => {
+        attempts++;
+        const ok = await verifySubscriptionStrict();
+        if (ok || attempts >= 10) { clearInterval(recheck); if(ok) showSuccessBanner(); }
+      }, 30000);
+    }
   } else if (params.get('checkout') === 'cancel') {
     if (typeof toast === 'function') toast('Pagamento cancelado. Você pode assinar a qualquer momento.');
     window.history.replaceState({}, '', window.location.pathname);

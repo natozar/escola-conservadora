@@ -415,8 +415,9 @@ function doSearch(q){
         const idx=plain.indexOf(norm);const tIdx=titleN.indexOf(norm);
         if(idx>=0||tIdx>=0){
           let snippet='';
+          const safeNorm=norm.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
           if(idx>=0){const start=Math.max(0,idx-30),end=Math.min(plain.length,idx+norm.length+40);
-            snippet=(start>0?'...':'')+plain.slice(start,end).replace(new RegExp(norm,'gi'),m=>`<mark>${m}</mark>`)+(end<plain.length?'...':'');}
+            snippet=(start>0?'...':'')+plain.slice(start,end).replace(new RegExp(safeNorm,'gi'),m=>`<mark>${m}</mark>`)+(end<plain.length?'...':'');}
           results.push({mi,li,mod:mod.title,title:les.title,snippet,score:tIdx>=0?2:1})
         }
       })
@@ -1921,7 +1922,9 @@ function requestNotifPermission(){
   return Notification.requestPermission().then(p=>p==='granted')
 }
 
+let _reminderTimer=null;
 function scheduleStudyReminder(){
+  if(_reminderTimer){clearTimeout(_reminderTimer);_reminderTimer=null}
   const s=getNotifSettings();
   if(!s.enabled)return;
   const now=new Date();
@@ -1929,7 +1932,8 @@ function scheduleStudyReminder(){
   target.setHours(s.hour,s.minute,0,0);
   if(target<=now)target.setDate(target.getDate()+1);
   const ms=target-now;
-  setTimeout(()=>{
+  _reminderTimer=setTimeout(()=>{
+    _reminderTimer=null;
     if(Notification.permission==='granted'){
       new Notification('escola liberal 🎓',{
         body:'Hora de estudar! Mantenha sua sequência de '+S.streak+' dias.',
