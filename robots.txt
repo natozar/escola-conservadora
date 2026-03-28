@@ -1,12 +1,33 @@
+# Escola Liberal — Plataforma Homeschool
+# https://escolaliberal.com.br
+
 User-agent: *
 Allow: /
+Allow: /index.html
+Allow: /contato.html
+Allow: /termos.html
+Allow: /privacidade.html
 Disallow: /app.html
 Disallow: /auth.html
 Disallow: /perfil.html
 Disallow: /admin-stripe.html
+Disallow: /admin-stripe-MSI.html
 Disallow: /supabase-schema.sql
 Disallow: /supabase-client.js
 Disallow: /stripe-billing.js
 Disallow: /cookie-consent.js
+Disallow: /stripe-webhook.ts
+Disallow: /create-checkout.ts
+Disallow: /lessons.json
+Disallow: /supabase/
+
+# Googlebot específico — permitir crawl de imagens
+User-agent: Googlebot
+Allow: /assets/icons/og-image.png
+Allow: /assets/icons/icon-512.png
+
+# Googlebot-Image
+User-agent: Googlebot-Image
+Allow: /assets/
 
 Sitemap: https://escolaliberal.com.br/sitemap.xml

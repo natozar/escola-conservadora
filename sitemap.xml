@@ -1,27 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage — Landing Page Principal -->
   <url>
     <loc>https://escolaliberal.com.br/</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://escolaliberal.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://escolaliberal.com.br/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://escolaliberal.com.br/"/>
   </url>
+  <!-- Contato -->
   <url>
     <loc>https://escolaliberal.com.br/contato.html</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
+  <!-- Termos de Uso -->
   <url>
     <loc>https://escolaliberal.com.br/termos.html</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+  <!-- Política de Privacidade -->
   <url>
     <loc>https://escolaliberal.com.br/privacidade.html</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-03-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
+  </url>
+  <!-- Offline fallback (crawlable for PWA) -->
+  <url>
+    <loc>https://escolaliberal.com.br/offline.html</loc>
+    <lastmod>2026-03-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.1</priority>
   </url>
 </urlset>

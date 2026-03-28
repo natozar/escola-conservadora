@@ -1,27 +1,43 @@
 {
-  "name": "escola liberal para Bilionário",
-  "short_name": "EscolaLib",
-  "description": "Educação econômica prática para famílias homeschool",
+  "name": "Escola Liberal — Plataforma Homeschool",
+  "short_name": "Escola Liberal",
+  "description": "Plataforma curricular homeschool com 9 disciplinas e 140 aulas interativas. Economia Austríaca, Matemática Singapura, Filosofia P4C e mais. Bilíngue PT/EN.",
   "start_url": "./app.html",
   "scope": "./",
+  "id": "escola-liberal-pwa",
   "display": "standalone",
   "background_color": "#0f1729",
   "theme_color": "#0f1729",
   "orientation": "any",
   "lang": "pt-BR",
-  "categories": ["education", "finance"],
+  "dir": "ltr",
+  "categories": ["education", "kids"],
+  "iarc_rating_id": "",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "assets/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "assets/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "assets/icons/favicon.svg",
@@ -36,14 +52,29 @@
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Tela principal do app"
+      "label": "Escola Liberal — Dashboard de aprendizado"
+    },
+    {
+      "src": "assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Escola Liberal — App mobile"
     }
   ],
   "shortcuts": [
     {
       "name": "Continuar Estudando",
+      "short_name": "Estudar",
       "url": "./app.html",
-      "description": "Abrir lição atual",
+      "description": "Abrir lição atual e continuar progresso",
+      "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Meu Perfil",
+      "short_name": "Perfil",
+      "url": "./perfil.html",
+      "description": "Ver progresso e configurações",
       "icons": [{ "src": "assets/icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
