@@ -155,7 +155,10 @@ function renderCards(){
     const unlocked=isModUnlocked(i);
     const clr=getModColor(m.color||'sage');
     const clrMuted=getModColorMuted(m.color||'sage');
-    html+=`<div class="mc${unlocked?'':' locked'}" ${unlocked?`onclick="goMod(${i})"`:''} ${unlocked?'':`title="Complete o módulo anterior para desbloquear"`}><div class="mc-top"><div class="mc-ico" style="background:${clrMuted};color:${clr}">${m.icon}</div><h3>${m.title}</h3></div><p>${m.desc}</p><div class="mc-prog"><div class="mc-bar"><div class="mc-fill" style="width:${p}%;background:${clr}"></div></div><div class="mc-pct">${p}%</div></div></div>`;
+    const premium=typeof isModuleUnlocked==='function'&&currentUser&&!isModuleUnlocked(i);
+    const clickAction=unlocked?(premium?`showPaywall(${i})`:`goMod(${i})`):'';
+    const lockLabel=premium?'🔒 Premium':(!unlocked?'🔒 Bloqueado':'');
+    html+=`<div class="mc${unlocked?'':' locked'}${premium?' premium':''}" ${clickAction?`onclick="${clickAction}"`:''}><div class="mc-top"><div class="mc-ico" style="background:${clrMuted};color:${clr}">${m.icon}</div><h3>${m.title}</h3>${lockLabel?`<span class="mc-lock">${lockLabel}</span>`:''}</div><p>${m.desc}</p><div class="mc-prog"><div class="mc-bar"><div class="mc-fill" style="width:${p}%;background:${clr}"></div></div><div class="mc-pct">${p}%</div></div></div>`;
   });
   document.getElementById('mcards').innerHTML=html
 }
@@ -221,6 +224,7 @@ function goMod(i){
 function openL(mi,li){
   if(!M[mi]||!M[mi].lessons[li])return;
   S.cMod=mi;S.cLes=li;const m=M[mi],l=m.lessons[li];
+  if(typeof gtag==='function')gtag('event','lesson_open',{module:m.title,lesson:l.title,module_index:mi,lesson_index:li});
   document.getElementById('lvProg').textContent=`Aula ${li+1}/${m.lessons.length}`;
   let h=l.content;
   if(l.quiz){
@@ -262,7 +266,8 @@ function nextL(){
   const mi=S.cMod,li=S.cLes;
   if(mi===null||mi===undefined||!M[mi]||!M[mi].lessons[li])return;
   const lk=`${mi}-${li}`;
-  if(!S.done[lk]){S.done[lk]=true;addXP(M[mi].lessons[li].xp);toast(`+${M[mi].lessons[li].xp} XP`);save();checkSaveModal()}
+  if(!S.done[lk]){S.done[lk]=true;addXP(M[mi].lessons[li].xp);toast(`+${M[mi].lessons[li].xp} XP`);save();checkSaveModal();
+    if(typeof gtag==='function')gtag('event','lesson_complete',{module:M[mi].title,lesson:M[mi].lessons[li].title,total_done:Object.keys(S.done).length})}
   if(li<M[mi].lessons.length-1)openL(mi,li+1);else{
     const justCompleted=M[mi].lessons.every((_,i)=>S.done[`${mi}-${i}`]);
     goMod(mi);
@@ -842,12 +847,52 @@ function obFinish(){
   S.ageGroup=obAgeGroup;
   S.lang=obLangPref;
   save();
+  // Salvar lead no Supabase
+  if(S.email&&typeof saveLeadEmail==='function')saveLeadEmail(S.email,S.name,obAgeGroup,obLangPref);
   if(typeof setLang==='function')setLang(obLangPref);
   if(typeof updateLangToggle==='function')updateLangToggle();
+  // GA4: onboarding completo
+  if(typeof gtag==='function')gtag('event','onboarding_complete',{name:S.name,age_group:obAgeGroup,lang:obLangPref,has_email:!!S.email});
   const el=document.getElementById('onboard');
   el.classList.add('hide');
   setTimeout(()=>{el.style.display='none'},500);
   goDash()
+}
+
+// ============================================================
+// PAYWALL — shows upgrade prompt for premium modules
+// ============================================================
+function showPaywall(modIdx){
+  const m=M[modIdx];if(!m)return;
+  const overlay=document.createElement('div');
+  overlay.className='save-modal-overlay';overlay.id='paywallModal';
+  overlay.innerHTML=`<div class="save-modal">
+    <button class="save-modal-close" onclick="document.getElementById('paywallModal').remove()" aria-label="Fechar">&times;</button>
+    <div style="font-size:2.5rem;margin-bottom:.75rem">${m.icon}</div>
+    <h2 style="font-size:1.3rem;margin-bottom:.5rem">${m.title}</h2>
+    <p style="color:var(--text-secondary);font-size:.9rem;margin-bottom:1.25rem;line-height:1.6">Este módulo faz parte do plano <strong>Premium</strong>. Desbloqueie acesso completo a todas as 140 aulas, certificados e ferramentas avançadas.</p>
+    <a href="perfil.html#planos" class="btn btn-sage" style="width:100%;margin-bottom:.75rem">Ver Planos — a partir de R$29,90/mês</a>
+    <button class="btn btn-ghost" onclick="document.getElementById('paywallModal').remove()" style="width:100%;font-size:.85rem">Voltar</button>
+  </div>`;
+  document.body.appendChild(overlay);
+  if(typeof gtag==='function')gtag('event','paywall_shown',{module:m.title,module_index:modIdx});
+}
+
+// ============================================================
+// SHARE — viral sharing via WhatsApp and clipboard
+// ============================================================
+function shareProgress(){
+  const done=Object.keys(S.done).length;
+  const total=M.reduce((s,m)=>s+m.lessons.length,0);
+  const pct=total?Math.round(done/total*100):0;
+  const text=`🎓 Já completei ${done} de ${total} aulas (${pct}%) na Escola Liberal!\n\nPlataforma homeschool com 9 disciplinas, gamificação e quizzes. Grátis!\n\n👉 https://escolaliberal.com.br`;
+  if(navigator.share){
+    navigator.share({title:'Escola Liberal',text:text,url:'https://escolaliberal.com.br'}).catch(()=>{});
+  }else{
+    const waUrl='https://wa.me/?text='+encodeURIComponent(text);
+    window.open(waUrl,'_blank');
+  }
+  if(typeof gtag==='function')gtag('event','share',{method:navigator.share?'native':'whatsapp',done_count:done});
 }
 
 // ============================================================

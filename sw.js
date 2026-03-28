@@ -1,5 +1,5 @@
 // Incrementar versão sempre que os assets mudarem para forçar atualização do cache
-const CACHE_NAME = 'escola-liberal-v9';
+const CACHE_NAME = 'escola-liberal-v10';
 const ASSETS = [
   './',
   './index.html',

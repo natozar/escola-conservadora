@@ -509,6 +509,24 @@ function getPlanLabel() {
   return labels[userPlan] || 'Gratuito';
 }
 
+// ========== LEAD CAPTURE (email do onboarding) ==========
+async function saveLeadEmail(email, name, ageGroup, lang) {
+  if (!sbClient || !email) return;
+  try {
+    await sbClient.from('leads').upsert({
+      email: email.toLowerCase().trim(),
+      name: name || 'Aluno',
+      age_group: ageGroup || null,
+      lang: lang || 'pt',
+      source: 'onboarding',
+      created_at: new Date().toISOString()
+    }, { onConflict: 'email' });
+    console.log('[Lead] Email salvo:', email);
+  } catch (e) {
+    console.warn('[Lead] Erro ao salvar (tabela leads pode não existir):', e.message);
+  }
+}
+
 // Toast helper (usa a função do app se disponível)
 function showToast(msg) {
   if (typeof toast === 'function') {

@@ -420,6 +420,11 @@ body.focus-mode .mobile-bar{display:none !important}
 .lsn-meta{display:flex;align-items:center;gap:.75rem}
 
 /* ========== ONBOARDING ========== */
+/* PAYWALL BADGE */
+.mc-lock{font-size:.65rem;padding:.15rem .5rem;border-radius:var(--r-full);background:var(--honey-muted);color:var(--honey);font-weight:600;margin-left:auto}
+.mc.premium{border-color:var(--honey-muted);cursor:pointer;opacity:.85}
+.mc.premium:hover{border-color:var(--honey);opacity:1}
+
 /* SAVE PROGRESS MODAL */
 .save-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:flex;align-items:center;justify-content:center;animation:fadeInModal .3s ease}
 @keyframes fadeInModal{from{opacity:0}to{opacity:1}}
