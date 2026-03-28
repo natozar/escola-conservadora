@@ -37,7 +37,11 @@ const DISCIPLINES={
   matematica:{label:'Matemática',icon:'🔢',order:1},
   filosofia:{label:'Filosofia',icon:'🏛️',order:2},
   emocional:{label:'Inteligência Emocional',icon:'💡',order:3},
-  psicologia:{label:'Psicologia',icon:'🧠',order:4}
+  psicologia:{label:'Psicologia',icon:'🧠',order:4},
+  portugues:{label:'Português e Redação',icon:'📝',order:5},
+  ciencias:{label:'Ciências da Natureza',icon:'🔬',order:6},
+  historia:{label:'História do Brasil',icon:'🇧🇷',order:7},
+  history:{label:'American History',icon:'🇺🇸',order:8}
 };
 const COLOR_MAP={
   sage:'var(--sage)',sky:'var(--sky)',honey:'var(--honey)',
@@ -135,16 +139,17 @@ function ui(){
 
 function isModUnlocked(i){
   if(!M[i])return false;
-  // First module of each discipline is always open
-  const disc=M[i].discipline||'economia';
-  const discMods=M.map((m,idx)=>({m,idx})).filter(x=>(x.m.discipline||'economia')===disc);
-  const posInDisc=discMods.findIndex(x=>x.idx===i);
-  if(posInDisc<=0)return true; // first in discipline
-  // Also keep original 2 economy modules free
-  if(disc==='economia'&&i<=1)return true;
-  // Check previous module in same discipline is complete
-  const prevIdx=discMods[posInDisc-1].idx;
-  return M[prevIdx].lessons.every((_,li)=>S.done[`${prevIdx}-${li}`])
+  // ====== MODO TESTE: todos os módulos abertos ======
+  // TODO: restaurar lógica de pré-requisito quando ativar cobrança
+  return true;
+  // Lógica original (preservada para reativar depois):
+  // const disc=M[i].discipline||'economia';
+  // const discMods=M.map((m,idx)=>({m,idx})).filter(x=>(x.m.discipline||'economia')===disc);
+  // const posInDisc=discMods.findIndex(x=>x.idx===i);
+  // if(posInDisc<=0)return true;
+  // if(disc==='economia'&&i<=1)return true;
+  // const prevIdx=discMods[posInDisc-1].idx;
+  // return M[prevIdx].lessons.every((_,li)=>S.done[`${prevIdx}-${li}`])
 }
 function renderCards(){
   let html='';
@@ -2473,7 +2478,7 @@ if(location.hash && location.hash.includes('type=recovery')){
     window.location.replace('auth.html'+q);
   }
 })();
-if(location.hash){const m=location.hash.match(/module-(\d)/);if(m)setTimeout(()=>goMod(parseInt(m[1])-1),100)}
+if(location.hash){const m=location.hash.match(/module-(\d+)/);if(m)setTimeout(()=>goMod(parseInt(m[1])-1),100)}
 // Show swipe hint on first lesson open
 const _origOpenL2=openL;
 openL=function(mi,li){_origOpenL2(mi,li);showSwipeHint()};

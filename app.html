@@ -245,8 +245,8 @@
     <!-- Módulos gerados dinamicamente por buildSidebar() -->
     <div id="modNav"></div>
 
-    <div class="side-label side-label-toggle" style="margin-top:1rem;cursor:pointer" onclick="toggleSideSection('toolsSection')">Ferramentas <span id="toolsArrow">▸</span></div>
-    <div class="side-section collapsed" id="toolsSection">
+    <div class="side-label side-label-toggle" style="margin-top:1rem;cursor:pointer" onclick="toggleSideSection('toolsSection')">Ferramentas <span id="toolsArrow" class="rotated">▾</span></div>
+    <div class="side-section" id="toolsSection">
     <div class="ni" onclick="goGlossary()" id="nGloss" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goGlossary()">
       <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">📖</div>
       <div><div class="ni-txt">Glossário</div><div class="ni-sub">Termos econômicos</div></div>
@@ -550,7 +550,7 @@
   <div class="cert-card">
     <div class="cert-seal" aria-hidden="true">🏅</div>
     <div class="cert-title">Certificado de Conclusão</div>
-    <div class="cert-sub">escola liberal para Bilionário</div>
+    <div class="cert-sub">Escola Liberal — Plataforma Homeschool</div>
     <div class="cert-name" id="certName"></div>
     <div class="cert-module" id="certModule"></div>
     <div class="cert-date" id="certDate"></div>
