@@ -920,7 +920,7 @@ const SAVE_MODAL_THRESHOLD=3;
 function checkSaveModal(){
   // Don't show if: already shown, user has account, or under threshold
   if(localStorage.getItem(SAVE_MODAL_KEY))return;
-  if(S.uid)return; // logged in via Supabase
+  if(S.uid||(typeof currentUser!=='undefined'&&currentUser))return; // logged in via Supabase
   const doneCount=Object.keys(S.done).length;
   if(doneCount>=SAVE_MODAL_THRESHOLD){
     document.getElementById('saveModalCount').textContent=doneCount;

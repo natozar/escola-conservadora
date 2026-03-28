@@ -475,20 +475,49 @@ function checkOAuthError() {
 
 // ========== INIT ==========
 (function init(){
-  // Check if recovery flow (password reset link)
-  if(checkRecoveryFlow()) return;
-  // Check if OAuth error redirect
+  // 1. Check OAuth error redirect (query params from Supabase)
   if(checkOAuthError()) return;
-  // Default: show login tab
-  showTab('login');
-  // Check if user is already logged in
-  if(typeof sbClient !== 'undefined' && sbClient){
-    sbClient.auth.getSession().then(function(res){
-      if(res.data && res.data.session){
-        window.location.href = 'app.html';
-      }
-    }).catch(function(){});
+
+  // 2. Detect recovery flow BEFORE SDK init (hash still intact)
+  var isRecovery = window.location.hash.includes('type=recovery');
+
+  // 3. Initialize Supabase — CRITICAL: sem isso sbClient fica null
+  if(typeof initSupabase === 'function') initSupabase();
+
+  // 4. Recovery flow: show new password form
+  if(isRecovery){
+    checkRecoveryFlow();
+    return;
   }
+
+  // 5. Default: show login tab
+  showTab('login');
+
+  // 6. Redirect on successful auth (OAuth callback or existing session)
+  if(sbClient){
+    var _redirected = false;
+    function doRedirect(){
+      if(_redirected) return;
+      _redirected = true;
+      window.location.href = 'app.html';
+    }
+
+    // Listen for SIGNED_IN from OAuth hash processing
+    sbClient.auth.onAuthStateChange(function(event, session){
+      if(event === 'SIGNED_IN' && session){
+        // Don't redirect if updating password (recovery flow)
+        var npf = document.getElementById('newPassForm');
+        if(npf && npf.style.display === 'block') return;
+        setTimeout(doRedirect, 400);
+      }
+    });
+
+    // Check if already logged in
+    sbClient.auth.getSession().then(function(res){
+      if(res.data && res.data.session) doRedirect();
+    }).catch(function(e){ console.warn('[Auth] Session check:', e.message); });
+  }
+
   // Tab from URL param
   var sp = new URLSearchParams(location.search);
   if(sp.get('tab') === 'signup') showTab('signup');

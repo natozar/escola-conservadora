@@ -133,6 +133,15 @@ async function resetPassword(email) {
 
 // ========== CALLBACKS PÓS-AUTH ==========
 async function onSignIn(user) {
+  // Salvar uid no estado local (para save modal check e persistência)
+  if (typeof S !== 'undefined') {
+    S.uid = user.id;
+    if (user.user_metadata?.full_name && (!S.name || S.name === 'Aluno')) {
+      S.name = user.user_metadata.full_name;
+    }
+    if (typeof save === 'function') save();
+  }
+
   // Carregar plano do usuário
   await loadUserPlan();
 
@@ -143,10 +152,18 @@ async function onSignIn(user) {
   if (typeof updateAuthUI === 'function') updateAuthUI(true);
   if (typeof ui === 'function') ui();
 
+  // Fechar save modal se estiver aberto
+  try { var sm = document.getElementById('saveModal'); if (sm) sm.style.display = 'none'; } catch(e){}
+
   showToast('✓ Logado como ' + (user.user_metadata?.full_name || user.email));
 }
 
 function onSignOut() {
+  // Limpar uid do estado local
+  if (typeof S !== 'undefined') {
+    S.uid = null;
+    if (typeof save === 'function') save();
+  }
   if (typeof updateAuthUI === 'function') updateAuthUI(false);
   showToast('Sessão encerrada');
 }
