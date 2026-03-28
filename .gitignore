@@ -34,3 +34,23 @@ build/
 
 # Arquivo deprecado — mantido apenas para referência histórica
 # supabase-auth.js  ← não ignorar pois está no repo com aviso de deprecação
+
+logs
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+# Dependency directories
+# Environment variables
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# OS specific
+
+# Task files
+# tasks.json
+# tasks/ 

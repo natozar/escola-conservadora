@@ -259,6 +259,26 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
   .section-center h2{font-size:1.8rem}
 }
 
+/* ========== FLOATING HERO BADGES ========== */
+.hero-badge{position:absolute;padding:.35rem .65rem;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-full);font-size:.72rem;font-weight:600;color:var(--text-secondary);animation:heroFloat 5s ease-in-out infinite;box-shadow:var(--shadow-card);z-index:2;white-space:nowrap}
+@keyframes heroFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ========== MODULE COLOR BORDERS ========== */
+.mod{border-left:4px solid transparent}
+.mod:nth-child(1){border-left-color:var(--sage)}
+.mod:nth-child(2){border-left-color:var(--sky)}
+.mod:nth-child(3){border-left-color:var(--lavender)}
+.mod:nth-child(4){border-left-color:var(--honey)}
+.mod:nth-child(5){border-left-color:var(--coral)}
+.mod:nth-child(6){border-left-color:#5bd59b}
+.mod:nth-child(7){border-left-color:var(--sky)}
+.mod:nth-child(8){border-left-color:var(--honey)}
+.mod:nth-child(9){border-left-color:var(--coral)}
+
+/* ========== SCROLL REVEAL ========== */
+.trust-num,.feat,.mod,.think,.test{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.trust-num.visible,.feat.visible,.mod.visible,.think.visible,.test.visible{opacity:1;transform:translateY(0)}
+
 /* ========== ANIMATIONS ========== */
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .fade{opacity:0;animation:fadeIn .7s var(--ease) forwards}
@@ -295,14 +315,17 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
     <div class="fade">
       <div class="hero-eyebrow"><span class="dot" aria-hidden="true"></span> Homeschool · 9 Disciplinas · PT + EN</div>
       <h1>A escola complementar que forma <em>pensadores</em>, não seguidores.</h1>
-      <p class="hero-desc">9 disciplinas, 140 aulas interativas com gamificação — Economia, Matemática, Filosofia, IE, Psicologia, Português, Ciências, História do Brasil e American History. Bilíngue PT/EN para jovens de 10 a 16 anos.</p>
+      <p class="hero-desc">140 aulas interativas com gamificação, quizzes e certificados. Para jovens de 10 a 16 anos, bilíngue PT/EN.</p>
       <div class="hero-actions">
         <a href="app.html" class="btn btn-sage btn-lg">Começar Gratuitamente →</a>
         <a href="#disciplines" class="btn btn-ghost btn-lg">Ver as 9 Disciplinas</a>
       </div>
     </div>
     <div class="fade d2">
-      <div class="hero-card">
+      <div class="hero-card" style="position:relative">
+        <div class="hero-badge" style="top:-12px;right:20px;animation-delay:0s">🏅 Conquistas</div>
+        <div class="hero-badge" style="bottom:30px;left:-16px;animation-delay:1.5s">🔥 Streaks</div>
+        <div class="hero-badge" style="top:40%;right:-20px;animation-delay:3s">⭐ XP</div>
         <div class="hero-card-title">9 Disciplinas · 14 Módulos · 140 Aulas</div>
         <div class="hc-module">
           <div class="hc-icon i1">💰</div>
@@ -713,6 +736,21 @@ initTheme();
       if(finalCta){finalCta.textContent='Voltar ao App →';finalCta.href='app.html'}
     }
   }catch(e){}
+})();
+
+// Scroll reveal with IntersectionObserver
+(function initScrollReveal(){
+  if(!('IntersectionObserver' in window))return;
+  var targets=document.querySelectorAll('.trust-num,.feat,.mod,.think,.test');
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
+  targets.forEach(function(el){observer.observe(el)});
 })();
 </script>
 </body>

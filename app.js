@@ -57,23 +57,46 @@ function getModColorMuted(c){return COLOR_MUTED_MAP[c]||'var(--sage-muted)'}
 // Get first module index of a discipline within M
 function getDiscModules(disc){return M.map((m,i)=>({mod:m,idx:i})).filter(x=>x.mod.discipline===disc)}
 
-// Build sidebar navigation dynamically from M
+// Build sidebar navigation dynamically from M — grouped accordion by discipline
 function buildSidebar(){
   const nav=document.getElementById('modNav');
   if(!nav)return;
   let html='';
-  const seen=new Set();
+  const grouped={};const order=[];
   M.forEach((m,i)=>{
     const disc=m.discipline||'economia';
-    if(!seen.has(disc)){
-      seen.add(disc);
-      const d=DISCIPLINES[disc]||{label:disc,icon:'📚'};
-      html+=`<div class="side-label side-disc" style="margin-top:.75rem">${d.icon} ${d.label}</div>`;
+    if(!grouped[disc]){grouped[disc]=[];order.push(disc)}
+    grouped[disc].push({mod:m,idx:i});
+  });
+  order.forEach(disc=>{
+    const d=DISCIPLINES[disc]||{label:disc,icon:'📚'};
+    const mods=grouped[disc];
+    const totalL=mods.reduce((s,x)=>s+x.mod.lessons.length,0);
+    const doneL=mods.reduce((s,x)=>s+x.mod.lessons.filter((_,li)=>S.done[`${x.idx}-${li}`]).length,0);
+    const pct=totalL?Math.round(doneL/totalL*100):0;
+    const clr=getModColor(mods[0].mod.color||'sage');
+    // Single-module discipline: show flat item (no accordion)
+    if(mods.length===1){
+      const x=mods[0],c=x.mod.color||'sage';
+      html+=`<div class="ni" onclick="goMod(${x.idx})" id="nM${x.idx}" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goMod(${x.idx})"><div class="ni-icon" style="background:${getModColorMuted(c)};color:${getModColor(c)}">${d.icon}</div><div><div class="ni-txt">${d.label}</div><div class="ni-sub">${x.mod.lessons.length} aulas · ${pct}%</div><div class="ni-prog"><div class="ni-prog-bar" style="width:${pct}%;background:${clr}"></div></div></div></div>`;
+    } else {
+      // Multi-module: accordion
+      html+=`<div class="disc-group" id="dg-${disc}"><div class="disc-group-head" onclick="toggleDiscGroup('${disc}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleDiscGroup('${disc}')"><span style="font-size:.95rem">${d.icon}</span><span style="font-size:.8rem;font-weight:600">${d.label}</span><span class="disc-count">${mods.length}</span><div class="disc-prog"><div class="disc-prog-fill" style="width:${pct}%;background:${clr}"></div></div><span class="disc-arrow" id="dga-${disc}">▸</span></div><div class="disc-group-body" id="dgb-${disc}">`;
+      mods.forEach(x=>{
+        const c=x.mod.color||'sage';
+        html+=`<div class="ni" onclick="goMod(${x.idx})" id="nM${x.idx}" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goMod(${x.idx})"><div class="ni-icon" style="background:${getModColorMuted(c)};color:${getModColor(c)}">${x.mod.icon}</div><div><div class="ni-txt">${x.mod.title}</div><div class="ni-sub">${x.mod.lessons.length} aulas</div></div></div>`;
+      });
+      html+=`</div></div>`;
     }
-    const c=m.color||'sage';
-    html+=`<div class="ni" onclick="goMod(${i})" id="nM${i}" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goMod(${i})"><div class="ni-icon" style="background:${getModColorMuted(c)};color:${getModColor(c)}">${m.icon}</div><div><div class="ni-txt">${m.title}</div><div class="ni-sub">Módulo ${i+1} · ${m.lessons.length} aulas</div></div></div>`;
   });
   nav.innerHTML=html;
+}
+function toggleDiscGroup(disc){
+  const g=document.getElementById('dg-'+disc);
+  const a=document.getElementById('dga-'+disc);
+  if(!g)return;
+  g.classList.toggle('open');
+  if(a)a.textContent=g.classList.contains('open')?'▾':'▸';
 }
 
 // ============================================================
@@ -81,7 +104,7 @@ function buildSidebar(){
 // ============================================================
 const SK='escola_v2';
 let S=load();
-function def(){return{name:'Aluno',avatar:null,xp:0,lvl:1,streak:0,last:null,done:{},quiz:{},cMod:null,cLes:null}}
+function def(){return{name:'Aluno',avatar:null,xp:0,lvl:1,streak:0,streakDays:[],last:null,done:{},quiz:{},cMod:null,cLes:null}}
 function load(){try{const d=localStorage.getItem(SK);return d?{...def(),...JSON.parse(d)}:def()}catch(e){return def()}}
 function save(){localStorage.setItem(SK,JSON.stringify(S));if(typeof queueSync==='function')queueSync('progress',S)}
 
@@ -93,8 +116,11 @@ function toast(m){const t=document.getElementById('toast');t.textContent=m;t.cla
 // Streak
 function streak(){
   const today=new Date().toDateString();
+  const todayISO=new Date().toISOString().slice(0,10);
   if(S.last){const d=Math.floor((new Date(today)-new Date(S.last))/(864e5));if(d===1)S.streak++;else if(d>1)S.streak=1}
   else S.streak=1;
+  if(!S.streakDays)S.streakDays=[];
+  if(!S.streakDays.includes(todayISO)){S.streakDays.push(todayISO);if(S.streakDays.length>30)S.streakDays=S.streakDays.slice(-30)}
   S.last=today;save()
 }
 
@@ -128,6 +154,23 @@ function ui(){
   document.getElementById('sQuiz').textContent=qt?Math.round(qc/qt*100)+'%':'0%';
   const sb=document.getElementById('streakB');
   sb.textContent=S.streak>0?`🔥 ${S.streak} dia${S.streak>1?'s':''} de sequência!`:'🔥 Comece sua sequência!';
+  // Streak calendar (7 days)
+  try{
+    const cal=document.getElementById('streakCalendar');
+    if(cal){
+      const days=['D','S','T','Q','Q','S','S'];
+      const today=new Date();
+      let calH='';
+      for(let d=6;d>=0;d--){
+        const dt=new Date(today);dt.setDate(today.getDate()-d);
+        const dayStr=dt.toISOString().slice(0,10);
+        const isToday=d===0;
+        const wasActive=S.streakDays&&S.streakDays.includes(dayStr);
+        calH+=`<div class="streak-day-col" style="display:flex;flex-direction:column;align-items:center;gap:.1rem"><div class="streak-day${wasActive?' active':''}${isToday?' today':''}">${wasActive?'✓':days[dt.getDay()]}</div><div class="streak-day-label">${dt.getDate()}</div></div>`;
+      }
+      cal.innerHTML=calH;
+    }
+  }catch(e){}
   // Sidebar module progress
   M.forEach((m,mi)=>{
     const el=_origById('nM'+mi);
@@ -180,7 +223,12 @@ function renderCards(){
     const premium=typeof isModuleUnlocked==='function'&&currentUser&&!isModuleUnlocked(i);
     const clickAction=unlocked?(premium?`showPaywall(${i})`:`goMod(${i})`):'';
     const lockLabel=premium?'🔒 Premium':(!unlocked?'🔒 Bloqueado':'');
-    html+=`<div class="mc${unlocked?'':' locked'}${premium?' premium':''}" ${clickAction?`onclick="${clickAction}"`:''}><div class="mc-top"><div class="mc-ico" style="background:${clrMuted};color:${clr}">${m.icon}</div><h3>${m.title}</h3>${lockLabel?`<span class="mc-lock">${lockLabel}</span>`:''}</div><p>${m.desc}</p><div class="mc-prog"><div class="mc-bar"><div class="mc-fill" style="width:${p}%;background:${clr}"></div></div><div class="mc-pct">${p}%</div></div></div>`;
+    const statusCls=p===100?'completed':p>0?'in-progress':'not-started';
+    const statusTxt=p===100?'✓ Completo':p>0?`${done}/${m.lessons.length} aulas`:'Começar';
+    html+=`<div class="mc${unlocked?'':' locked'}${premium?' premium':''}" ${clickAction?`onclick="${clickAction}"`:''}>`+
+      `<div class="mc-circle"><div class="mc-ring" style="--ring-pct:${p};--ring-color:${clr}"></div><div class="mc-ring-inner"></div><span class="mc-circle-icon">${m.icon}</span></div>`+
+      `<div class="mc-info"><h3>${m.title}</h3><p>${m.desc}</p><div class="mc-meta">${m.lessons.length} aulas · ${p}%${lockLabel?' · '+lockLabel:''}</div></div>`+
+      `<div class="mc-status ${statusCls}">${statusTxt}</div></div>`;
   });
   document.getElementById('mcards').innerHTML=html
 }
@@ -2331,12 +2379,17 @@ function updateBottomNav(active){
   const btn=document.getElementById('bn-'+active);
   if(btn)btn.classList.add('active')
 }
-function updateMobileHeader(title,showBack){
+function updateMobileHeader(title,showBack,breadcrumb,progress){
   const mh=document.getElementById('mobileHeader');
   if(!mh)return;
   document.getElementById('mhTitle').textContent=title||'escola liberal';
   document.getElementById('mhBack').style.visibility=showBack?'visible':'hidden';
-  document.getElementById('mhXP').textContent=S.xp+' XP'
+  document.getElementById('mhXP').textContent=S.xp+' XP';
+  const bc=document.getElementById('mhBreadcrumb');
+  if(bc){bc.innerHTML=breadcrumb||'';bc.classList.toggle('show',!!breadcrumb)}
+  const pg=document.getElementById('mhProgress');
+  const pf=document.getElementById('mhProgressFill');
+  if(pg&&pf){pg.classList.toggle('show',progress!==undefined);if(progress!==undefined)pf.style.width=progress+'%'}
 }
 let _mobileBackFn=null;
 function mobileBack(){
@@ -2353,18 +2406,53 @@ function openModulesView(){
 }
 function toggleSideMobile(){
   const side=document.getElementById('side');
+  const scrim=document.getElementById('sideScrim');
   side.classList.toggle('open');
-  // Close when clicking outside
-  if(side.classList.contains('open')){
-    const overlay=document.createElement('div');
-    overlay.id='sideOverlay';
-    overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:199';
-    overlay.onclick=()=>{side.classList.remove('open');overlay.remove()};
-    document.body.appendChild(overlay)
-  }else{
-    const ov=document.getElementById('sideOverlay');
-    if(ov)ov.remove()
-  }
+  if(scrim)scrim.classList.toggle('show',side.classList.contains('open'));
+}
+function closeSideMobile(){
+  const side=document.getElementById('side');
+  const scrim=document.getElementById('sideScrim');
+  if(side)side.classList.remove('open');
+  if(scrim)scrim.classList.remove('show');
+}
+function toggleSidebarRail(){
+  const shell=document.getElementById('shell');
+  if(!shell)return;
+  shell.classList.toggle('rail');
+  const btn=document.getElementById('railBtn');
+  if(btn)btn.textContent=shell.classList.contains('rail')?'▶':'◀ Recolher';
+  localStorage.setItem('escola_rail',shell.classList.contains('rail')?'1':'0');
+}
+// Restore rail state on load
+try{if(localStorage.getItem('escola_rail')==='1'){const s=document.getElementById('shell');if(s)s.classList.add('rail');const b=document.getElementById('railBtn');if(b)b.textContent='▶'}}catch(e){}
+
+// Bottom sheets
+function togglePracticeSheet(){
+  const sheet=document.getElementById('practiceSheet');
+  const scrim=document.getElementById('practiceScrim');
+  closeMoreSheet();
+  if(sheet)sheet.classList.toggle('open');
+  if(scrim)scrim.classList.toggle('show',sheet&&sheet.classList.contains('open'));
+}
+function closePracticeSheet(){
+  const sheet=document.getElementById('practiceSheet');
+  const scrim=document.getElementById('practiceScrim');
+  if(sheet)sheet.classList.remove('open');
+  if(scrim)scrim.classList.remove('show');
+}
+function toggleMoreSheet(){
+  const sheet=document.getElementById('moreSheet');
+  const scrim=document.getElementById('moreScrim');
+  closePracticeSheet();
+  if(sheet)sheet.classList.toggle('open');
+  if(scrim)scrim.classList.toggle('show',sheet&&sheet.classList.contains('open'));
+}
+function closeMoreSheet(){
+  const sheet=document.getElementById('moreSheet');
+  const scrim=document.getElementById('moreScrim');
+  if(sheet)sheet.classList.remove('open');
+  if(scrim)scrim.classList.remove('show');
 }
 
 // Override goDash etc. to update mobile nav
@@ -2375,22 +2463,24 @@ goDash=function(){
   updateMobileHeader('escola liberal',false);
   _mobileBackFn=null;
   // Close sidebar if open
-  document.getElementById('side').classList.remove('open');
-  const ov=document.getElementById('sideOverlay');if(ov)ov.remove()
+  closeSideMobile();
 };
 const _origGoMod=goMod;
 goMod=function(i){
   if(!M[i])return;
   _origGoMod(i);
   updateBottomNav('mod');
-  updateMobileHeader(M[i].icon+' '+M[i].title,true);
+  const done=M[i].lessons.filter((_,li)=>S.done[`${i}-${li}`]).length;
+  const pct=Math.round(done/M[i].lessons.length*100);
+  updateMobileHeader(M[i].icon+' '+M[i].title,true,`<span>Disciplinas</span> › ${M[i].title}`,pct);
   _mobileBackFn=()=>goDash()
 };
 const _origOpenL=openL;
 openL=function(mi,li){
   if(!M[mi]||!M[mi].lessons[li])return;
   _origOpenL(mi,li);
-  updateMobileHeader(M[mi].lessons[li].title,true);
+  const pct=Math.round((li+1)/M[mi].lessons.length*100);
+  updateMobileHeader(M[mi].lessons[li].title,true,`<span>${M[mi].title}</span> › Aula ${li+1}/${M[mi].lessons.length}`,pct);
   _mobileBackFn=()=>goMod(mi)
 };
 const _origGoPerf=goPerf;
@@ -2406,7 +2496,7 @@ const _origGoBadges=goBadges;
 if(typeof goBadges==='function'){
   goBadges=function(){
     _origGoBadges();
-    updateBottomNav('menu');
+    updateBottomNav('more');
     updateMobileHeader('🏅 Conquistas',true);
     _mobileBackFn=()=>goDash()
   }
@@ -2460,8 +2550,9 @@ function toggleSideSection(id){
   const sec=document.getElementById(id);
   if(!sec)return;
   sec.classList.toggle('collapsed');
-  const arrow=document.getElementById(id==='toolsSection'?'toolsArrow':'');
-  if(arrow)arrow.classList.toggle('rotated')
+  const arrowMap={toolsSection:'toolsArrow',configSection:'configArrow'};
+  const arrow=document.getElementById(arrowMap[id]);
+  if(arrow)arrow.textContent=sec.classList.contains('collapsed')?'▸':'▾';
 }
 
 // ============================================================

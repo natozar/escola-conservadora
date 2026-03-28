@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" as="style">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=17">
+<link rel="stylesheet" href="app.css?v=18">
 <script src="cookie-consent.js"></script>
 </head>
 <body>
@@ -203,12 +203,18 @@
 
 <!-- MOBILE HEADER -->
 <div class="mobile-header" id="mobileHeader">
-  <div class="mh-back" id="mhBack" onclick="mobileBack()">←</div>
-  <div class="mh-title" id="mhTitle">escola liberal</div>
-  <div class="mh-xp" id="mhXP"></div>
+  <div class="mh-row">
+    <div class="mh-back" id="mhBack" onclick="mobileBack()">←</div>
+    <div class="mh-title" id="mhTitle">escola liberal</div>
+    <div class="mh-xp" id="mhXP"></div>
+  </div>
+  <div class="mh-breadcrumb" id="mhBreadcrumb"></div>
+  <div class="mh-progress" id="mhProgress"><div class="mh-progress-fill" id="mhProgressFill" style="width:0%"></div></div>
 </div>
 
-<div class="shell">
+<div class="shell" id="shell">
+  <!-- SIDEBAR SCRIM (mobile overlay) -->
+  <div class="side-scrim" id="sideScrim" onclick="closeSideMobile()"></div>
   <!-- SIDEBAR -->
   <aside class="side" id="side" role="navigation" aria-label="Menu principal">
     <a href="index.html" class="side-logo">
@@ -236,23 +242,24 @@
       <div class="ss"><div class="ss-val" id="sQuiz">0%</div><div class="ss-lbl">Acertos</div></div>
     </div>
 
+    <!-- GRUPO 1: Primário (sempre visível) -->
     <div class="side-label">Navegação</div>
     <div class="ni active" onclick="goDash()" id="nDash" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goDash()">
       <div class="ni-icon ic-dash">🏠</div>
       <div><div class="ni-txt">Dashboard</div><div class="ni-sub">Visão geral</div></div>
     </div>
-    <!-- Módulos gerados dinamicamente por buildSidebar() -->
-    <div id="modNav"></div>
-
-    <div class="side-label" style="margin-top:1rem">Estudo</div>
     <div class="ni" onclick="goPerf()" id="nPerf" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goPerf()">
       <div class="ni-icon" style="background:var(--lavender-muted);color:var(--lavender)">📊</div>
-      <div><div class="ni-txt">Desempenho</div><div class="ni-sub">Suas estatísticas</div></div>
+      <div><div class="ni-txt">Meu Progresso</div><div class="ni-sub">Desempenho e conquistas</div></div>
     </div>
-    <div class="ni" onclick="goBadges()" id="nBadges" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goBadges()">
-      <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">🏅</div>
-      <div><div class="ni-txt">Conquistas</div><div class="ni-sub">Suas medalhas</div></div>
-    </div>
+
+    <!-- Módulos gerados dinamicamente por buildSidebar() — accordion por disciplina -->
+    <div class="side-label" style="margin-top:.75rem">Disciplinas</div>
+    <div id="modNav"></div>
+
+    <!-- GRUPO 2: Ferramentas (colapsável, aberto por padrão) -->
+    <div class="side-label side-label-toggle" style="margin-top:1rem;cursor:pointer" onclick="toggleSideSection('toolsSection')">Ferramentas <span id="toolsArrow">▾</span></div>
+    <div class="side-section" id="toolsSection">
     <div class="ni" onclick="goFlashcards()" id="nFlash" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goFlashcards()">
       <div class="ni-icon" style="background:var(--sky-muted);color:var(--sky)">🃏</div>
       <div><div class="ni-txt">Flashcards</div><div class="ni-sub">Memorização ativa</div></div>
@@ -261,9 +268,6 @@
       <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">📖</div>
       <div><div class="ni-txt">Glossário</div><div class="ni-sub">Termos econômicos</div></div>
     </div>
-
-    <div class="side-label side-label-toggle" style="margin-top:1rem;cursor:pointer" onclick="toggleSideSection('toolsSection')">Prática Avançada <span id="toolsArrow">▾</span></div>
-    <div class="side-section collapsed" id="toolsSection">
     <div class="ni" onclick="startMarathon()" id="nMarathon" role="button" tabindex="0" onkeydown="if(event.key==='Enter')startMarathon()">
       <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">⚡</div>
       <div><div class="ni-txt">Maratona</div><div class="ni-sub">Quiz contra o relógio</div></div>
@@ -274,59 +278,69 @@
     </div>
     <div class="ni" onclick="goReview()" id="nReview" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goReview()">
       <div class="ni-icon" style="background:var(--coral-muted);color:var(--coral)">🔄</div>
-      <div><div class="ni-txt">Revisão de Quizzes</div><div class="ni-sub">Quizzes com erros</div></div>
-    </div>
-    <div class="ni" onclick="goErrorReview()" id="nErrorReview" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goErrorReview()">
-      <div class="ni-icon" style="background:var(--coral-muted);color:var(--coral)">❌</div>
-      <div><div class="ni-txt">Revisão de Erros</div><div class="ni-sub">Refaça questões erradas</div></div>
+      <div><div class="ni-txt">Revisão</div><div class="ni-sub">Quizzes e erros</div></div>
     </div>
     <div class="ni" onclick="goSpaced()" id="nSpaced" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goSpaced()">
       <div class="ni-icon" style="background:var(--sky-muted);color:var(--sky)">🧠</div>
       <div><div class="ni-txt">Revisão Espaçada</div><div class="ni-sub">Método Leitner</div></div>
     </div>
+    </div><!-- /toolsSection -->
+
+    <!-- GRUPO 3: Config (colapsável, fechado por padrão) -->
+    <div class="side-label side-label-toggle" style="margin-top:1rem;cursor:pointer" onclick="toggleSideSection('configSection')">Configurações <span id="configArrow">▸</span></div>
+    <div class="side-section collapsed" id="configSection">
     <div class="ni" onclick="goTimeline()" id="nTimeline" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goTimeline()">
       <div class="ni-icon" style="background:var(--sage-muted);color:var(--sage)">📅</div>
       <div><div class="ni-txt">Histórico</div><div class="ni-sub">Timeline de estudo</div></div>
+    </div>
+    <div class="ni" onclick="goBadges()" id="nBadges" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goBadges()">
+      <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">🏅</div>
+      <div><div class="ni-txt">Conquistas</div><div class="ni-sub">Suas medalhas</div></div>
+    </div>
+    <div class="ni" onclick="goErrorReview()" id="nErrorReview" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goErrorReview()">
+      <div class="ni-icon" style="background:var(--coral-muted);color:var(--coral)">❌</div>
+      <div><div class="ni-txt">Revisão de Erros</div><div class="ni-sub">Refaça questões erradas</div></div>
     </div>
     <div class="ni" onclick="goGame()" id="nGame" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goGame()">
       <div class="ni-icon" style="background:rgba(91,213,155,.1);color:#5bd59b">🍋</div>
       <div><div class="ni-txt">Mini-Jogo</div><div class="ni-sub">Barraquinha de Limonada</div></div>
     </div>
-    </div><!-- /toolsSection -->
+    <div class="ni" onclick="showBackupMenu()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showBackupMenu()">
+      <div class="ni-icon" style="background:var(--sage-muted);color:var(--sage-light)">💾</div>
+      <div><div class="ni-txt">Backup</div><div class="ni-sub">Exportar / Importar</div></div>
+    </div>
+    <div class="ni" onclick="shareProgress()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')shareProgress()">
+      <div class="ni-icon" style="background:var(--lavender-muted);color:var(--lavender)">📤</div>
+      <div><div class="ni-txt">Compartilhar</div><div class="ni-sub">WhatsApp e redes sociais</div></div>
+    </div>
+    <div class="ni" onclick="exportPDF()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')exportPDF()">
+      <div class="ni-icon" style="background:var(--sky-muted);color:var(--sky)">📄</div>
+      <div><div class="ni-txt">Exportar PDF</div><div class="ni-sub">Relatório de progresso</div></div>
+    </div>
+    <div class="ni" onclick="toggleSfx()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleSfx()" id="sfxToggle">
+      <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">🔊</div>
+      <div><div class="ni-txt" id="sfxLabel">Sons Ligados</div><div class="ni-sub">Efeitos sonoros</div></div>
+    </div>
+    <div class="ni" onclick="setLang(CURRENT_LANG==='pt'?'en':'pt');buildSidebar();updateLangToggle()" role="button" tabindex="0" id="langToggle">
+      <div class="ni-icon" style="background:var(--sky-muted);color:var(--sky)" id="langFlag">🇺🇸</div>
+      <div><div class="ni-txt" id="langLabel">English</div><div class="ni-sub" id="langSub">Switch language</div></div>
+    </div>
+    <div class="ni" onclick="resetAll()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')resetAll()">
+      <div class="ni-icon ic-reset">↺</div>
+      <div><div class="ni-txt">Resetar</div><div class="ni-sub">Recomeçar do zero</div></div>
+    </div>
+    </div><!-- /configSection -->
 
     <div class="side-bottom">
       <a href="perfil.html" class="ni" role="link" tabindex="0" style="text-decoration:none;color:inherit">
         <div class="ni-icon" style="background:var(--sage-muted);color:var(--sage-light)">👤</div>
-        <div><div class="ni-txt">Meu Perfil</div><div class="ni-sub">Conta, progresso e assinatura</div></div>
+        <div><div class="ni-txt">Meu Perfil</div><div class="ni-sub">Conta e assinatura</div></div>
       </a>
-      <div class="ni" onclick="showBackupMenu()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')showBackupMenu()">
-        <div class="ni-icon" style="background:var(--sage-muted);color:var(--sage-light)">💾</div>
-        <div><div class="ni-txt">Backup</div><div class="ni-sub">Exportar / Importar</div></div>
-      </div>
-      <div class="ni" onclick="shareProgress()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')shareProgress()">
-        <div class="ni-icon" style="background:var(--lavender-muted);color:var(--lavender)">📤</div>
-        <div><div class="ni-txt">Compartilhar</div><div class="ni-sub">WhatsApp e redes sociais</div></div>
-      </div>
-      <div class="ni" onclick="exportPDF()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')exportPDF()">
-        <div class="ni-icon" style="background:var(--sky-muted);color:var(--sky)">📄</div>
-        <div><div class="ni-txt">Exportar PDF</div><div class="ni-sub">Relatório de progresso</div></div>
-      </div>
-      <div class="ni" onclick="toggleSfx()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')toggleSfx()" id="sfxToggle">
-        <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">🔊</div>
-        <div><div class="ni-txt" id="sfxLabel">Sons Ligados</div><div class="ni-sub">Efeitos sonoros</div></div>
-      </div>
-      <div class="ni" onclick="setLang(CURRENT_LANG==='pt'?'en':'pt');buildSidebar();updateLangToggle()" role="button" tabindex="0" id="langToggle">
-        <div class="ni-icon" style="background:var(--sky-muted);color:var(--sky)" id="langFlag">🇺🇸</div>
-        <div><div class="ni-txt" id="langLabel">English</div><div class="ni-sub" id="langSub">Switch language</div></div>
-      </div>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Alternar tema claro e escuro">
         <div class="theme-switch"></div>
         <div><div class="theme-label" id="themeLabel">Modo Claro</div><div class="theme-sub" id="themeSub">Trocar aparência</div></div>
       </button>
-      <div class="ni" onclick="resetAll()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')resetAll()">
-        <div class="ni-icon ic-reset">↺</div>
-        <div><div class="ni-txt">Resetar</div><div class="ni-sub">Recomeçar do zero</div></div>
-      </div>
+      <button class="rail-toggle" onclick="toggleSidebarRail()" aria-label="Colapsar menu" id="railBtn">◀ Recolher</button>
     </div>
   </aside>
 
@@ -336,25 +350,43 @@
 
     <!-- DASHBOARD -->
     <div class="dash" id="vDash">
+      <!-- ZONA HERO -->
       <div class="welcome">
         <h2>Bem-vindo, <span id="wName">Aluno</span></h2>
         <p id="welcomeMsg">Cada aula te aproxima de pensar como um verdadeiro pensador autônomo.</p>
         <div class="streak" id="streakB">🔥 Comece sua sequência!</div>
+        <div class="streak-calendar" id="streakCalendar"></div>
       </div>
       <div id="continueSection"></div>
-      <div id="dailyChallenge"></div>
-      <div id="missionsSection"></div>
-      <div class="search-wrap">
-        <span class="search-icon">🔍</span>
-        <input class="search-box" id="searchBox" placeholder="Buscar em todas as aulas..." oninput="doSearch(this.value)" aria-label="Buscar em todas as aulas">
+      <div id="dailyGoalSection"></div>
+
+      <!-- ZONA APRENDIZADO -->
+      <div class="dash-section">
+        <div class="dash-section-label">Suas Disciplinas</div>
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input class="search-box" id="searchBox" placeholder="Buscar em todas as aulas..." oninput="doSearch(this.value)" aria-label="Buscar em todas as aulas">
         <div class="search-results" id="searchResults"></div>
       </div>
       <div class="mcards" id="mcards"></div>
-      <div id="progressChart"></div>
-      <div id="favSection"></div>
-      <div id="quoteSection"></div>
-      <div class="ach-title">Conquistas</div>
-      <div class="achs" id="achs"></div>
+      </div>
+
+      <!-- ZONA ENGAJAMENTO -->
+      <div class="dash-section">
+        <div class="dash-section-label">Desafios & Progresso</div>
+        <div id="dailyChallenge"></div>
+        <div id="missionsSection"></div>
+        <div id="progressChart"></div>
+      </div>
+
+      <!-- ZONA EXTRA -->
+      <div class="dash-section">
+        <div class="dash-section-label">Extras</div>
+        <div id="favSection"></div>
+        <div id="quoteSection"></div>
+        <div class="ach-title">Conquistas</div>
+        <div class="achs" id="achs"></div>
+      </div>
     </div>
 
     <!-- MODULE VIEW -->
@@ -533,11 +565,43 @@
 <!-- BOTTOM NAV (mobile) -->
 <nav class="bottom-nav" id="bottomNav" aria-label="Navegação rápida">
   <button class="bnav-item active" id="bn-dash" onclick="goDash()" aria-label="Ir para tela inicial"><span class="bnav-icon">🏠</span><span class="bnav-label">Início</span></button>
-  <button class="bnav-item" id="bn-mod" onclick="openModulesView()" aria-label="Ver módulos de aulas"><span class="bnav-icon">📚</span><span class="bnav-label">Módulos</span></button>
+  <button class="bnav-item" id="bn-mod" onclick="openModulesView()" aria-label="Ver módulos de aulas"><span class="bnav-icon">📖</span><span class="bnav-label">Aprender</span></button>
+  <button class="bnav-item" id="bn-practice" onclick="togglePracticeSheet()" aria-label="Praticar"><span class="bnav-icon">⚡</span><span class="bnav-label">Praticar</span></button>
   <button class="bnav-item" id="bn-progress" onclick="goPerf()" aria-label="Ver seu progresso"><span class="bnav-icon">📊</span><span class="bnav-label">Progresso</span></button>
-  <button class="bnav-item" id="bn-profile" onclick="location.href='perfil.html'" aria-label="Ir para seu perfil"><span class="bnav-icon">👤</span><span class="bnav-label">Perfil</span></button>
-  <button class="bnav-item" id="bn-menu" onclick="toggleSideMobile()" aria-label="Abrir menu principal"><span class="bnav-icon">☰</span><span class="bnav-label">Menu</span></button>
+  <button class="bnav-item" id="bn-more" onclick="toggleMoreSheet()" aria-label="Mais opções"><span class="bnav-icon">···</span><span class="bnav-label">Mais</span></button>
 </nav>
+
+<!-- PRACTICE BOTTOM SHEET (mobile) -->
+<div class="bottom-sheet-scrim" id="practiceScrim" onclick="closePracticeSheet()"></div>
+<div class="bottom-sheet" id="practiceSheet">
+  <div class="bottom-sheet-handle"></div>
+  <div class="bottom-sheet-title">Praticar</div>
+  <div class="bottom-sheet-grid">
+    <button class="bottom-sheet-item" onclick="closePracticeSheet();goFlashcards()"><div class="bottom-sheet-icon" style="background:var(--sky-muted);color:var(--sky)">🃏</div>Flashcards</button>
+    <button class="bottom-sheet-item" onclick="closePracticeSheet();startMarathon()"><div class="bottom-sheet-icon" style="background:var(--honey-muted);color:var(--honey)">⚡</div>Maratona</button>
+    <button class="bottom-sheet-item" onclick="closePracticeSheet();startExam()"><div class="bottom-sheet-icon" style="background:var(--lavender-muted);color:var(--lavender)">📝</div>Simulado</button>
+    <button class="bottom-sheet-item" onclick="closePracticeSheet();goReview()"><div class="bottom-sheet-icon" style="background:var(--coral-muted);color:var(--coral)">🔄</div>Revisão</button>
+    <button class="bottom-sheet-item" onclick="closePracticeSheet();goSpaced()"><div class="bottom-sheet-icon" style="background:var(--sky-muted);color:var(--sky)">🧠</div>Espaçada</button>
+    <button class="bottom-sheet-item" onclick="closePracticeSheet();goGlossary()"><div class="bottom-sheet-icon" style="background:var(--honey-muted);color:var(--honey)">📖</div>Glossário</button>
+  </div>
+</div>
+
+<!-- MORE BOTTOM SHEET (mobile) -->
+<div class="bottom-sheet-scrim" id="moreScrim" onclick="closeMoreSheet()"></div>
+<div class="bottom-sheet" id="moreSheet">
+  <div class="bottom-sheet-handle"></div>
+  <div class="bottom-sheet-title">Mais</div>
+  <div class="bottom-sheet-grid">
+    <button class="bottom-sheet-item" onclick="closeMoreSheet();location.href='perfil.html'"><div class="bottom-sheet-icon" style="background:var(--sage-muted);color:var(--sage-light)">👤</div>Perfil</button>
+    <button class="bottom-sheet-item" onclick="closeMoreSheet();goBadges()"><div class="bottom-sheet-icon" style="background:var(--honey-muted);color:var(--honey)">🏅</div>Conquistas</button>
+    <button class="bottom-sheet-item" onclick="closeMoreSheet();goTimeline()"><div class="bottom-sheet-icon" style="background:var(--sage-muted);color:var(--sage)">📅</div>Histórico</button>
+    <button class="bottom-sheet-item" onclick="closeMoreSheet();goGame()"><div class="bottom-sheet-icon" style="background:rgba(91,213,155,.1);color:#5bd59b">🍋</div>Mini-Jogo</button>
+    <button class="bottom-sheet-item" onclick="closeMoreSheet();goErrorReview()"><div class="bottom-sheet-icon" style="background:var(--coral-muted);color:var(--coral)">❌</div>Erros</button>
+    <button class="bottom-sheet-item" onclick="closeMoreSheet();toggleTheme()"><div class="bottom-sheet-icon" style="background:var(--bg-elevated);color:var(--text-secondary)">🌗</div>Tema</button>
+    <button class="bottom-sheet-item" onclick="closeMoreSheet();showBackupMenu()"><div class="bottom-sheet-icon" style="background:var(--sage-muted);color:var(--sage-light)">💾</div>Backup</button>
+    <button class="bottom-sheet-item" onclick="closeMoreSheet();toggleSideMobile()"><div class="bottom-sheet-icon" style="background:var(--bg-elevated);color:var(--text-secondary)">☰</div>Menu</button>
+  </div>
+</div>
 
 <!-- SWIPE HINT -->
 <div class="swipe-hint" id="swipeHint">← Deslize para navegar →</div>
