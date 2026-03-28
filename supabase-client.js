@@ -45,7 +45,13 @@ function initSupabase() {
 
 async function checkSession() {
   try {
-    const { data: { session } } = await sbClient.auth.getSession();
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Session check timeout (5s)')), 5000)
+    );
+    const { data: { session } } = await Promise.race([
+      sbClient.auth.getSession(),
+      timeoutPromise
+    ]);
     if (session?.user) {
       currentUser = session.user;
       syncEnabled = true;
@@ -89,12 +95,13 @@ async function signInGoogle() {
     const { data, error } = await sbClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin + '/app.html'
+        redirectTo: window.location.origin + '/auth.html'
       }
     });
     if (error) throw error;
     return { success: true, data };
   } catch (e) {
+    console.error('[OAuth] Google login error:', e.message);
     return { success: false, error: e.message };
   }
 }
