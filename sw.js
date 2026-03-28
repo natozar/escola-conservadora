@@ -1,7 +1,7 @@
-// Escola Liberal PWA — Service Worker v18
+// Escola Liberal PWA — Service Worker v19
 // Estratégia: Network-first (navegação) + Stale-While-Revalidate (assets) + Cache-first (fonts)
-const CACHE_NAME = 'escola-liberal-v18';
-const STATIC_CACHE = 'escola-static-v18';
+const CACHE_NAME = 'escola-liberal-v19';
+const STATIC_CACHE = 'escola-static-v19';
 const FONT_CACHE = 'escola-fonts-v1';
 
 // Core assets — cached on install
@@ -25,11 +25,16 @@ const CORE_ASSETS = [
   './assets/icons/favicon.ico',
   './assets/icons/favicon.svg',
   './assets/icons/icon-192.png',
-  './assets/icons/icon-512.png'
+  './assets/icons/icon-512.png',
+  './lessons/index.json'
 ];
 
-// Lazy-loaded: lessons.json (345KB) — only cached on first use
-const LAZY_ASSETS = ['./lessons.json'];
+// Lazy-loaded: lesson data — cached on first use
+const LAZY_ASSETS = ['./lessons.json', './lessons/index.json',
+  './lessons/mod-0.json','./lessons/mod-1.json','./lessons/mod-2.json','./lessons/mod-3.json',
+  './lessons/mod-4.json','./lessons/mod-5.json','./lessons/mod-6.json','./lessons/mod-7.json',
+  './lessons/mod-8.json','./lessons/mod-9.json','./lessons/mod-10.json','./lessons/mod-11.json',
+  './lessons/mod-12.json','./lessons/mod-13.json'];
 
 self.addEventListener('install', e => {
   e.waitUntil(
@@ -39,7 +44,7 @@ self.addEventListener('install', e => {
 });
 
 self.addEventListener('activate', e => {
-  const keepCaches = ['escola-liberal-v18', 'escola-static-v18', FONT_CACHE];
+  const keepCaches = [CACHE_NAME, STATIC_CACHE, FONT_CACHE];
   e.waitUntil(
     caches.keys().then(keys =>
       Promise.all(keys.filter(k => !keepCaches.includes(k)).map(k => caches.delete(k)))

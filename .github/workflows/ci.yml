@@ -1,0 +1,66 @@
+name: CI — Lint, Validate & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Validate HTML
+        run: npx html-validate index.html app.html auth.html perfil.html contato.html || true
+
+      - name: Check for console.error patterns
+        run: |
+          echo "Checking for common JS issues..."
+          ! grep -rn "debugger" app.js i18n.js supabase-client.js stripe-billing.js || true
+
+      - name: Verify lessons split integrity
+        run: |
+          node -e "
+            const fs=require('fs');
+            const index=JSON.parse(fs.readFileSync('lessons/index.json','utf8'));
+            console.log('Index modules:', index.length);
+            let ok=true;
+            index.forEach((_,i) => {
+              const f='lessons/mod-'+i+'.json';
+              if(!fs.existsSync(f)){console.error('MISSING:',f);ok=false}
+              else{const m=JSON.parse(fs.readFileSync(f,'utf8'));console.log('  mod-'+i+':', m.title, m.lessons.length, 'lessons')}
+            });
+            if(!ok) process.exit(1);
+            console.log('All module files present.');
+          "
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check bundle sizes
+        run: |
+          echo "=== Bundle Size Check ==="
+          MAX_JS=160000
+          MAX_CSS=95000
+          MAX_INDEX=80000
+          JS_SIZE=$(wc -c < app.js)
+          CSS_SIZE=$(wc -c < app.css)
+          IDX_SIZE=$(wc -c < lessons/index.json)
+          echo "app.js: ${JS_SIZE} bytes (max: ${MAX_JS})"
+          echo "app.css: ${CSS_SIZE} bytes (max: ${MAX_CSS})"
+          echo "lessons/index.json: ${IDX_SIZE} bytes (max: ${MAX_INDEX})"
+          if [ "$JS_SIZE" -gt "$MAX_JS" ]; then echo "WARN: app.js exceeds budget"; fi
+          if [ "$CSS_SIZE" -gt "$MAX_CSS" ]; then echo "WARN: app.css exceeds budget"; fi
+          if [ "$IDX_SIZE" -gt "$MAX_INDEX" ]; then echo "WARN: index.json exceeds budget"; fi

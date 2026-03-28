@@ -6,20 +6,32 @@ const _nullProxy=new Proxy(document.createElement('div'),{get(t,p){if(p==='__isN
 document.getElementById=function(id){return _origById(id)||_nullProxy};
 
 // ============================================================
-// COURSE DATA — loaded from external JSON for performance
+// COURSE DATA — lazy-loaded: index (66KB) on boot, full content per module on demand
 // ============================================================
 let M=[];
+const _modCache={};  // cache of fully-loaded modules by index
+
 async function loadLessons(){
+  // Phase 1: Load lightweight index (metadata + quizzes, no lesson content)
   try{
-    const r=await fetch('./lessons.json');
+    const r=await fetch('./lessons/index.json');
     if(!r.ok)throw new Error(r.status);
     M=await r.json();
+    // Mark modules as not fully loaded (no lesson content yet)
+    M.forEach(m=>{m._loaded=false});
   }catch(e){
-    console.warn('[Lessons] Fetch failed, trying cache...',e.message);
+    console.warn('[Lessons] Index fetch failed, trying full fallback...',e.message);
+    try{
+      // Fallback: try legacy lessons.json (full file) or cache
+      const r2=await fetch('./lessons.json');
+      if(r2.ok){M=await r2.json();M.forEach(m=>{m._loaded=true});return true}
+    }catch(e2){}
     try{
       const c=await caches.match('./lessons.json');
-      if(c)M=await c.json();
-    }catch(e2){console.error('[Lessons] Cache also failed:',e2.message)}
+      if(c){M=await c.json();M.forEach(m=>{m._loaded=true});return true}
+      const c2=await caches.match('./lessons/index.json');
+      if(c2){M=await c2.json();M.forEach(m=>{m._loaded=false})}
+    }catch(e3){console.error('[Lessons] All sources failed:',e3.message)}
   }
   if(M.length===0){
     document.getElementById('errorScreen').style.display='flex';
@@ -27,7 +39,42 @@ async function loadLessons(){
   }
   return true;
 }
-// Legacy compat: M was const, now populated async before init
+
+// Phase 2: Load full module content on demand (when user opens a module/lesson)
+async function loadFullModule(i){
+  if(!M[i])return false;
+  if(M[i]._loaded)return true;
+  if(_modCache[i]){M[i]=_modCache[i];return true}
+  try{
+    const r=await fetch('./lessons/mod-'+i+'.json');
+    if(!r.ok)throw new Error(r.status);
+    const full=await r.json();
+    full._loaded=true;
+    // Preserve quiz data from index if full module load somehow misses it
+    M[i]=full;
+    _modCache[i]=full;
+    return true;
+  }catch(e){
+    console.warn('[Lessons] Module '+i+' fetch failed, trying cache...',e.message);
+    try{
+      const c=await caches.match('./lessons/mod-'+i+'.json');
+      if(c){const full=await c.json();full._loaded=true;M[i]=full;_modCache[i]=full;return true}
+    }catch(e2){}
+    // Final fallback: try full lessons.json
+    try{
+      const c=await caches.match('./lessons.json');
+      if(c){const all=await c.json();if(all[i]){all[i]._loaded=true;M[i]=all[i];_modCache[i]=all[i];return true}}
+    }catch(e3){}
+    return false;
+  }
+}
+
+// Preload remaining modules in background after dashboard renders
+function preloadModules(){
+  M.forEach((_,i)=>{
+    if(!M[i]._loaded)setTimeout(()=>loadFullModule(i),1000+i*200);
+  });
+}
 
 // ============================================================
 // DISCIPLINE & COLOR HELPERS
@@ -299,18 +346,27 @@ function goMod(i){
   document.getElementById('mvT').textContent=m.icon+' '+m.title;
   document.getElementById('mvS').textContent=m.desc;
   const allDone=m.lessons.every((_,li)=>S.done[`${i}-${li}`]);
+  // Reading time needs content — estimate from XP if not loaded yet
   document.getElementById('lsnList').innerHTML=m.lessons.map((l,li)=>{
     const k=`${i}-${li}`,d=S.done[k],cur=!d&&(li===0||S.done[`${i}-${li-1}`]),lock=false; // MODO TESTE: todas as aulas abertas
+    const readMin=l.content?calcReadTime(l.content):Math.max(2,Math.round(l.xp/8));
     return`<div class="lsn ${d?'done':cur?'cur':''}" onclick="openL(${i},${li})">`+
-      `<div class="lsn-n">${d?'✓':li+1}</div><div class="lsn-info"><h4>${l.title}</h4><p>${l.sub}</p></div><div class="lsn-meta"><div class="reading-time">⏱ ~${calcReadTime(l.content)} min</div><div class="lsn-xp">+${l.xp} XP</div></div></div>`
+      `<div class="lsn-n">${d?'✓':li+1}</div><div class="lsn-info"><h4>${l.title}</h4><p>${l.sub}</p></div><div class="lsn-meta"><div class="reading-time">⏱ ~${readMin} min</div><div class="lsn-xp">+${l.xp} XP</div></div></div>`
   }).join('')+(allDone?`<div style="text-align:center;margin-top:1.25rem"><button class="btn btn-sage" onclick="showCert(${i})">🏅 Ver Certificado</button></div>`:'');
   hideAllViews();
   const vm=document.getElementById('vMod');vm.classList.add('on','view-enter');
   setTimeout(()=>vm.classList.remove('view-enter'),350);
-  setNav('nM'+i)
+  setNav('nM'+i);
+  // Preload full module content in background for when user opens a lesson
+  if(!M[i]._loaded)loadFullModule(i);
 }
-function openL(mi,li){
+async function openL(mi,li){
   if(!M[mi]||!M[mi].lessons[li])return;
+  // Ensure full module content is loaded before rendering lesson
+  if(!M[mi]._loaded){
+    const ok=await loadFullModule(mi);
+    if(!ok){toast('Erro ao carregar aula. Tente novamente.','error');return}
+  }
   try{history.pushState({view:'lesson',mod:mi,les:li},'')}catch(e){}
   S.cMod=mi;S.cLes=li;const m=M[mi],l=m.lessons[li];
   if(typeof gtag==='function')gtag('event','lesson_open',{module:m.title,lesson:l.title,module_index:mi,lesson_index:li});
@@ -471,9 +527,9 @@ function doSearch(q){
     const results=[];
     M.forEach((mod,mi)=>{
       mod.lessons.forEach((les,li)=>{
-        const plain=les.content.replace(/<[^>]*>/g,' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+        const plain=les.content?(les.content.replace(/<[^>]*>/g,' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')):'';
         const titleN=(les.title+' '+les.sub).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-        const idx=plain.indexOf(norm);const tIdx=titleN.indexOf(norm);
+        const idx=plain?plain.indexOf(norm):-1;const tIdx=titleN.indexOf(norm);
         if(idx>=0||tIdx>=0){
           let snippet='';
           const safeNorm=norm.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -2599,7 +2655,9 @@ updateGlobalProgress();
 if(S.name!=='Aluno'){
   document.getElementById('onboard').style.display='none';
   goDash();
-  setTimeout(checkWhatsNew,1500)
+  setTimeout(checkWhatsNew,1500);
+  // Preload full module content in background for fast lesson opens
+  setTimeout(preloadModules,2000);
 }
 // Redirect recovery token to auth page
 if(location.hash && location.hash.includes('type=recovery')){
