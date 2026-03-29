@@ -909,6 +909,7 @@ function hideAllViews(){
   document.getElementById('vSpaced').classList.remove('on');
   document.getElementById('vGame').classList.remove('on');
   document.getElementById('vErrorReview').classList.remove('on');
+  document.getElementById('vAulas').style.display='none';
   document.getElementById('focusBtn').classList.remove('always');
   stopTTS()
 }
@@ -2526,14 +2527,6 @@ function mobileBack(){
   if(_mobileBackFn)_mobileBackFn();
   else goDash()
 }
-function openModulesView(){
-  goDash();
-  setTimeout(()=>{
-    const mc=document.getElementById('mcards');
-    if(mc)mc.scrollIntoView({behavior:'smooth'})
-  },100);
-  updateBottomNav('mod')
-}
 function toggleSideMobile(){
   const side=document.getElementById('side');
   const scrim=document.getElementById('sideScrim');
@@ -2557,33 +2550,98 @@ function toggleSidebarRail(){
 // Restore rail state on load
 try{if(localStorage.getItem('escola_rail')==='1'){const s=document.getElementById('shell');if(s)s.classList.add('rail');const b=document.getElementById('railBtn');if(b)b.textContent='▶'}}catch(e){}
 
-// Bottom sheets
-function togglePracticeSheet(){
-  const sheet=document.getElementById('practiceSheet');
-  const scrim=document.getElementById('practiceScrim');
-  closeMoreSheet();
-  if(sheet)sheet.classList.toggle('open');
-  if(scrim)scrim.classList.toggle('show',sheet&&sheet.classList.contains('open'));
+
+// ============================================================
+// AULAS TAB — mobile discipline grid
+// ============================================================
+function goAulasTab(){
+  hideAllViews();
+  document.getElementById('vAulas').style.display='block';
+  updateBottomNav('aulas');
+  updateMobileHeader('Disciplinas',false);
+  _mobileBackFn=null;
+  renderDiscGrid();
+  closeSideMobile();
 }
-function closePracticeSheet(){
-  const sheet=document.getElementById('practiceSheet');
-  const scrim=document.getElementById('practiceScrim');
-  if(sheet)sheet.classList.remove('open');
-  if(scrim)scrim.classList.remove('show');
+
+function renderDiscGrid(){
+  const grid=document.getElementById('discGrid');
+  const tools=document.getElementById('toolsGrid');
+  if(!grid)return;
+
+  // Group modules by discipline
+  const grouped={};const order=[];
+  M.forEach((m,i)=>{
+    const disc=m.discipline||'economia';
+    if(!grouped[disc]){grouped[disc]=[];order.push(disc)}
+    grouped[disc].push({mod:m,idx:i});
+  });
+
+  let html='';
+  order.forEach(disc=>{
+    const d=DISCIPLINES[disc]||{label:disc,icon:'📚'};
+    const mods=grouped[disc];
+    const totalL=mods.reduce((s,x)=>s+x.mod.lessons.length,0);
+    const doneL=mods.reduce((s,x)=>s+x.mod.lessons.filter((_,li)=>S.done[x.idx+'-'+li]).length,0);
+    const pct=totalL?Math.round(doneL/totalL*100):0;
+    const color=mods[0].mod.color||'sage';
+    const firstIdx=mods[0].idx;
+
+    html+=`<div class="disc-grid-card" data-color="${color}" onclick="${mods.length===1?'goMod('+firstIdx+')':'toggleDiscMobile(\''+disc+'\')'}">
+      <div class="dg-icon">${d.icon}</div>
+      <div class="dg-name">${d.label}</div>
+      <div class="dg-meta">${mods.length>1?mods.length+' módulos · ':''}${totalL} aulas</div>
+      <div class="dg-prog"><div class="dg-prog-fill" style="width:${pct}%;background:${getModColor(color)}"></div></div>
+    </div>`;
+  });
+  grid.innerHTML=html;
+
+  // Tools grid
+  if(tools){
+    tools.innerHTML=`
+      <div class="tools-grid-item" onclick="goFlashcards()"><span class="tg-icon">🃏</span><span class="tg-label">Flashcards</span></div>
+      <div class="tools-grid-item" onclick="startMarathon()"><span class="tg-icon">⚡</span><span class="tg-label">Maratona</span></div>
+      <div class="tools-grid-item" onclick="startExam()"><span class="tg-icon">📝</span><span class="tg-label">Simulado</span></div>
+      <div class="tools-grid-item" onclick="goReview()"><span class="tg-icon">🔄</span><span class="tg-label">Revisão</span></div>
+      <div class="tools-grid-item" onclick="goSpaced()"><span class="tg-icon">🧠</span><span class="tg-label">Espaçada</span></div>
+      <div class="tools-grid-item" onclick="goGlossary()"><span class="tg-icon">📖</span><span class="tg-label">Glossário</span></div>
+    `;
+  }
 }
-function toggleMoreSheet(){
-  const sheet=document.getElementById('moreSheet');
-  const scrim=document.getElementById('moreScrim');
-  closePracticeSheet();
-  if(sheet)sheet.classList.toggle('open');
-  if(scrim)scrim.classList.toggle('show',sheet&&sheet.classList.contains('open'));
+
+function toggleDiscMobile(disc){
+  // For multi-module disciplines (e.g. Economia with 6 modules), show module list
+  const mods=M.map((m,i)=>({mod:m,idx:i})).filter(x=>x.mod.discipline===disc);
+  if(mods.length===1){goMod(mods[0].idx);return}
+  const d=DISCIPLINES[disc]||{label:disc,icon:'📚'};
+  hideAllViews();
+  document.getElementById('vAulas').style.display='block';
+  updateBottomNav('aulas');
+  updateMobileHeader(d.icon+' '+d.label,true);
+  _mobileBackFn=()=>goAulasTab();
+
+  const grid=document.getElementById('discGrid');
+  const tools=document.getElementById('toolsGrid');
+  document.querySelector('.aulas-title').textContent=d.label;
+  if(tools)tools.style.display='none';
+
+  let html='';
+  mods.forEach(x=>{
+    const pct=x.mod.lessons.length?Math.round(x.mod.lessons.filter((_,li)=>S.done[x.idx+'-'+li]).length/x.mod.lessons.length*100):0;
+    const color=x.mod.color||'sage';
+    html+=`<div class="disc-grid-card" data-color="${color}" onclick="goMod(${x.idx})" style="min-height:100px">
+      <div class="dg-icon">${x.mod.icon||d.icon}</div>
+      <div class="dg-name">${x.mod.title}</div>
+      <div class="dg-meta">${x.mod.lessons.length} aulas · ${pct}%</div>
+      <div class="dg-prog"><div class="dg-prog-fill" style="width:${pct}%;background:${getModColor(color)}"></div></div>
+    </div>`;
+  });
+  grid.innerHTML=html;
 }
-function closeMoreSheet(){
-  const sheet=document.getElementById('moreSheet');
-  const scrim=document.getElementById('moreScrim');
-  if(sheet)sheet.classList.remove('open');
-  if(scrim)scrim.classList.remove('show');
-}
+// Expose to global scope (Vite may wrap in module scope)
+window.goAulasTab=goAulasTab;
+window.toggleDiscMobile=toggleDiscMobile;
+window.renderDiscGrid=renderDiscGrid;
 
 // Override goDash etc. to update mobile nav
 const _origGoDash=goDash;
@@ -2599,7 +2657,7 @@ const _origGoMod=goMod;
 goMod=function(i){
   if(!M[i])return;
   _origGoMod(i);
-  updateBottomNav('mod');
+  updateBottomNav('aulas');
   const done=M[i].lessons.filter((_,li)=>S.done[`${i}-${li}`]).length;
   const pct=Math.round(done/M[i].lessons.length*100);
   updateMobileHeader(M[i].icon+' '+M[i].title,true,`<span>Disciplinas</span> › ${M[i].title}`,pct);
@@ -2609,6 +2667,7 @@ const _origOpenL=openL;
 openL=function(mi,li){
   if(!M[mi]||!M[mi].lessons[li])return;
   _origOpenL(mi,li);
+  updateBottomNav('aulas');
   const pct=Math.round((li+1)/M[mi].lessons.length*100);
   updateMobileHeader(M[mi].lessons[li].title,true,`<span>${M[mi].title}</span> › Aula ${li+1}/${M[mi].lessons.length}`,pct);
   _mobileBackFn=()=>goMod(mi)
@@ -2626,11 +2685,36 @@ const _origGoBadges=goBadges;
 if(typeof goBadges==='function'){
   goBadges=function(){
     _origGoBadges();
-    updateBottomNav('more');
+    updateBottomNav('progress');
     updateMobileHeader('🏅 Conquistas',true);
     _mobileBackFn=()=>goDash()
   }
 }
+const _origGoTimeline=typeof goTimeline==='function'?goTimeline:null;
+if(_origGoTimeline){
+  goTimeline=function(){
+    _origGoTimeline();
+    updateBottomNav('progress');
+    updateMobileHeader('📅 Linha do Tempo',true);
+    _mobileBackFn=()=>goDash()
+  }
+}
+
+// Override tool functions for mobile header
+const _origGoFlash=goFlashcards;
+goFlashcards=function(){_origGoFlash();updateBottomNav('aulas');updateMobileHeader('🃏 Flashcards',true);_mobileBackFn=()=>goDash();closeSideMobile()};
+const _origStartMarathon2=startMarathon;
+startMarathon=function(){_origStartMarathon2();updateBottomNav('aulas');updateMobileHeader('⚡ Maratona',true);_mobileBackFn=()=>goDash();closeSideMobile()};
+const _origStartExam=startExam;
+startExam=function(){_origStartExam();updateBottomNav('aulas');updateMobileHeader('📝 Simulado',true);_mobileBackFn=()=>goDash();closeSideMobile()};
+const _origGoReview=goReview;
+goReview=function(){_origGoReview();updateBottomNav('aulas');updateMobileHeader('🔄 Revisão',true);_mobileBackFn=()=>goDash();closeSideMobile()};
+const _origGoSpaced=goSpaced;
+goSpaced=function(){_origGoSpaced();updateBottomNav('aulas');updateMobileHeader('🧠 Revisão Espaçada',true);_mobileBackFn=()=>goDash();closeSideMobile()};
+const _origGoGlossary=goGlossary;
+goGlossary=function(){_origGoGlossary();updateBottomNav('aulas');updateMobileHeader('📖 Glossário',true);_mobileBackFn=()=>goDash();closeSideMobile()};
+const _origGoGame=typeof goGame==='function'?goGame:null;
+if(_origGoGame){goGame=function(){_origGoGame();updateBottomNav('aulas');updateMobileHeader('🍋 Mini-Jogo',true);_mobileBackFn=()=>goDash();closeSideMobile()}}
 
 // ============================================================
 // MOBILE: SWIPE GESTURES
@@ -2653,14 +2737,6 @@ document.addEventListener('touchend',e=>{
   else{nextL();vibrate()}        // Swipe left = next
 },{passive:true});
 
-// Show swipe hint once on first lesson
-function showSwipeHint(){
-  if(localStorage.getItem('escola_swipe_shown'))return;
-  const hint=document.getElementById('swipeHint');
-  if(!hint)return;
-  hint.classList.add('show');
-  setTimeout(()=>{hint.classList.remove('show');localStorage.setItem('escola_swipe_shown','1')},3000)
-}
 
 // ============================================================
 // MOBILE: HAPTIC FEEDBACK
@@ -2745,9 +2821,6 @@ if(location.hash && location.hash.includes('type=recovery')){
   }
 })();
 if(location.hash){const m=location.hash.match(/module-(\d+)/);if(m)setTimeout(()=>goMod(parseInt(m[1])-1),100)}
-// Show swipe hint on first lesson open
-const _origOpenL2=openL;
-openL=function(mi,li){_origOpenL2(mi,li);showSwipeHint()};
 })(); // end async _boot
 
 // ============================================================

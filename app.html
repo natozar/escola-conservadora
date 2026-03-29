@@ -559,52 +559,33 @@
       <div class="error-review" id="errorReviewContent"></div>
     </div>
 
+    <!-- AULAS TAB VIEW (mobile disciplines + tools grid) -->
+    <div id="vAulas" style="display:none">
+      <h2 class="aulas-title">Escolha uma Disciplina</h2>
+      <div class="disc-grid" id="discGrid"></div>
+      <h3 class="tools-title">Ferramentas</h3>
+      <div class="tools-grid" id="toolsGrid"></div>
+    </div>
+
   </main>
 </div>
 
-<!-- BOTTOM NAV (mobile) -->
-<nav class="bottom-nav" id="bottomNav" aria-label="Navegação rápida">
-  <button class="bnav-item active" id="bn-dash" onclick="goDash()" aria-label="Ir para tela inicial"><span class="bnav-icon">🏠</span><span class="bnav-label">Início</span></button>
-  <button class="bnav-item" id="bn-mod" onclick="openModulesView()" aria-label="Ver módulos de aulas"><span class="bnav-icon">📖</span><span class="bnav-label">Aprender</span></button>
-  <button class="bnav-item" id="bn-practice" onclick="togglePracticeSheet()" aria-label="Praticar"><span class="bnav-icon">⚡</span><span class="bnav-label">Praticar</span></button>
-  <button class="bnav-item" id="bn-progress" onclick="goPerf()" aria-label="Ver seu progresso"><span class="bnav-icon">📊</span><span class="bnav-label">Progresso</span></button>
-  <button class="bnav-item" id="bn-more" onclick="toggleMoreSheet()" aria-label="Mais opções"><span class="bnav-icon">···</span><span class="bnav-label">Mais</span></button>
+<!-- MOBILE BOTTOM NAV — 4 tabs -->
+<nav class="bottom-nav" id="bottomNav" role="tablist" aria-label="Navegação mobile">
+  <button class="bnav-item active" id="bn-dash" onclick="goDash()" role="tab">
+    <span class="bnav-icon">🏠</span><span class="bnav-label">Início</span>
+  </button>
+  <button class="bnav-item" id="bn-aulas" onclick="goAulasTab()" role="tab">
+    <span class="bnav-icon">📚</span><span class="bnav-label">Aulas</span>
+  </button>
+  <button class="bnav-item" id="bn-progress" onclick="goPerf()" role="tab">
+    <span class="bnav-icon">📊</span><span class="bnav-label">Progresso</span>
+  </button>
+  <button class="bnav-item" id="bn-perfil" onclick="location.href='perfil.html'" role="tab">
+    <span class="bnav-icon">👤</span><span class="bnav-label">Perfil</span>
+  </button>
 </nav>
 
-<!-- PRACTICE BOTTOM SHEET (mobile) -->
-<div class="bottom-sheet-scrim" id="practiceScrim" onclick="closePracticeSheet()"></div>
-<div class="bottom-sheet" id="practiceSheet">
-  <div class="bottom-sheet-handle"></div>
-  <div class="bottom-sheet-title">Praticar</div>
-  <div class="bottom-sheet-grid">
-    <button class="bottom-sheet-item" onclick="closePracticeSheet();goFlashcards()"><div class="bottom-sheet-icon" style="background:var(--sky-muted);color:var(--sky)">🃏</div>Flashcards</button>
-    <button class="bottom-sheet-item" onclick="closePracticeSheet();startMarathon()"><div class="bottom-sheet-icon" style="background:var(--honey-muted);color:var(--honey)">⚡</div>Maratona</button>
-    <button class="bottom-sheet-item" onclick="closePracticeSheet();startExam()"><div class="bottom-sheet-icon" style="background:var(--lavender-muted);color:var(--lavender)">📝</div>Simulado</button>
-    <button class="bottom-sheet-item" onclick="closePracticeSheet();goReview()"><div class="bottom-sheet-icon" style="background:var(--coral-muted);color:var(--coral)">🔄</div>Revisão</button>
-    <button class="bottom-sheet-item" onclick="closePracticeSheet();goSpaced()"><div class="bottom-sheet-icon" style="background:var(--sky-muted);color:var(--sky)">🧠</div>Espaçada</button>
-    <button class="bottom-sheet-item" onclick="closePracticeSheet();goGlossary()"><div class="bottom-sheet-icon" style="background:var(--honey-muted);color:var(--honey)">📖</div>Glossário</button>
-  </div>
-</div>
-
-<!-- MORE BOTTOM SHEET (mobile) -->
-<div class="bottom-sheet-scrim" id="moreScrim" onclick="closeMoreSheet()"></div>
-<div class="bottom-sheet" id="moreSheet">
-  <div class="bottom-sheet-handle"></div>
-  <div class="bottom-sheet-title">Mais</div>
-  <div class="bottom-sheet-grid">
-    <button class="bottom-sheet-item" onclick="closeMoreSheet();location.href='perfil.html'"><div class="bottom-sheet-icon" style="background:var(--sage-muted);color:var(--sage-light)">👤</div>Perfil</button>
-    <button class="bottom-sheet-item" onclick="closeMoreSheet();goBadges()"><div class="bottom-sheet-icon" style="background:var(--honey-muted);color:var(--honey)">🏅</div>Conquistas</button>
-    <button class="bottom-sheet-item" onclick="closeMoreSheet();goTimeline()"><div class="bottom-sheet-icon" style="background:var(--sage-muted);color:var(--sage)">📅</div>Histórico</button>
-    <button class="bottom-sheet-item" onclick="closeMoreSheet();goGame()"><div class="bottom-sheet-icon" style="background:rgba(91,213,155,.1);color:#5bd59b">🍋</div>Mini-Jogo</button>
-    <button class="bottom-sheet-item" onclick="closeMoreSheet();goErrorReview()"><div class="bottom-sheet-icon" style="background:var(--coral-muted);color:var(--coral)">❌</div>Erros</button>
-    <button class="bottom-sheet-item" onclick="closeMoreSheet();toggleTheme()"><div class="bottom-sheet-icon" style="background:var(--bg-elevated);color:var(--text-secondary)">🌗</div>Tema</button>
-    <button class="bottom-sheet-item" onclick="closeMoreSheet();showBackupMenu()"><div class="bottom-sheet-icon" style="background:var(--sage-muted);color:var(--sage-light)">💾</div>Backup</button>
-    <button class="bottom-sheet-item" onclick="closeMoreSheet();toggleSideMobile()"><div class="bottom-sheet-icon" style="background:var(--bg-elevated);color:var(--text-secondary)">☰</div>Menu</button>
-  </div>
-</div>
-
-<!-- SWIPE HINT -->
-<div class="swipe-hint" id="swipeHint">← Deslize para navegar →</div>
 
 <!-- KEYBOARD HINT -->
 <div class="kbd-hint" id="kbdHint">
