@@ -59,6 +59,7 @@ select option{background:var(--card);color:var(--text)}
 <button class="theme-btn" onclick="toggleTheme()" aria-label="Alternar tema">🌙</button>
 <div class="container">
   <a href="index.html" class="back">← Voltar ao início</a>
+  <a href="app.html" class="back" style="margin-left:1rem">← Voltar à plataforma</a>
   <h1>Fale Conosco</h1>
   <div class="subtitle">Tem uma sugestão, dúvida ou encontrou um problema? Adoramos ouvir.</div>
 
@@ -111,7 +112,7 @@ select option{background:var(--card);color:var(--text)}
   </div>
 
   <div class="footer">
-    <p>escola liberal para Bilionário © 2026 · <a href="termos.html">Termos</a> · <a href="privacidade.html">Privacidade</a></p>
+    <p>Escola Liberal © 2026 · <a href="termos.html">Termos</a> · <a href="privacidade.html">Privacidade</a></p>
   </div>
 </div>
 <script>
@@ -139,7 +140,6 @@ function resetForm(){
   document.getElementById('cSubject').value='sugestao';
   document.getElementById('cMessage').value='';
 }
-function initTheme(){const t=localStorage.getItem('escola_theme')||'dark';document.documentElement.setAttribute('data-theme',t)}
 initTheme();
 </script>
 </body>

@@ -471,7 +471,7 @@ a.profile-row:hover{background:var(--bg-hover)}
 .dash,.modv.on,.lesv.on,.xview.on{animation:viewFadeIn .35s var(--ease) both}
 
 /* ========== FOCUS MODE ========== */
-.focus-btn{position:fixed;top:20px;right:80px;width:40px;height:40px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;z-index:300;display:none;align-items:center;justify-content:center;font-size:1rem;transition:all .2s}
+.focus-btn{position:fixed;top:20px;right:80px;width:40px;height:40px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);color:var(--text-muted);cursor:pointer;z-index:310;display:none;align-items:center;justify-content:center;font-size:1rem;transition:all .2s}
 .focus-btn:hover{color:var(--text-primary);border-color:var(--border-hover)}
 .lesv.on~.focus-btn,.focus-btn.always{display:flex}
 body.focus-mode .side{display:none !important}
@@ -829,7 +829,7 @@ body.focus-mode .mobile-bar{display:none !important}
 .pwa-ios-ok-btn:active{background:var(--bg-hover)}
 
 /* ========== WHAT'S NEW MODAL ========== */
-.wn-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:600;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.wn-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:650;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
 .wn-overlay.show{opacity:1;pointer-events:auto}
 .wn-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-xl);max-width:460px;width:90%;max-height:80vh;overflow-y:auto;padding:2rem}
 .wn-card h2{font-family:'DM Serif Display',serif;font-size:1.4rem;margin-bottom:.25rem}
@@ -943,7 +943,6 @@ body.focus-mode .mobile-bar{display:none !important}
 .mc.locked::after{content:'🔒';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2rem;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
 
 /* ========== SAFE AREAS (notch phones) ========== */
-body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
 *{-webkit-user-select:text;user-select:text}
 
@@ -987,6 +986,7 @@ html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touc
 
 /* ========== MOBILE IMPROVEMENTS ========== */
 @media(max-width:900px){
+  body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
   /* Bottom nav visible on mobile */
   .bottom-nav{display:flex}
   .mobile-header{display:flex}
@@ -996,7 +996,7 @@ html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touc
   .side{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
   .side.open{top:0;padding-top:calc(60px + env(safe-area-inset-top))}
   /* Global progress under header */
-  .global-progress{top:calc(48px + env(safe-area-inset-top))}
+  .global-progress{top:calc(var(--mobile-header-h,56px) + env(safe-area-inset-top))}
   /* PWA overlay: full screen on mobile */
   .pwa-overlay{align-items:flex-end}
   .pwa-card{border-radius:var(--r-xl) var(--r-xl) 0 0;max-width:100%}

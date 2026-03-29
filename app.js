@@ -35,6 +35,16 @@ async function loadLessons(){
   }
   if(M.length===0){
     document.getElementById('errorScreen').style.display='flex';
+    const retryBtn=document.getElementById('errorScreen').querySelector('button');
+    if(retryBtn){
+      retryBtn.onclick=async function(){
+        this.textContent='Carregando...';
+        this.disabled=true;
+        const ok=await loadLessons();
+        if(ok){document.getElementById('errorScreen').style.display='none';location.reload()}
+        else{this.textContent='Recarregar';this.disabled=false}
+      };
+    }
     return false;
   }
   return true;
@@ -852,7 +862,7 @@ function showCert(mi){
   document.getElementById('certDate').textContent=new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
   document.getElementById('certOverlay').classList.add('show')
 }
-function closeCert(){document.getElementById('certOverlay').classList.remove('show')}
+function closeCert(){const el=_origById('certOverlay');if(el){el.classList.remove('show');el.style.display=''}}
 
 // ============================================================
 // DAILY CHALLENGE
@@ -1049,7 +1059,12 @@ function obFinish(){
     // GA4: onboarding completo
     if(typeof gtag==='function')gtag('event','onboarding_complete',{name:S.name,age_group:obAgeGroup,lang:obLangPref,has_email:!!S.email});
     const el=_origById('onboard');
-    if(el){el.classList.add('hide');setTimeout(()=>{el.style.display='none'},500)}
+    if(el){el.classList.add('hide');setTimeout(()=>{el.style.display='none';
+      // After onboarding hides, show What's New and PWA modal
+      setTimeout(checkWhatsNew,800);
+      setTimeout(()=>_showPwaModal(false),2000);
+      setTimeout(preloadModules,2500);
+    },500)}
     goDash()
   }catch(e){console.error('[obFinish]',e.message);goDash()}
 }
@@ -1107,7 +1122,8 @@ function checkSaveModal(){
   }
 }
 function closeSaveModal(){
-  document.getElementById('saveModal').style.display='none';
+  const modal=_origById('saveModal');
+  if(modal){modal.style.display='none';modal.classList.remove('show')}
 }
 
 // ============================================================
@@ -1932,6 +1948,9 @@ function _isInStandaloneMode(){
     window.matchMedia('(display-mode: standalone)').matches;
 }
 function _showPwaModal(force){
+  // Don't show PWA modal while onboarding is active
+  const obEl=_origById('onboard');
+  if(obEl&&obEl.style.display!=='none')return;
   // Remove chaves antigas para garantir que o popup apareça após o rebrand
   localStorage.removeItem('escola_install_dismissed');
   const dismissed=localStorage.getItem(PWA_DISMISS_KEY);
@@ -2005,6 +2024,9 @@ const CHANGELOG=[
   {emoji:'🔒',text:'<strong>PIN Parental</strong> — Painel protegido para responsáveis'}
 ];
 function checkWhatsNew(){
+  // Don't show What's New while onboarding is active
+  const obEl=_origById('onboard');
+  if(obEl&&obEl.style.display!=='none')return;
   const lastV=localStorage.getItem('escola_last_version');
   if(lastV!==APP_VERSION){
     document.getElementById('wnVer').textContent='Versão '+APP_VERSION;
