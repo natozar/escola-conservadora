@@ -2684,7 +2684,8 @@ openL=function(mi,li){
   updateBottomNav('aulas');
   const pct=Math.round((li+1)/M[mi].lessons.length*100);
   updateMobileHeader(M[mi].lessons[li].title,true,`<span>${M[mi].title}</span> › Aula ${li+1}/${M[mi].lessons.length}`,pct);
-  _mobileBackFn=()=>goMod(mi)
+  _mobileBackFn=()=>goMod(mi);
+  closeSideMobile()
 };
 const _origGoPerf=goPerf;
 if(typeof goPerf==='function'){
@@ -2692,7 +2693,8 @@ if(typeof goPerf==='function'){
     _origGoPerf();
     updateBottomNav('progress');
     updateMobileHeader('📊 Desempenho',true);
-    _mobileBackFn=()=>goDash()
+    _mobileBackFn=()=>goDash();
+    closeSideMobile()
   }
 }
 const _origGoBadges=goBadges;
@@ -2701,7 +2703,8 @@ if(typeof goBadges==='function'){
     _origGoBadges();
     updateBottomNav('progress');
     updateMobileHeader('🏅 Conquistas',true);
-    _mobileBackFn=()=>goDash()
+    _mobileBackFn=()=>goDash();
+    closeSideMobile()
   }
 }
 const _origGoTimeline=typeof goTimeline==='function'?goTimeline:null;
@@ -2710,7 +2713,8 @@ if(_origGoTimeline){
     _origGoTimeline();
     updateBottomNav('progress');
     updateMobileHeader('📅 Linha do Tempo',true);
-    _mobileBackFn=()=>goDash()
+    _mobileBackFn=()=>goDash();
+    closeSideMobile()
   }
 }
 

@@ -24,6 +24,7 @@
   --sp-xs:.35rem;--sp-sm:.75rem;--sp-md:1.25rem;--sp-lg:2rem;--sp-xl:3rem;--sp-section:2.5rem;
   /* Typography tokens */
   --fs-display:2rem;--fs-h1:1.65rem;--fs-h2:1.35rem;--fs-h3:1.1rem;--fs-body:.92rem;--fs-sm:.82rem;--fs-xs:.72rem;--fs-xxs:.65rem;
+  --mobile-header-h:56px;
 }
 [data-theme="light"]{
   --bg-primary:#f5f3ef;--bg-secondary:#eae7e1;--bg-card:#ffffff;--bg-elevated:#f0ede8;
@@ -167,7 +168,7 @@ a.profile-row:hover{background:var(--bg-hover)}
 .btn-outline-sage{background:transparent;color:var(--sage);border:1.5px solid var(--sage)}
 .btn-outline-sage:hover{background:var(--sage-muted);color:var(--sage-light)}
 .btn-sm{padding:.4rem .85rem;font-size:.78rem;min-height:auto}
-.btn-icon{width:36px;height:36px;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.btn-icon{width:44px;height:44px;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center}
 
 /* ========== STREAK CALENDAR ========== */
 .streak-calendar{display:flex;gap:.35rem;margin-top:.75rem;align-items:center}
@@ -285,7 +286,7 @@ a.profile-row:hover{background:var(--bg-hover)}
 .lesv-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.75rem}
 
 /* ========== TOAST ========== */
-.toast{position:fixed;top:20px;right:20px;background:var(--sage);color:#fff;padding:.8rem 1.25rem;border-radius:var(--r-md);font-weight:600;font-size:.88rem;z-index:999;transform:translateX(150%);transition:transform .4s var(--ease);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.toast{position:fixed;top:20px;right:20px;background:var(--sage);color:#fff;padding:.8rem 1.25rem;border-radius:var(--r-md);font-weight:600;font-size:.88rem;z-index:990;transform:translateX(150%);transition:transform .4s var(--ease);box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .toast.show{transform:translateX(0)}
 
 /* ========== CHAT TUTOR ========== */
@@ -717,7 +718,7 @@ body.focus-mode .mobile-bar{display:none !important}
 .timeline-empty{padding:2rem;text-align:center;color:var(--text-muted);font-size:.85rem}
 
 /* ========== CONFETTI ========== */
-.confetti-container{position:fixed;inset:0;pointer-events:none;z-index:999;overflow:hidden}
+.confetti-container{position:fixed;inset:0;pointer-events:none;z-index:980;overflow:hidden}
 .confetti-piece{position:absolute;width:10px;height:10px;top:-20px;animation:confettiFall 3s linear forwards}
 @keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
 
@@ -988,6 +989,7 @@ html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touc
   .pwa-overlay{align-items:flex-end}
   .pwa-card{border-radius:var(--r-xl) var(--r-xl) 0 0;max-width:100%}
   /* Chat FAB above bottom nav */
+  .focus-btn{top:auto;bottom:calc(70px + env(safe-area-inset-bottom));right:16px}
   .chat-fab{bottom:calc(70px + env(safe-area-inset-bottom))!important}
   .chat-panel{bottom:calc(70px + env(safe-area-inset-bottom))!important;max-height:50vh!important}
   .mcards{grid-template-columns:repeat(2,1fr)!important;gap:.75rem}
@@ -1060,7 +1062,7 @@ html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touc
   /* Lesv nav buttons bigger */
   .lesv-nav .btn{min-height:44px;padding:.65rem 1rem}
 }
-@media(max-width:380px){
+@media(max-width:400px){
   .side-stats{grid-template-columns:1fr}
   .perf-grid{grid-template-columns:1fr}
   .onboard-av{width:46px;height:46px;font-size:1.2rem}
@@ -1146,7 +1148,7 @@ html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touc
 /* ====== UPDATE BANNER ====== */
 .update-banner{position:fixed;top:-60px;left:50%;transform:translateX(-50%);z-index:1100;display:flex;align-items:center;gap:.75rem;padding:.6rem 1rem;background:var(--sage);color:#fff;border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:0 4px 20px rgba(0,0,0,.25);font-size:.85rem;font-family:'DM Sans',sans-serif;transition:top .4s var(--ease);max-width:95vw}
 .update-banner.show{top:0}
-@media(max-width:900px){.update-banner.show{top:calc(env(safe-area-inset-top))}}
+@media(max-width:900px){.update-banner.show{top:calc(var(--mobile-header-h) + env(safe-area-inset-top))}}
 .update-text{flex:1;font-weight:500;white-space:nowrap}
 .update-btn{background:#fff;color:var(--sage);border:none;border-radius:var(--r-full);padding:.35rem 1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:transform .15s}
 .update-btn:active{transform:scale(.95)}
