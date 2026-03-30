@@ -98,7 +98,11 @@ const DISCIPLINES={
   portugues:{label:'Português e Redação',icon:'📝',order:5},
   ciencias:{label:'Ciências da Natureza',icon:'🔬',order:6},
   historia:{label:'História do Brasil',icon:'🇧🇷',order:7},
-  history:{label:'American History',icon:'🇺🇸',order:8}
+  history:{label:'American History',icon:'🇺🇸',order:8},
+  financas:{label:'Educação Financeira',icon:'💳',order:9},
+  ingles:{label:'Inglês',icon:'🇬🇧',order:10},
+  geografia:{label:'Geografia',icon:'🌍',order:11},
+  ia:{label:'Inteligência Artificial',icon:'🤖',order:12}
 };
 const COLOR_MAP={
   sage:'var(--sage)',sky:'var(--sky)',honey:'var(--honey)',
