@@ -102,7 +102,12 @@ const DISCIPLINES={
   financas:{label:'Educação Financeira',icon:'💳',order:9},
   ingles:{label:'Inglês',icon:'🇬🇧',order:10},
   geografia:{label:'Geografia',icon:'🌍',order:11},
-  ia:{label:'Inteligência Artificial',icon:'🤖',order:12}
+  ia:{label:'Inteligência Artificial',icon:'🤖',order:12},
+  midia:{label:'Educação Midiática',icon:'🛡️',order:13},
+  direito:{label:'Direito e Cidadania',icon:'⚖️',order:14},
+  saude:{label:'Saúde e Bem-estar',icon:'💪',order:15},
+  artes:{label:'Artes e Cultura',icon:'🎨',order:16},
+  logica:{label:'Lógica e Argumentação',icon:'🧩',order:17}
 };
 const COLOR_MAP={
   sage:'var(--sage)',sky:'var(--sky)',honey:'var(--honey)',
