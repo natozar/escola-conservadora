@@ -259,17 +259,14 @@ function ui(){
 
 function isModUnlocked(i){
   if(!M[i])return false;
-  // ====== MODO TESTE: todos os módulos abertos ======
-  // TODO: restaurar lógica de pré-requisito quando ativar cobrança
-  return true;
-  // Lógica original (preservada para reativar depois):
-  // const disc=M[i].discipline||'economia';
-  // const discMods=M.map((m,idx)=>({m,idx})).filter(x=>(x.m.discipline||'economia')===disc);
-  // const posInDisc=discMods.findIndex(x=>x.idx===i);
-  // if(posInDisc<=0)return true;
-  // if(disc==='economia'&&i<=1)return true;
-  // const prevIdx=discMods[posInDisc-1].idx;
-  // return M[prevIdx].lessons.every((_,li)=>S.done[`${prevIdx}-${li}`])
+  const disc=M[i].discipline||'economia';
+  const discMods=M.map((m,idx)=>({m,idx})).filter(x=>(x.m.discipline||'economia')===disc);
+  const posInDisc=discMods.findIndex(x=>x.idx===i);
+  // First module of each discipline is always unlocked
+  if(posInDisc<=0)return true;
+  // Subsequent modules require completing the previous one in the same discipline
+  const prevIdx=discMods[posInDisc-1].idx;
+  return M[prevIdx].lessons.every((_,li)=>S.done[`${prevIdx}-${li}`])
 }
 function renderCards(){
   let html='';
@@ -367,10 +364,10 @@ function goMod(i){
   const allDone=m.lessons.every((_,li)=>S.done[`${i}-${li}`]);
   // Reading time needs content — estimate from XP if not loaded yet
   document.getElementById('lsnList').innerHTML=m.lessons.map((l,li)=>{
-    const k=`${i}-${li}`,d=S.done[k],cur=!d&&(li===0||S.done[`${i}-${li-1}`]),lock=false; // MODO TESTE: todas as aulas abertas
+    const k=`${i}-${li}`,d=S.done[k],cur=!d&&(li===0||S.done[`${i}-${li-1}`]),lock=!d&&!cur;
     const readMin=l.content?calcReadTime(l.content):Math.max(2,Math.round(l.xp/8));
-    return`<div class="lsn ${d?'done':cur?'cur':''}" onclick="openL(${i},${li})">`+
-      `<div class="lsn-n">${d?'✓':li+1}</div><div class="lsn-info"><h4>${l.title}</h4><p>${l.sub}</p></div><div class="lsn-meta"><div class="reading-time">⏱ ~${readMin} min</div><div class="lsn-xp">+${l.xp} XP</div></div></div>`
+    return`<div class="lsn ${d?'done':cur?'cur':lock?'locked':''}" ${lock?'':`onclick="openL(${i},${li})"`}>`+
+      `<div class="lsn-n">${d?'✓':lock?'🔒':li+1}</div><div class="lsn-info"><h4>${l.title}</h4><p>${l.sub}</p></div><div class="lsn-meta"><div class="reading-time">⏱ ~${readMin} min</div><div class="lsn-xp">+${l.xp} XP</div></div></div>`
   }).join('')+(allDone?`<div style="text-align:center;margin-top:1.25rem"><button class="btn btn-sage" onclick="showCert(${i})">🏅 Ver Certificado</button></div>`:'');
   hideAllViews();
   const vm=document.getElementById('vMod');vm.classList.add('on','view-enter');
@@ -1091,7 +1088,7 @@ function showModulePaywall(modIdx){
     <button class="save-modal-close" onclick="document.getElementById('paywallModal').remove()" aria-label="Fechar">&times;</button>
     <div style="font-size:2.5rem;margin-bottom:.75rem">${m.icon}</div>
     <h2 style="font-size:1.3rem;margin-bottom:.5rem">${m.title}</h2>
-    <p style="color:var(--text-secondary);font-size:.9rem;margin-bottom:1.25rem;line-height:1.6">Este módulo faz parte do plano <strong>Premium</strong>. Desbloqueie acesso completo a todas as 140 aulas, certificados e ferramentas avançadas.</p>
+    <p style="color:var(--text-secondary);font-size:.9rem;margin-bottom:1.25rem;line-height:1.6">Este módulo faz parte do plano <strong>Premium</strong>. Desbloqueie acesso completo a todas as ${M.reduce((s,m)=>s+m.lessons.length,0)} aulas, certificados e ferramentas avançadas.</p>
     <a href="perfil.html#planos" class="btn btn-sage" style="width:100%;margin-bottom:.75rem">Ver Planos — a partir de R$29,90/mês</a>
     <button class="btn btn-ghost" onclick="document.getElementById('paywallModal').remove()" style="width:100%;font-size:.85rem">Voltar</button>
   </div>`;

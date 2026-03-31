@@ -241,6 +241,7 @@ a.profile-row:hover{background:var(--bg-hover)}
 .lsn:active{transform:scale(.98);transition-duration:.1s}
 .lsn.done{border-left:3px solid var(--sage)}
 .lsn.cur{border-left:3px solid var(--honey);background:var(--honey-muted)}
+.lsn.locked{opacity:.45;cursor:not-allowed;pointer-events:none}
 .lsn.lock{opacity:.4;cursor:not-allowed}
 .lsn-n{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.8rem;background:rgba(255,255,255,.04);color:var(--text-secondary)}
 .lsn.done .lsn-n{background:var(--sage);color:#fff}

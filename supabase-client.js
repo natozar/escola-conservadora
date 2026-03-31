@@ -214,17 +214,22 @@ async function loadUserPlan() {
 
 // Verifica se o módulo está liberado no plano atual
 function isModuleUnlocked(moduleIndex) {
-  // ====== MODO TESTE: todos os módulos abertos ======
-  // TODO: restaurar lógica de plano quando ativar cobrança
+  // Offline/unauthenticated: all modules open (freemium local experience)
+  if (!syncEnabled || !currentUser) return true;
+  // Custom plan with specific module access list
+  if (window._planDetails?.modules_access) {
+    return window._planDetails.modules_access.includes(moduleIndex);
+  }
+  // Free plan: first module of each discipline only (index 0 in each discipline group)
+  if (userPlan === 'free') {
+    const M = window.M || [];
+    if (!M[moduleIndex]) return false;
+    const disc = M[moduleIndex].discipline || 'economia';
+    const firstInDisc = M.findIndex(m => (m.discipline || 'economia') === disc);
+    return moduleIndex === firstInDisc;
+  }
+  // Paid plans: all modules
   return true;
-
-  // Lógica original (preservada para reativar depois):
-  // if (!syncEnabled || !currentUser) return true;
-  // if (window._planDetails?.modules_access) {
-  //   return window._planDetails.modules_access.includes(moduleIndex);
-  // }
-  // if (userPlan === 'free') return moduleIndex <= 1;
-  // return true;
 }
 
 // Verifica se uma feature está liberada
