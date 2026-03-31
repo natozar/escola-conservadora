@@ -474,7 +474,7 @@ function nextL(){
   if(li<M[mi].lessons.length-1)openL(mi,li+1);else{
     const justCompleted=M[mi].lessons.every((_,i)=>S.done[`${mi}-${i}`]);
     goMod(mi);
-    if(justCompleted){toast('🏆 Módulo Concluído!');launchConfetti();playSfx('complete');logActivity('module',`Módulo concluído: ${M[mi].title}`);setTimeout(()=>showCert(mi),600)}
+    if(justCompleted){toast('🏆 Módulo Concluído!');launchConfetti();playSfx('complete');logActivity('module',`Módulo concluído: ${M[mi].title}`);setTimeout(()=>showCert(mi),600);checkDiscCompletion(mi)}
     else toast('🏆 Módulo Concluído!')
   }
 }
@@ -922,6 +922,144 @@ function _certId(mi){
   const raw=`${S.name}-${mi}-${S.lvl}`;
   let h=0;for(let i=0;i<raw.length;i++){h=((h<<5)-h)+raw.charCodeAt(i);h|=0}
   return 'EL-'+Math.abs(h).toString(36).toUpperCase().slice(0,8)
+}
+function _discCertId(disc){
+  const raw=`${S.name}-DISC-${disc}`;
+  let h=0;for(let i=0;i<raw.length;i++){h=((h<<5)-h)+raw.charCodeAt(i);h|=0}
+  return 'ELD-'+Math.abs(h).toString(36).toUpperCase().slice(0,8)
+}
+
+function checkDiscCompletion(mi){
+  const disc=M[mi].discipline||'economia';
+  const mods=getDiscModules(disc);
+  const allDone=mods.every(({mod,idx})=>mod.lessons.every((_,li)=>S.done[`${idx}-${li}`]));
+  if(allDone){
+    const d=DISCIPLINES[disc];
+    if(d){
+      setTimeout(()=>{
+        toast(`🏆 ${d.label} Completa!`);launchConfetti();
+        setTimeout(()=>showDiscCert(disc),800)
+      },1200)
+    }
+  }
+}
+
+function showDiscCert(disc){
+  const d=DISCIPLINES[disc];if(!d)return;
+  const mods=getDiscModules(disc);
+  const totalLessons=mods.reduce((s,{mod})=>s+mod.lessons.length,0);
+  const totalHours=Math.max(1,Math.round(totalLessons*5/60));
+  const totalModules=mods.length;
+  const quizOk=mods.reduce((s,{mod,idx})=>s+mod.lessons.filter((_,li)=>S.quiz[`${idx}-${li}`]).length,0);
+  const quizTotal=mods.reduce((s,{mod})=>s+mod.lessons.filter(l=>l.quiz).length,0);
+  const certHash=_discCertId(disc);
+
+  const overlay=document.createElement('div');
+  overlay.className='cert-overlay show';overlay.id='discCertOverlay';
+  overlay.onclick=e=>{if(e.target===overlay){overlay.remove()}};
+  overlay.innerHTML=`<div class="cert-card cert-card-disc">
+    <div class="cert-seal" aria-hidden="true">🏆</div>
+    <div class="cert-title">Certificado de Disciplina</div>
+    <div class="cert-sub">Escola Liberal — Plataforma Homeschool</div>
+    <div class="cert-name">${S.name}</div>
+    <div class="cert-module">Concluiu a disciplina: ${d.icon} ${d.label}</div>
+    <div class="cert-details">${totalModules} módulos · ${totalLessons} aulas · ${totalHours}h · ${quizTotal?Math.round(quizOk/quizTotal*100)+'% quizzes':''}</div>
+    <div class="cert-date">${new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'})}</div>
+    <div class="cert-id">ID: ${certHash}</div>
+    <div style="display:flex;gap:.75rem;justify-content:center;margin-top:.5rem;flex-wrap:wrap">
+      <button class="cert-close" onclick="exportDiscCertPDF('${disc}')" style="border-color:var(--sage);color:var(--sage)">📄 Salvar PDF</button>
+      <button class="cert-close" onclick="exportDiscCertImage('${disc}')" style="border-color:var(--honey);color:var(--honey)">📥 Salvar Imagem</button>
+      <button class="cert-close" onclick="document.getElementById('discCertOverlay').remove()">Fechar</button>
+    </div>
+  </div>`;
+  document.body.appendChild(overlay)
+}
+
+function _drawDiscCert(ctx,w,h,disc){
+  const d=DISCIPLINES[disc];if(!d)return;
+  const mods=getDiscModules(disc);
+  const totalLessons=mods.reduce((s,{mod})=>s+mod.lessons.length,0);
+  const totalHours=Math.max(1,Math.round(totalLessons*5/60));
+  const quizOk=mods.reduce((s,{mod,idx})=>s+mod.lessons.filter((_,li)=>S.quiz[`${idx}-${li}`]).length,0);
+  const quizTotal=mods.reduce((s,{mod})=>s+mod.lessons.filter(l=>l.quiz).length,0);
+  const certHash=_discCertId(disc);
+  // Background — premium gold gradient
+  const grad=ctx.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0,'#1a1a2e');grad.addColorStop(1,'#16213e');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+  // Double border — gold
+  ctx.strokeStyle='#dba550';ctx.lineWidth=5;ctx.strokeRect(18,18,w-36,h-36);
+  ctx.strokeStyle='rgba(219,165,80,.4)';ctx.lineWidth=2;ctx.strokeRect(30,30,w-60,h-60);
+  // Corner ornaments
+  [[38,38],[w-38,38],[38,h-38],[w-38,h-38]].forEach(([x,y])=>{ctx.fillStyle='#dba550';ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.fill()});
+  // Trophy
+  ctx.font='56px serif';ctx.textAlign='center';ctx.fillStyle='#dba550';ctx.fillText('🏆',w/2,100);
+  // Title
+  ctx.font='bold 32px Georgia';ctx.fillStyle='#e8e6e1';ctx.fillText('Certificado de Disciplina',w/2,152);
+  ctx.font='15px sans-serif';ctx.fillStyle='#9ba3b5';ctx.fillText('Escola Liberal — Plataforma Homeschool',w/2,180);
+  // Divider
+  ctx.beginPath();ctx.moveTo(w*0.15,205);ctx.lineTo(w*0.85,205);ctx.strokeStyle='rgba(219,165,80,.4)';ctx.lineWidth=1;ctx.stroke();
+  // Cert text
+  ctx.font='14px sans-serif';ctx.fillStyle='#9ba3b5';ctx.fillText('Certificamos que',w/2,240);
+  ctx.font='italic 40px Georgia';ctx.fillStyle='#5fbf96';ctx.fillText(S.name,w/2,290);
+  ctx.font='14px sans-serif';ctx.fillStyle='#9ba3b5';ctx.fillText('concluiu com êxito a disciplina completa',w/2,325);
+  // Discipline name
+  ctx.font='bold 26px sans-serif';ctx.fillStyle='#dba550';ctx.fillText(d.label,w/2,368);
+  // Details
+  ctx.font='13px sans-serif';ctx.fillStyle='#9ba3b5';
+  ctx.fillText(`${mods.length} módulos · ${totalLessons} aulas · ${totalHours}h de carga horária${quizTotal?` · ${Math.round(quizOk/quizTotal*100)}% quizzes`:''}`,w/2,400);
+  // Divider 2
+  ctx.beginPath();ctx.moveTo(w*0.25,425);ctx.lineTo(w*0.75,425);ctx.strokeStyle='rgba(219,165,80,.2)';ctx.stroke();
+  // Date
+  ctx.font='14px sans-serif';ctx.fillStyle='#9ba3b5';
+  ctx.fillText(new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'}),w/2,455);
+  // ID
+  ctx.font='11px monospace';ctx.fillStyle='#6b7488';
+  ctx.fillText(`Certificado ${certHash} · escolaliberal.com.br`,w/2,485);
+  // Footer
+  ctx.font='11px sans-serif';ctx.fillStyle='#4a5568';
+  ctx.fillText('Este certificado atesta a conclusão da disciplina completa na plataforma Escola Liberal.',w/2,h-50)
+}
+
+function exportDiscCertImage(disc){
+  const c=document.createElement('canvas');c.width=900;c.height=560;
+  _drawDiscCert(c.getContext('2d'),900,560,disc);
+  const a=document.createElement('a');
+  a.download=`certificado-disciplina-${disc}.png`;
+  a.href=c.toDataURL('image/png');a.click();
+  toast('Certificado PNG salvo!')
+}
+
+function exportDiscCertPDF(disc){
+  const c=document.createElement('canvas');c.width=1190;c.height=842;
+  _drawDiscCert(c.getContext('2d'),1190,842,disc);
+  // Reuse same PDF generation logic from module cert
+  const pdfW=841.89;const pdfH=595.28;
+  const imgW=pdfW-40;const imgH=pdfH-40;
+  const jpegData=c.toDataURL('image/jpeg',0.92);
+  const jpegBin=atob(jpegData.split(',')[1]);
+  const jpegBytes=new Uint8Array(jpegBin.length);
+  for(let i=0;i<jpegBin.length;i++)jpegBytes[i]=jpegBin.charCodeAt(i);
+
+  let pdf='%PDF-1.4\n';const offsets=[];
+  offsets.push(pdf.length);pdf+='1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n';
+  offsets.push(pdf.length);pdf+='2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n';
+  offsets.push(pdf.length);pdf+=`3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pdfW} ${pdfH}] /Contents 4 0 R /Resources << /XObject << /Img 5 0 R >> >> >>\nendobj\n`;
+  const cs=`q ${imgW} 0 0 ${imgH} 20 20 cm /Img Do Q`;
+  offsets.push(pdf.length);pdf+=`4 0 obj\n<< /Length ${cs.length} >>\nstream\n${cs}\nendstream\nendobj\n`;
+  const imgObjStr=`5 0 obj\n<< /Type /XObject /Subtype /Image /Width ${c.width} /Height ${c.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpegBytes.length} >>\nstream\n`;
+  const imgEnd='\nendstream\nendobj\n';
+  const pdfStart=new TextEncoder().encode(pdf);const imgStartB=new TextEncoder().encode(imgObjStr);const imgEndB=new TextEncoder().encode(imgEnd);
+  offsets.push(pdfStart.length);
+  const xrefOff=pdfStart.length+imgStartB.length+jpegBytes.length+imgEndB.length;
+  let xref=`xref\n0 6\n0000000000 65535 f \n`;offsets.forEach(o=>{xref+=String(o).padStart(10,'0')+' 00000 n \n'});
+  xref+=`trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xrefOff}\n%%EOF`;
+  const xrefB=new TextEncoder().encode(xref);
+  const total=new Uint8Array(pdfStart.length+imgStartB.length+jpegBytes.length+imgEndB.length+xrefB.length);
+  let p=0;total.set(pdfStart,p);p+=pdfStart.length;total.set(imgStartB,p);p+=imgStartB.length;total.set(jpegBytes,p);p+=jpegBytes.length;total.set(imgEndB,p);p+=imgEndB.length;total.set(xrefB,p);
+  const blob=new Blob([total],{type:'application/pdf'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`certificado-disciplina-${disc}.pdf`;a.click();URL.revokeObjectURL(a.href);
+  toast('Certificado PDF salvo!')
 }
 function closeCert(){const el=_origById('certOverlay');if(el){el.classList.remove('show');el.style.display=''}}
 
