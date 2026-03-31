@@ -971,6 +971,7 @@ function hideAllViews(){
   document.getElementById('vGame').classList.remove('on');
   document.getElementById('vErrorReview').classList.remove('on');
   document.getElementById('vLeaderboard').classList.remove('on');
+  document.getElementById('vStudyPlan').classList.remove('on');
   document.getElementById('vAulas').style.display='none';
   document.getElementById('focusBtn').classList.remove('always');
   stopTTS()
@@ -2070,6 +2071,137 @@ function spacedAnswer(term,correct){
   const due=Object.entries(data).filter(([_,v])=>v.next<=Date.now());
   if(due.length>0)renderSpacedReview(due[0][0],data);
   else goSpaced()
+}
+
+// ============================================================
+// STUDY PLAN — PLANO DE ESTUDOS PERSONALIZADO
+// ============================================================
+function goStudyPlan(){
+  hideAllViews();setNav('nStudyPlan');
+  document.getElementById('vStudyPlan').classList.add('on');
+  try{history.pushState({view:'studyplan'},'')}catch(e){}
+  renderStudyPlan()
+}
+
+function analyzeProgress(){
+  const totalL=M.reduce((s,m)=>s+m.lessons.length,0);
+  const doneCount=Object.keys(S.done).length;
+  const quizTotal=Object.keys(S.quiz).length;
+  const quizCorrect=Object.values(S.quiz).filter(v=>v).length;
+  const quizPct=quizTotal?Math.round(quizCorrect/quizTotal*100):0;
+
+  // Per-discipline analysis
+  const discAnalysis={};
+  Object.entries(DISCIPLINES).forEach(([key,d])=>{
+    const mods=M.map((m,i)=>({m,i})).filter(x=>(x.m.discipline||'economia')===key);
+    if(!mods.length)return;
+    let done=0,total=0,qOk=0,qTotal=0;
+    mods.forEach(({m,i})=>{
+      m.lessons.forEach((_,li)=>{
+        total++;
+        if(S.done[`${i}-${li}`])done++;
+        if(S.quiz[`${i}-${li}`]!==undefined){qTotal++;if(S.quiz[`${i}-${li}`])qOk++}
+      });
+    });
+    const pct=total?Math.round(done/total*100):0;
+    const qPct=qTotal?Math.round(qOk/qTotal*100):0;
+    discAnalysis[key]={label:d.label,icon:d.icon,done,total,pct,qOk,qTotal,qPct,mods}
+  });
+
+  // Find weak areas (low quiz accuracy)
+  const weakAreas=Object.entries(discAnalysis)
+    .filter(([_,d])=>d.qTotal>=3&&d.qPct<70)
+    .sort((a,b)=>a[1].qPct-b[1].qPct);
+
+  // Find next lessons to do (per discipline, the first incomplete)
+  const nextLessons=[];
+  Object.entries(discAnalysis).forEach(([key,d])=>{
+    for(const{m,i}of d.mods){
+      if(!isModUnlocked(i))continue;
+      for(let li=0;li<m.lessons.length;li++){
+        if(!S.done[`${i}-${li}`]){
+          nextLessons.push({mi:i,li,title:m.lessons[li].title,mod:m.title,icon:m.icon,disc:key,discLabel:d.label});
+          break
+        }
+      }
+      if(nextLessons.filter(n=>n.disc===key).length)break
+    }
+  });
+
+  // Study streak analysis
+  const daysActive=(S.streakDays||[]).length;
+  const avgPerDay=daysActive?Math.round(doneCount/Math.max(1,daysActive)):0;
+
+  // Weekly goal suggestion
+  const remaining=totalL-doneCount;
+  const weeksToFinish=remaining>0?Math.ceil(remaining/(avgPerDay*5||5)):0;
+
+  return{totalL,doneCount,quizPct,discAnalysis,weakAreas,nextLessons,avgPerDay,remaining,weeksToFinish,daysActive}
+}
+
+function renderStudyPlan(){
+  const a=analyzeProgress();
+  const el=document.getElementById('studyPlanContent');
+
+  // Summary card
+  let html=`<div class="sp-summary">
+    <div class="sp-summary-stat"><div class="sp-stat-val">${a.doneCount}/${a.totalL}</div><div class="sp-stat-lbl">Aulas completas</div></div>
+    <div class="sp-summary-stat"><div class="sp-stat-val">${a.quizPct}%</div><div class="sp-stat-lbl">Acerto quizzes</div></div>
+    <div class="sp-summary-stat"><div class="sp-stat-val">${a.avgPerDay}</div><div class="sp-stat-lbl">Aulas/dia média</div></div>
+    <div class="sp-summary-stat"><div class="sp-stat-val">${a.weeksToFinish>0?'~'+a.weeksToFinish+'sem':'✓'}</div><div class="sp-stat-lbl">${a.weeksToFinish>0?'Para terminar':'Completo!'}</div></div>
+  </div>`;
+
+  // Recommended next lessons
+  if(a.nextLessons.length){
+    html+=`<div class="sp-section"><h3>🎯 Próximas Aulas Recomendadas</h3><div class="sp-next-list">`;
+    a.nextLessons.slice(0,5).forEach(n=>{
+      html+=`<div class="sp-next-item" onclick="openL(${n.mi},${n.li})">
+        <span class="sp-next-icon">${n.icon}</span>
+        <div class="sp-next-info"><div class="sp-next-title">${n.title}</div><div class="sp-next-sub">${n.discLabel} · ${n.mod}</div></div>
+        <span class="sp-next-arrow">→</span>
+      </div>`
+    });
+    html+=`</div></div>`
+  }
+
+  // Weak areas
+  if(a.weakAreas.length){
+    html+=`<div class="sp-section"><h3>⚠️ Áreas para Reforçar</h3><p class="sp-section-sub">Disciplinas com menos de 70% de acerto nos quizzes</p><div class="sp-weak-list">`;
+    a.weakAreas.forEach(([key,d])=>{
+      html+=`<div class="sp-weak-item">
+        <span class="sp-weak-icon">${d.icon}</span>
+        <div class="sp-weak-info"><div class="sp-weak-name">${d.label}</div><div class="sp-weak-stat">${d.qPct}% acerto (${d.qOk}/${d.qTotal})</div></div>
+        <button class="btn btn-ghost btn-sm" onclick="goReview()">Revisar</button>
+      </div>`
+    });
+    html+=`</div></div>`
+  }
+
+  // Discipline progress map
+  html+=`<div class="sp-section"><h3>📊 Mapa de Progresso</h3><div class="sp-disc-map">`;
+  Object.entries(a.discAnalysis).sort((a,b)=>a[1].pct-b[1].pct).forEach(([key,d])=>{
+    const status=d.pct===100?'complete':d.pct>0?'active':'todo';
+    html+=`<div class="sp-disc-row">
+      <span class="sp-disc-icon">${d.icon}</span>
+      <div class="sp-disc-info">
+        <div class="sp-disc-head"><span class="sp-disc-name">${d.label}</span><span class="sp-disc-pct">${d.pct}%</span></div>
+        <div class="sp-disc-bar"><div class="sp-disc-fill sp-disc-${status}" style="width:${d.pct}%"></div></div>
+        <div class="sp-disc-meta">${d.done}/${d.total} aulas · ${d.qTotal?d.qPct+'% quizzes':'sem quizzes ainda'}</div>
+      </div>
+    </div>`
+  });
+  html+=`</div></div>`;
+
+  // Tips
+  html+=`<div class="sp-section sp-tips"><h3>💡 Dicas para Você</h3><div class="sp-tips-list">`;
+  if(S.streak<3)html+=`<div class="sp-tip">🔥 Estude todos os dias para manter sua sequência. Consistência vale mais que intensidade!</div>`;
+  if(a.quizPct<60&&a.quizPct>0)html+=`<div class="sp-tip">📖 Revise as aulas antes de refazer os quizzes. Use os Flashcards para memorizar conceitos-chave.</div>`;
+  if(a.weakAreas.length)html+=`<div class="sp-tip">🎯 Foque em ${a.weakAreas[0][1].label} — é sua área mais fraca. Prática com IA pode ajudar!</div>`;
+  if(a.doneCount>20&&a.doneCount<a.totalL)html+=`<div class="sp-tip">🏆 Você já fez ${Math.round(a.doneCount/a.totalL*100)}% do currículo! Faltam ${a.remaining} aulas. Continue assim!</div>`;
+  if(a.doneCount===0)html+=`<div class="sp-tip">🚀 Comece pela disciplina que mais te interessa. A primeira aula de cada disciplina é gratuita!</div>`;
+  html+=`</div></div>`;
+
+  el.innerHTML=html
 }
 
 // ============================================================
@@ -3542,6 +3674,7 @@ window.addEventListener('popstate',function(e){
   if(s.view==='mod'&&M[s.mod])goMod(s.mod);
   else if(s.view==='lesson'&&M[s.mod]&&M[s.mod].lessons[s.les])openL(s.mod,s.les);
   else if(s.view==='leaderboard')goLeaderboard();
+  else if(s.view==='studyplan')goStudyPlan();
   else goDash();
 });
 

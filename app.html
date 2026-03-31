@@ -252,6 +252,10 @@
       <div class="ni-icon" style="background:var(--lavender-muted);color:var(--lavender)">📊</div>
       <div><div class="ni-txt">Meu Progresso</div><div class="ni-sub">Desempenho e conquistas</div></div>
     </div>
+    <div class="ni" onclick="goStudyPlan()" id="nStudyPlan" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goStudyPlan()">
+      <div class="ni-icon" style="background:var(--sage-muted);color:var(--sage)">📋</div>
+      <div><div class="ni-txt">Plano de Estudos</div><div class="ni-sub">Recomendações personalizadas</div></div>
+    </div>
 
     <!-- Módulos gerados dinamicamente por buildSidebar() — accordion por disciplina -->
     <div class="side-label" style="margin-top:.75rem">Disciplinas</div>
@@ -570,6 +574,15 @@
         <div><h2>❌ Revisão de Erros</h2></div>
       </div>
       <div class="error-review" id="errorReviewContent"></div>
+    </div>
+
+    <!-- STUDY PLAN VIEW -->
+    <div class="xview" id="vStudyPlan">
+      <div class="xview-head">
+        <button class="btn btn-ghost" onclick="mobileBack()">← Voltar</button>
+        <div><h2>📋 Plano de Estudos</h2></div>
+      </div>
+      <div id="studyPlanContent"></div>
     </div>
 
     <!-- LEADERBOARD VIEW -->
