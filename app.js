@@ -107,7 +107,10 @@ const DISCIPLINES={
   direito:{label:'Direito e Cidadania',icon:'⚖️',order:14},
   saude:{label:'Saúde e Bem-estar',icon:'💪',order:15},
   artes:{label:'Artes e Cultura',icon:'🎨',order:16},
-  logica:{label:'Lógica e Argumentação',icon:'🧩',order:17}
+  logica:{label:'Lógica e Argumentação',icon:'🧩',order:17},
+  programacao:{label:'Programação',icon:'💻',order:18},
+  oratoria:{label:'Oratória e Debate',icon:'🎤',order:19},
+  civica:{label:'Educação Cívica',icon:'🏛️',order:20}
 };
 const COLOR_MAP={
   sage:'var(--sage)',sky:'var(--sky)',honey:'var(--honey)',
@@ -125,7 +128,8 @@ const DISC_ACCENT={
   economia:'sage',matematica:'sky',filosofia:'lavender',emocional:'honey',
   psicologia:'coral',portugues:'sage',ciencias:'mint',historia:'coral',
   history:'sky',financas:'honey',ingles:'sky',geografia:'mint',
-  ia:'lavender',midia:'coral',direito:'sage',saude:'mint',artes:'honey',logica:'lavender'
+  ia:'lavender',midia:'coral',direito:'sage',saude:'mint',artes:'honey',logica:'lavender',
+  programacao:'sky',oratoria:'honey',civica:'sage'
 };
 function setDiscAccent(disc){
   const color=DISC_ACCENT[disc]||'sage';

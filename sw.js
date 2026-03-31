@@ -31,11 +31,9 @@ const CORE_ASSETS = [
 ];
 
 // Lazy-loaded: lesson data — cached on first use
-const LAZY_ASSETS = ['./lessons.json', './lessons/index.json',
-  './lessons/mod-0.json','./lessons/mod-1.json','./lessons/mod-2.json','./lessons/mod-3.json',
-  './lessons/mod-4.json','./lessons/mod-5.json','./lessons/mod-6.json','./lessons/mod-7.json',
-  './lessons/mod-8.json','./lessons/mod-9.json','./lessons/mod-10.json','./lessons/mod-11.json',
-  './lessons/mod-12.json','./lessons/mod-13.json'];
+const LAZY_ASSETS = ['./lessons.json', './lessons/index.json'].concat(
+  Array.from({length:61},(_,i)=>'./lessons/mod-'+i+'.json')
+);
 
 self.addEventListener('install', e => {
   e.waitUntil(
