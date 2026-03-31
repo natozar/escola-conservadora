@@ -174,8 +174,29 @@ function def(){return{name:'Aluno',avatar:null,xp:0,lvl:1,streak:0,streakDays:[]
 function load(){try{const d=localStorage.getItem(SK);return d?{...def(),...JSON.parse(d)}:def()}catch(e){return def()}}
 function save(){try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){console.warn('[save] storage error:',e.message)}if(typeof queueSync==='function')queueSync('progress',S)}
 
-// XP
-function addXP(n){if(S.lvl<1)S.lvl=1;S.xp+=n;const oldLvl=S.lvl;while(S.xp>=S.lvl*100){S.xp-=S.lvl*100;S.lvl++;toast(`Nível ${S.lvl}!  🎉`);launchConfetti();playSfx('levelup');logActivity('level',`Subiu para nível ${S.lvl}!`)}save();ui();if(typeof updateLeaderboardXP==='function')updateLeaderboardXP(n)}
+// XP & XP EVENTS
+function getXPMultiplier(){
+  // Weekend boost (Saturday/Sunday)
+  const day=new Date().getDay();
+  if(day===0||day===6)return{mult:2,label:'🔥 Fim de Semana 2x XP!'};
+  // Custom event (stored in localStorage)
+  try{
+    const ev=JSON.parse(localStorage.getItem('escola_xp_event')||'null');
+    if(ev&&new Date(ev.end)>new Date())return{mult:ev.mult||2,label:ev.label||'⚡ Evento XP!'};
+  }catch(e){}
+  return{mult:1,label:null}
+}
+function addXP(n){
+  if(S.lvl<1)S.lvl=1;
+  const{mult,label}=getXPMultiplier();
+  const earned=n*mult;
+  S.xp+=earned;
+  const oldLvl=S.lvl;
+  while(S.xp>=S.lvl*100){S.xp-=S.lvl*100;S.lvl++;toast(`Nível ${S.lvl}!  🎉`);launchConfetti();playSfx('levelup');logActivity('level',`Subiu para nível ${S.lvl}!`)}
+  save();ui();
+  if(typeof updateLeaderboardXP==='function')updateLeaderboardXP(earned);
+  if(mult>1&&n>0)toast(`${label} +${earned} XP (${mult}x)`)
+}
 function totalXP(){let t=S.xp;for(let i=1;i<S.lvl;i++)t+=i*100;return t}
 function toast(m,type){const t=document.getElementById('toast');t.textContent=m;t.className='toast show'+(type?' toast-'+type:'');setTimeout(()=>{t.classList.remove('show')},2500)}
 
@@ -254,7 +275,19 @@ function ui(){
     const bar=progEl.querySelector('.ni-prog-bar');
     if(bar)bar.style.cssText=`width:${pct}%;background:${clr}`
   });
-  renderCards();renderAch();renderLeaderboardWidget()
+  renderCards();renderAch();renderLeaderboardWidget();renderXPEvent()
+}
+function renderXPEvent(){
+  const{mult,label}=getXPMultiplier();
+  let el=_origById('xpEventBanner');
+  if(mult<=1){if(el)el.style.display='none';return}
+  if(!el){
+    el=document.createElement('div');el.id='xpEventBanner';el.className='xp-event-banner';
+    const welcome=document.querySelector('.welcome');
+    if(welcome)welcome.parentNode.insertBefore(el,welcome.nextSibling)
+  }
+  el.style.display='';
+  el.innerHTML=`<span class="xp-event-icon">⚡</span><span class="xp-event-text">${label}</span><span class="xp-event-badge">${mult}x</span>`
 }
 
 function isModUnlocked(i){
