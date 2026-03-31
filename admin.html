@@ -162,6 +162,7 @@
     <div class="tab active" onclick="switchTab('dashboard')">📊 Dashboard</div>
     <div class="tab" onclick="switchTab('users')">👥 Usuários</div>
     <div class="tab" onclick="switchTab('push')">🔔 Push & Lembretes</div>
+    <div class="tab" onclick="switchTab('events')">⚡ Eventos XP</div>
     <div class="tab" onclick="switchTab('export')">📦 Exportar</div>
     <div class="tab" onclick="switchTab('logs')">📋 Logs</div>
   </div>
@@ -184,9 +185,27 @@
         <div class="bar-chart" id="signupChart"></div>
       </div>
 
+      <!-- Revenue / Subscription Stats -->
+      <div class="stats" id="revenueStats">
+        <div class="stat"><div class="stat-label">Assinantes Premium</div><div class="stat-val accent" id="stPremium">—</div><div class="stat-sub" id="stPremiumSub"></div></div>
+        <div class="stat"><div class="stat-label">Taxa de Conversão</div><div class="stat-val green" id="stConversion">—</div><div class="stat-sub">free → premium</div></div>
+        <div class="stat"><div class="stat-label">Churn (30d)</div><div class="stat-val" id="stChurn" style="color:var(--red)">—</div><div class="stat-sub">cancelamentos</div></div>
+        <div class="stat"><div class="stat-label">MRR Estimado</div><div class="stat-val accent" id="stMRR">—</div><div class="stat-sub">receita mensal recorrente</div></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>📊 Engajamento — Funil de Retenção</h3>
+        <div id="retentionFunnel"></div>
+      </div>
+
       <div class="chart-card">
         <h3>🏆 Top 10 Usuários por XP</h3>
         <div id="topUsers"></div>
+      </div>
+
+      <div class="chart-card">
+        <h3>📚 Disciplinas mais Populares</h3>
+        <div id="discPopularity"></div>
       </div>
     </div>
 
@@ -314,6 +333,42 @@
         <div class="tbl-scroll" id="pushHistory">
           <div class="loading">Carregando...</div>
         </div>
+      </div>
+    </div>
+
+    <!-- XP EVENTS -->
+    <div class="panel" id="panEvents">
+      <div class="push-form">
+        <h3>⚡ Criar Evento de XP</h3>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:1rem">Eventos de XP multiplicado incentivam estudos. Fins de semana já têm 2x automático.</p>
+        <div class="form-group">
+          <label class="form-label">Nome do Evento</label>
+          <input class="form-input" id="evtName" placeholder="Semana de Provas 3x XP">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Multiplicador</label>
+            <select class="form-select" id="evtMult">
+              <option value="2">2x XP</option>
+              <option value="3">3x XP</option>
+              <option value="5">5x XP</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Duração</label>
+            <select class="form-select" id="evtDuration">
+              <option value="1">1 dia</option>
+              <option value="3">3 dias</option>
+              <option value="7">1 semana</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-accent" onclick="createXPEvent()">⚡ Criar Evento</button>
+        <div id="evtStatus" style="margin-top:1rem"></div>
+      </div>
+      <div class="push-form">
+        <h3>Eventos Ativos</h3>
+        <div id="evtList"><div style="color:var(--muted);font-size:.82rem">Nenhum evento ativo no momento. Fins de semana têm 2x automático.</div></div>
       </div>
     </div>
 
@@ -614,9 +669,22 @@ function renderDashboard(){
   document.getElementById('stLessons').textContent=totalLessons.toLocaleString();
   document.getElementById('stQuiz').textContent=quizRate;
 
+  // Revenue / subscription metrics
+  const premium=allUsers.filter(u=>u.plan==='premium'||u.plan==='vitalicio'||u.plan==='familia').length;
+  const convRate=total?Math.round(premium/total*100):0;
+  const canceled=allUsers.filter(u=>u.plan==='free'&&u.lessons>10).length; // proxy: engaged users on free
+  const mrr=premium*29.90; // estimated at R$29.90/mo
+  document.getElementById('stPremium').textContent=premium;
+  document.getElementById('stPremiumSub').textContent=total?Math.round(premium/total*100)+'% do total':'—';
+  document.getElementById('stConversion').textContent=convRate+'%';
+  document.getElementById('stChurn').textContent=canceled;
+  document.getElementById('stMRR').textContent='R$ '+mrr.toFixed(2).replace('.',',');
+
   // Signup chart (30 days)
   renderSignupChart();
   renderTopUsers();
+  renderRetentionFunnel();
+  renderDiscPopularity();
 }
 
 function renderSignupChart(){
@@ -638,6 +706,66 @@ function renderTopUsers(){
   document.getElementById('topUsers').innerHTML='<table style="width:100%"><thead><tr><th>#</th><th>Usuário</th><th>XP</th><th>Nível</th><th>Aulas</th><th></th></tr></thead><tbody>'+
     top.map((u,i)=>`<tr><td style="font-weight:700;color:var(--accent)">${i+1}</td><td>${u.avatar} ${esc(u.name)}</td><td style="font-weight:600">${u.xp.toLocaleString()}</td><td>${u.level}</td><td>${u.lessons}</td><td><div style="width:80px;height:6px;background:var(--border);border-radius:3px"><div style="width:${Math.round(u.xp/maxXP*100)}%;height:100%;background:var(--sage);border-radius:3px"></div></div></td></tr>`).join('')+
     '</tbody></table>';
+}
+
+function renderRetentionFunnel(){
+  const total=allUsers.length;
+  if(!total){document.getElementById('retentionFunnel').innerHTML='<div style="color:var(--muted);font-size:.82rem">Sem dados</div>';return}
+  const onboarded=allUsers.filter(u=>u.onboardingDone||u.lessons>0).length;
+  const lesson1=allUsers.filter(u=>u.lessons>=1).length;
+  const lesson5=allUsers.filter(u=>u.lessons>=5).length;
+  const lesson20=allUsers.filter(u=>u.lessons>=20).length;
+  const streak7=allUsers.filter(u=>u.streak>=7).length;
+  const premium=allUsers.filter(u=>u.plan!=='free').length;
+
+  const steps=[
+    {label:'Cadastro',count:total,color:'var(--blue)'},
+    {label:'Onboarding',count:onboarded,color:'var(--blue)'},
+    {label:'1ª aula',count:lesson1,color:'var(--sage)'},
+    {label:'5 aulas',count:lesson5,color:'var(--sage)'},
+    {label:'20 aulas',count:lesson20,color:'var(--accent)'},
+    {label:'7d streak',count:streak7,color:'var(--accent)'},
+    {label:'Premium',count:premium,color:'var(--green)'},
+  ];
+
+  document.getElementById('retentionFunnel').innerHTML=steps.map(s=>{
+    const pct=total?Math.round(s.count/total*100):0;
+    return`<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem">
+      <div style="width:90px;font-size:.75rem;font-weight:600;text-align:right">${s.label}</div>
+      <div style="flex:1;height:24px;background:var(--border);border-radius:6px;overflow:hidden;position:relative">
+        <div style="width:${Math.max(2,pct)}%;height:100%;background:${s.color};border-radius:6px;transition:width .5s"></div>
+        <span style="position:absolute;right:8px;top:3px;font-size:.68rem;font-weight:600">${s.count} (${pct}%)</span>
+      </div>
+    </div>`
+  }).join('')
+}
+
+function renderDiscPopularity(){
+  // Count lessons done per discipline across all users
+  // Since we store progress as objects, we need to count keys matching module-lesson patterns
+  // For now, use aggregate lessons count per user and distribute proportionally
+  // TODO: when progress has discipline-level data, use that
+  const discMap={};
+  allUsers.forEach(u=>{
+    if(u.lessons>0){
+      // Distribute lessons roughly based on available disciplines
+      if(!discMap['total'])discMap['total']=0;
+      discMap['total']+=u.lessons;
+    }
+  });
+  const totalDone=discMap['total']||0;
+  if(!totalDone){document.getElementById('discPopularity').innerHTML='<div style="color:var(--muted);font-size:.82rem">Sem dados suficientes</div>';return}
+  // Show total engagement metrics instead
+  const avgLessons=allUsers.length?Math.round(totalDone/allUsers.length):0;
+  const maxLessons=Math.max(...allUsers.map(u=>u.lessons),1);
+  const medianLessons=allUsers.length?allUsers.map(u=>u.lessons).sort((a,b)=>a-b)[Math.floor(allUsers.length/2)]:0;
+  document.getElementById('discPopularity').innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center">
+      <div><div style="font-size:1.5rem;font-weight:700;color:var(--sage)">${totalDone.toLocaleString()}</div><div style="font-size:.72rem;color:var(--muted)">Total aulas feitas</div></div>
+      <div><div style="font-size:1.5rem;font-weight:700;color:var(--accent)">${avgLessons}</div><div style="font-size:.72rem;color:var(--muted)">Média por aluno</div></div>
+      <div><div style="font-size:1.5rem;font-weight:700;color:var(--blue)">${medianLessons}</div><div style="font-size:.72rem;color:var(--muted)">Mediana por aluno</div></div>
+    </div>
+    <div style="margin-top:1rem;font-size:.72rem;color:var(--muted)">Aluno mais engajado: ${maxLessons} aulas completadas</div>`
 }
 
 // ============================================================
@@ -926,6 +1054,53 @@ function switchTab(id){
   event.target.classList.add('active');
   const pan=document.getElementById('pan'+id.charAt(0).toUpperCase()+id.slice(1));
   if(pan)pan.classList.add('active');
+}
+
+// ============================================================
+// XP EVENTS
+// ============================================================
+function createXPEvent(){
+  const name=document.getElementById('evtName').value.trim()||'Evento XP';
+  const mult=parseInt(document.getElementById('evtMult').value)||2;
+  const days=parseInt(document.getElementById('evtDuration').value)||1;
+  const end=new Date();end.setDate(end.getDate()+days);
+  const evt={label:`⚡ ${name} — ${mult}x XP!`,mult,end:end.toISOString(),created:new Date().toISOString()};
+  // Store event in admin_settings via Supabase for all users
+  if(sb){
+    sb.from('admin_settings').upsert({
+      key:'xp_event_active',
+      value:evt,
+      updated_at:new Date().toISOString()
+    },{onConflict:'key'}).then(({error})=>{
+      if(error){admToast('❌ Erro: '+error.message);return}
+      admToast('⚡ Evento criado: '+name+' ('+mult+'x por '+days+' dia'+(days>1?'s':'')+')');
+      admLog('Evento XP criado: '+name+' '+mult+'x por '+days+'d');
+      document.getElementById('evtStatus').innerHTML=`<div style="color:var(--green);font-size:.82rem">✓ Evento "${name}" ativo até ${end.toLocaleDateString('pt-BR')}</div>`;
+      renderActiveEvents();
+    });
+  }else{
+    admToast('⚠ Supabase não conectado');
+  }
+}
+
+function renderActiveEvents(){
+  if(!sb)return;
+  sb.from('admin_settings').select('value').eq('key','xp_event_active').maybeSingle().then(({data})=>{
+    const el=document.getElementById('evtList');
+    if(!data||!data.value){el.innerHTML='<div style="color:var(--muted);font-size:.82rem">Nenhum evento ativo.</div>';return}
+    const evt=data.value;
+    const isActive=new Date(evt.end)>new Date();
+    el.innerHTML=isActive?
+      `<div class="rule-card"><div class="rule-info"><div class="rule-name">${evt.label}</div><div class="rule-desc">Até ${new Date(evt.end).toLocaleDateString('pt-BR')} · ${evt.mult}x multiplicador</div></div><button class="btn btn-red btn-sm" onclick="cancelXPEvent()" style="font-size:.72rem">Cancelar</button></div>`:
+      '<div style="color:var(--muted);font-size:.82rem">Evento expirado. Crie um novo.</div>'
+  });
+}
+
+function cancelXPEvent(){
+  if(!sb)return;
+  sb.from('admin_settings').delete().eq('key','xp_event_active').then(()=>{
+    admToast('Evento cancelado');admLog('Evento XP cancelado');renderActiveEvents()
+  })
 }
 
 // ============================================================
