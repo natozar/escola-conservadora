@@ -3845,6 +3845,32 @@ window.addEventListener('popstate',function(e){
   else goDash();
 });
 
+// ============================================================
+// SYNC STATUS INDICATOR
+// ============================================================
+let _syncHideTimer=null;
+function showSyncStatus(state,msg){
+  const el=document.getElementById('syncIndicator');
+  if(!el)return;
+  el.className='sync-indicator show '+state;
+  el.innerHTML=`<span class="sync-dot"></span>${msg}`;
+  clearTimeout(_syncHideTimer);
+  if(state==='synced')_syncHideTimer=setTimeout(()=>{el.classList.remove('show')},3000);
+}
+// Hook into online/offline events
+window.addEventListener('online',()=>{showSyncStatus('synced','Conexão restaurada');if(typeof flushSyncQueue==='function')flushSyncQueue()});
+window.addEventListener('offline',()=>showSyncStatus('offline','Offline — dados salvos localmente'));
+// Override queueSync to show status
+const _origQueueSync=window.queueSync;
+if(typeof _origQueueSync==='function'){
+  window.queueSync=function(type,data){
+    showSyncStatus('syncing','Sincronizando...');
+    _origQueueSync(type,data);
+    // After debounce, show synced (flushSyncQueue runs after 3s)
+    setTimeout(()=>{if(navigator.onLine)showSyncStatus('synced','Salvo na nuvem')},4000);
+  }
+}
+
 // INIT — load lessons then bootstrap
 (async function _boot(){
   if(typeof initI18n==='function')initI18n();
