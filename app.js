@@ -2982,26 +2982,55 @@ function requestNotifPermission(){
 }
 
 let _reminderTimer=null;
+let _streakDangerTimer=null;
+const NOTIF_MESSAGES=[
+  ()=>`Hora de estudar! Mantenha sua sequência de ${S.streak} dia${S.streak!==1?'s':''}.`,
+  ()=>`Faltam ${M.reduce((s,m)=>s+m.lessons.length,0)-Object.keys(S.done).length} aulas para completar o currículo!`,
+  ()=>'5 minutos de estudo fazem diferença. Vamos lá?',
+  ()=>`Você está no nível ${S.lvl}. Que tal subir mais um hoje?`,
+  ()=>'Consistência é o segredo. Uma aula por dia muda tudo.',
+];
+function _notifMsg(){return NOTIF_MESSAGES[Math.floor(Math.random()*NOTIF_MESSAGES.length)]()}
+
 function scheduleStudyReminder(){
   if(_reminderTimer){clearTimeout(_reminderTimer);_reminderTimer=null}
+  if(_streakDangerTimer){clearTimeout(_streakDangerTimer);_streakDangerTimer=null}
   const s=getNotifSettings();
   if(!s.enabled)return;
   const now=new Date();
+
+  // Main daily reminder
   const target=new Date(now);
   target.setHours(s.hour,s.minute,0,0);
   if(target<=now)target.setDate(target.getDate()+1);
-  const ms=target-now;
   _reminderTimer=setTimeout(()=>{
     _reminderTimer=null;
     if(Notification.permission==='granted'){
-      new Notification('escola liberal 🎓',{
-        body:'Hora de estudar! Mantenha sua sequência de '+S.streak+' dias.',
-        icon:'assets/icons/icon-192.png',
-        badge:'assets/icons/favicon.svg'
-      });
+      const{mult,label}=getXPMultiplier();
+      const body=mult>1?`${label} Aproveite o bônus de XP hoje!`:_notifMsg();
+      new Notification('escola liberal 🎓',{body,icon:'assets/icons/icon-192.png',badge:'assets/icons/favicon.svg'});
       scheduleStudyReminder()
     }
-  },ms)
+  },target-now);
+
+  // Streak danger: if no study today and it's past 20h, warn
+  const todayISO=now.toISOString().slice(0,10);
+  const studiedToday=S.streakDays&&S.streakDays.includes(todayISO);
+  if(!studiedToday&&S.streak>0){
+    const danger=new Date(now);danger.setHours(20,0,0,0);
+    if(danger>now){
+      _streakDangerTimer=setTimeout(()=>{
+        _streakDangerTimer=null;
+        const todayCheck=new Date().toISOString().slice(0,10);
+        if(!(S.streakDays&&S.streakDays.includes(todayCheck))&&Notification.permission==='granted'){
+          new Notification('Sua sequência está em perigo! 🔥',{
+            body:`Você tem ${S.streak} dia${S.streak!==1?'s':''} de sequência. Estude antes de meia-noite para não perder!`,
+            icon:'assets/icons/icon-192.png',badge:'assets/icons/favicon.svg',tag:'streak-danger'
+          })
+        }
+      },danger-now)
+    }
+  }
 }
 
 function toggleNotifications(){
