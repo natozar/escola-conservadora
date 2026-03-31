@@ -37,6 +37,28 @@ serve(async (req) => {
 
   const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
+  // Idempotency: skip already-processed events
+  const eventId = event.id
+  const { data: existing } = await supabase
+    .from('admin_settings')
+    .select('key')
+    .eq('key', `stripe_event:${eventId}`)
+    .maybeSingle()
+
+  if (existing) {
+    return new Response(JSON.stringify({ received: true, skipped: true }), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 200,
+    })
+  }
+
+  // Mark event as processed (TTL: stored but not cleaned up — low volume)
+  await supabase.from('admin_settings').upsert({
+    key: `stripe_event:${eventId}`,
+    value: { type: event.type, processed_at: new Date().toISOString() },
+    updated_at: new Date().toISOString(),
+  }, { onConflict: 'key' })
+
   switch (event.type) {
     case 'checkout.session.completed': {
       const session = event.data.object as Stripe.Checkout.Session
