@@ -421,7 +421,16 @@ function ans(mi,li,a){
   else{playSfx('error');logActivity('quiz',`Quiz: ${M[mi].lessons[li].title} — Errou`)}
   const lk=`${mi}-${li}`;
   if(!S.done[lk]){S.done[lk]=true;addXP(l.xp);toast(`+${l.xp} XP — Aula Concluída`);logActivity('lesson',`Aula: ${M[mi].lessons[li].title}`)}
-  save()
+  save();
+  // Show AI Practice button after answering
+  const qzEl=document.querySelector('.qz');
+  if(qzEl&&!qzEl.querySelector('.ai-practice-btn')){
+    const btn=document.createElement('button');
+    btn.className='btn btn-ghost ai-practice-btn';
+    btn.innerHTML='🤖 Praticar mais com IA';
+    btn.onclick=()=>startAIQuiz(mi,li);
+    qzEl.appendChild(btn)
+  }
 }
 function nextL(){
   const mi=S.cMod,li=S.cLes;
@@ -2204,6 +2213,140 @@ function getLeagueDesc(league,rank,total){
   if(L.promote>0&&rank<=L.promote)return '🔥 Zona de promoção! Continue assim!';
   if(L.demote>0&&rank>total-L.demote)return '⚠️ Zona de rebaixamento — estude mais!';
   return `Posição ${rank}° de ${total} estudantes`
+}
+
+// ============================================================
+// AI QUIZ PRACTICE — Prática Infinita com IA
+// ============================================================
+let aiQuizState={mi:null,li:null,questions:[],current:0,score:0,loading:false};
+
+async function startAIQuiz(mi,li){
+  if(aiQuizState.loading)return;
+  const m=M[mi];const l=m.lessons[li];
+  if(!l)return;
+  aiQuizState={mi,li,questions:[],current:0,score:0,loading:true};
+
+  // Show loading in a modal
+  const overlay=document.createElement('div');
+  overlay.className='save-modal-overlay';overlay.id='aiQuizModal';
+  overlay.innerHTML=`<div class="save-modal aiq-modal">
+    <button class="save-modal-close" onclick="closeAIQuiz()" aria-label="Fechar">&times;</button>
+    <div class="aiq-loading"><div class="aiq-spinner"></div><h3>🤖 Gerando questões com IA...</h3><p>Analisando "${l.title}" para criar perguntas únicas</p></div>
+  </div>`;
+  document.body.appendChild(overlay);
+
+  try{
+    const questions=await generateAIQuestions(mi,li);
+    if(!questions||questions.length===0){
+      document.querySelector('#aiQuizModal .aiq-loading').innerHTML='<p>Não foi possível gerar questões agora. Tente novamente mais tarde.</p><button class="btn btn-ghost" onclick="closeAIQuiz()">Fechar</button>';
+      aiQuizState.loading=false;
+      return
+    }
+    aiQuizState.questions=questions;
+    aiQuizState.loading=false;
+    renderAIQuiz()
+  }catch(e){
+    console.warn('[AI Quiz]',e);
+    document.querySelector('#aiQuizModal .aiq-loading').innerHTML='<p>Erro ao gerar questões. Verifique sua conexão.</p><button class="btn btn-ghost" onclick="closeAIQuiz()">Fechar</button>';
+    aiQuizState.loading=false
+  }
+}
+
+async function generateAIQuestions(mi,li){
+  const m=M[mi];const l=m.lessons[li];
+  const content=l.content?l.content.replace(/<[^>]*>/g,' ').substring(0,2000):'';
+  const prompt=`Gere 3 questões de múltipla escolha sobre esta aula.
+Aula: "${l.title}" do módulo "${m.title}".
+Conteúdo: ${content}
+
+Responda APENAS com JSON válido neste formato exato, sem texto extra:
+[{"q":"pergunta","o":["opção A","opção B","opção C","opção D"],"c":0,"exp":"explicação curta"}]
+
+Onde "c" é o índice (0-3) da resposta correta. Faça perguntas que testem compreensão, não decoreba.`;
+
+  const headers={'Content-Type':'application/json'};
+  if(typeof sbClient!=='undefined'&&sbClient){
+    try{const{data}=await sbClient.auth.getSession();if(data.session)headers['Authorization']='Bearer '+data.session.access_token}catch(e){}
+  }
+
+  const SUPABASE_URL=typeof window.SUPABASE_URL!=='undefined'?window.SUPABASE_URL:'https://hwjplecfqsckfiwxiedo.supabase.co';
+  const r=await fetch(SUPABASE_URL+'/functions/v1/ai-tutor',{
+    method:'POST',headers,
+    body:JSON.stringify({message:prompt,moduleTitle:m.title,lessonTitle:l.title,lessonContext:content,lang:typeof CURRENT_LANG!=='undefined'?CURRENT_LANG:'pt'})
+  });
+
+  if(!r.ok)throw new Error('API error '+r.status);
+  const data=await r.json();
+  const reply=data.reply||'';
+  // Extract JSON from reply
+  const jsonMatch=reply.match(/\[[\s\S]*\]/);
+  if(!jsonMatch)throw new Error('No JSON in response');
+  const questions=JSON.parse(jsonMatch[0]);
+  // Validate structure
+  return questions.filter(q=>q.q&&Array.isArray(q.o)&&q.o.length>=3&&typeof q.c==='number'&&q.exp).slice(0,5)
+}
+
+function renderAIQuiz(){
+  const{questions,current,score}=aiQuizState;
+  if(current>=questions.length){renderAIQuizResult();return}
+  const q=questions[current];
+  const modal=document.querySelector('#aiQuizModal .aiq-modal');
+  if(!modal)return;
+  modal.innerHTML=`
+    <button class="save-modal-close" onclick="closeAIQuiz()" aria-label="Fechar">&times;</button>
+    <div class="aiq-head">
+      <span>🤖 Prática IA</span>
+      <span class="aiq-count">${current+1}/${questions.length}</span>
+    </div>
+    <div class="aiq-progress"><div class="aiq-prog-fill" style="width:${Math.round(current/questions.length*100)}%"></div></div>
+    <div class="aiq-question">${q.q}</div>
+    <div class="aiq-options">${q.o.map((o,i)=>`<button class="aiq-opt" onclick="answerAIQuiz(${i})">${o}</button>`).join('')}</div>
+    <div class="aiq-feedback" id="aiqFb"></div>`
+}
+
+function answerAIQuiz(idx){
+  const{questions,current}=aiQuizState;
+  const q=questions[current];
+  const ok=idx===q.c;
+  if(ok)aiQuizState.score++;
+  // Highlight answers
+  document.querySelectorAll('.aiq-opt').forEach((b,i)=>{
+    b.classList.add('aiq-off');
+    if(i===q.c)b.classList.add('aiq-ok');
+    if(i===idx&&!ok)b.classList.add('aiq-no')
+  });
+  const fb=document.getElementById('aiqFb');
+  fb.className='aiq-feedback show';
+  fb.innerHTML=`<span style="color:${ok?'var(--sage-light)':'var(--coral)'}"><strong>${ok?'✓ Correto!':'✗ Incorreto'}</strong></span> ${q.exp}`;
+  // Auto advance after 2s
+  setTimeout(()=>{aiQuizState.current++;renderAIQuiz()},2200)
+}
+
+function renderAIQuizResult(){
+  const{questions,score,mi,li}=aiQuizState;
+  const pct=Math.round(score/questions.length*100);
+  const xpEarned=score*10;
+  if(xpEarned>0)addXP(xpEarned);
+  const modal=document.querySelector('#aiQuizModal .aiq-modal');
+  if(!modal)return;
+  modal.innerHTML=`
+    <button class="save-modal-close" onclick="closeAIQuiz()" aria-label="Fechar">&times;</button>
+    <div class="aiq-result">
+      <div class="aiq-result-emoji">${pct>=80?'🎉':pct>=50?'👍':'💪'}</div>
+      <h3>${pct>=80?'Excelente!':pct>=50?'Bom trabalho!':'Continue praticando!'}</h3>
+      <div class="aiq-result-score">${score}/${questions.length} corretas (${pct}%)</div>
+      ${xpEarned>0?`<div class="aiq-result-xp">+${xpEarned} XP</div>`:''}
+      <div class="aiq-result-actions">
+        <button class="btn btn-sage" onclick="closeAIQuiz();startAIQuiz(${mi},${li})">Praticar Novamente</button>
+        <button class="btn btn-ghost" onclick="closeAIQuiz()">Fechar</button>
+      </div>
+    </div>`;
+  if(typeof gtag==='function')gtag('event','ai_quiz_complete',{score,total:questions.length,pct})
+}
+
+function closeAIQuiz(){
+  const el=document.getElementById('aiQuizModal');if(el)el.remove();
+  aiQuizState={mi:null,li:null,questions:[],current:0,score:0,loading:false}
 }
 
 // ============================================================
