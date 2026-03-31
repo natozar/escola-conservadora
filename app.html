@@ -268,6 +268,10 @@
       <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">📖</div>
       <div><div class="ni-txt">Glossário</div><div class="ni-sub">Termos econômicos</div></div>
     </div>
+    <div class="ni" onclick="goLeaderboard()" id="nLeaderboard" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goLeaderboard()">
+      <div class="ni-icon" style="background:rgba(255,215,0,.12);color:#ffd700">🏆</div>
+      <div><div class="ni-txt">Liga Semanal</div><div class="ni-sub">Ranking e competição</div></div>
+    </div>
     <div class="ni" onclick="startMarathon()" id="nMarathon" role="button" tabindex="0" onkeydown="if(event.key==='Enter')startMarathon()">
       <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">⚡</div>
       <div><div class="ni-txt">Maratona</div><div class="ni-sub">Quiz contra o relógio</div></div>
@@ -376,6 +380,7 @@
         <div class="dash-section-label">Desafios & Progresso</div>
         <div id="dailyChallenge"></div>
         <div id="missionsSection"></div>
+        <div id="leaderboardWidget"></div>
         <div id="progressChart"></div>
       </div>
 
@@ -557,6 +562,18 @@
         <div><h2>❌ Revisão de Erros</h2></div>
       </div>
       <div class="error-review" id="errorReviewContent"></div>
+    </div>
+
+    <!-- LEADERBOARD VIEW -->
+    <div class="xview" id="vLeaderboard">
+      <div class="xview-head">
+        <button class="btn btn-ghost" onclick="mobileBack()">← Voltar</button>
+        <div><h2 id="lbTitle">🏆 Liga Semanal</h2></div>
+      </div>
+      <div class="lb-league-banner" id="lbBanner"></div>
+      <div class="lb-timer" id="lbTimer"></div>
+      <div class="lb-table" id="lbTable"></div>
+      <div class="lb-rules" id="lbRules"></div>
     </div>
 
     <!-- AULAS TAB VIEW (mobile disciplines + tools grid) -->
