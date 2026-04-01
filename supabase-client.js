@@ -21,7 +21,14 @@ function initSupabase() {
     console.warn('[Supabase] SDK não carregado. Modo offline.');
     return false;
   }
-  sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+      flowType: 'implicit',          // SPA: usar hash fragments (não PKCE code)
+      detectSessionInUrl: true,       // auto-detectar tokens no hash
+      persistSession: true,
+      autoRefreshToken: true
+    }
+  });
 
   // Listener de mudança de auth
   sbClient.auth.onAuthStateChange((event, session) => {

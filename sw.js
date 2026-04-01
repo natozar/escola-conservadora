@@ -1,7 +1,7 @@
-// Escola Liberal PWA — Service Worker v22
+// Escola Liberal PWA — Service Worker v23
 // Estratégia: Network-first (navegação) + Stale-While-Revalidate (assets) + Cache-first (fonts)
-const CACHE_NAME = 'escola-liberal-v22';
-const STATIC_CACHE = 'escola-static-v22';
+const CACHE_NAME = 'escola-liberal-v23';
+const STATIC_CACHE = 'escola-static-v23';
 const FONT_CACHE = 'escola-fonts-v1';
 
 // Core assets — cached on install
@@ -32,7 +32,7 @@ const CORE_ASSETS = [
 
 // Lazy-loaded: lesson data — cached on first use
 const LAZY_ASSETS = ['./lessons.json', './lessons/index.json'].concat(
-  Array.from({length:61},(_,i)=>'./lessons/mod-'+i+'.json')
+  Array.from({length:66},(_,i)=>'./lessons/mod-'+i+'.json')
 );
 
 self.addEventListener('install', e => {

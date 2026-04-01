@@ -125,7 +125,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg-primary);col
   <div class="auth-logo">
     <div class="auth-logo-mark">EL</div>
     <h1>Escola <em>Liberal</em></h1>
-    <p>Plataforma homeschool com 9 disciplinas e 140 aulas interativas</p>
+    <p>Plataforma homeschool com 21 disciplinas e 660 aulas interativas</p>
   </div>
 
   <div class="auth-card">
@@ -460,9 +460,15 @@ function checkRecoveryFlow() {
 // ========== OAUTH ERROR HANDLER ==========
 function checkOAuthError() {
   const sp = new URLSearchParams(location.search);
-  if (!sp.get('oauth_error')) return false;
-  const errCode = sp.get('error_code') || '';
-  const errDesc = sp.get('error_description') || '';
+  const hashParams = new URLSearchParams(location.hash.replace('#','?'));
+  // Supabase pode enviar erro tanto como 'error' ou 'oauth_error' na query ou hash
+  const hasError = sp.get('error') || sp.get('oauth_error') || hashParams.get('error');
+  if (!hasError) return false;
+
+  const errCode = sp.get('error_code') || sp.get('error') || hashParams.get('error_code') || '';
+  const errDesc = sp.get('error_description') || hashParams.get('error_description') || '';
+  console.error('[OAuth] Erro detectado:', errCode, errDesc);
+
   let msg = 'Erro ao entrar com Google. Tente novamente.';
   if (errCode === 'unexpected_failure' || errCode === 'server_error') {
     msg = 'O servidor de autenticação retornou um erro inesperado. Aguarde alguns instantes e tente novamente.';
@@ -504,24 +510,39 @@ function checkOAuthError() {
     var _redirected = false;
     function doRedirect(){
       if(_redirected) return;
+      // Don't redirect if updating password (recovery flow)
+      var npf = document.getElementById('newPassForm');
+      if(npf && npf.style.display === 'block') return;
       _redirected = true;
+      console.log('[Auth] Redirecionando para app.html...');
       window.location.href = 'app.html';
     }
 
-    // Listen for SIGNED_IN from OAuth hash processing
+    // Listen for auth events — handle SIGNED_IN and INITIAL_SESSION
     sbClient.auth.onAuthStateChange(function(event, session){
-      if(event === 'SIGNED_IN' && session){
-        // Don't redirect if updating password (recovery flow)
-        var npf = document.getElementById('newPassForm');
-        if(npf && npf.style.display === 'block') return;
-        setTimeout(doRedirect, 400);
+      console.log('[Auth] Event:', event, '| session:', !!session);
+      if(session && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED')){
+        setTimeout(doRedirect, 300);
       }
     });
 
-    // Check if already logged in
+    // Fallback: explicit session check (catches PKCE code exchange + edge cases)
     sbClient.auth.getSession().then(function(res){
-      if(res.data && res.data.session) doRedirect();
+      if(res.data && res.data.session){
+        console.log('[Auth] Sessão ativa detectada via getSession()');
+        doRedirect();
+      }
     }).catch(function(e){ console.warn('[Auth] Session check:', e.message); });
+
+    // Safety net: if URL has hash tokens or code param, re-check after SDK processes
+    if(window.location.hash.includes('access_token') || new URLSearchParams(location.search).has('code')){
+      console.log('[Auth] Tokens detectados na URL, aguardando processamento...');
+      setTimeout(function(){
+        sbClient.auth.getSession().then(function(res){
+          if(res.data && res.data.session) doRedirect();
+        });
+      }, 1500);
+    }
   }
 
   // Tab from URL param
