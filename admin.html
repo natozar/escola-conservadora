@@ -163,11 +163,46 @@
     <div class="tab" onclick="switchTab('users')">👥 Usuários</div>
     <div class="tab" onclick="switchTab('push')">🔔 Push & Lembretes</div>
     <div class="tab" onclick="switchTab('events')">⚡ Eventos XP</div>
+    <div class="tab" onclick="switchTab('billing')">💳 Billing</div>
     <div class="tab" onclick="switchTab('export')">📦 Exportar</div>
     <div class="tab" onclick="switchTab('logs')">📋 Logs</div>
   </div>
 
   <div class="content">
+
+    <!-- BILLING CONTROL -->
+    <div class="panel" id="panBilling">
+      <h2>💳 Controle de Cobrança</h2>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;margin-bottom:1.5rem">
+        <h3 style="margin-bottom:1rem">Paywall (Bloqueio de Módulos)</h3>
+        <p style="color:var(--muted);margin-bottom:1rem">Quando ativado, usuários free só acessam o 1° módulo de cada disciplina. Quando desativado, toda a plataforma é gratuita.</p>
+        <div style="display:flex;align-items:center;gap:1rem">
+          <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer">
+            <input type="checkbox" id="paywallToggle" onchange="togglePaywall(this.checked)" style="width:20px;height:20px">
+            <span id="paywallLabel" style="font-weight:600">Paywall DESATIVADO — Acesso gratuito total</span>
+          </label>
+        </div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;margin-bottom:1.5rem">
+        <h3 style="margin-bottom:1rem">Planos Stripe</h3>
+        <p style="color:var(--muted);margin-bottom:1rem">Configuração de planos de assinatura. O sistema Stripe está integrado e pronto — basta ativar o paywall acima para começar a cobrar.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:.85rem">
+          <tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:.5rem">Plano</th><th>Preço</th><th>Acesso</th><th>Status</th></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem">Free</td><td>R$0</td><td>1° módulo/disciplina</td><td>✅ Ativo</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem">Mensal</td><td>R$29,90/mês</td><td>Todos os módulos</td><td id="stripeMensalStatus">⏸ Dormant</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem">Anual</td><td>R$238,80/ano</td><td>Todos os módulos</td><td id="stripeAnualStatus">⏸ Dormant</td></tr>
+          <tr><td style="padding:.5rem">Vitalício</td><td>R$497</td><td>Todos os módulos</td><td id="stripeVitalicioStatus">⏸ Dormant</td></tr>
+        </table>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem">
+        <h3 style="margin-bottom:1rem">Receita</h3>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem" id="revenueStats">
+          <div><div style="font-size:1.5rem;font-weight:700" id="rvMRR">R$0</div><div style="color:var(--muted);font-size:.8rem">MRR</div></div>
+          <div><div style="font-size:1.5rem;font-weight:700" id="rvPremium">0</div><div style="color:var(--muted);font-size:.8rem">Assinantes Premium</div></div>
+          <div><div style="font-size:1.5rem;font-weight:700" id="rvConversion">0%</div><div style="color:var(--muted);font-size:.8rem">Taxa Conversão</div></div>
+        </div>
+      </div>
+    </div>
 
     <!-- DASHBOARD -->
     <div class="panel active" id="panDashboard">
@@ -526,6 +561,7 @@ function enterAdmin(){
   document.getElementById('mainApp').style.display='block';
   loadAllData();
   loadAutoRules();
+  loadPaywallState();
   renderLogs();
   admLog('Login admin: '+(adminUser?.email||'local'));
 }
@@ -1054,6 +1090,38 @@ function switchTab(id){
   event.target.classList.add('active');
   const pan=document.getElementById('pan'+id.charAt(0).toUpperCase()+id.slice(1));
   if(pan)pan.classList.add('active');
+}
+
+// ============================================================
+// PAYWALL TOGGLE
+// ============================================================
+async function loadPaywallState(){
+  try{
+    const{data}=await sb.from('admin_settings').select('value').eq('key','paywall_enabled').maybeSingle();
+    const enabled=data&&data.value==='true';
+    const toggle=document.getElementById('paywallToggle');
+    const label=document.getElementById('paywallLabel');
+    if(toggle)toggle.checked=enabled;
+    if(label)label.textContent=enabled?'Paywall ATIVADO — Módulos bloqueados para free':'Paywall DESATIVADO — Acesso gratuito total';
+    if(label)label.style.color=enabled?'#e07460':'#4a9e7e';
+    // Update stripe plan statuses
+    const status=enabled?'✅ Ativo':'⏸ Dormant';
+    ['stripeMensalStatus','stripeAnualStatus','stripeVitalicioStatus'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=status});
+  }catch(e){console.warn('[Paywall] Load failed:',e.message)}
+}
+async function togglePaywall(enabled){
+  try{
+    await sb.from('admin_settings').upsert({key:'paywall_enabled',value:enabled?'true':'false'},{onConflict:'key'});
+    const label=document.getElementById('paywallLabel');
+    if(label){
+      label.textContent=enabled?'Paywall ATIVADO — Módulos bloqueados para free':'Paywall DESATIVADO — Acesso gratuito total';
+      label.style.color=enabled?'#e07460':'#4a9e7e';
+    }
+    const status=enabled?'✅ Ativo':'⏸ Dormant';
+    ['stripeMensalStatus','stripeAnualStatus','stripeVitalicioStatus'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=status});
+    addLog(enabled?'Paywall ATIVADO':'Paywall DESATIVADO — acesso gratuito total');
+    alert(enabled?'Paywall ativado! Usuários free terão módulos bloqueados.':'Paywall desativado! Toda a plataforma é gratuita.');
+  }catch(e){alert('Erro ao salvar: '+e.message)}
 }
 
 // ============================================================

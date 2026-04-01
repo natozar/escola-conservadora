@@ -221,7 +221,10 @@ async function loadUserPlan() {
 }
 
 // Verifica se o módulo está liberado no plano atual
+// PAYWALL TOGGLE: check admin_settings for paywall_enabled flag
 function isModuleUnlocked(moduleIndex) {
+  // Global unlock: if paywall is disabled via admin, everything is free
+  if (window._paywallDisabled) return true;
   // Offline/unauthenticated: all modules open (freemium local experience)
   if (!syncEnabled || !currentUser) return true;
   // Custom plan with specific module access list
@@ -239,6 +242,17 @@ function isModuleUnlocked(moduleIndex) {
   // Paid plans: all modules
   return true;
 }
+
+// Load paywall setting from admin_settings (default: DISABLED = all free)
+(async function loadPaywallSetting(){
+  window._paywallDisabled = true; // Default: paywall OFF (all content free)
+  try {
+    if (typeof sbClient !== 'undefined' && sbClient) {
+      const {data} = await sbClient.from('admin_settings').select('value').eq('key','paywall_enabled').single();
+      if (data && data.value === 'true') window._paywallDisabled = false;
+    }
+  } catch(e) { /* Keep paywall disabled on error */ }
+})()
 
 // Verifica se uma feature está liberada
 function isFeatureUnlocked(featureName) {
