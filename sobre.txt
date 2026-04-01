@@ -83,13 +83,12 @@ Auth: email + Google OAuth
 Edge Functions: create-checkout, stripe-webhook, ai-tutor (deployed)
 
 ============================================================
-TUTOR IA (Claude API) — DEPLOYED, PRECISA DE CRÉDITOS
+TUTOR IA (Claude API) — ATIVO ✅
 ============================================================
 Edge Function: ai-tutor (deployed com --no-verify-jwt)
 Modelo: claude-haiku-4-5-20251001
 Secret setado: ANTHROPIC_API_KEY ✅
-Status: FUNCIONAL mas conta Anthropic sem créditos
-Ação necessária: adicionar créditos em console.anthropic.com/settings/billing
+Status: ATIVO — $5 de créditos adicionados em 01/04/2026
 Custo estimado: ~$0.001 por mensagem (~$10 = 10.000 perguntas)
 Rate limit: 10 msg/dia free, 50 msg/dia premium
 Fallback: chatKB local com 30+ respostas quando API offline
@@ -185,8 +184,8 @@ FEITO NA SESSÃO #4 (31/03/2026):
   ✅ Atualizar números em landing page, app, SEO, sitemap
 
 PRIORIDADE ALTA:
-  ⬜ Adicionar créditos na conta Anthropic (ativar tutor IA + quiz IA)
-  ⬜ Aplicar migration SQL no Supabase (weekly_xp table)
+  ✅ Adicionar créditos na conta Anthropic ($5 — tutor IA + quiz IA ativos)
+  ✅ Aplicar migration SQL no Supabase (weekly_xp table + RLS + indexes)
   ⬜ Testes end-to-end (fluxo completo de pagamento)
 
 PRIORIDADE MÉDIA:
