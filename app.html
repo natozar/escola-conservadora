@@ -727,9 +727,16 @@
 
 <!-- APP VERSION BAR (top) -->
 <div class="app-version-bar" id="appVersionBar">
-  <span class="avb-version" id="avbVersion">v--</span>
-  <span class="avb-status" id="avbStatus">✓ Atualizado</span>
-  <button class="avb-check" id="avbCheck" onclick="_checkForUpdates()">Verificar</button>
+  <div class="avb-brand">
+    <div class="avb-logo">EL</div>
+    <span class="avb-name">Escola <em>Liberal</em></span>
+  </div>
+  <div class="avb-right">
+    <span class="avb-version" id="avbVersion">v--</span>
+    <span class="avb-divider">·</span>
+    <span class="avb-status" id="avbStatus">✓ Atualizado</span>
+    <button class="avb-check" id="avbCheck" onclick="_checkForUpdates()" title="Verificar atualizações">↻</button>
+  </div>
 </div>
 
 <!-- SW UPDATE BANNER (slides down when update available) -->
