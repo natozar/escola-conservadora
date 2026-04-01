@@ -18,7 +18,7 @@ PWA instalável, funciona offline, com gamificação (XP, níveis, badges, strea
 Objetivo: parceria com ANED (Associação Nacional de Educação Domiciliar).
 
 ============================================================
-21 DISCIPLINAS · 61 MÓDULOS · 610 AULAS (PT + EN)
+21 DISCIPLINAS · 66 MÓDULOS · 660 AULAS (PT + EN)
 ============================================================
 
 1. ECONOMIA — Escola Austríaca (6 módulos, 60 aulas)
@@ -29,29 +29,26 @@ Objetivo: parceria com ANED (Associação Nacional de Educação Domiciliar).
    - Módulo 4: História Econômica (lavender)
    - Módulo 5: Pensamento Crítico (mint)
 
-2. MATEMÁTICA — Método Singapura (1 módulo, 10 aulas)
-   - Módulo 6: Números e Operações (sky)
-
-3. FILOSOFIA — P4C + Socrático (1 módulo, 10 aulas)
-   - Módulo 7: Aprender a Pensar (lavender)
-
-4. INTELIGÊNCIA EMOCIONAL (1 módulo, 10 aulas)
-   - Módulo 8: Inteligência Emocional (honey)
-
-5. PSICOLOGIA DO CRESCIMENTO (1 módulo, 10 aulas)
-   - Módulo 9: Mentalidade de Crescimento (coral)
-
-6. PORTUGUÊS E REDAÇÃO (1 módulo, 10 aulas)
-   - Módulo 10: Português e Redação (sage)
-
-7. CIÊNCIAS DA NATUREZA (1 módulo, 10 aulas)
-   - Módulo 11: Ciências da Natureza (mint)
-
-8. HISTÓRIA DO BRASIL (1 módulo, 10 aulas)
-   - Módulo 12: História do Brasil (coral)
-
-9. AMERICAN HISTORY — English (1 módulo, 10 aulas)
-   - Módulo 13: American History (sky, lang: en)
+2. MATEMÁTICA — Método Singapura (3 módulos, 30 aulas)
+3. FILOSOFIA — P4C + Socrático (3 módulos, 30 aulas)
+4. INTELIGÊNCIA EMOCIONAL (3 módulos, 30 aulas)
+5. PSICOLOGIA DO CRESCIMENTO (3 módulos, 30 aulas)
+6. PORTUGUÊS E REDAÇÃO (3 módulos, 30 aulas)
+7. CIÊNCIAS DA NATUREZA (3 módulos, 30 aulas)
+8. HISTÓRIA DO BRASIL (3 módulos, 30 aulas)
+9. AMERICAN HISTORY — English (3 módulos, 30 aulas)
+10. EDUCAÇÃO FINANCEIRA (3 módulos, 30 aulas)
+11. INGLÊS (3 módulos, 30 aulas)
+12. GEOGRAFIA (3 módulos, 30 aulas)
+13. INTELIGÊNCIA ARTIFICIAL (3 módulos, 30 aulas)
+14. EDUCAÇÃO MIDIÁTICA (3 módulos, 30 aulas)
+15. DIREITO E CIDADANIA (3 módulos, 30 aulas)
+16. SAÚDE E BEM-ESTAR (3 módulos, 30 aulas)
+17. ARTES E CULTURA (3 módulos, 30 aulas)
+18. LÓGICA E ARGUMENTAÇÃO (3 módulos, 30 aulas)
+19. PROGRAMAÇÃO (3 módulos, 30 aulas)
+20. ORATÓRIA E DEBATE (3 módulos, 30 aulas)
+21. EDUCAÇÃO CÍVICA (3 módulos, 30 aulas)
 
 ============================================================
 ESTRUTURA DE ARQUIVOS
@@ -182,6 +179,11 @@ FASE 9 — Admin + Social + Leaderboard Real + Offline (31/03/2026):
 PRÓXIMOS PASSOS (FASE 10)
 ============================================================
 
+FEITO NA SESSÃO #4 (31/03/2026):
+  ✅ Expandir 5 disciplinas de 2→3 módulos (filosofia, emocional, psicologia, inglês, IA)
+  ✅ Total: 21 disciplinas, 66 módulos, 660 aulas — todas com 3 módulos
+  ✅ Atualizar números em landing page, app, SEO, sitemap
+
 PRIORIDADE ALTA:
   ⬜ Adicionar créditos na conta Anthropic (ativar tutor IA + quiz IA)
   ⬜ Aplicar migration SQL no Supabase (weekly_xp table)
@@ -191,7 +193,7 @@ PRIORIDADE MÉDIA:
   ⬜ App nativo via Capacitor (push notifications iOS/Android)
   ⬜ Split app.js em ES modules (manutenibilidade)
   ⬜ Video-aulas curtas (3-5 min) com player integrado
-  ⬜ Simulador de mercado interativo expandido
+  ⬜ Enriquecer conteúdo dos módulos com content > 1500 chars
 
 PRIORIDADE BAIXA:
   ⬜ Fórum/comunidade in-app
