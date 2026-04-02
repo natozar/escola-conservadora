@@ -349,11 +349,11 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
     if(/iPhone|iPad|iPod/i.test(navigator.userAgent)){
       document.getElementById('mwInstallBtn').textContent='🚀 Abrir o App';
     }
-  } else if(isMobile&&(isStandalone||hasProgress)){
-    // Already installed or has progress → go straight to app
+  } else if(isStandalone||hasProgress){
+    // Already installed or has progress (any device) → go straight to app
     window.location.replace('app.html');
   }
-  // Desktop: show landing page normally (no redirect)
+  // No progress, not standalone: show landing page with CTA buttons
 })();
 </script>
 
