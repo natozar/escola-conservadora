@@ -157,7 +157,8 @@
     <h1>🛡️ Admin — Escola Liberal</h1>
     <div class="topbar-actions">
       <button class="btn btn-accent" onclick="enterPresentationMode()">🖥 Apresentação</button>
-      <button class="btn btn-ghost" onclick="loadAllData()">🔄 Atualizar</button>
+      <button class="btn btn-sage" id="btnInstallAdmin" style="display:none" onclick="installAdminPWA()">📲 Instalar App</button>
+      <button class="btn btn-ghost" onclick="loadAllData()">🔄 Atualizar Dados</button>
       <button class="btn btn-ghost" onclick="window.location.href='app.html'">← Plataforma</button>
     </div>
   </div>
@@ -1580,6 +1581,169 @@ function exitPresentationMode(){
   document.getElementById('presentationMode').style.display='none';
   if(document.exitFullscreen)document.exitFullscreen().catch(()=>{});
 }
+
+// ============================================================
+// PWA INSTALL — Admin App
+// ============================================================
+const ADMIN_VERSION='1.0.0';
+let _deferredInstallPrompt=null;
+
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  _deferredInstallPrompt=e;
+  const btn=document.getElementById('btnInstallAdmin');
+  if(btn)btn.style.display='inline-flex';
+});
+
+async function installAdminPWA(){
+  if(_deferredInstallPrompt){
+    _deferredInstallPrompt.prompt();
+    const{outcome}=await _deferredInstallPrompt.userChoice;
+    if(outcome==='accepted'){
+      admToast('✓ App Admin instalado!');
+      admLog('PWA Admin instalada');
+      document.getElementById('btnInstallAdmin').style.display='none';
+    }
+    _deferredInstallPrompt=null;
+  }else{
+    // iOS / manual install
+    admToast('📲 iOS: toque em Compartilhar → Adicionar à Tela Início');
+  }
+}
+
+// Detectar se já está instalado (standalone)
+if(window.matchMedia('(display-mode:standalone)').matches||window.navigator.standalone){
+  const btn=document.getElementById('btnInstallAdmin');
+  if(btn)btn.style.display='none';
+}
+
+// ============================================================
+// UPDATE SYSTEM — check for new version
+// ============================================================
+function checkAdminUpdate(){
+  // Register SW for update detection
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js').then(reg=>{
+      // Check for update on load
+      reg.addEventListener('updatefound',()=>{
+        const newWorker=reg.installing;
+        newWorker.addEventListener('statechange',()=>{
+          if(newWorker.state==='installed'&&navigator.serviceWorker.controller){
+            showUpdateBanner();
+          }
+        });
+      });
+      // Also check periodically (every 30 min)
+      setInterval(()=>reg.update(),1800000);
+    }).catch(e=>console.warn('[Admin SW]',e.message));
+
+    // Listen for SW controlled change (after skipWaiting)
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{
+      if(_isReloading)return;
+      _isReloading=true;
+      window.location.reload();
+    });
+  }
+}
+let _isReloading=false;
+
+function showUpdateBanner(){
+  // Don't show if already visible
+  if(document.getElementById('updateBanner'))return;
+  const banner=document.createElement('div');
+  banner.id='updateBanner';
+  banner.style.cssText='position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,#1a2535,#0d1520);border-top:2px solid #d4a843;padding:1rem 1.5rem;z-index:10000;display:flex;align-items:center;justify-content:space-between;gap:1rem;animation:slideUpBanner .3s ease';
+  banner.innerHTML=`
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <span style="font-size:1.3rem">🔄</span>
+      <div>
+        <div style="font-weight:700;font-size:.88rem;color:#e8e6e1">Nova atualização disponível</div>
+        <div style="font-size:.72rem;color:#7a8ca3">Uma nova versão do painel está pronta para instalar.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:.5rem;flex-shrink:0">
+      <button onclick="applyUpdate()" style="padding:.5rem 1.2rem;background:#d4a843;color:#0d1520;border:none;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer">Atualizar Agora</button>
+      <button onclick="this.parentElement.parentElement.remove()" style="padding:.5rem .8rem;background:transparent;border:1px solid #243044;color:#7a8ca3;border-radius:8px;font-size:.78rem;cursor:pointer">Depois</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+}
+
+function applyUpdate(){
+  if(navigator.serviceWorker.controller){
+    navigator.serviceWorker.controller.postMessage({type:'SKIP_WAITING'});
+  }
+  // Fallback: force reload
+  setTimeout(()=>{
+    _isReloading=true;
+    window.location.reload(true);
+  },1000);
+}
+
+// Manual force update button
+function forceCheckUpdate(){
+  admToast('🔄 Verificando atualizações...');
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.getRegistration().then(reg=>{
+      if(reg){
+        reg.update().then(()=>{
+          // Check if there's a waiting worker
+          if(reg.waiting){
+            showUpdateBanner();
+          }else{
+            admToast('✓ Você está na versão mais recente (v'+ADMIN_VERSION+')');
+          }
+        });
+      }else{
+        admToast('✓ Nenhuma atualização pendente');
+      }
+    });
+  }else{
+    // No SW — just reload
+    window.location.reload(true);
+  }
+}
+
+// ============================================================
+// VERSION BAR — bottom status
+// ============================================================
+function renderVersionBar(){
+  if(document.getElementById('adminVersionBar'))return;
+  const bar=document.createElement('div');
+  bar.id='adminVersionBar';
+  bar.style.cssText='position:fixed;bottom:0;left:0;right:0;background:#0d1520;border-top:1px solid #243044;padding:.35rem 1.5rem;display:flex;align-items:center;justify-content:space-between;font-size:.68rem;color:#7a8ca3;z-index:99';
+  bar.innerHTML=`
+    <span>🛡️ EL Admin v${ADMIN_VERSION}</span>
+    <span style="display:flex;align-items:center;gap:.75rem">
+      <span id="adminOnlineStatus">🟢 Online</span>
+      <button onclick="forceCheckUpdate()" style="background:none;border:none;color:#7a8ca3;font-size:.68rem;cursor:pointer;text-decoration:underline">Verificar atualização</button>
+    </span>
+  `;
+  document.body.appendChild(bar);
+  // Adjust content padding
+  document.querySelector('.content').style.paddingBottom='3rem';
+}
+
+// Online/offline indicator
+window.addEventListener('online',()=>{
+  const el=document.getElementById('adminOnlineStatus');
+  if(el){el.textContent='🟢 Online';el.style.color='#4a9e7e'}
+  admToast('🟢 Conexão restaurada');
+});
+window.addEventListener('offline',()=>{
+  const el=document.getElementById('adminOnlineStatus');
+  if(el){el.textContent='🔴 Offline';el.style.color='#e74c3c'}
+  admToast('🔴 Sem conexão — dados podem estar desatualizados');
+});
+
+// Init on load
+window.addEventListener('DOMContentLoaded',()=>{
+  checkAdminUpdate();
+  renderVersionBar();
+});
 </script>
+<style>
+@keyframes slideUpBanner{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+</style>
 </body>
 </html>
