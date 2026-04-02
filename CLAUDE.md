@@ -238,7 +238,6 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 ### Compartilhamento de Progresso (linhas 3550-3665)
 - `shareProgress()` → canvas 600x400px com stats visuais
 - `downloadShare()` → salva imagem PNG
-- **⚠️ BUG CONHECIDO: Função duplicada (~linha 1319 e ~3578). A segunda sobrescreve.**
 
 ### Navegação Global (linhas 4160-4250)
 - Touch events (swipe mobile)
@@ -247,9 +246,18 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 - Keyboard navigation (arrows, Esc)
 - Online/offline detection
 
+### Navegação Desktop (helper)
+- `renderBackLink(containerId, label, fn)` → link "← Voltar" no topo de views secundárias
+- Visível apenas em desktop (>768px), oculto no mobile (bottom nav resolve)
+- Usado em: goGlossary, goFlashcards, goPerf, goBadges, goStudyPlan, goGame
+
 ### Boot Sequence (linhas 4300+)
-- `DOMContentLoaded` → loadLessons → auth check → ui() → performance metrics
+- `_waitSupabase` → Promise que resolve quando SDK carrega (timeout 4s para offline)
+- `initAfterAuth(user)` → atualiza UI após login no app.html
+- `DOMContentLoaded` → loadLessons → await auth → ui() → deferred init
 - Auth flow → Supabase sign-in/sign-up com guards `typeof sbClient !== 'undefined'`
+- OAuth callback: polling com backoff (20×250ms) em vez de timeout fixo
+- Hash parser: protegido contra collision OAuth vs `#module-N`
 
 ---
 
@@ -257,7 +265,7 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 
 | Tabela | Campos principais | Uso |
 |--------|------------------|-----|
-| profiles | id, plan, plan_expires_at, name, avatar, onboarding_done, theme, daily_goal, pin | Perfil do usuário |
+| profiles | id, plan, plan_expires_at, name, avatar, onboarding_done, theme, daily_goal, pin, state | Perfil do usuário |
 | progress | profile_id, sub_profile_id, xp, level, streak, last_study_date, current_module, current_lesson, completed_lessons, quiz_results | Progresso do aluno |
 | notes | profile_id, sub_profile_id, lesson_key, content | Notas por aula |
 | favorites | profile_id, sub_profile_id, lesson_key | Aulas favoritas |
@@ -304,10 +312,10 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 
 ---
 
-## Service Worker (sw.js v32)
+## Service Worker (sw.js v34)
 
 ### Estratégia de Cache
-- **Install:** pré-cache CORE_ASSETS (HTML, CSS, JS, ícones, index.json)
+- **Install:** pré-cache CORE_ASSETS (HTML, CSS, JS, ícones, index.json) + `self.skipWaiting()` forçado
 - **Navigation:** Network-first com fallback para cache, offline.html como último recurso
 - **Assets estáticos:** Stale-while-revalidate
 - **Fontes:** Cache-first (nunca expira)
@@ -315,19 +323,54 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 - **Google Auth URLs:** Skip (sem cache para evitar poluição)
 
 ### Atualização
-- `skipWaiting()` + `clients.claim()` no activate
+- `skipWaiting()` forçado no install (ativa imediatamente sem esperar mensagem)
+- `clients.claim()` no activate
 - Limpa caches antigos automaticamente (prefixo `escola-`)
+- Admin panel detecta updates e mostra banner "Atualizar Agora"
 
 ---
 
 ## Bugs Conhecidos
 
-1. **`shareProgress()` duplicada** — duas definições (~linha 1319 e ~3578). A segunda sobrescreve a primeira. Remover a instância redundante.
+1. ~~**`shareProgress()` duplicada**~~ — **RESOLVIDO** (só existe uma definição agora)
 2. **Credenciais hardcoded** em `supabase-client.js` (URL e anon key expostos no client-side). Para SPA é aceitável com RLS, mas auditar RLS policies.
-3. **Google OAuth incompleto** — botão existe, config no Google Cloud Console pendente.
-4. **AI Tutor/Quiz desabilitado** — precisa de créditos na API Anthropic.
+3. ~~**Google OAuth loop infinito**~~ — **RESOLVIDO** (auth.html usa orquestrador único, app.js usa polling com backoff)
+4. **AI Tutor/Quiz desabilitado** — precisa de créditos na API Anthropic. Disclaimer LGPD e system prompt já implementados.
 5. **Leaderboard migration** — SQL existe mas não foi executado no Supabase.
-6. **admin.html** — TODO: dados de progresso por disciplina não integrados.
+6. **Migration pendente** — `supabase/migrations/add_state_to_profiles.sql` precisa ser executado no SQL Editor do Supabase.
+
+---
+
+## Compliance Jurídico (aplicado 2026-04-02)
+
+### Termos de Uso (termos.html)
+- Seção 2: descrição atualizada (currículo complementar, 10-16 anos)
+- Seção 6: IP reescrita (Lei 9.610/98, correntes acadêmicas, INPI)
+- Seção 6-A: Proteção de dados de menores (LGPD Art. 14)
+- Email: contato@escolaliberal.com.br
+
+### Privacidade (privacidade.html)
+- Seção 8: Dados de crianças/adolescentes expandida
+- Seção 8-A: Inteligência Artificial (tutor IA)
+- Email atualizado em todas as ocorrências
+
+### Metodologias (nomenclatura legal)
+- "Método Singapura" → "Abordagem CPA (Concreto-Pictórico-Abstrato)"
+- "P4C / Philosophy for Children" → "Diálogo Socrático"
+- "método de [autor vivo]" → "inspirado em / baseado em"
+- Referências históricas preservadas no blog
+
+### Tutor IA
+- Disclaimer obrigatório por sessão (sessionStorage)
+- System prompt com regras LGPD (idade, sem conselho financeiro/jurídico)
+- Toggle parental previsto nos termos
+
+### Citações
+- Todas com disclaimer Art. 46, Lei 9.610/98
+- Máximo 2 linhas + atribuição
+
+### Rodapé legal
+- Presente em todas as páginas públicas (8 arquivos)
 
 ---
 
@@ -401,13 +444,53 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 - Distribuição: comunidade homeschool (ANED) + campo liberal-conservador
 
 ### Prioridades (em ordem)
-1. Estabilidade e performance da PWA
-2. Compliance jurídico (LGPD, direitos autorais — já aplicado)
-3. Dashboard de métricas de engajamento (dados para apresentar ao governo)
-4. Preparação para escala (mais usuários simultâneos)
-5. Refatoração do app.js em módulos ES (médio prazo)
-6. Google OAuth + AI Tutor ativos
-7. App nativo via Capacitor (push notifications)
+1. ~~Estabilidade e performance da PWA~~ — **FEITO** (boot otimizado, GPU hints CSS, defer init)
+2. ~~Compliance jurídico (LGPD, direitos autorais)~~ — **FEITO** (7 tarefas jurídicas completas)
+3. ~~Dashboard de métricas de engajamento~~ — **FEITO** (admin: geografia, instalações, impacto, modo apresentação)
+4. ~~Auth Google OAuth fix~~ — **FEITO** (7 bugs corrigidos: loop, race condition, boot, back links)
+5. Preparação para escala (mais usuários simultâneos)
+6. Refatoração do app.js em módulos ES (médio prazo)
+7. AI Tutor ativo (créditos API Anthropic — disclaimer e prompt LGPD já prontos)
+8. App nativo via Capacitor (push notifications)
+
+### Concluído nesta sessão (2026-04-02)
+- Correção jurídica completa: LGPD menores, direitos autorais, metodologias, citações
+- Sistema de 26 agentes IA em `.agents/`
+- Admin panel: PWA, geografia por estado, instalações, impacto educacional, modo apresentação
+- Auth PIN no admin (110108), removido login Supabase/Google
+- Coleta de estado (UF) no onboarding (novo step 3)
+- Performance: GPU hints CSS, defer boot, Vite CSS minify
+- 7 bugs auth/navegação corrigidos
+- SW v34 com skipWaiting forçado
+
+---
+
+## Admin Panel (admin.html)
+
+### Acesso
+- **URL:** `escolaliberal.com.br/admin.html`
+- **Auth:** PIN `110108` (sessionStorage, bloqueia após 5 tentativas)
+- **PWA:** manifest-admin.json separado (tema gold #d4a843, ícone escudo)
+
+### Abas
+| Aba | Conteúdo |
+|-----|----------|
+| 📊 Dashboard | Stats gerais, cadastros/dia, top users, funil de retenção, disciplinas |
+| 👥 Usuários | Tabela completa, filtros, busca |
+| 🔔 Push & Lembretes | Push manual + 5 regras automáticas (inatividade, streak, etc.) |
+| ⚡ Eventos XP | Criar eventos de XP multiplicado |
+| 💳 Billing | Paywall toggle, planos Stripe, receita |
+| 📦 Exportar | XML/CSV/JSON com filtros e campos selecionáveis + leads |
+| 📋 Logs | Log de atividades admin |
+| 📍 Geografia | Mapa de alunos por estado/região do Brasil |
+| 📱 Instalações | Métricas PWA, dispositivos, navegadores |
+| 🎯 Impacto | Dashboard executivo para pitch gov (horas, retenção, crescimento) |
+
+### Features especiais
+- **🖥 Modo Apresentação** — fullscreen com números grandes para projetar em reuniões
+- **🔄 Update banner** — detecta nova versão do SW e mostra "Atualizar Agora"
+- **📲 Instalar App** — botão PWA install na topbar
+- **🟢/🔴 Status online/offline** — barra de versão no rodapé
 
 ---
 
