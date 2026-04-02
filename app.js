@@ -387,6 +387,17 @@ function renderAch(){
 }
 
 // NAV
+function renderBackLink(containerId,label,fn){
+  var target=document.getElementById(containerId);
+  if(!target)return;
+  var existing=target.querySelector('.back-link');
+  if(existing)existing.remove();
+  var back=document.createElement('a');
+  back.href='#';back.className='back-link';
+  back.textContent='← '+(label||'Voltar');
+  back.onclick=function(e){e.preventDefault();(fn||goDash)()};
+  target.prepend(back);
+}
 function goDash(){
   hideAllViews();clearDiscAccent();
   const vd=_origById('vDash');
@@ -869,6 +880,7 @@ function findAnswer(q){
 // ============================================================
 function goGlossary(){
   hideAllViews();document.getElementById('vGloss').classList.add('on');setNav('nGloss');
+  renderBackLink('vGloss','Voltar');
   renderGlossary(GLOSSARY)
 }
 function renderGlossary(items){
@@ -888,6 +900,7 @@ function filterGlossary(q){
 let flashMod=0,flashIdx=0,flashItems=[];
 function goFlashcards(){
   hideAllViews();document.getElementById('vFlash').classList.add('on');setNav('nFlash');
+  renderBackLink('vFlash','Voltar');
   document.getElementById('flashTabs').innerHTML=M.map((m,i)=>
     `<button class="xview-tab${i===flashMod?' active':''}" onclick="setFlashMod(${i})">${m.icon} ${m.title}</button>`
   ).join('');
@@ -1214,6 +1227,7 @@ function calcReadTime(content){
 // ============================================================
 function goPerf(){
   hideAllViews();document.getElementById('vPerf').classList.add('on');setNav('nPerf');
+  renderBackLink('vPerf','Voltar');
   const totalLessons=M.reduce((s,m)=>s+m.lessons.length,0);
   const doneLessons=Object.keys(S.done).length;
   const totalQuizzes=Object.keys(S.quiz).length;
@@ -1934,6 +1948,7 @@ const ALL_BADGES=[];
 function goBadges(){
   hideAllViews();setNav('nBadges');
   document.getElementById('vBadges').classList.add('on');
+  renderBackLink('vBadges','Voltar');
   const badges=getAllBadges();
   const unlocked=badges.filter(b=>b.check()).length;
   const total=badges.length;
@@ -2270,6 +2285,7 @@ function spacedAnswer(term,correct){
 function goStudyPlan(){
   hideAllViews();setNav('nStudyPlan');
   document.getElementById('vStudyPlan').classList.add('on');
+  renderBackLink('vStudyPlan','Voltar');
   try{history.pushState({view:'studyplan'},'')}catch(e){}
   renderStudyPlan()
 }
@@ -2997,6 +3013,7 @@ const GAME_EVENTS=[
 function goGame(){
   hideAllViews();setNav('nGame');
   document.getElementById('vGame').classList.add('on');
+  renderBackLink('vGame','Voltar');
   gameDay=1;gameCash=20;gameHistory=[];gameInvestment=0;gameReputation=50;
   renderGameDay()
 }
@@ -4275,6 +4292,18 @@ showDashSkeleton();
 
 // PULL TO REFRESH — REMOVIDO (atualização apenas via botão na barra superior)
 
+// Supabase ready signal — boot waits for auth with timeout
+let _supabaseReady=null;
+const _waitSupabase=new Promise(resolve=>{_supabaseReady=resolve});
+
+// initAfterAuth: chamado quando login acontece no app.html (não via auth.html)
+async function initAfterAuth(user){
+  console.log('[Auth] initAfterAuth:',user?.email);
+  if(typeof updateAuthUI==='function')updateAuthUI();
+  if(typeof ui==='function')ui();
+  if(typeof checkPlanAccess==='function')checkPlanAccess();
+}
+
 // INIT — load lessons then bootstrap
 (async function _boot(){
   if(typeof initI18n==='function')initI18n();
@@ -4284,6 +4313,10 @@ showDashSkeleton();
   updateLangToggle();
   streak();
   initOnboard();
+
+// Esperar auth com timeout de 4s (não bloquear offline)
+await Promise.race([_waitSupabase,new Promise(r=>setTimeout(()=>r(false),4000))]);
+
 if(S.name!=='Aluno'){
   document.getElementById('onboard').style.display='none';
   goDash();
@@ -4356,7 +4389,15 @@ if(location.hash && location.hash.includes('type=recovery')){
     history.replaceState(null,'',location.pathname);
   }
 })();
-if(location.hash){const m=location.hash.match(/module-(\d+)/);if(m)setTimeout(()=>goMod(parseInt(m[1])-1),100)}
+if(location.hash){
+  // Não processar hash de OAuth/recovery como navegação de módulo
+  if(location.hash.includes('access_token')||location.hash.includes('type=recovery')){
+    console.log('[Nav] Hash de auth detectado, ignorando parser de módulo');
+  }else{
+    const m=location.hash.match(/module-(\d+)/);
+    if(m)setTimeout(()=>goMod(parseInt(m[1])-1),100);
+  }
+}
 })(); // end async _boot
 
 // ============================================================
@@ -4371,13 +4412,14 @@ if(location.hash){const m=location.hash.match(/module-(\d+)/);if(m)setTimeout(()
     cl.onload=function(){
       if(typeof initSupabase==='function'){
         var ok=initSupabase();
-        if(ok) _renderAuth();
+        if(ok){_renderAuth();if(typeof _supabaseReady==='function')_supabaseReady(true)}
+        else{if(typeof _supabaseReady==='function')_supabaseReady(false)}
       }
     };
-    cl.onerror=function(){console.warn('[Supabase] client.js não encontrado, modo offline.')};
+    cl.onerror=function(){console.warn('[Supabase] client.js não encontrado, modo offline.');if(typeof _supabaseReady==='function')_supabaseReady(false)};
     document.body.appendChild(cl);
   };
-  sdk.onerror=function(){console.warn('[Supabase] SDK offline, continuando sem sync.')};
+  sdk.onerror=function(){console.warn('[Supabase] SDK offline, continuando sem sync.');if(typeof _supabaseReady==='function')_supabaseReady(false)};
   document.body.appendChild(sdk);
 })();
 
@@ -4445,6 +4487,9 @@ async function _doSignOut(){
     await signOut();
   }
   updateAuthUI();
+  if(typeof setSubscription==='function')setSubscription(null);
+  toast('Conta desconectada');
+  goDash();
 }
 
 // ============================================================
@@ -4512,31 +4557,36 @@ async function _loginEmail(){
   }
 }
 
-// Handle OAuth callback in app.html (single handler, no loop)
+// Handle OAuth callback in app.html (polling with backoff)
 (function(){
-  var _oauthHandled=false;
   if(location.hash&&location.hash.includes('access_token')){
-    if(_oauthHandled)return;
-    _oauthHandled=true;
-    // Clean URL immediately to prevent re-processing on reload
-    var cleanPath=location.pathname+location.search;
-    history.replaceState(null,'',cleanPath);
-    // Let Supabase process the session from the hash (SDK reads it before we clear)
-    setTimeout(function(){
-      if(typeof sbClient!=='undefined'&&sbClient){
-        sbClient.auth.getSession().then(function(r){
-          if(r.data.session){
-            updateAuthUI();
-            toast('Login realizado!','success');
-          }
-        });
+    console.log('[Auth] OAuth tokens detectados, aguardando SDK...');
+    var attempts=0,maxAttempts=20; // 20×250ms = 5s máximo
+    function checkOAuthSession(){
+      attempts++;
+      if(typeof sbClient==='undefined'||!sbClient){
+        if(attempts<maxAttempts)setTimeout(checkOAuthSession,250);
+        else console.warn('[Auth] SDK não carregou em 5s');
+        return;
       }
-    },1500);
+      sbClient.auth.getSession().then(function(r){
+        if(r.data&&r.data.session){
+          if(typeof updateAuthUI==='function')updateAuthUI();
+          toast('Login realizado!','success');
+          history.replaceState(null,'',location.pathname);
+        }else if(attempts<maxAttempts){
+          setTimeout(checkOAuthSession,250);
+        }
+      }).catch(function(){
+        if(attempts<maxAttempts)setTimeout(checkOAuthSession,250);
+      });
+    }
+    setTimeout(checkOAuthSession,500); // espera inicial mínima
   }
   // Handle OAuth error redirect
   var sp=new URLSearchParams(location.search);
   if(sp.get('error')){
-    setTimeout(function(){toast('Erro no login: '+(sp.get('error_description')||sp.get('error')),'error')},1000);
+    setTimeout(function(){toast('Erro no login: '+(sp.get('error_description')||sp.get('error')),'error')},500);
     history.replaceState(null,'',location.pathname);
   }
 })();

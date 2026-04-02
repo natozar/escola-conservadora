@@ -1571,6 +1571,11 @@ html,body{overflow-x:hidden;max-width:100vw}
 .side.open{padding-top:calc(90px + env(safe-area-inset-top))}
 .global-progress{top:calc(82px + env(safe-area-inset-top))}
 }
+/* Back Link (desktop only) */
+.back-link{display:inline-block;margin:0 0 1rem;color:var(--sage);text-decoration:none;font-weight:500;font-size:.95rem;transition:color .2s}
+.back-link:hover{color:var(--honey)}
+@media(max-width:768px){.back-link{display:none}}
+
 /* Tutor IA Disclaimer */
 .tutor-disclaimer{background:var(--bg-elevated,#1e2d4a);border:1px solid var(--border,rgba(255,255,255,.06));border-radius:12px;padding:1.25rem;margin:.75rem;text-align:center}
 .tutor-disclaimer-icon{font-size:2rem;margin-bottom:.5rem}
