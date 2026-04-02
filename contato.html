@@ -64,7 +64,7 @@ select option{background:var(--card);color:var(--text)}
   <div class="subtitle">Tem uma sugestão, dúvida ou encontrou um problema? Adoramos ouvir.</div>
 
   <div class="contact-options">
-    <a href="mailto:chatsagrado@gmail.com" class="contact-opt">
+    <a href="mailto:contato@escolaliberal.com.br" class="contact-opt">
       <span class="co-icon">📧</span>
       <div class="co-label">E-mail</div>
       <div class="co-sub">Resposta em até 48h</div>
@@ -113,6 +113,7 @@ select option{background:var(--card);color:var(--text)}
 
   <div class="footer">
     <p>Escola Liberal © 2026 · <a href="termos.html">Termos</a> · <a href="privacidade.html">Privacidade</a></p>
+    <p class="legal-footer" style="font-size:.65rem;color:var(--muted,#9ba3b5);opacity:.7;margin-top:.75rem;line-height:1.5">O conteúdo da Escola Liberal é de natureza exclusivamente educacional. Citações reproduzidas conforme Art. 46, Lei 9.610/98. Metodologias mencionadas são correntes acadêmicas de ampla difusão e não implicam licença ou endosso de seus autores. Marca em processo de registro no INPI.</p>
   </div>
 </div>
 <script>
@@ -128,7 +129,7 @@ function sendForm(e){
   // For now, open mailto. Replace with API call when backend is ready.
   const subjectMap={sugestao:'Sugestão de Melhoria',bug:'Reportar Problema',conteudo:'Sugestão de Conteúdo',parceria:'Proposta de Parceria',outro:'Contato Geral'};
   const body=`Nome: ${name}\nE-mail: ${email}\nAssunto: ${subjectMap[subject]}\n\nMensagem:\n${message}`;
-  window.location.href=`mailto:chatsagrado@gmail.com?subject=${encodeURIComponent('escola liberal — '+subjectMap[subject])}&body=${encodeURIComponent(body)}`;
+  window.location.href=`mailto:contato@escolaliberal.com.br?subject=${encodeURIComponent('escola liberal — '+subjectMap[subject])}&body=${encodeURIComponent(body)}`;
   document.getElementById('formArea').style.display='none';
   document.getElementById('successMsg').classList.add('show')
 }

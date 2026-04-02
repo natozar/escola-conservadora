@@ -1571,3 +1571,9 @@ html,body{overflow-x:hidden;max-width:100vw}
 .side.open{padding-top:calc(90px + env(safe-area-inset-top))}
 .global-progress{top:calc(82px + env(safe-area-inset-top))}
 }
+/* Tutor IA Disclaimer */
+.tutor-disclaimer{background:var(--bg-elevated,#1e2d4a);border:1px solid var(--border,rgba(255,255,255,.06));border-radius:12px;padding:1.25rem;margin:.75rem;text-align:center}
+.tutor-disclaimer-icon{font-size:2rem;margin-bottom:.5rem}
+.tutor-disclaimer p{font-size:.82rem;color:var(--text-secondary,#9ba3b5);margin-bottom:.5rem;line-height:1.5}
+.tutor-disclaimer button{margin-top:.5rem;padding:.6rem 1.5rem;background:var(--sage,#4a9e7e);color:#fff;border:none;border-radius:9999px;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer}
+.tutor-disclaimer button:hover{opacity:.9}

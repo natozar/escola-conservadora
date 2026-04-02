@@ -70,13 +70,13 @@ ALTER TABLE public.admin_settings ENABLE ROW LEVEL SECURITY;
 -- SECURITY FIX: admin_settings only accessible to authenticated admin users
 CREATE POLICY "Admin read admin_settings" ON public.admin_settings
   FOR SELECT TO authenticated USING (
-    auth.uid() IN (SELECT id FROM profiles WHERE email = ANY(ARRAY['chatsagrado@gmail.com']))
+    auth.uid() IN (SELECT id FROM profiles WHERE email = ANY(ARRAY['contato@escolaliberal.com.br']))
   );
 CREATE POLICY "Admin write admin_settings" ON public.admin_settings
   FOR ALL TO authenticated USING (
-    auth.uid() IN (SELECT id FROM profiles WHERE email = ANY(ARRAY['chatsagrado@gmail.com']))
+    auth.uid() IN (SELECT id FROM profiles WHERE email = ANY(ARRAY['contato@escolaliberal.com.br']))
   ) WITH CHECK (
-    auth.uid() IN (SELECT id FROM profiles WHERE email = ANY(ARRAY['chatsagrado@gmail.com']))
+    auth.uid() IN (SELECT id FROM profiles WHERE email = ANY(ARRAY['contato@escolaliberal.com.br']))
   );
 
 -- 4. Tabela de push subscriptions (Web Push API)
@@ -105,7 +105,7 @@ CREATE POLICY "Users manage own subscriptions" ON public.push_subscriptions
 CREATE POLICY "Admin can read all subscriptions" ON public.push_subscriptions
   FOR SELECT TO authenticated USING (
     auth.uid() = profile_id OR
-    auth.uid() IN (SELECT id FROM profiles WHERE email = ANY(ARRAY['chatsagrado@gmail.com']))
+    auth.uid() IN (SELECT id FROM profiles WHERE email = ANY(ARRAY['contato@escolaliberal.com.br']))
   );
 
 -- 5. Índices para performance

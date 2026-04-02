@@ -723,6 +723,19 @@ function toggleChat(){
 }
 
 function initChat(){
+  if(!sessionStorage.getItem('tutor_disclaimer_seen')){
+    const disc=document.createElement('div');
+    disc.className='tutor-disclaimer';
+    disc.innerHTML=`
+      <div class="tutor-disclaimer-icon">🤖</div>
+      <p><strong>Assistente Educacional IA</strong></p>
+      <p>Este assistente é uma ferramenta de apoio ao aprendizado. Suas respostas têm caráter educacional e podem conter imprecisões. Não substitui professores, orientadores ou profissionais qualificados.</p>
+      <p style="font-size:.75rem;opacity:.7">As interações com este assistente não são armazenadas de forma identificada após o encerramento da sessão.</p>
+      <button onclick="this.parentElement.remove();sessionStorage.setItem('tutor_disclaimer_seen','1');addBotMsg('Olá! 👋 Sou o <strong>Tutor IA</strong> da escola liberal. Pergunte qualquer coisa sobre as aulas — uso inteligência artificial para responder! 🤖');showSuggestions()">Entendi — Começar</button>
+    `;
+    document.getElementById('chatBody').appendChild(disc);
+    return;
+  }
   addBotMsg('Olá! 👋 Sou o <strong>Tutor IA</strong> da escola liberal. Pergunte qualquer coisa sobre as aulas — uso inteligência artificial para responder! 🤖');
   showSuggestions();
 }
@@ -3138,20 +3151,20 @@ function renderContinue(){
 // MOTIVATIONAL QUOTES
 // ============================================================
 const QUOTES=[
-  {text:'Não existe maneira de o homem se esquivar do seu próprio julgamento.',author:'Ludwig von Mises'},
-  {text:'A liberdade econômica é um requisito para a liberdade política.',author:'Milton Friedman'},
-  {text:'O mais importante investimento que você pode fazer é em si mesmo.',author:'Warren Buffett'},
-  {text:'A curiosidade é a chave da criatividade.',author:'Akio Morita'},
-  {text:'A única função da previsão econômica é fazer a astrologia parecer respeitável.',author:'John Kenneth Galbraith'},
-  {text:'Quem controla o dinheiro de uma nação controla a nação.',author:'Thomas Jefferson'},
-  {text:'Não é da benevolência do açougueiro que esperamos nosso jantar, mas do seu interesse próprio.',author:'Adam Smith'},
-  {text:'Ideias são mais poderosas do que se imagina comumente.',author:'Friedrich Hayek'},
-  {text:'A pobreza não é causada por falta de recursos, mas pela falta de ideias certas.',author:'Thomas Sowell'},
-  {text:'Riqueza não é sobre ter muito dinheiro. É sobre ter muitas opções.',author:'Chris Rock'},
-  {text:'O empresário sempre procura a mudança, responde a ela e a explora como uma oportunidade.',author:'Peter Drucker'},
-  {text:'Se você acha que educação é cara, experimente a ignorância.',author:'Derek Bok'},
-  {text:'A inflação é a forma mais universal de tributação.',author:'Ludwig von Mises'},
-  {text:'Existe apenas um bem: o conhecimento. Existe apenas um mal: a ignorância.',author:'Sócrates'}
+  {text:'Não existe maneira de o homem se esquivar do seu próprio julgamento. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Ludwig von Mises'},
+  {text:'A liberdade econômica é um requisito para a liberdade política. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Milton Friedman'},
+  {text:'O mais importante investimento que você pode fazer é em si mesmo. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Warren Buffett'},
+  {text:'A curiosidade é a chave da criatividade. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Akio Morita'},
+  {text:'A única função da previsão econômica é fazer a astrologia parecer respeitável. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'John Kenneth Galbraith'},
+  {text:'Quem controla o dinheiro de uma nação controla a nação. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Thomas Jefferson'},
+  {text:'Não é da benevolência do açougueiro que esperamos nosso jantar, mas do seu interesse próprio. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Adam Smith'},
+  {text:'Ideias são mais poderosas do que se imagina comumente. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Friedrich Hayek'},
+  {text:'A pobreza não é causada por falta de recursos, mas pela falta de ideias certas. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Thomas Sowell'},
+  {text:'Riqueza não é sobre ter muito dinheiro. É sobre ter muitas opções. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Chris Rock'},
+  {text:'O empresário sempre procura a mudança, responde a ela e a explora como uma oportunidade. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Peter Drucker'},
+  {text:'Se você acha que educação é cara, experimente a ignorância. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Derek Bok'},
+  {text:'A inflação é a forma mais universal de tributação. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Ludwig von Mises'},
+  {text:'Existe apenas um bem: o conhecimento. Existe apenas um mal: a ignorância. (citação reproduzida para fins educacionais conforme Art. 46, Lei 9.610/98)',author:'Sócrates'}
 ];
 function renderQuote(){
   const seed=new Date().toDateString();
