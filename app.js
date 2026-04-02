@@ -4512,18 +4512,22 @@ async function _loginEmail(){
   }
 }
 
-// Handle OAuth callback in app.html (not auth.html)
+// Handle OAuth callback in app.html (single handler, no loop)
 (function(){
+  var _oauthHandled=false;
   if(location.hash&&location.hash.includes('access_token')){
-    // OAuth returned here — let Supabase handle the session
+    if(_oauthHandled)return;
+    _oauthHandled=true;
+    // Clean URL immediately to prevent re-processing on reload
+    var cleanPath=location.pathname+location.search;
+    history.replaceState(null,'',cleanPath);
+    // Let Supabase process the session from the hash (SDK reads it before we clear)
     setTimeout(function(){
       if(typeof sbClient!=='undefined'&&sbClient){
         sbClient.auth.getSession().then(function(r){
           if(r.data.session){
             updateAuthUI();
             toast('Login realizado!','success');
-            // Clean URL
-            history.replaceState(null,'',location.pathname);
           }
         });
       }

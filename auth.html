@@ -505,9 +505,12 @@ function checkOAuthError() {
   // 5. Default: show login tab
   showTab('login');
 
-  // 6. Redirect on successful auth (OAuth callback or existing session)
+  // 6. Redirect on successful auth (existing session only)
+  // OAuth callbacks are handled by app.html — auth.html only redirects for existing sessions
   if(sbClient){
     var _redirected = false;
+    var _isOAuthCallback = window.location.hash.includes('access_token') || new URLSearchParams(location.search).has('code');
+
     function doRedirect(){
       if(_redirected) return;
       // Don't redirect if updating password (recovery flow)
@@ -518,30 +521,30 @@ function checkOAuthError() {
       window.location.href = 'app.html';
     }
 
-    // Listen for auth events — handle SIGNED_IN and INITIAL_SESSION
+    // Listen for auth events — but skip if this is an OAuth callback (app.html handles those)
     sbClient.auth.onAuthStateChange(function(event, session){
-      console.log('[Auth] Event:', event, '| session:', !!session);
-      if(session && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED')){
+      console.log('[Auth] Event:', event, '| session:', !!session, '| oauthCB:', _isOAuthCallback);
+      if(_isOAuthCallback){
+        // OAuth callback landed on auth.html — redirect to app.html with tokens intact
+        if(session && event === 'SIGNED_IN'){
+          _redirected = true;
+          window.location.href = 'app.html';
+        }
+        return;
+      }
+      if(session && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')){
         setTimeout(doRedirect, 300);
       }
     });
 
-    // Fallback: explicit session check (catches PKCE code exchange + edge cases)
-    sbClient.auth.getSession().then(function(res){
-      if(res.data && res.data.session){
-        console.log('[Auth] Sessão ativa detectada via getSession()');
-        doRedirect();
-      }
-    }).catch(function(e){ console.warn('[Auth] Session check:', e.message); });
-
-    // Safety net: if URL has hash tokens or code param, re-check after SDK processes
-    if(window.location.hash.includes('access_token') || new URLSearchParams(location.search).has('code')){
-      console.log('[Auth] Tokens detectados na URL, aguardando processamento...');
-      setTimeout(function(){
-        sbClient.auth.getSession().then(function(res){
-          if(res.data && res.data.session) doRedirect();
-        });
-      }, 1500);
+    // Fallback: existing session check (NOT for OAuth callbacks)
+    if(!_isOAuthCallback){
+      sbClient.auth.getSession().then(function(res){
+        if(res.data && res.data.session){
+          console.log('[Auth] Sessão ativa detectada via getSession()');
+          doRedirect();
+        }
+      }).catch(function(e){ console.warn('[Auth] Session check:', e.message); });
     }
   }
 
