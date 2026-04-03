@@ -1199,10 +1199,10 @@ body{overscroll-behavior-y:contain}
   /* Hide desktop version bar on mobile — mobile header has everything */
   .app-version-bar{display:none!important}
   /* Adjust content for fixed header + bottom nav */
-  .main{padding:calc(64px + env(safe-area-inset-top)) 1rem calc(72px + env(safe-area-inset-bottom))!important;box-sizing:border-box;width:100%}
+  .main{padding:calc(56px + env(safe-area-inset-top)) 1rem calc(72px + env(safe-area-inset-bottom))!important;box-sizing:border-box;width:100%}
   /* Hamburger in header replaces sidebar toggle */
   .side{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
-  .side.open{top:0;padding-top:calc(64px + env(safe-area-inset-top))}
+  .side.open{top:0;padding-top:calc(56px + env(safe-area-inset-top))}
   /* Global progress under header */
   .global-progress{top:calc(var(--mobile-header-h,56px) + env(safe-area-inset-top))}
   /* PWA overlay: full screen on mobile */
@@ -1735,14 +1735,12 @@ html,body{overflow-x:hidden;max-width:100vw}
 @keyframes avbPulse{0%,100%{opacity:1}50%{opacity:.5}}
 @keyframes avbSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @media(max-width:900px){
-.app-version-bar{position:fixed;top:0;left:0;right:0;padding:.2rem .6rem calc(.2rem + env(safe-area-inset-top,0px));min-height:26px;font-size:.6rem}
-.avb-logo{width:16px;height:16px}.avb-name{font-size:.58rem}
-.avb-version{font-size:.5rem}.avb-status{font-size:.5rem;padding:.08rem .3rem}
-.avb-check{width:20px;height:20px;font-size:.6rem}
-.mobile-header{top:calc(26px + env(safe-area-inset-top,0px))!important}
-.main{padding-top:calc(90px + env(safe-area-inset-top))!important}
-.side.open{padding-top:calc(90px + env(safe-area-inset-top))}
-.global-progress{top:calc(82px + env(safe-area-inset-top))}
+/* Version bar hidden on mobile — header is the only top bar */
+.app-version-bar{display:none!important}
+.mobile-header{top:0!important}
+.main{padding-top:calc(56px + env(safe-area-inset-top))!important}
+.side.open{padding-top:calc(56px + env(safe-area-inset-top))}
+.global-progress{top:calc(56px + env(safe-area-inset-top))}
 }
 /* Back Link (desktop only) */
 .back-link{display:inline-block;margin:0 0 1rem;color:var(--sage);text-decoration:none;font-weight:500;font-size:.95rem;transition:color .2s}
