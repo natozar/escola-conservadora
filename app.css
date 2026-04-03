@@ -994,7 +994,8 @@ body.focus-mode .mobile-bar{display:none !important}
 .mc.locked::after{content:'🔒';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2rem;filter:drop-shadow(0 2px 8px rgba(0,0,0,.3))}
 
 /* ========== SAFE AREAS (notch phones) ========== */
-html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;overscroll-behavior-y:contain}
+body{overscroll-behavior-y:contain}
 *{-webkit-user-select:text;user-select:text}
 
 /* ========== MOBILE BOTTOM NAV ========== */
@@ -1473,9 +1474,11 @@ html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;-webkit-touc
 @media(min-width:901px){#vAulas{display:none!important}}
 
 /* ====== UPDATE BANNER ====== */
-.update-banner{position:fixed;top:-60px;left:50%;transform:translateX(-50%);z-index:1100;display:flex;align-items:center;gap:.75rem;padding:.6rem 1rem;background:var(--sage);color:#fff;border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:0 4px 20px rgba(0,0,0,.25);font-size:.85rem;font-family:'DM Sans',sans-serif;transition:top .4s var(--ease);max-width:95vw}
-.update-banner.show{top:0}
-@media(max-width:900px){.update-banner.show{top:calc(var(--mobile-header-h) + env(safe-area-inset-top))}}
+.update-banner{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:50%;transform:translateX(-50%);z-index:9999;align-items:center;gap:10px;padding:10px 16px;background:var(--bg-card);border:1px solid var(--sage-light);border-radius:var(--r-md);box-shadow:0 4px 20px rgba(0,0,0,.15);font-size:.85rem;font-family:'DM Sans',sans-serif;max-width:calc(100vw - 32px);animation:bannerSlide .3s ease;color:var(--text-primary)}
+.update-banner button:first-of-type{background:var(--sage-light);color:#fff;border:none;padding:6px 14px;border-radius:var(--r-sm);font-weight:600;font-size:.8rem;cursor:pointer;white-space:nowrap}
+.update-banner button:last-of-type{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem;padding:4px}
+@keyframes bannerSlide{from{transform:translateX(-50%) translateY(-120%);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
+@media(max-width:900px){.update-banner{top:calc(var(--mobile-header-h,56px) + env(safe-area-inset-top) + 8px)}}
 .update-text{flex:1;font-weight:500;white-space:nowrap}
 .update-btn{background:#fff;color:var(--sage);border:none;border-radius:var(--r-full);padding:.35rem 1rem;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:transform .15s}
 .update-btn:active{transform:scale(.95)}

@@ -349,6 +349,21 @@ const _origGoErrorReview=typeof window.goErrorReview==='function'?window.goError
 if(_origGoErrorReview){window.goErrorReview=function(){_origGoErrorReview();updateBottomNav('practice');updateMobileHeader('🔄 Revisar Erros',true);_mobileBackFn=()=>window.goDash();closeSideMobile()}}
 
 // ============================================================
+// BLOCK PULL-TO-REFRESH (iOS Safari standalone fallback)
+// overscroll-behavior-y:contain handles Chrome/Edge/Firefox.
+// This JS handles iOS Safari standalone mode where CSS alone doesn't work.
+// ============================================================
+var _ptrStartY=0;
+document.addEventListener('touchstart',function(e){
+  _ptrStartY=e.touches[0].clientY;
+},{passive:true});
+document.addEventListener('touchmove',function(e){
+  if(window.scrollY===0&&e.touches[0].clientY>_ptrStartY+10){
+    e.preventDefault();
+  }
+},{passive:false});
+
+// ============================================================
 // MOBILE: SWIPE GESTURES
 // ============================================================
 let touchStartX=0,touchStartY=0,touchStartTime=0;

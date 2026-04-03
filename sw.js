@@ -1,33 +1,36 @@
 // Escola Liberal PWA — Service Worker v25
 // Estratégia: Network-first (navegação) + Stale-While-Revalidate (assets) + Cache-first (fonts)
-const SW_VERSION = 'v41';
-const CACHE_NAME = 'escola-liberal-v41';
-const STATIC_CACHE = 'escola-static-v41';
+const SW_VERSION = 'v45';
+const CACHE_NAME = 'escola-liberal-v45';
+const STATIC_CACHE = 'escola-static-v45';
 const FONT_CACHE = 'escola-fonts-v1';
 
 // Core assets — cached on install
+// CORE_ASSETS: pre-cached on install.
+// NOTE: Vite bundles app.js/app.css into hashed filenames (assets/build/app-HASH.js).
+// Those are cached via stale-while-revalidate on first fetch, not pre-cached here.
+// Only list files with STABLE names that exist in the dist root.
 const CORE_ASSETS = [
   './',
   './index.html',
   './app.html',
-  './app.css',
-  './i18n.js',
-  './cookie-consent.js',
-  './supabase-client.js',
-  './stripe-billing.js',
   './auth.html',
   './perfil.html',
   './offline.html',
   './termos.html',
   './privacidade.html',
   './contato.html',
+  './blog.html',
   './manifest.json',
+  './i18n.js',
+  './cookie-consent.js',
+  './supabase-client.js',
+  './stripe-billing.js',
   './assets/icons/favicon.ico',
   './assets/icons/favicon.svg',
   './assets/icons/icon-192.png',
   './assets/icons/icon-512.png',
-  './lessons/index.json',
-  './blog.html'
+  './lessons/index.json'
 ];
 
 // Lazy-loaded: lesson data — cached on first use
@@ -41,7 +44,11 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME).then(c => c.addAll(CORE_ASSETS))
   );
-  self.skipWaiting(); // Forçar ativação imediata da nova versão
+  // FASE 1 (TEMPORARIO): skipWaiting incondicional para forcar update
+  // em TODOS os dispositivos que ja tem PWA instalada.
+  // FASE 2 (proximo deploy): remover esta linha e deixar user controlar via banner.
+  // TODO: Remover self.skipWaiting() no proximo commit apos confirmar que todos atualizaram.
+  self.skipWaiting();
 });
 
 // ========== MESSAGES ==========

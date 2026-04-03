@@ -357,6 +357,25 @@ Quando `OFFLINE_MODE = true` (src/boot.js):
 - Debate → mensagens mockadas por sala (4-5 msgs hardcoded)
 - Para reverter: `OFFLINE_MODE = false` + `DEMO_MODE = false`
 
+### Fluxo Offline → Online (quando desligar OFFLINE_MODE)
+```
+1. Mudar OFFLINE_MODE = false em src/boot.js
+2. Deploy
+3. User abre app → Supabase SDK carrega em background
+4. App funciona normal com localStorage (sem esperar auth)
+5. User clica Perfil → showLoginPrompt('perfil') → Google OAuth
+6. onSignIn(user) → mergeLocalToCloud()
+   → Compara localStorage vs nuvem (weighted score)
+   → Local vence se score maior → tudo sobe
+   → Nuvem vence se score maior → tudo desce
+7. save() agora faz dual-write: localStorage + queueSync()
+8. User continua usando normalmente
+```
+
+### Tabela debate_messages (para executar no Supabase quando ligar online)
+- SQL em `supabase/migrations/consolidated-ready.sql`
+- Inclui: CREATE TABLE, RLS, indexes, Realtime publication
+
 ---
 
 ## Compliance Jurídico (aplicado 2026-04-02)
@@ -405,6 +424,7 @@ Quando `OFFLINE_MODE = true` (src/boot.js):
 8. **Commitar credenciais novas** — usar variáveis de ambiente ou Edge Functions
 9. **Quebrar compatibilidade iOS Safari** — testar private mode, safe areas
 10. **Usar `document.getElementById` sem considerar** o Safe DOM Proxy (linha 6)
+11. **Atualizar o app sem consentimento do user** — sempre via banner + botao (ver Politica de Atualizacao PWA)
 
 ### SEMPRE fazer:
 1. **Ler os arquivos relevantes** antes de qualquer alteração
@@ -417,6 +437,44 @@ Quando `OFFLINE_MODE = true` (src/boot.js):
 8. **Manter localStorage como fallback** para tudo que vai no Supabase
 9. **Guardar safe-area** em CSS para PWA iOS (env(safe-area-inset-*))
 10. **Reportar o que foi alterado** — arquivo por arquivo, com descrição
+11. **Verificar politica de atualizacao** ao alterar sw.js (skipWaiting APENAS no message handler)
+
+---
+
+### Politica de Atualizacao PWA (PERMANENTE)
+
+O app NUNCA se atualiza automaticamente. O usuario SEMPRE decide quando atualizar.
+
+**Regras fixas:**
+1. Pull-to-refresh BLOQUEADO — `overscroll-behavior-y:contain` + JS guard iOS
+2. `skipWaiting()` PROIBIDO no install — novo SW fica em waiting ate user autorizar (exceto primeiro install)
+3. Banner de update aparece quando novo SW esta pronto (id: updateBanner)
+4. Botao 🔄 no top bar visivel apenas quando ha update (id: mhUpdateBtn)
+5. Polling a cada 60s — `reg.update()` verifica nova versao em background
+6. User clica "Atualizar" → `postMessage({type:'SKIP_WAITING'})` → `controllerchange` → `reload()`
+7. Fallback 5s — se controllerchange nao disparar (iOS), faz reload forcado
+8. Banner reaparece em 30 min se user fechou sem atualizar
+9. `reg.waiting` tratado no boot (user que reabriu com update pendente)
+
+**Fluxo:**
+```
+Deploy → SW novo detectado (polling 60s)
+→ SW novo instala (waiting) — NAO ativa automaticamente
+→ Banner aparece + icone 🔄 pulsa
+→ User clica "Atualizar" → skipWaiting → claim → reload
+→ App carrega com nova versao
+```
+
+**NUNCA MAIS:**
+- Fazer `self.skipWaiting()` direto no install event (exceto primeiro install)
+- Colocar `location.reload()` no controllerchange fora da acao do user
+- Permitir pull-to-refresh (overscroll-behavior deve estar no CSS sempre)
+- Atualizar silenciosamente sem o user ver
+
+**Em todo PR/commit que altere sw.js:**
+- Incrementar SW_VERSION
+- Verificar que skipWaiting esta APENAS no message handler
+- Verificar que CORE_ASSETS inclui todos os arquivos alterados
 
 ---
 
@@ -536,6 +594,35 @@ Quando `OFFLINE_MODE = true` (src/boot.js):
 - Boot reescrito: src/boot.js limpo, sem await auth, sem Promise de rede
 - Console limpo: apenas [App] OFFLINE_MODE, [Supabase] Desligado, [Lessons] N modulos
 - SW v41
+
+### Concluido nesta sessao (2026-04-02 — sessao 8)
+- Blindagem Supabase: guards OFFLINE_MODE em loadUserPlan(), askAITutor(), save()
+- save() dual-write: localStorage sempre + queueSync apenas se !OFFLINE_MODE
+- Merge inteligente: 4 cenarios verificados (nuvem vazia, local vence, nuvem vence, dados demo)
+- consolidated-ready.sql: debate_messages table + RLS + Realtime + indexes
+- Schema match verificado: todos os campos localStorage mapam para colunas Supabase
+- Fluxo offline→online documentado e testado mentalmente
+- SW v42
+
+### Concluido nesta sessao (2026-04-02 — sessao 9)
+- Pull-to-refresh desabilitado: overscroll-behavior-y:contain (CSS) + touchmove preventDefault (JS iOS fallback)
+- SW install: removido self.skipWaiting() automatico — user decide quando ativar via banner
+- controllerchange: reload APENAS quando user clicou "Atualizar agora" (_userRequestedUpdate flag)
+- Update flow: SW novo fica em waiting → banner aparece → user clica → skipWaiting via message → reload
+- SW v43
+
+### Concluido nesta sessao (2026-04-03 — sessao 10)
+- FASE 1 TRANSITORIA: SW v45 com skipWaiting() incondicional no install para forcar update em TODOS os dispositivos
+- controllerchange auto-reload TEMPORARIO para transicao
+- CORE_ASSETS limpo: removido app.css e app.js (nao existem no dist, Vite gera hashes)
+- PENDENTE FASE 2: proximo deploy remover skipWaiting do install + remover controllerchange automatico
+
+### ⚠️ PENDENTE: FASE 2 do update PWA
+No PROXIMO commit/deploy, executar:
+1. Remover `self.skipWaiting()` do install event no sw.js (deixar apenas no message handler)
+2. Remover o controllerchange listener automatico no final do script em app.html (marcado com TODO)
+3. Incrementar SW_VERSION para v46
+4. Isso ativa o sistema permanente: updates apenas via banner + botao do user
 
 ---
 
