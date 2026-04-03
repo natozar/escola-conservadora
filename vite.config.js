@@ -35,26 +35,27 @@ function minifyLegacyJS() {
       }
 
       console.log('  [plugin] Copying static assets...');
-      // Use shell commands to copy (avoids Node cpSync issues with accented paths on Windows)
+      // Use Node.js cpSync for cross-platform compatibility
+      for (const dir of ['lessons', 'blog']) {
+        const src = resolve(root, dir);
+        const dest = resolve(dist, dir);
+        if (existsSync(src)) {
+          try { cpSync(src, dest, { recursive: true }); console.log(`  ✓ Copied ${dir}/`); }
+          catch(e) { console.error(`  ✗ ${dir}:`, e.message); }
+        }
+      }
+      // assets/ — merge with Vite's assets/build/ output
       try {
-        execSync(`xcopy /E /I /Y /Q "${resolve(root, 'lessons')}" "${resolve(dist, 'lessons')}"`, { stdio: 'pipe' });
-        console.log('  ✓ Copied lessons/');
-      } catch(e) { console.error('  ✗ lessons:', e.message); }
-      try {
-        execSync(`xcopy /E /I /Y /Q "${resolve(root, 'assets')}" "${resolve(dist, 'assets')}"`, { stdio: 'pipe' });
-        console.log('  ✓ Copied assets/');
+        const assetsSrc = resolve(root, 'assets');
+        const assetsDest = resolve(dist, 'assets');
+        if (existsSync(assetsSrc)) { cpSync(assetsSrc, assetsDest, { recursive: true }); console.log('  ✓ Copied assets/'); }
       } catch(e) { console.error('  ✗ assets:', e.message); }
-      // supabase/ NOT copied to dist (migrations/functions are not public assets)
-      try {
-        execSync(`xcopy /E /I /Y /Q "${resolve(root, 'blog')}" "${resolve(dist, 'blog')}"`, { stdio: 'pipe' });
-        console.log('  ✓ Copied blog/');
-      } catch(e) { console.error('  ✗ blog:', e.message); }
 
       // Copy individual files
       for (const f of ['lessons.json', 'sw.js', 'CNAME', 'robots.txt', 'sitemap.xml']) {
         const src = resolve(root, f);
         if (existsSync(src)) {
-          try { execSync(`copy /Y "${src}" "${resolve(dist, f)}"`, { stdio: 'pipe' }); console.log(`  ✓ Copied ${f}`); }
+          try { copyFileSync(src, resolve(dist, f)); console.log(`  ✓ Copied ${f}`); }
           catch(e) { console.error(`  ✗ ${f}:`, e.message); }
         }
       }
@@ -66,7 +67,7 @@ export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
-    emptyOutDir: true,
+    emptyOutDir: false,
     rollupOptions: { input },
     assetsDir: 'assets/build',
     sourcemap: false,

@@ -42,7 +42,7 @@ if('serviceWorker' in navigator){
 <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"></noscript>
 <link rel="stylesheet" href="app.css?v=19">
 <script src="cookie-consent.js" defer></script>
-<!-- Critical inline CSS for instant splash -->
+<!-- Critical inline CSS for instant splash + MOBILE LAYOUT FIX -->
 <style>
 .app-splash{position:fixed;inset:0;background:#0f1729;display:flex;align-items:center;justify-content:center;z-index:99999;transition:opacity .3s}
 .app-splash-inner{text-align:center}
@@ -50,6 +50,19 @@ if('serviceWorker' in navigator){
 .app-splash-name{font-family:-apple-system,sans-serif;color:#dba550;font-size:1.1rem;font-weight:600;letter-spacing:.02em}
 .app-splash-spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,.08);border-top-color:#4a9e7e;border-radius:50%;animation:appSpin .7s linear infinite;margin:1rem auto 0}
 @keyframes appSpin{to{transform:rotate(360deg)}}
+/* === CRITICAL MOBILE LAYOUT — inline to survive CSS cache issues === */
+@media(max-width:900px){
+  .shell{display:block!important;min-height:0!important;height:auto!important}
+  .main{padding:calc(48px + env(safe-area-inset-top,0px)) .75rem calc(64px + env(safe-area-inset-bottom,0px))!important;box-sizing:border-box!important;width:100%!important;max-height:none!important;overflow-y:visible!important;height:auto!important}
+  .side{transform:translateX(-100%);position:fixed!important;z-index:200!important;top:0!important;left:0!important;bottom:0!important;width:300px!important;height:100vh!important;height:100dvh!important}
+  .side.open{transform:translateX(0)!important}
+  .mobile-header{display:flex!important}
+  .app-version-bar{display:none!important}
+  .bottom-nav{display:flex!important}
+}
+@media(max-width:600px){
+  .main{padding:calc(48px + env(safe-area-inset-top,0px)) .5rem calc(64px + env(safe-area-inset-bottom,0px))!important;max-height:none!important;overflow-y:visible!important;height:auto!important}
+}
 </style>
 </head>
 <body>
