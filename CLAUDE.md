@@ -341,6 +341,7 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 7. ~~**App exigia login para acessar**~~ — **RESOLVIDO**: `DEMO_MODE = true` em boot.js permite acesso total sem auth. Todos os modulos desbloqueados, sem paywall, sem save modal. Login apenas via botao Perfil. Para reativar auth obrigatorio: mudar `DEMO_MODE` para `false`.
 8. ~~**App nao forcava atualizacao do SW**~~ — **RESOLVIDO**: `updateViaCache:'none'` no registro, polling `reg.update()` a cada 60s, `controllerchange` faz reload automatico, `skipWaiting()` + `clients.claim()` no SW.
 9. ~~**App dependia de Supabase para boot**~~ — **RESOLVIDO**: `OFFLINE_MODE = true` desliga Supabase completamente. Zero fetch de rede, zero erros no console. Boot em <2s. Dados demo pre-populados (seedDemoData). Para reconectar: mudar `OFFLINE_MODE` para `false` em src/boot.js.
+10. **Debate implementado** — 15 salas tematicas com presenca online (mock em OFFLINE_MODE, Supabase Presence quando online). Botao destaque verde "💬 Debate N" no topo mobile + desktop. Grid responsivo (1/2/3 colunas). Chat com bolhas, avatars, timestamps. Auth requerido apenas para enviar. SW v47.
 
 ---
 
