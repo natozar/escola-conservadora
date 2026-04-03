@@ -196,31 +196,65 @@ function _renderRoom(room){
 // ============================================================
 // SEND
 // ============================================================
-function sendDebateMsg(){
+async function sendDebateMsg(){
   if(!_isDebateAuthed()){
     if(_currentRoom)_showDebateOfflineLogin(_currentRoom.id);
     else if(typeof window.showLoginPrompt==='function')window.showLoginPrompt('debate');
     return;
   }
-  var input=window._origById?window._origById('debateInput'):document.getElementById('debateInput');
+  var input=window._origById?window._origById('debateInput'):null;
   if(!input)return;
   var text=input.value.trim();
   if(!text||text.length>500)return;
 
-  // Run moderation filter
+  // LAYER 1: Local filter (instant, free)
   if(typeof window.moderateMessage==='function'&&_currentRoom){
-    var mod=window.moderateMessage(text,_currentRoom.id);
-    if(!mod.allowed){
-      if(typeof window._showModToast==='function')window._showModToast(mod.reason,mod.type==='personal_data'?'blocked':mod.type==='rate_limit'?'info':'warning');
+    var localMod=window.moderateMessage(text,_currentRoom.id);
+    if(!localMod.allowed){
+      if(typeof window._showModToast==='function')window._showModToast(localMod.reason,localMod.type==='personal_data'?'blocked':'warning');
       return;
     }
   }
 
+  // LAYER 2: AI moderation (async, with loading indicator)
+  if(typeof window.aiModerateMessage==='function'&&!window.OFFLINE_MODE){
+    // Show typing indicator
+    var indicator=document.createElement('div');
+    indicator.id='debateModIndicator';
+    indicator.className='debate-mod-indicator';
+    indicator.innerHTML='<span class="debate-mod-dots"><span>.</span><span>.</span><span>.</span></span> Verificando mensagem';
+    var msgContainer=window._origById?window._origById('debateMessages'):null;
+    if(msgContainer){msgContainer.appendChild(indicator);msgContainer.scrollTop=msgContainer.scrollHeight}
+    // Disable input during check
+    input.disabled=true;
+
+    try{
+      var aiMod=await window.aiModerateMessage(text,_currentRoom.id);
+      // Remove indicator
+      var ind=document.getElementById('debateModIndicator');if(ind)ind.remove();
+      input.disabled=false;
+
+      if(!aiMod.allowed){
+        if(typeof window._showModToast==='function')window._showModToast(aiMod.reason,aiMod.severity==='strike'?'danger':'warning');
+        // Register strike/warn
+        if(aiMod.severity==='strike'&&typeof window._addStrike==='function')window._addStrike(_currentRoom.id,'moderacao IA',text);
+        input.focus();
+        return;
+      }
+    }catch(e){
+      var ind2=document.getElementById('debateModIndicator');if(ind2)ind2.remove();
+      input.disabled=false;
+      // AI failed — proceed (local filter already passed)
+    }
+  }
+
+  // APPROVED — publish message
   input.value='';
   _addMsg({user_name:window.S.name||'Aluno',user_avatar:window.S.avatar||'🧑‍🎓',text:text,created_at:new Date().toISOString(),is_own:true});
-  if(typeof window.sbClient!=='undefined'&&window.sbClient&&_currentRoom){
+  if(typeof window.sbClient!=='undefined'&&window.sbClient&&_currentRoom&&window.currentUser){
     window.sbClient.from('debate_messages').insert({room_id:_currentRoom.id,user_id:window.currentUser.id,user_name:window.S.name||'Aluno',user_avatar:window.S.avatar||'🧑‍🎓',text:text}).then(function(r){if(r.error)console.warn('[Debate]',r.error.message)});
   }
+  input.focus();
 }
 
 // ============================================================

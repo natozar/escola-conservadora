@@ -308,9 +308,49 @@ window.setDebateDisabled=setDebateDisabled;
 window.getRulesBannerHtml=getRulesBannerHtml;
 window._isSuspended=_isSuspended;
 window._showModToast=_showModToast;
+window._addStrike=_addStrike;
 
-// TODO: When OFFLINE_MODE=false, sync strikes to Supabase
-// async function syncStrikes() { if(!sbClient||!currentUser)return; ... }
-// TODO: Server-side moderation via Edge Function with AI
-// async function aiModerate(text, roomId) { ... }
+// ============================================================
+// AI MODERATION — Edge Function with Claude Haiku
+// ============================================================
+async function aiModerateMessage(text,roomId){
+  // Skip AI in OFFLINE_MODE (local filter is enough)
+  if(window.OFFLINE_MODE)return{allowed:true,reason:'',severity:'ok'};
+  // Skip if no Supabase
+  if(typeof window.sbClient==='undefined'||!window.sbClient)return{allowed:true,reason:'',severity:'ok'};
+
+  var controller=new AbortController();
+  var timeout=setTimeout(function(){controller.abort()},5000);
+
+  try{
+    var room=window.DEBATE_ROOMS&&window.DEBATE_ROOMS.find(function(r){return r.id===roomId});
+    var roomName=room?room.name:roomId;
+    var userName=window.S&&window.S.name?window.S.name:'Aluno';
+    var SUPABASE_URL='https://hwjplecfqsckfiwxiedo.supabase.co';
+    var SUPABASE_KEY='sb_publishable_-_ZYfPPllImPNCKOA1ZMXQ_zYYM-P6q';
+
+    var headers={'Content-Type':'application/json','apikey':SUPABASE_KEY};
+    try{
+      var sess=await window.sbClient.auth.getSession();
+      if(sess&&sess.data&&sess.data.session)headers['Authorization']='Bearer '+sess.data.session.access_token;
+    }catch(e){}
+
+    var res=await fetch(SUPABASE_URL+'/functions/v1/moderate-debate',{
+      method:'POST',
+      headers:headers,
+      body:JSON.stringify({message:text,room_id:roomId,room_name:roomName,user_name:userName}),
+      signal:controller.signal
+    });
+    clearTimeout(timeout);
+    if(!res.ok){console.warn('[AI Mod] HTTP',res.status);return{allowed:true,reason:'',severity:'ok',fallback:true}}
+    return await res.json();
+  }catch(err){
+    clearTimeout(timeout);
+    if(err.name==='AbortError')console.warn('[AI Mod] timeout');
+    else console.warn('[AI Mod]',err.message);
+    return{allowed:true,reason:'',severity:'ok',fallback:true};
+  }
+}
+window.aiModerateMessage=aiModerateMessage;
+
 // TODO: Supabase table: moderation_log (id, user_id, room_id, action, reason, message_preview, created_at)
