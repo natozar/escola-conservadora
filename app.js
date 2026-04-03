@@ -1136,7 +1136,11 @@ function hideAllViews(){
   document.getElementById('vExamPrep').classList.remove('on');
   document.getElementById('vAulas').style.display='none';
   document.getElementById('focusBtn').classList.remove('always');
-  stopTTS()
+  stopTTS();
+  // Reset scroll so next view starts at top (critical for mobile)
+  var mainEl=document.querySelector('.main');
+  if(mainEl)mainEl.scrollTop=0;
+  window.scrollTo(0,0);
 }
 
 // ============================================================

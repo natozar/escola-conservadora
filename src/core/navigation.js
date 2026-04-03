@@ -177,7 +177,11 @@ function hideAllViews(){
   // Restore tutor FAB (hidden when in debate)
   var chatFab=window._origById?window._origById('chatFab'):null;
   if(chatFab)chatFab.style.display='';
-  window.stopTTS()
+  window.stopTTS();
+  // Reset scroll so next view starts at top (critical for mobile)
+  var mainEl=document.querySelector('.main');
+  if(mainEl)mainEl.scrollTop=0;
+  window.scrollTo(0,0);
 }
 
 // ============================================================
