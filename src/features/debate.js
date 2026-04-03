@@ -44,6 +44,16 @@ _updateTotalOnline();
 // NAVIGATION
 // ============================================================
 function goDebate(){
+  // Check if debate is disabled by parent
+  if(typeof window.isDebateDisabled==='function'&&window.isDebateDisabled()){
+    if(typeof window.toast==='function')window.toast('Debate desativado pelo responsavel.','error');
+    return;
+  }
+  // Check LGPD consent
+  if(typeof window.showDebateConsent==='function'&&!window.hasDebateConsent()){
+    window.showDebateConsent(function(){goDebate()});
+    return;
+  }
   window.hideAllViews();
   var view = document.getElementById('vDebate');
   if(!view){
@@ -113,7 +123,12 @@ function _renderRoom(room){
   var isLoggedIn=typeof window.currentUser!=='undefined'&&window.currentUser;
   var ph=isLoggedIn?'Escreva sua opiniao...':'🔒 Faca login para participar';
 
-  view.innerHTML='<div class="debate-room-bar" style="--room-color:'+room.color+'">'
+  // Check suspension status for input
+  var susp=typeof window._isSuspended==='function'?window._isSuspended():{suspended:false};
+  if(susp.suspended){ph=susp.msg;isLoggedIn=false}// Force readonly if suspended
+  var rulesBanner=typeof window.getRulesBannerHtml==='function'?window.getRulesBannerHtml():'';
+
+  view.innerHTML=rulesBanner+'<div class="debate-room-bar" style="--room-color:'+room.color+'">'
     +'<div class="debate-room-bar-info">'
     +'<span class="debate-room-bar-icon" style="color:'+room.color+'">'+room.icon+'</span>'
     +'<div><div class="debate-room-bar-name">'+room.name+'</div>'
@@ -141,6 +156,16 @@ function sendDebateMsg(){
   if(!input)return;
   var text=input.value.trim();
   if(!text||text.length>500)return;
+
+  // Run moderation filter
+  if(typeof window.moderateMessage==='function'&&_currentRoom){
+    var mod=window.moderateMessage(text,_currentRoom.id);
+    if(!mod.allowed){
+      if(typeof window._showModToast==='function')window._showModToast(mod.reason,mod.type==='personal_data'?'blocked':mod.type==='rate_limit'?'info':'warning');
+      return;
+    }
+  }
+
   input.value='';
   _addMsg({user_name:window.S.name||'Aluno',user_avatar:window.S.avatar||'🧑‍🎓',text:text,created_at:new Date().toISOString(),is_own:true});
   if(typeof window.sbClient!=='undefined'&&window.sbClient&&_currentRoom){

@@ -36,6 +36,7 @@ import './features/spaced-repetition.js';
 import './features/study-plan.js';
 import './features/investment-game.js';
 import './features/backup.js';
+import './features/moderation.js'; // debate moderation (content filter, strikes, LGPD)
 import './features/debate.js';    // debate ao vivo (Supabase Realtime)
 
 // Phase 5: Navigation (depends on features for goDash calls)

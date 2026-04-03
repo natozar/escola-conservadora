@@ -1119,6 +1119,16 @@ body{overscroll-behavior-y:contain}
 .debate-input[readonly]{cursor:pointer;opacity:.65}
 .debate-send-btn{width:40px;height:40px;border-radius:50%;color:#fff;border:none;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s;box-shadow:0 2px 8px rgba(0,0,0,.12)}
 .debate-send-btn:active{transform:scale(.88)}
+/* Moderation */
+.debate-rules-banner{background:var(--honey-muted,#fef3c7);color:var(--honey,#92400e);padding:6px 10px;font-size:.72rem;text-align:center;border-bottom:1px solid rgba(219,165,80,.3);position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:.5rem;border-radius:var(--r-sm) var(--r-sm) 0 0;line-height:1.4}
+.mod-toast{position:fixed;bottom:calc(80px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);padding:10px 18px;border-radius:12px;font-size:.82rem;font-weight:600;z-index:9999;animation:modIn .3s ease;max-width:90vw;text-align:center}
+@keyframes modIn{from{opacity:0;transform:translateX(-50%) translateY(20px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+.mod-toast.warning{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.mod-toast.danger{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
+.mod-toast.info{background:#dbeafe;color:#1e40af;border:1px solid #93c5fd}
+.mod-toast.blocked{background:#fce7f3;color:#9d174d;border:1px solid #f9a8d4}
+.debate-consent-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.debate-consent-modal{background:var(--bg-card);color:var(--text-primary);border-radius:var(--r-xl);padding:1.5rem;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
 
 /* ========== SWIPE INDICATOR ========== */
 .swipe-hint{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--bg-card);border:1px solid var(--border);padding:.4rem 1rem;border-radius:var(--r-full);font-size:.72rem;color:var(--text-muted);z-index:200;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}

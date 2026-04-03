@@ -166,6 +166,42 @@ function openParentDash(){
     </div>`;
   });
   document.getElementById('parentCards').innerHTML=cardsHtml;
+
+  // Debate moderation section
+  var debateHtml='<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)">'
+    +'<h3 style="font-size:1rem;margin-bottom:.75rem">💬 Debate — Controle Parental</h3>';
+  var strikes=typeof window.getDebateStrikes==='function'?window.getDebateStrikes():{strikes:0,history:[]};
+  var disabled=typeof window.isDebateDisabled==='function'&&window.isDebateDisabled();
+  debateHtml+='<div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem">'
+    +'<div class="pc-stat-box"><div class="pc-stat-val" style="color:'+(strikes.strikes>=3?'var(--coral)':'var(--sage)')+'">'+strikes.strikes+'</div><div class="pc-stat-lbl">Strikes</div></div>'
+    +'<div class="pc-stat-box"><div class="pc-stat-val">'+(strikes.banned?'🚫':strikes.suspended_until?'⏸':'✓')+'</div><div class="pc-stat-lbl">'+(strikes.banned?'Banido':strikes.suspended_until?'Suspenso':'Ativo')+'</div></div>'
+    +'</div>';
+  // History
+  if(strikes.history&&strikes.history.length>0){
+    debateHtml+='<details style="margin-bottom:.75rem"><summary style="font-size:.82rem;cursor:pointer;color:var(--text-muted)">Historico de infracoes ('+strikes.history.length+')</summary>'
+      +'<div style="margin-top:.5rem;font-size:.75rem">';
+    strikes.history.slice(-10).reverse().forEach(function(h){
+      debateHtml+='<div style="padding:.3rem 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-muted)">'+new Date(h.date).toLocaleDateString('pt-BR')+'</span> · <span style="color:var(--coral)">'+h.reason+'</span> · <em>'+h.msg+'</em></div>';
+    });
+    debateHtml+='</div></details>';
+  }
+  // Sent messages
+  var sentLog=typeof window.getDebateSentLog==='function'?window.getDebateSentLog():[];
+  if(sentLog.length>0){
+    debateHtml+='<details style="margin-bottom:.75rem"><summary style="font-size:.82rem;cursor:pointer;color:var(--text-muted)">Ultimas mensagens enviadas ('+sentLog.length+')</summary>'
+      +'<div style="margin-top:.5rem;font-size:.75rem">';
+    sentLog.slice(-20).reverse().forEach(function(m){
+      debateHtml+='<div style="padding:.3rem 0;border-bottom:1px solid var(--border)"><span style="color:var(--text-muted)">'+new Date(m.date).toLocaleDateString('pt-BR')+'</span> · <span>['+m.room+']</span> '+m.text+'</div>';
+    });
+    debateHtml+='</div></details>';
+  }
+  // Controls
+  debateHtml+='<div style="display:flex;gap:.5rem;flex-wrap:wrap">';
+  if(strikes.strikes>0)debateHtml+='<button class="btn btn-ghost" style="font-size:.78rem" onclick="resetDebateStrikes();openParentDash()">↺ Resetar Strikes</button>';
+  debateHtml+='<button class="btn btn-ghost" style="font-size:.78rem" onclick="setDebateDisabled('+(disabled?'false':'true')+');openParentDash()">'+(disabled?'✓ Reativar Debate':'✕ Desativar Debate')+'</button>';
+  debateHtml+='</div></div>';
+  document.getElementById('parentCards').innerHTML+=debateHtml;
+
   document.getElementById('parentDetail').innerHTML='';
 }
 
