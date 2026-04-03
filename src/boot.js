@@ -87,12 +87,21 @@ if('serviceWorker' in navigator){
 window.addEventListener('popstate',function(e){
   var s=e.state;
   if(!s||!s.view){window.goDash();return}
-  if(s.view==='mod'&&window.M[s.mod])window.goMod(s.mod);
-  else if(s.view==='lesson'&&window.M[s.mod]&&window.M[s.mod].lessons[s.les])window.openL(s.mod,s.les);
-  else if(s.view==='leaderboard'&&typeof window.goLeaderboard==='function')window.goLeaderboard();
-  else if(s.view==='studyplan'&&typeof window.goStudyPlan==='function')window.goStudyPlan();
-  else if(s.view==='debate'&&typeof window.goDebate==='function')window.goDebate();
-  else window.goDash();
+  switch(s.view){
+    case'dash':window.goDash();break;
+    case'mod':if(window.M[s.mod])window.goMod(s.mod);else window.goDash();break;
+    case'lesson':if(window.M[s.mod]&&window.M[s.mod].lessons&&window.M[s.mod].lessons[s.les])window.openL(s.mod,s.les);else window.goDash();break;
+    case'glossary':if(typeof window.goGlossary==='function')window.goGlossary();else window.goDash();break;
+    case'flashcards':if(typeof window.goFlashcards==='function')window.goFlashcards();else window.goDash();break;
+    case'perf':if(typeof window.goPerf==='function')window.goPerf();else window.goDash();break;
+    case'badges':if(typeof window.goBadges==='function')window.goBadges();else window.goDash();break;
+    case'studyplan':if(typeof window.goStudyPlan==='function')window.goStudyPlan();else window.goDash();break;
+    case'game':if(typeof window.goGame==='function')window.goGame();else window.goDash();break;
+    case'leaderboard':if(typeof window.goLeaderboard==='function')window.goLeaderboard();else window.goDash();break;
+    case'debate':if(typeof window.goDebate==='function')window.goDebate();else window.goDash();break;
+    case'debateroom':if(typeof window.goDebateRoom==='function'&&s.room)window.goDebateRoom(s.room);else window.goDash();break;
+    default:window.goDash();
+  }
 });
 
 // ============================================================

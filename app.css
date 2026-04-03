@@ -78,8 +78,8 @@ h1,h2,h3{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-heigh
 .mc-fill.active,.xp-bar.active,.dg-bar-fill.active{background-size:200% 100%;background-image:linear-gradient(90deg,var(--sage),var(--sage-light),var(--sage));animation:progressShimmer 2s linear infinite}
 
 /* ========== LAYOUT ========== */
-.shell{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:100vh;min-height:100dvh}
-@media(max-width:900px){.shell{grid-template-columns:1fr}.side{transform:translateX(-100%);transition:transform .3s var(--ease);position:fixed;z-index:200;inset:0;width:300px;box-shadow:none}.side.open{transform:translateX(0);box-shadow:8px 0 32px rgba(0,0,0,.3)}}
+.shell{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:100vh;min-height:100dvh;align-items:start}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.side{transform:translateX(-100%);transition:transform .3s var(--ease);position:fixed;z-index:200;top:0;left:0;bottom:0;width:300px;height:100vh;height:100dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;box-shadow:none}.side.open{transform:translateX(0);box-shadow:8px 0 24px rgba(0,0,0,.3)}}
 /* Sidebar scrim overlay */
 .side-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:199;opacity:0;transition:opacity .3s var(--ease)}
 .side-scrim.show{display:block;opacity:1}
@@ -98,7 +98,10 @@ h1,h2,h3{font-family:'DM Serif Display',Georgia,serif;font-weight:400;line-heigh
 @media(min-width:901px){.rail-toggle{display:flex}}
 
 /* ========== SIDEBAR ========== */
-.side{background:var(--bg-secondary);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:1.25rem;overflow-y:auto}
+.side{background:var(--bg-secondary);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:1.25rem;overflow-y:auto;overflow-x:hidden;height:100vh;height:100dvh;position:sticky;top:0;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--scrollbar-thumb) transparent}
+.side::-webkit-scrollbar{width:6px}
+.side::-webkit-scrollbar-track{background:transparent}
+.side::-webkit-scrollbar-thumb{background:var(--scrollbar-thumb);border-radius:3px}
 .side-logo{display:flex;align-items:center;gap:.6rem;margin-bottom:1.75rem;text-decoration:none;color:var(--text-primary)}
 .side-mark{width:30px;height:30px;background:linear-gradient(135deg,var(--sage),var(--sage-light));border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:.8rem;color:#fff}
 .side-name{font-family:'DM Serif Display',serif;font-size:.9rem}
@@ -147,13 +150,13 @@ a.profile-row:hover{background:var(--bg-hover)}
 .disc-arrow{font-size:.65rem;color:var(--text-muted);transition:transform .2s;margin-left:.25rem}
 .disc-group.open .disc-arrow{transform:rotate(90deg)}
 .disc-group-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.disc-group.open .disc-group-body{max-height:600px}
+.disc-group.open .disc-group-body{max-height:2000px}
 .disc-group-body .ni{padding-left:1.25rem}
 
 .side-bottom{margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)}
 
 /* ========== MAIN ========== */
-.main{padding:calc(2rem + 28px) 2rem 2rem;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;max-height:100vh;max-height:100dvh;box-sizing:border-box}
+.main{padding:calc(2rem + 28px) 2rem 2rem;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;max-height:100vh;max-height:100dvh;box-sizing:border-box;overscroll-behavior-y:contain}
 .mobile-bar{display:none;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
 @media(max-width:900px){.mobile-bar{display:flex}}
 .menu-btn{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text-secondary);padding:.45rem .75rem;cursor:pointer;font-size:.85rem;font-family:'DM Sans',sans-serif}
@@ -545,7 +548,7 @@ body.focus-mode .mobile-bar{display:none !important}
 .ob-age-btn.active,.ob-lang-btn.active{border-color:var(--sage);background:var(--sage-subtle);box-shadow:0 0 0 3px var(--sage-muted)}
 .side-section{overflow:hidden;transition:max-height .3s ease}
 .side-section.collapsed{max-height:0}
-.side-section:not(.collapsed){max-height:600px}
+.side-section:not(.collapsed){max-height:2000px}
 .side-label-toggle{display:flex;justify-content:space-between;align-items:center;user-select:none}
 .side-label-toggle span{transition:transform .3s}
 .side-label-toggle .rotated{transform:rotate(90deg)}
