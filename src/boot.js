@@ -114,26 +114,8 @@ window.addEventListener('offline',function(){showSyncStatus('offline','Offline �
 // PROFILE NAVIGATION
 // ============================================================
 function handleProfileNav(){
-  if(OFFLINE_MODE){
-    // Modo apresentacao — mostrar modal informativo
-    var overlay=document.createElement('div');
-    overlay.id='offlineProfileModal';
-    overlay.className='save-modal-overlay';
-    overlay.onclick=function(e){if(e.target===overlay)overlay.remove()};
-    overlay.innerHTML='<div class="save-modal" style="max-width:340px;padding:2rem 1.5rem;text-align:center">'
-      +'<div style="font-size:2.5rem;margin-bottom:.75rem">🏛️</div>'
-      +'<h2 style="font-size:1.15rem;margin-bottom:.5rem">Modo Apresentacao</h2>'
-      +'<p style="color:var(--text-muted);font-size:.85rem;margin-bottom:1.25rem;line-height:1.6">Login desabilitado nesta versao de demonstracao. O progresso e salvo localmente neste dispositivo.</p>'
-      +'<button class="btn btn-sage" style="width:100%" onclick="document.getElementById(\'offlineProfileModal\').remove()">OK</button>'
-      +'</div>';
-    document.body.appendChild(overlay);
-    return;
-  }
-  if(typeof window.currentUser!=='undefined'&&window.currentUser){
-    location.href='perfil.html';
-  } else {
-    showLoginPrompt('perfil');
-  }
+  // Always go to perfil.html — it handles logged in/out states internally
+  location.href='perfil.html';
 }
 window.handleProfileNav=handleProfileNav;
 
