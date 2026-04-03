@@ -138,11 +138,13 @@ if('serviceWorker' in navigator){
 function goAulasTab(){
   window.hideAllViews();
   document.getElementById('vAulas').style.display='block';
+  try{history.pushState({view:'aulas'},'')}catch(e){}
   updateBottomNav('mod');
   updateMobileHeader('Disciplinas',false);
   _mobileBackFn=null;
   renderDiscGrid();
   closeSideMobile();
+  window.setNav('nDisc');
 }
 
 function renderDiscGrid(){
