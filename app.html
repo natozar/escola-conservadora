@@ -265,9 +265,12 @@ if('serviceWorker' in navigator){
       <div><div class="ni-txt">Plano de Estudos</div><div class="ni-sub">Recomendações personalizadas</div></div>
     </div>
 
-    <!-- Módulos gerados dinamicamente por buildSidebar() — accordion por disciplina -->
-    <div class="side-label" style="margin-top:.75rem">Disciplinas</div>
-    <div id="modNav"></div>
+    <!-- Disciplinas — single link, modules render in main area -->
+    <div class="ni" onclick="goDiscView()" id="nDisc" role="button" tabindex="0" style="margin-top:.75rem">
+      <div class="ni-icon" style="background:var(--sage-muted);color:var(--sage)">📚</div>
+      <div><div class="ni-txt">Disciplinas</div><div class="ni-sub" id="discSubtitle">21 disciplinas</div></div>
+    </div>
+    <div id="modNav" style="display:none"></div>
 
     <!-- GRUPO 2: Ferramentas (colapsável, aberto por padrão) -->
     <div class="side-label side-label-toggle" style="margin-top:1rem;cursor:pointer" onclick="toggleSideSection('toolsSection')">Ferramentas <span id="toolsArrow">▾</span></div>

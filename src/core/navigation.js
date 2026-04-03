@@ -22,6 +22,8 @@ function renderBackLink(containerId,label,fn){
 function goDash(){
   const S=window.S;const M=window.M;
   window.hideAllViews();window.clearDiscAccent();
+  // Restore original dashboard HTML if goDiscView() overwrote it
+  if(typeof window.restoreDash==='function')window.restoreDash();
   const vd=window._origById('vDash');
   if(!vd)return;
   vd.style.display='block';vd.classList.add('view-enter');
