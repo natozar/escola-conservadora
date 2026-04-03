@@ -55,12 +55,14 @@ function goDebate(){
     return;
   }
   window.hideAllViews();
-  var view = document.getElementById('vDebate');
+  // Use _origById to bypass Safe DOM proxy (which returns truthy proxy instead of null)
+  var view = window._origById?window._origById('vDebate'):document.getElementById('vDebate');
   if(!view){
     view = document.createElement('div');
     view.className='xview';
     view.id='vDebate';
-    document.getElementById('mainC').appendChild(view);
+    var mainC=window._origById?window._origById('mainC'):document.getElementById('mainC');
+    if(mainC)mainC.appendChild(view);
   }
   view.classList.add('on','view-enter');
   setTimeout(function(){view.classList.remove('view-enter')},350);
@@ -75,7 +77,7 @@ function goDebateRoom(roomId){
   if(!room)return;
   _currentRoom=room;
   _debateMessages=[];
-  var view=document.getElementById('vDebate');
+  var view=window._origById?window._origById('vDebate'):document.getElementById('vDebate');
   if(!view)return;
   _renderRoom(room);
   _subscribeRoom(roomId);
@@ -86,7 +88,7 @@ function goDebateRoom(roomId){
 // RENDER — Room list
 // ============================================================
 function _renderRoomList(){
-  var view=document.getElementById('vDebate');
+  var view=window._origById?window._origById('vDebate'):document.getElementById('vDebate');
   var totalOnline=DEBATE_ROOMS.reduce(function(s,r){return s+r.online},0);
 
   var html='<div class="debate-list-header">'
@@ -119,7 +121,7 @@ function _renderRoomList(){
 // RENDER — Room chat
 // ============================================================
 function _renderRoom(room){
-  var view=document.getElementById('vDebate');
+  var view=window._origById?window._origById('vDebate'):document.getElementById('vDebate');
   var isLoggedIn=typeof window.currentUser!=='undefined'&&window.currentUser;
   var ph=isLoggedIn?'Escreva sua opiniao...':'🔒 Faca login para participar';
 
@@ -152,7 +154,7 @@ function _renderRoom(room){
 // ============================================================
 function sendDebateMsg(){
   if(!window.currentUser){window.showLoginPrompt('debate');return}
-  var input=document.getElementById('debateInput');
+  var input=window._origById?window._origById('debateInput'):document.getElementById('debateInput');
   if(!input)return;
   var text=input.value.trim();
   if(!text||text.length>500)return;
@@ -194,7 +196,7 @@ function _subscribeRoom(roomId){
 function _addMsg(msg){
   _debateMessages.push(msg);
   if(_debateMessages.length>200)_debateMessages.shift();
-  var c=document.getElementById('debateMessages');if(!c)return;
+  var c=window._origById?window._origById('debateMessages'):document.getElementById('debateMessages');if(!c)return;
   var ld=c.querySelector('.debate-chat-loading');if(ld)ld.remove();
   var d=document.createElement('div');
   d.className='debate-bubble'+(msg.is_own?' debate-bubble-own':'');
@@ -206,7 +208,7 @@ function _addMsg(msg){
   c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
 function _renderMsgs(){
-  var c=document.getElementById('debateMessages');if(!c)return;c.innerHTML='';
+  var c=window._origById?window._origById('debateMessages'):document.getElementById('debateMessages');if(!c)return;c.innerHTML='';
   if(!_debateMessages.length){c.innerHTML='<div class="debate-chat-empty"><div style="font-size:2.5rem;margin-bottom:.5rem">💬</div>Nenhuma mensagem ainda.<br>Seja o primeiro!</div>';return}
   _debateMessages.forEach(function(m){_addMsg(m)});
 }
