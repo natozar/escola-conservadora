@@ -1240,6 +1240,7 @@ let obAgeGroup='';
 let obLangPref='pt';
 function initOnboard(){
   if(S.name!=='Aluno'){document.getElementById('onboard').style.display='none';return}
+  if(window.DEMO_MODE){document.getElementById('onboard').style.display='none';return}
   document.getElementById('obAvatars').innerHTML=AVATARS.map((a,i)=>
     `<div class="onboard-av${i===0?' selected':''}" onclick="selectAvatar('${a}',this)">${a}</div>`
   ).join('');

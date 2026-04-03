@@ -196,8 +196,8 @@ export async function boot(){
   window.streak();
   window.initOnboard();
 
-  // OFFLINE/DEMO: go straight to dashboard — no auth wait
-  if(window.S.name!=='Aluno'){
+  // Go straight to dashboard — no auth wait
+  if(window.DEMO_MODE || window.S.name!=='Aluno'){
     document.getElementById('onboard').style.display='none';
     window.goDash();
   }

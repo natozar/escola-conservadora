@@ -11,6 +11,11 @@ function initOnboard(){
     document.getElementById('onboard').style.display='none';
     return;
   }
+  // DEMO_MODE: auto-skip onboarding — go straight to dashboard
+  if(window.DEMO_MODE){
+    document.getElementById('onboard').style.display='none';
+    return;
+  }
   // Render avatar picker
   document.getElementById('obAvatars').innerHTML=AVATARS.map((a,i)=>
     `<div class="onboard-av${i===0?' selected':''}" onclick="selectAvatar('${a}',this)">${a}</div>`
