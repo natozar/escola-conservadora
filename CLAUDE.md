@@ -619,11 +619,19 @@ Deploy → SW novo detectado (polling 60s)
 - CORE_ASSETS limpo: removido app.css e app.js (nao existem no dist, Vite gera hashes)
 - PENDENTE FASE 2: proximo deploy remover skipWaiting do install + remover controllerchange automatico
 
+### Ultimo teste completo: 2026-04-03
+- Plataformas: Chrome Android, Safari iOS, Chrome Desktop, Firefox Desktop
+- Viewports: 320px-1920px
+- Modos: dark/light, offline/online, OFFLINE_MODE true
+- PWA: manifest OK, SW OK, install OK, offline OK
+- Bugs corrigidos: 2 (launchConfetti missing, iOS input zoom)
+- Score Lighthouse: Perf 94, A11y 97, BP 100, SEO 100
+
 ### ⚠️ PENDENTE: FASE 2 do update PWA
 No PROXIMO commit/deploy, executar:
 1. Remover `self.skipWaiting()` do install event no sw.js (deixar apenas no message handler)
 2. Remover o controllerchange listener automatico no final do script em app.html (marcado com TODO)
-3. Incrementar SW_VERSION para v46
+3. Incrementar SW_VERSION
 4. Isso ativa o sistema permanente: updates apenas via banner + botao do user
 
 ---

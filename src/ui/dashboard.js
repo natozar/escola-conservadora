@@ -382,3 +382,26 @@ window.getTodayLessons=getTodayLessons;
 window.renderDailyGoal=renderDailyGoal;
 window.changeDailyGoal=changeDailyGoal;
 window.enhanceAria=enhanceAria;
+
+// ============================================================
+// CONFETTI (was missing from module extraction)
+// ============================================================
+function launchConfetti(){
+  var c=document.createElement('div');c.className='confetti-container';
+  var colors=['#4a9e7e','#dba550','#e07460','#5b9bd5','#9b7ed8','#5bd59b','#f0d078'];
+  for(var i=0;i<60;i++){
+    var p=document.createElement('div');p.className='confetti-piece';
+    p.style.left=Math.random()*100+'%';
+    p.style.background=colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDelay=Math.random()*1.5+'s';
+    p.style.animationDuration=(2+Math.random()*2)+'s';
+    p.style.width=(6+Math.random()*8)+'px';
+    p.style.height=(6+Math.random()*8)+'px';
+    p.style.borderRadius=Math.random()>.5?'50%':'2px';
+    p.style.transform='rotate('+Math.random()*360+'deg)';
+    c.appendChild(p);
+  }
+  document.body.appendChild(c);
+  setTimeout(function(){c.remove()},4000);
+}
+window.launchConfetti=launchConfetti;
