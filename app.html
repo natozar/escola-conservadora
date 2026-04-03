@@ -7,16 +7,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0f1729">
 <script>
-// Force SW update on page load — runs BEFORE anything else.
-// This ensures devices with old cached SW get the new version.
+// Force SW update on page load — aggressive auto-update.
 if('serviceWorker' in navigator){
   navigator.serviceWorker.getRegistration().then(function(reg){
-    if(reg){
-      reg.update().then(function(){
-        // If there's a waiting worker, activate it immediately
-        if(reg.waiting){reg.waiting.postMessage({type:'SKIP_WAITING'})}
-      }).catch(function(){});
-    }
+    if(!reg)return;
+    function skipWait(w){if(w)w.postMessage({type:'SKIP_WAITING'})}
+    // 1. Already waiting from previous visit? Skip now.
+    if(reg.waiting){skipWait(reg.waiting);return}
+    // 2. Trigger update check
+    reg.update().catch(function(){});
+    // 3. When new SW installs, auto-skip (don't wait for user)
+    reg.addEventListener('updatefound',function(){
+      var nw=reg.installing;if(!nw)return;
+      nw.addEventListener('statechange',function(){
+        if(nw.state==='installed'&&navigator.serviceWorker.controller)skipWait(nw);
+      });
+    });
   });
 }
 </script>
