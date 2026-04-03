@@ -295,9 +295,9 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 | Plano | Preço | Price ID | Acesso |
 |-------|-------|----------|--------|
 | free | R$0 | — | 2 módulos, 20 aulas, quiz básico |
-| mensal | R$29,90/mês | price_1TEZ923hFZmDmgU4CNzKGG3B | 6 módulos, 60 aulas |
-| anual | R$19,90/mês | price_1TEZAz3hFZmDmgU4ZJMJrsVT | Tudo (cobrado R$238,80/ano) |
-| vitalício | R$497 | price_1TEZBj3hFZmDmgU4aYOfHYhy | Acesso permanente |
+| mensal | R$29,90/mês | [STRIPE_PRICE_MENSAL] | 6 módulos, 60 aulas |
+| anual | R$19,90/mês | [STRIPE_PRICE_ANUAL] | Tudo (cobrado R$238,80/ano) |
+| vitalício | R$497 | [STRIPE_PRICE_VITALICIO] | Acesso permanente |
 
 ### Fluxo de pagamento
 1. `handleCheckout(planId)` → chama Edge Function `/functions/v1/create-checkout`
@@ -349,7 +349,7 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 Quando `OFFLINE_MODE = true` (src/boot.js):
 - Supabase SDK NAO e carregado (zero scripts CDN)
 - Stripe NAO e carregado
-- Zero chamadas de rede para hwjplecfqsckfiwxiedo.supabase.co
+- Zero chamadas de rede para [SUPABASE_HOST]
 - Zero erros/warnings no console
 - Tudo funciona com localStorage puro
 - `seedDemoData()` popula dados na primeira visita (750 XP, 15 aulas, streak 7)
@@ -533,7 +533,7 @@ Deploy → SW novo detectado (polling 60s)
 - Correção jurídica completa: LGPD menores, direitos autorais, metodologias, citações
 - Sistema de 26 agentes IA em `.agents/`
 - Admin panel: PWA, geografia por estado, instalações, impacto educacional, modo apresentação
-- Auth PIN no admin (110108), removido login Supabase/Google
+- Auth PIN no admin ([ADMIN_PIN]), removido login Supabase/Google
 - Coleta de estado (UF) no onboarding (novo step 3)
 - Performance: GPU hints CSS, defer boot, Vite CSS minify
 - 7 bugs auth/navegação corrigidos
@@ -630,7 +630,7 @@ No PROXIMO commit/deploy, executar:
 
 ### Acesso
 - **URL:** `escolaliberal.com.br/admin.html`
-- **Auth:** PIN `110108` (sessionStorage, bloqueia após 5 tentativas)
+- **Auth:** PIN `[ADMIN_PIN]` (sessionStorage, bloqueia após 5 tentativas)
 - **PWA:** manifest-admin.json separado (tema gold #d4a843, ícone escudo)
 
 ### Abas

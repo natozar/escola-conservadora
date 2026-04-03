@@ -53,4 +53,43 @@ dev-debug.log
 
 # Task files
 # tasks.json
-# tasks/ 
+# tasks/
+
+# === SEGURANCA — Arquivos internos (nao publicar) ===
+SECURITY-AUDIT.md
+PROGRESS.md
+SETUP.md
+*.local.md
+
+# Admin panels (protegidos por PIN, nao precisam estar no Pages publico)
+admin-stripe.html
+admin-stripe-MSI.html
+
+# Edge Functions duplicadas na raiz
+/create-checkout.ts
+/stripe-webhook.ts
+
+# Agentes IA internos
+.agents/
+
+# Scripts de geracao/automacao
+scripts/
+
+# Migrations SQL (executar manualmente no Supabase)
+supabase/migrations/
+
+# Taskmaster
+.taskmaster/
+
+# Claude Code config
+.claude/
+
+# QA artifacts
+qa/test-results/
+qa/playwright-report/
+
+# Screenshots locais
+screenshots/
+
+# Arquivos Windows
+NUL

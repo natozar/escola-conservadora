@@ -4,8 +4,9 @@ import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync, cpSync
 import { execSync } from 'child_process';
 import { minify } from 'terser';
 
-// Collect all HTML entry points
-const htmlFiles = readdirSync('.').filter(f => f.endsWith('.html'));
+// Collect HTML entry points (exclude admin panels from public deploy)
+const EXCLUDE_HTML = ['admin-stripe.html', 'admin-stripe-MSI.html'];
+const htmlFiles = readdirSync('.').filter(f => f.endsWith('.html') && !EXCLUDE_HTML.includes(f));
 const input = {};
 htmlFiles.forEach(f => { input[f.replace('.html', '')] = resolve(__dirname, f); });
 
@@ -43,10 +44,7 @@ function minifyLegacyJS() {
         execSync(`xcopy /E /I /Y /Q "${resolve(root, 'assets')}" "${resolve(dist, 'assets')}"`, { stdio: 'pipe' });
         console.log('  ✓ Copied assets/');
       } catch(e) { console.error('  ✗ assets:', e.message); }
-      try {
-        execSync(`xcopy /E /I /Y /Q "${resolve(root, 'supabase')}" "${resolve(dist, 'supabase')}"`, { stdio: 'pipe' });
-        console.log('  ✓ Copied supabase/');
-      } catch(e) { console.error('  ✗ supabase:', e.message); }
+      // supabase/ NOT copied to dist (migrations/functions are not public assets)
       try {
         execSync(`xcopy /E /I /Y /Q "${resolve(root, 'blog')}" "${resolve(dist, 'blog')}"`, { stdio: 'pipe' });
         console.log('  ✓ Copied blog/');

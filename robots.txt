@@ -11,6 +11,7 @@ Allow: /blog.html
 Allow: /blog/
 Disallow: /app.html
 Disallow: /admin.html
+Disallow: /admin-stripe
 Disallow: /auth.html
 Disallow: /perfil.html
 Disallow: /admin-stripe.html
@@ -23,6 +24,8 @@ Disallow: /stripe-webhook.ts
 Disallow: /create-checkout.ts
 Disallow: /lessons.json
 Disallow: /supabase/
+Disallow: /CLAUDE.md
+Disallow: /SECURITY-AUDIT.md
 
 # Googlebot específico — permitir crawl de imagens
 User-agent: Googlebot
