@@ -32,7 +32,7 @@ function initSupabase() {
 
   // Listener de mudança de auth
   sbClient.auth.onAuthStateChange((event, session) => {
-    if (event === 'SIGNED_IN' && session?.user) {
+    if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED') && session?.user) {
       currentUser = session.user;
       syncEnabled = true;
       onSignIn(session.user).catch(e => console.warn('[Supabase] Erro em onSignIn:', e.message));
@@ -100,10 +100,14 @@ async function signInEmail(email, password) {
 // ========== AUTH: GOOGLE ==========
 async function signInGoogle() {
   try {
+    // Redirect to auth.html (not app.html) — auth.html loads SDK synchronously
+    // and has a dedicated onAuthStateChange listener that redirects to app.html.
+    // This avoids race conditions with app.js's dynamic SDK loading.
+    const base = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
     const { data, error } = await sbClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1) + 'app.html',
+        redirectTo: base + 'auth.html',
         queryParams: { prompt: 'select_account' }
       }
     });
@@ -142,13 +146,35 @@ async function resetPassword(email) {
 
 // ========== CALLBACKS PÓS-AUTH ==========
 async function onSignIn(user) {
-  // Salvar uid no estado local (para save modal check e persistência)
+  // Salvar uid e dados do perfil Google/email no estado local
   if (typeof S !== 'undefined') {
     S.uid = user.id;
+    // Capturar nome do Google (ou email signup) se ainda não definido
     if (user.user_metadata?.full_name && (!S.name || S.name === 'Aluno')) {
       S.name = user.user_metadata.full_name;
     }
+    // Capturar email (sempre disponível no user object)
+    if (user.email && !S.email) {
+      S.email = user.email;
+    }
+    // Marcar provider de login para onboarding saber que veio do Google
+    if (user.app_metadata?.provider) {
+      S._authProvider = user.app_metadata.provider;
+    }
     if (typeof save === 'function') save();
+
+    // Se o onboarding está visível e o nome já foi preenchido pelo Google,
+    // pular step 1 automaticamente (evita pedir nome/email de novo)
+    if (S.name && S.name !== 'Aluno') {
+      var obEl = document.getElementById('onboard');
+      var step1 = document.getElementById('obStep1');
+      if (obEl && obEl.style.display !== 'none' && step1 && step1.classList.contains('active')) {
+        // Skip step 1 → go to step 2
+        step1.classList.remove('active');
+        var step2 = document.getElementById('obStep2');
+        if (step2) step2.classList.add('active');
+      }
+    }
   }
 
   // Carregar plano do usuário
@@ -223,6 +249,8 @@ async function loadUserPlan() {
 // Verifica se o módulo está liberado no plano atual
 // PAYWALL TOGGLE: check admin_settings for paywall_enabled flag
 function isModuleUnlocked(moduleIndex) {
+  // DEMO_MODE: everything unlocked, no paywall
+  if (window.DEMO_MODE) return true;
   // Global unlock: if paywall is disabled via admin, everything is free
   if (window._paywallDisabled) return true;
   // Offline/unauthenticated: all modules open (freemium local experience)

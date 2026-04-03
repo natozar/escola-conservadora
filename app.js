@@ -4557,23 +4557,28 @@ async function _loginEmail(){
   }
 }
 
-// Handle OAuth callback in app.html (polling with backoff)
+// Handle OAuth callback in app.html (fallback — primary handler is auth.html)
 (function(){
   if(location.hash&&location.hash.includes('access_token')){
-    console.log('[Auth] OAuth tokens detectados, aguardando SDK...');
-    var attempts=0,maxAttempts=20; // 20×250ms = 5s máximo
+    console.log('[Auth] OAuth tokens detectados em app.html, aguardando SDK...');
+    // IMPORTANT: Do NOT clean the hash until SDK has processed it via detectSessionInUrl.
+    // The hash is needed by Supabase's detectSessionInUrl to establish the session.
+    var attempts=0,maxAttempts=30; // 30×250ms = 7.5s máximo
+    var hashCleaned=false;
     function checkOAuthSession(){
       attempts++;
       if(typeof sbClient==='undefined'||!sbClient){
         if(attempts<maxAttempts)setTimeout(checkOAuthSession,250);
-        else console.warn('[Auth] SDK não carregou em 5s');
+        else console.warn('[Auth] SDK não carregou em 7.5s');
         return;
       }
       sbClient.auth.getSession().then(function(r){
         if(r.data&&r.data.session){
+          if(typeof initAfterAuth==='function')initAfterAuth(r.data.session.user);
           if(typeof updateAuthUI==='function')updateAuthUI();
           toast('Login realizado!','success');
-          history.replaceState(null,'',location.pathname);
+          // Only clean hash AFTER session is confirmed
+          if(!hashCleaned){hashCleaned=true;history.replaceState(null,'',location.pathname)}
         }else if(attempts<maxAttempts){
           setTimeout(checkOAuthSession,250);
         }

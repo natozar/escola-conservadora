@@ -68,7 +68,7 @@
   --coral:#e07460;--coral-muted:rgba(224,116,96,.1);
   --sky:#5b9bd5;--sky-muted:rgba(91,155,213,.1);
   --lavender:#9b7ed8;--lavender-muted:rgba(155,126,216,.1);
-  --text-primary:#e8e6e1;--text-secondary:#9ba3b5;--text-muted:#6b7488;--text-inverse:#0f1729;
+  --text-primary:#e8e6e1;--text-secondary:#9ba3b5;--text-muted:#8892a4;--text-inverse:#0f1729;
   --border:rgba(255,255,255,.06);--border-hover:rgba(255,255,255,.12);
   --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:24px;--r-full:9999px;
   --ease:cubic-bezier(.4,0,.2,1);
@@ -81,7 +81,7 @@
   --coral:#d4604e;--coral-muted:rgba(212,96,78,.08);
   --sky:#4a87c0;--sky-muted:rgba(74,135,192,.08);
   --lavender:#7f63c0;--lavender-muted:rgba(127,99,192,.08);
-  --text-primary:#1a1a2e;--text-secondary:#4a4a5e;--text-muted:#7a7a8e;--text-inverse:#ffffff;
+  --text-primary:#1a1a2e;--text-secondary:#4a4a5e;--text-muted:#656578;--text-inverse:#ffffff;
   --border:rgba(0,0,0,.08);--border-hover:rgba(0,0,0,.15);
 }
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
@@ -137,7 +137,7 @@ nav.scrolled{background:rgba(15,23,41,.92);backdrop-filter:blur(20px) saturate(1
 .hc-icon.i1{background:var(--sage-muted);color:var(--sage-light)}
 .hc-icon.i2{background:var(--sky-muted);color:var(--sky)}
 .hc-icon.i3{background:var(--honey-muted);color:var(--honey)}
-.hc-text h4{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;margin-bottom:.15rem}
+.hc-text h3.hc-h4{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;margin-bottom:.15rem}
 .hc-text p{font-size:.78rem;color:var(--text-muted)}
 .hc-bar{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
 .hc-bar-label{display:flex;justify-content:space-between;font-size:.75rem;color:var(--text-muted);margin-bottom:.5rem}
@@ -191,7 +191,7 @@ nav.scrolled{background:rgba(15,23,41,.92);backdrop-filter:blur(20px) saturate(1
 .think:nth-child(2) .think-avatar{background:linear-gradient(135deg,#6b4a8e,var(--lavender))}
 .think:nth-child(3) .think-avatar{background:linear-gradient(135deg,#8e6b3d,var(--honey))}
 .think:nth-child(4) .think-avatar{background:linear-gradient(135deg,#3d8e5a,var(--sage))}
-.think h4{font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.think h3.hc-h4{font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.2rem}
 .think-school{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--sage-light);margin-bottom:.6rem}
 .think p{font-size:.82rem;color:var(--text-secondary);line-height:1.55;font-style:italic}
 
@@ -399,23 +399,23 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
         <div class="hero-card-title">18 Disciplinas · 38 Módulos · 380 Aulas</div>
         <div class="hc-module">
           <div class="hc-icon i1">💰</div>
-          <div class="hc-text"><h4>Economia</h4><p>Escola Austríaca · 6 módulos</p></div>
+          <div class="hc-text"><h3 class="hc-h4">Economia</h3><p>Escola Austríaca · 6 módulos</p></div>
         </div>
         <div class="hc-module">
           <div class="hc-icon i2">🔢</div>
-          <div class="hc-text"><h4>Matemática</h4><p>Abordagem CPA (Concreto-Pictórico-Abstrato)</p></div>
+          <div class="hc-text"><h3 class="hc-h4">Matemática</h3><p>Abordagem CPA (Concreto-Pictórico-Abstrato)</p></div>
         </div>
         <div class="hc-module">
           <div class="hc-icon" style="background:var(--lavender-muted);color:var(--lavender)">🏛️</div>
-          <div class="hc-text"><h4>Filosofia</h4><p>Diálogo Socrático + Pensamento Crítico</p></div>
+          <div class="hc-text"><h3 class="hc-h4">Filosofia</h3><p>Diálogo Socrático + Pensamento Crítico</p></div>
         </div>
         <div class="hc-module">
           <div class="hc-icon i3">💡</div>
-          <div class="hc-text"><h4>IE + Psicologia</h4><p>Resiliência e Growth Mindset</p></div>
+          <div class="hc-text"><h3 class="hc-h4">IE + Psicologia</h3><p>Resiliência e Growth Mindset</p></div>
         </div>
         <div class="hc-module">
           <div class="hc-icon" style="background:var(--coral-muted);color:var(--coral)">📚</div>
-          <div class="hc-text"><h4>PT · Ciências · História</h4><p>Português, Ciências, Brasil e US History</p></div>
+          <div class="hc-text"><h3 class="hc-h4">PT · Ciências · História</h3><p>Português, Ciências, Brasil e US History</p></div>
         </div>
         <div class="hc-bar">
           <div class="hc-bar-label"><span>Progresso geral</span><span id="heroP">0%</span></div>
@@ -579,27 +579,27 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
   <div class="think-grid">
     <div class="think">
       <div class="think-avatar" style="background:linear-gradient(135deg,#3d8e5a,var(--sage))">LM</div>
-      <h4>Mises, Hayek, Sowell</h4>
+      <h3 class="hc-h4">Mises, Hayek, Sowell</h3>
       <div class="think-school">Economia · Escola Austríaca</div>
       <p>"O mercado livre é o melhor sistema para coordenar a ação humana e gerar prosperidade." — Inspirado em Mises, Hayek e Sowell</p>
       <span style="font-size:.65rem;opacity:.6;display:block;margin-top:.25rem">(citação para fins educacionais — Art. 46, Lei 9.610/98)</span>
     </div>
     <div class="think">
       <div class="think-avatar" style="background:linear-gradient(135deg,#4480b5,var(--sky))">CPA</div>
-      <h4>Abordagem CPA</h4>
+      <h3 class="hc-h4">Abordagem CPA</h3>
       <div class="think-school">Matemática · CPA</div>
       <p>A abordagem CPA (Concreto → Pictórico → Abstrato) é referência internacional em ensino de matemática. Singapura lidera rankings do PISA desde 2015 com esse método.</p>
     </div>
     <div class="think">
       <div class="think-avatar" style="background:linear-gradient(135deg,#7a5eb8,var(--lavender))">🏛️</div>
-      <h4>Lipman + Sócrates</h4>
+      <h3 class="hc-h4">Lipman + Sócrates</h3>
       <div class="think-school">Filosofia · Diálogo Socrático</div>
       <p>"A verdadeira educação é ensinar a pensar, não o que pensar." — Atribuída a Sócrates / Matthew Lipman</p>
       <span style="font-size:.65rem;opacity:.6;display:block;margin-top:.25rem">(citação para fins educacionais — Art. 46, Lei 9.610/98)</span>
     </div>
     <div class="think">
       <div class="think-avatar" style="background:linear-gradient(135deg,#b85a4a,var(--coral))">CD</div>
-      <h4>Dweck + Duckworth</h4>
+      <h3 class="hc-h4">Dweck + Duckworth</h3>
       <div class="think-school">Psicologia · Growth Mindset</div>
       <p>"Esforço, perseverança e mentalidade de crescimento fazem a diferença." — Carol Dweck &amp; Angela Duckworth</p>
       <span style="font-size:.65rem;opacity:.6;display:block;margin-top:.25rem">(citação para fins educacionais — Art. 46, Lei 9.610/98)</span>

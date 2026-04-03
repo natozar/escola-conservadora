@@ -17,7 +17,8 @@ function minifyLegacyJS() {
       const root = __dirname;
       console.log('  [plugin] writeBundle running, root:', root);
       const dist = resolve(root, 'dist');
-      const jsFiles = ['app.js', 'i18n.js', 'cookie-consent.js', 'supabase-client.js', 'stripe-billing.js'];
+      // app.js removed — now bundled as ES modules via src/main.js (Vite handles it)
+      const jsFiles = ['i18n.js', 'cookie-consent.js', 'supabase-client.js', 'stripe-billing.js'];
       for (const file of jsFiles) {
         const src = resolve(root, file);
         if (!existsSync(src)) continue;

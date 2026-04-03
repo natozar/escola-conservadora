@@ -1,0 +1,16 @@
+{
+  "name": "escola-liberal-qa",
+  "version": "1.0.0",
+  "description": "QA Agent — testa fluxos, encontra bugs, audita performance e acessibilidade",
+  "scripts": {
+    "install-browsers": "npx playwright install chromium",
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "report": "npx playwright show-report",
+    "audit": "node audit.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.50.0"
+  }
+}

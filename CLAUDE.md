@@ -19,7 +19,7 @@ Plataforma PWA educacional para homeschool brasileiro. 21 disciplinas, 61 módul
 | Backend | Supabase (auth, database, realtime sync) |
 | Pagamentos | Stripe (checkout via Edge Functions) |
 | IA | API Anthropic (Claude) — tutor + quiz generator |
-| PWA | Service Worker v32 (network-first + stale-while-revalidate + cache-first) |
+| PWA | Service Worker v37 (network-first + stale-while-revalidate + cache-first) |
 | Testes | Playwright + html-validate + Lighthouse + Axe |
 | CI/CD | GitHub Actions → GitHub Pages |
 
@@ -40,7 +40,7 @@ Plataforma PWA educacional para homeschool brasileiro. 21 disciplinas, 61 módul
 ├── stripe-billing.js   → Integração Stripe (plans, checkout, verificação)
 ├── i18n.js             → Internacionalização PT/EN
 ├── cookie-consent.js   → Banner de cookies
-├── sw.js               → Service Worker v32
+├── sw.js               → Service Worker v37
 ├── manifest.json       → PWA manifest
 ├── vite.config.js      → Config Vite + plugin minifyLegacyJS
 ├── package.json        → Deps: vite, terser, playwright, html-validate, lighthouse, axe
@@ -312,7 +312,7 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 
 ---
 
-## Service Worker (sw.js v34)
+## Service Worker (sw.js v35)
 
 ### Estratégia de Cache
 - **Install:** pré-cache CORE_ASSETS (HTML, CSS, JS, ícones, index.json) + `self.skipWaiting()` forçado
@@ -334,10 +334,12 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 
 1. ~~**`shareProgress()` duplicada**~~ — **RESOLVIDO** (só existe uma definição agora)
 2. **Credenciais hardcoded** em `supabase-client.js` (URL e anon key expostos no client-side). Para SPA é aceitável com RLS, mas auditar RLS policies.
-3. ~~**Google OAuth loop infinito**~~ — **RESOLVIDO** (auth.html usa orquestrador único, app.js usa polling com backoff)
+3. ~~**Google OAuth redirect loop**~~ — **RESOLVIDO v2** (causa raiz: `redirectTo` apontava para `app.html` onde SDK carrega via script injection dinâmica, criando race condition com `detectSessionInUrl`. Fix: redirect OAuth para `auth.html` que carrega SDK sincronamente, detecta sessão via `onAuthStateChange`/polling, e redireciona para `app.html`. Também corrigido: `INITIAL_SESSION` event handling em supabase-client.js, loading state visual durante OAuth callback)
 4. **AI Tutor/Quiz desabilitado** — precisa de créditos na API Anthropic. Disclaimer LGPD e system prompt já implementados.
 5. **Leaderboard migration** — SQL existe mas não foi executado no Supabase.
 6. **Migration pendente** — `supabase/migrations/add_state_to_profiles.sql` precisa ser executado no SQL Editor do Supabase.
+7. ~~**App exigia login para acessar**~~ — **RESOLVIDO**: `DEMO_MODE = true` em boot.js permite acesso total sem auth. Todos os modulos desbloqueados, sem paywall, sem save modal. Login apenas via botao Perfil. Para reativar auth obrigatorio: mudar `DEMO_MODE` para `false`.
+8. ~~**App nao forcava atualizacao do SW**~~ — **RESOLVIDO**: `updateViaCache:'none'` no registro, polling `reg.update()` a cada 60s, `controllerchange` faz reload automatico, `skipWaiting()` + `clients.claim()` no SW.
 
 ---
 
@@ -462,6 +464,40 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 - Performance: GPU hints CSS, defer boot, Vite CSS minify
 - 7 bugs auth/navegação corrigidos
 - SW v34 com skipWaiting forçado
+
+### Concluído nesta sessão (2026-04-02 — sessão 2)
+- Fix Google OAuth redirect loop: redirectTo mudado para auth.html (SDK síncrono), INITIAL_SESSION handling, loading state visual durante callback
+- Sistema de agentes v2.0: 25 agentes reescritos (3-5x mais detalhados) + orchestrator + WORKFLOWS.md + PROTOCOLS.md
+- SW v35
+
+### Concluido nesta sessao (2026-04-02 — sessao 3)
+- Refatoracao app.js em 30 modulos ES (src/core, src/features, src/ui, src/boot.js, src/main.js)
+- Redesign navegacao mobile: top bar com avatar/streak/update, bottom nav 5 tabs com hub Praticar centralizado
+- Novas funcoes: togglePracticeMenu(), checkForSwUpdate(), _updatePracticeCounts()
+- Bottom sheet "Praticar" com 7 ferramentas de estudo (daily, marathon, simulado, spaced, erros, flashcards, game)
+- Mobile header: avatar com borda cor da liga, streak badge, botao update SW (visivel apenas quando ha update)
+- CSS: .practice-sheet, .practice-backdrop, .practice-item, .bnav-center, .mh-right, .mh-avatar, .mh-streak, .mh-update-btn
+- SW v37
+
+### Concluido nesta sessao (2026-04-02 — sessao 4)
+- DEMO_MODE: app abre 100% sem login. Flag `const DEMO_MODE = true` em boot.js
+- Removido await de auth que bloqueava boot por 4s
+- Login apenas via botao Perfil (bottom nav + sidebar + mobile header)
+- handleProfileNav(): se logado → perfil.html, se nao → modal de login
+- checkSaveModal() desabilitado em DEMO_MODE (nao nag para criar conta)
+- isModuleUnlocked() retorna true em DEMO_MODE (paywall desabilitado)
+- Para reverter: mudar DEMO_MODE para false em src/boot.js
+
+### Concluido nesta sessao (2026-04-02 — sessao 5)
+- Lighthouse otimizacao: a11y 92→97 (contraste texto), SEO 66→100 (robots, viewport)
+- cookie-consent.js: defer (nao bloqueia render)
+- meta viewport: removido maximum-scale=1.0 e user-scalable=no (a11y)
+- meta robots: noindex → index,follow (SEO)
+- Contraste: --text-muted escurecido para WCAG AA (dark: #6b7488→#8892a4, light: #7a7a8e→#656578)
+- .btn-sage: background escurecido #4a9e7e→#3d8b6e para contraste 4.5:1
+- index.html: h4→h3 (heading order correto), contraste muted corrigido
+- SW v39
+- Scores finais: index 100/94/100/100 | app 93/97/100/100
 
 ---
 

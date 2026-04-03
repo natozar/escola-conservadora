@@ -493,55 +493,103 @@ function checkOAuthError() {
   // 2. Detect recovery flow BEFORE SDK init (hash still intact)
   var isRecovery = window.location.hash.includes('type=recovery');
 
-  // 3. Initialize Supabase — CRITICAL: sem isso sbClient fica null
+  // 3. Detect OAuth callback — hash contains access_token from Google redirect
+  var isOAuthCallback = window.location.hash.includes('access_token');
+
+  // 4. If OAuth callback, show loading state immediately (before SDK init)
+  if(isOAuthCallback){
+    document.querySelector('.auth-card').innerHTML =
+      '<div style="text-align:center;padding:2rem 1rem">'
+      + '<div class="auth-spinner" style="width:32px;height:32px;border-width:3px;margin:0 auto 1rem"></div>'
+      + '<p style="color:var(--text-primary);font-size:1rem;margin-bottom:.5rem">Conectando sua conta Google...</p>'
+      + '<p style="color:var(--text-muted);font-size:.8rem">Aguarde um momento</p>'
+      + '</div>';
+  }
+
+  // 5. Initialize Supabase — CRITICAL: must happen BEFORE hash is cleaned
+  //    detectSessionInUrl:true will read the #access_token from the hash
   if(typeof initSupabase === 'function') initSupabase();
 
-  // 4. Recovery flow: show new password form
+  // 6. Recovery flow: show new password form
   if(isRecovery){
     checkRecoveryFlow();
     return;
   }
 
-  // 5. Default: show login tab
-  showTab('login');
+  // 7. Default: show login tab (only if not OAuth callback)
+  if(!isOAuthCallback) showTab('login');
 
-  // 6. Redirect on successful auth
+  // 8. Redirect on successful auth
+  var _redirecting = false;
+
+  function doRedirect(){
+    if(_redirecting) return;
+    // Don't redirect during recovery flow (new password form)
+    var npf = document.getElementById('newPassForm');
+    if(npf && npf.style.display === 'block') return;
+    _redirecting = true;
+    console.log('[Auth] Redirecionando para app.html...');
+    window.location.replace('app.html'); // replace so back button doesn't return to auth
+  }
+
   if(sbClient){
-    var _redirecting = false;
-
-    function doRedirect(){
-      if(_redirecting) return;
-      // Não redirecionar se está no fluxo de recovery (nova senha)
-      var npf = document.getElementById('newPassForm');
-      if(npf && npf.style.display === 'block') return;
-      _redirecting = true;
-      console.log('[Auth] Redirecionando para app.html...');
-      window.location.replace('app.html'); // replace para não voltar ao auth via back button
-    }
-
-    // Único listener: onAuthStateChange cobre todos os cenários
+    // Primary: onAuthStateChange covers all scenarios (OAuth, email, session restore)
     sbClient.auth.onAuthStateChange(function(event, session){
       console.log('[Auth] Event:', event, '| session:', !!session);
-      if(session && session.user && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')){
+      if(session && session.user && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED')){
         doRedirect();
       }
     });
 
-    // Fallback: se nenhum evento disparar em 3s, checar sessão manualmente
+    // Fallback 1: if no event fires in 2s, check session manually
     setTimeout(function(){
       if(_redirecting) return;
       sbClient.auth.getSession().then(function(res){
         if(res.data && res.data.session && res.data.session.user){
-          console.log('[Auth] Fallback: sessão ativa encontrada');
+          console.log('[Auth] Fallback 1: sessão ativa encontrada');
           doRedirect();
         }
       }).catch(function(e){ console.warn('[Auth] Fallback check:', e.message); });
-    }, 3000);
+    }, 2000);
+
+    // Fallback 2: for OAuth callback specifically — more aggressive polling
+    if(isOAuthCallback){
+      var pollCount = 0;
+      var pollMax = 30; // 30 × 200ms = 6s
+      function pollSession(){
+        pollCount++;
+        if(_redirecting || pollCount > pollMax) return;
+        sbClient.auth.getSession().then(function(res){
+          if(res.data && res.data.session && res.data.session.user){
+            console.log('[Auth] OAuth poll: sessão encontrada em ' + (pollCount * 200) + 'ms');
+            doRedirect();
+          } else if(pollCount <= pollMax){
+            setTimeout(pollSession, 200);
+          }
+        }).catch(function(){
+          if(pollCount <= pollMax) setTimeout(pollSession, 200);
+        });
+      }
+      setTimeout(pollSession, 300);
+    }
+  } else if(isOAuthCallback) {
+    // SDK failed to load but we have OAuth tokens — retry initSupabase
+    console.warn('[Auth] SDK not loaded for OAuth callback, retrying...');
+    setTimeout(function(){
+      if(typeof initSupabase === 'function') initSupabase();
+      if(sbClient){
+        sbClient.auth.getSession().then(function(res){
+          if(res.data && res.data.session && res.data.session.user) doRedirect();
+        }).catch(function(){});
+      }
+    }, 1000);
   }
 
   // Tab from URL param
-  var sp = new URLSearchParams(location.search);
-  if(sp.get('tab') === 'signup') showTab('signup');
+  if(!isOAuthCallback){
+    var sp = new URLSearchParams(location.search);
+    if(sp.get('tab') === 'signup') showTab('signup');
+  }
 })();
 </script>
 </body>
