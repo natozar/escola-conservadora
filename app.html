@@ -221,11 +221,6 @@ if('serviceWorker' in navigator){
   <div class="side-scrim" id="sideScrim" onclick="closeSideMobile()"></div>
   <!-- SIDEBAR -->
   <aside class="side" id="side" role="navigation" aria-label="Menu principal">
-    <a href="index.html" class="side-logo">
-      <img src="assets/icons/favicon.svg" alt="Escola Liberal" class="side-logo-img">
-      <div class="side-name">Escola <em>Liberal</em></div>
-    </a>
-
     <div class="profile">
       <a href="#" onclick="event.preventDefault();handleProfileNav()" class="profile-row" style="text-decoration:none;color:inherit" title="Ver meu perfil">
         <div class="avatar" id="avatarI">A</div>
@@ -774,10 +769,10 @@ if('serviceWorker' in navigator){
 
 <!-- APP VERSION BAR (top) -->
 <div class="app-version-bar" id="appVersionBar">
-  <div class="avb-brand">
+  <a href="index.html" class="avb-brand">
     <img src="assets/icons/favicon.svg" alt="" class="avb-logo">
     <span class="avb-name">Escola <em>Liberal</em></span>
-  </div>
+  </a>
   <div class="avb-right">
     <button id="debateTopBtnDesktop" class="debate-btn-top has-activity" onclick="goDebate()"><span class="debate-icon">💬</span><span class="debate-label">Debate</span><span class="live-dot"></span><span class="online-count" id="debateOnlineCountDesktop">0</span></button>
     <span class="avb-divider">·</span>

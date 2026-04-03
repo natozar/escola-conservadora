@@ -1,8 +1,8 @@
 // Escola Liberal PWA — Service Worker v25
 // Estratégia: Network-first (navegação) + Stale-While-Revalidate (assets) + Cache-first (fonts)
-const SW_VERSION = 'v65';
-const CACHE_NAME = 'escola-liberal-v65';
-const STATIC_CACHE = 'escola-static-v65';
+const SW_VERSION = 'v66';
+const CACHE_NAME = 'escola-liberal-v66';
+const STATIC_CACHE = 'escola-static-v66';
 const FONT_CACHE = 'escola-fonts-v1';
 
 // Core assets — cached on install
@@ -147,25 +147,4 @@ self.addEventListener('fetch', e => {
   e.respondWith(
     caches.match(request).then(cached => {
       const fetchPromise = fetch(request).then(res => {
-        if (res.status === 200) {
-          const cacheName = LAZY_ASSETS.some(a => request.url.includes(a)) ? STATIC_CACHE : CACHE_NAME;
-          caches.open(cacheName).then(c => c.put(request, res.clone()));
-        }
-        return res;
-      }).catch(() => {
-        // Offline fallback
-        if (request.destination === 'image') {
-          return new Response(
-            '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150"><rect fill="#1e293b" width="200" height="150"/><text fill="#64748b" x="100" y="80" text-anchor="middle" font-size="14">Offline</text></svg>',
-            { headers: { 'Content-Type': 'image/svg+xml' } }
-          );
-        }
-        // Must return Response, not undefined (iOS Safari requirement)
-        return new Response('', { status: 408, statusText: 'Offline' });
-      });
-      // cached can be undefined on iOS — must always resolve to Response
-      if (cached) return cached;
-      return fetchPromise.then(r => r || new Response('', { status: 408 }));
-    })
-  );
-});
+        if (res.status === 200
