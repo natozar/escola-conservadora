@@ -8,7 +8,7 @@
 // OFFLINE_MODE: Supabase COMPLETAMENTE desligado. Zero fetch de rede.
 // Para apresentacao a governos. Tudo roda em localStorage.
 // Para reconectar Supabase: mudar para false.
-const OFFLINE_MODE = true;
+const OFFLINE_MODE = false;
 window.OFFLINE_MODE = OFFLINE_MODE;
 
 // DEMO_MODE: app abre sem exigir login. Paywall desabilitado.
