@@ -77,6 +77,7 @@
     var style = document.createElement('style');
     style.textContent = ''
       + '#cookieBanner{position:fixed;bottom:0;left:0;right:0;z-index:99999;background:var(--bg-card,#1a2540);border-top:1px solid var(--border,rgba(255,255,255,.06));padding:1rem 1.5rem;box-shadow:0 -4px 24px rgba(0,0,0,.3);animation:cbSlideUp .4s ease}'
+      + '@media(max-width:900px){#cookieBanner{bottom:calc(72px + env(safe-area-inset-bottom,0px));border-radius:12px 12px 0 0}}'
       + '@keyframes cbSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}'
       + '#cookieBanner.cb-hide{animation:cbSlideDown .3s ease forwards}'
       + '@keyframes cbSlideDown{to{transform:translateY(100%)}}'
