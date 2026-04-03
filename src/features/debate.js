@@ -68,6 +68,9 @@ function goDebate(){
   setTimeout(function(){view.classList.remove('view-enter')},350);
   window.setNav('nDebate');
   _currentRoom=null;
+  // Hide tutor FAB when in debate (debate is student-to-student, not AI)
+  var fab=window._origById?window._origById('chatFab'):null;
+  if(fab)fab.style.display='none';
   _renderRoomList();
   try{history.pushState({view:'debate'},'')}catch(e){}
 }

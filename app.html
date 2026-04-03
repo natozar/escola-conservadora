@@ -206,7 +206,7 @@ if('serviceWorker' in navigator){
     <div class="mh-right">
       <div class="mh-xp" id="mhXP"></div>
       <div class="mh-streak" id="mhStreak" title="Sequencia de dias">0🔥</div>
-      <button id="debateTopBtn" class="debate-btn-top has-activity" onclick="goDebate()">💬 <span>Debate</span> <span class="online-count" id="debateOnlineCount">0</span></button>
+      <button id="debateTopBtn" class="debate-btn-top has-activity" onclick="goDebate()"><span class="debate-icon">💬</span><span class="debate-label">Debate</span><span class="live-dot"></span><span class="online-count" id="debateOnlineCount">0</span></button>
       <button class="mh-update-btn" id="mhUpdateBtn" onclick="checkForSwUpdate()" title="Atualizacao disponivel" aria-label="Atualizar app">↻</button>
       <a href="#" onclick="event.preventDefault();handleProfileNav()" class="mh-avatar" id="mhAvatar" title="Meu perfil" aria-label="Meu perfil">A</a>
     </div>
@@ -771,7 +771,7 @@ if('serviceWorker' in navigator){
     <span class="avb-name">Escola <em>Liberal</em></span>
   </div>
   <div class="avb-right">
-    <button id="debateTopBtnDesktop" class="debate-btn-top has-activity" onclick="goDebate()" style="font-size:.8rem;padding:4px 12px">💬 <span>Debate</span> <span class="online-count" id="debateOnlineCountDesktop">0</span></button>
+    <button id="debateTopBtnDesktop" class="debate-btn-top has-activity" onclick="goDebate()" style="font-size:.78rem;padding:5px 14px"><span class="debate-icon">💬</span><span class="debate-label">Debate</span><span class="live-dot"></span><span class="online-count" id="debateOnlineCountDesktop">0</span></button>
     <span class="avb-divider">·</span>
     <span class="avb-version" id="avbVersion">v--</span>
     <span class="avb-divider">·</span>

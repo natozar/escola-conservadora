@@ -172,6 +172,9 @@ function hideAllViews(){
   document.getElementById('vAulas').style.display='none';
   var vDebate=document.getElementById('vDebate');if(vDebate)vDebate.classList.remove('on');
   document.getElementById('focusBtn').classList.remove('always');
+  // Restore tutor FAB (hidden when in debate)
+  var chatFab=window._origById?window._origById('chatFab'):null;
+  if(chatFab)chatFab.style.display='';
   window.stopTTS()
 }
 
