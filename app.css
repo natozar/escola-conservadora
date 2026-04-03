@@ -153,7 +153,7 @@ a.profile-row:hover{background:var(--bg-hover)}
 .side-bottom{margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)}
 
 /* ========== MAIN ========== */
-.main{padding:calc(2rem + 28px) 2rem 2rem;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;max-height:100vh;max-height:100dvh;box-sizing:border-box}
+.main{padding:calc(2rem + 28px) 2rem 2rem;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;max-height:100vh;max-height:100dvh;box-sizing:border-box}
 .mobile-bar{display:none;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
 @media(max-width:900px){.mobile-bar{display:flex}}
 .menu-btn{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text-secondary);padding:.45rem .75rem;cursor:pointer;font-size:.85rem;font-family:'DM Sans',sans-serif}
