@@ -2,7 +2,7 @@
 
 ## Identidade do Projeto
 
-Plataforma PWA educacional para homeschool brasileiro. 21 disciplinas, 61 módulos, 610+ aulas interativas. Público: jovens de 10 a 16 anos. Bilíngue PT/EN. Gratuita. Offline-first. Gamificação completa. Compatível com ANED. Criada por Renato Rodrigues (Ribeirão Preto/SP).
+Plataforma PWA educacional para homeschool brasileiro. 21 disciplinas, 66 módulos, 660 aulas interativas. Público: jovens de 10 a 16 anos. Bilíngue PT/EN. Gratuita. Offline-first. Gamificação completa. Compatível com ANED. Criada por Renato Rodrigues (Ribeirão Preto/SP).
 
 **Domínio:** escolaliberal.com.br
 **Repo:** github.com/natozar/escola-liberal
@@ -19,7 +19,7 @@ Plataforma PWA educacional para homeschool brasileiro. 21 disciplinas, 61 módul
 | Backend | Supabase (auth, database, realtime sync) |
 | Pagamentos | Stripe (checkout via Edge Functions) |
 | IA | API Anthropic (Claude) — tutor + quiz generator |
-| PWA | Service Worker v37 (network-first + stale-while-revalidate + cache-first) |
+| PWA | Service Worker v79 (network-first + stale-while-revalidate + cache-first) |
 | Testes | Playwright + html-validate + Lighthouse + Axe |
 | CI/CD | GitHub Actions → GitHub Pages |
 
@@ -334,7 +334,7 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 
 1. ~~**`shareProgress()` duplicada**~~ — **RESOLVIDO** (só existe uma definição agora)
 2. **Credenciais hardcoded** em `supabase-client.js` (URL e anon key expostos no client-side). Para SPA é aceitável com RLS, mas auditar RLS policies.
-3. ~~**Google OAuth redirect loop**~~ — **RESOLVIDO v2** (causa raiz: `redirectTo` apontava para `app.html` onde SDK carrega via script injection dinâmica, criando race condition com `detectSessionInUrl`. Fix: redirect OAuth para `auth.html` que carrega SDK sincronamente, detecta sessão via `onAuthStateChange`/polling, e redireciona para `app.html`. Também corrigido: `INITIAL_SESSION` event handling em supabase-client.js, loading state visual durante OAuth callback)
+3. ~~**Google OAuth redirect loop**~~ — **RESOLVIDO v3** (v2 fix: redirect para auth.html com SDK sincrono. v3 fix: trigger `handle_new_user` no Supabase falhava com "Database error saving new user" — reescrita com ON CONFLICT DO NOTHING + EXCEPTION handler. `sync_profile_email` tambem corrigida. auth.html: `initSupabase()` agora executa antes de `checkOAuthError()` return para evitar sbClient null.)
 4. **AI Tutor/Quiz desabilitado** — precisa de créditos na API Anthropic. Disclaimer LGPD e system prompt já implementados.
 5. **Leaderboard migration** — SQL existe mas não foi executado no Supabase.
 6. **Migration pendente** — `supabase/migrations/add_state_to_profiles.sql` precisa ser executado no SQL Editor do Supabase.
@@ -632,7 +632,7 @@ Deploy → SW novo detectado (polling 60s)
 - FASE 1 TRANSITORIA: SW v45 com skipWaiting() incondicional no install para forcar update em TODOS os dispositivos
 - controllerchange auto-reload TEMPORARIO para transicao
 - CORE_ASSETS limpo: removido app.css e app.js (nao existem no dist, Vite gera hashes)
-- PENDENTE FASE 2: proximo deploy remover skipWaiting do install + remover controllerchange automatico
+- FASE 2 concluida: skipWaiting removido do install, controllerchange condicionado a _userRequestedUpdate
 
 ### Ultimo teste completo: 2026-04-03
 - Plataformas: Chrome Android, Safari iOS, Chrome Desktop, Firefox Desktop
@@ -663,12 +663,29 @@ Deploy → SW novo detectado (polling 60s)
 - Arquivos alterados: onboarding.js, debate.js, chat.js, study-plan.js, dashboard.js, pwa.js, app.js, app.html, termos.html, privacidade.html, sw.js, CLAUDE.md
 - SW v79
 
-### ⚠️ PENDENTE: FASE 2 do update PWA
-No PROXIMO commit/deploy, executar:
-1. Remover `self.skipWaiting()` do install event no sw.js (deixar apenas no message handler)
-2. Remover o controllerchange listener automatico no final do script em app.html (marcado com TODO)
-3. Incrementar SW_VERSION
-4. Isso ativa o sistema permanente: updates apenas via banner + botao do user
+### Concluido nesta sessao (2026-04-04 — Google OAuth Fix)
+- **Causa raiz:** Trigger `handle_new_user` no Supabase falhava ao criar perfil no OAuth callback, retornando `500: Database error saving new user`
+- **Diagnostico:** Logs do Supabase Auth mostraram erro no `/callback`. As funcoes `handle_new_user` e `sync_profile_email` nao tinham exception handling — qualquer falha cancelava toda a transacao de criacao de usuario.
+- **Fix 1 (Supabase SQL):** `handle_new_user` reescrita com `ON CONFLICT DO NOTHING` + `EXCEPTION WHEN OTHERS THEN RETURN NEW` + insert em `subscriptions`
+- **Fix 2 (Supabase SQL):** `sync_profile_email` reescrita com `EXCEPTION WHEN OTHERS THEN RETURN NEW`
+- **Fix 3 (auth.html):** `initSupabase()` agora executa SEMPRE, mesmo apos erro OAuth. Antes, `checkOAuthError()` retornava early e `sbClient` ficava null, impedindo o usuario de tentar novamente.
+- **Arquivos alterados:** auth.html, supabase-schema.sql, CLAUDE.md
+- **SQL executado no Supabase:** handle_new_user + sync_profile_email (ambas com exception handler)
+- **Testado:** Login Google com chatsagrado@gmail.com → redirect para app.html com currentUser ativo
+
+### Concluido nesta sessao (2026-04-04 — consolidacao e deploy)
+- Commit consolidado: auth.html fix OAuth, supabase-schema.sql, CLAUDE.md
+- Build Vite: dist/ atualizado com SW v79
+- FASE 2 PWA marcada como concluida (ja estava implementada desde sessao 9)
+- Branch feat/lei-felca-compliance mergeada na main
+- Deploy via GitHub Pages
+- 31 agentes IA (.agents/) — 6 novos: performance, content, i18n, pwa, a11y, onboarding
+
+### ✅ CONCLUÍDO: FASE 2 do update PWA
+- skipWaiting() removido do install event (só no message handler)
+- controllerchange condicionado a _userRequestedUpdate
+- Política de atualização permanente aplicada
+- SW v79
 
 ---
 
