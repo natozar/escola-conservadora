@@ -1,5 +1,5 @@
 // ============================================================
-// ONBOARDING — Age verification (Lei Felca 15.211/2025)
+// ONBOARDING — Age verification (18+ only)
 // Step 1: Date of birth → must be 18+
 // Step 2: Name + avatar (optional)
 // DEMO_MODE/OFFLINE_MODE: skip all steps
@@ -50,7 +50,7 @@ function obVerifyAge(){
     // Block: under 18
     window.S.ageGroup='blocked';
     window.save();
-    if(errEl){errEl.innerHTML='<strong>Acesso restrito.</strong> Esta plataforma e exclusiva para maiores de 18 anos, conforme a Lei 15.211/2025.';errEl.style.display='block'}
+    if(errEl){errEl.innerHTML='<strong>Acesso restrito.</strong> Esta plataforma e exclusiva para maiores de 18 anos.';errEl.style.display='block'}
     return;
   }
 
@@ -85,13 +85,6 @@ function selectAvatar(a,el){
   obAvatar=a;
   document.querySelectorAll('.onboard-av').forEach(function(e){e.classList.remove('selected')});
   el.classList.add('selected');
-}
-
-// Simple PIN hash (kept for parent panel compat)
-function _hashPINSimple(pin){
-  if(typeof window.hashPIN==='function')return window.hashPIN(pin);
-  var h=0;for(var i=0;i<pin.length;i++){h=((h<<5)-h)+pin.charCodeAt(i);h|=0}
-  return'pin_'+Math.abs(h).toString(36);
 }
 
 // Quick finish — save name + avatar and go to dashboard
