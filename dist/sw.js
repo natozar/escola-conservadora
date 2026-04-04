@@ -1,8 +1,8 @@
 // Escola Liberal PWA — Service Worker v73
 // Estratégia: Network-first (navigation + Vite bundles) + Stale-While-Revalidate (other assets) + Cache-first (fonts)
-const SW_VERSION = 'v87';
-const CACHE_NAME = 'escola-liberal-v87';
-const STATIC_CACHE = 'escola-static-v87';
+const SW_VERSION = 'v88';
+const CACHE_NAME = 'escola-liberal-v88';
+const STATIC_CACHE = 'escola-static-v88';
 const FONT_CACHE = 'escola-fonts-v1';
 
 // Core assets — cached on install (only stable filenames that exist in dist root)
@@ -22,7 +22,8 @@ const CORE_ASSETS = [
   './supabase-client.js',
   './stripe-billing.js',
   './lessons/index.json',
-  './pin-gate.js'
+  './pin-gate.js',
+  './manifest.json'
 ];
 
 // Lazy-loaded: lesson data — cached on first use

@@ -26,7 +26,9 @@ npm-debug.log*
 
 # Build / temporários
 dist/
+dist-new/
 build/
+build-output/
 .cache/
 
 # Supabase local (CLI)

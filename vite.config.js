@@ -52,7 +52,7 @@ function minifyLegacyJS() {
       } catch(e) { console.error('  ✗ assets:', e.message); }
 
       // Copy individual files
-      for (const f of ['lessons.json', 'sw.js', 'pin-gate.js', 'CNAME', 'robots.txt', 'sitemap.xml']) {
+      for (const f of ['lessons.json', 'sw.js', 'pin-gate.js', 'CNAME', 'robots.txt', 'sitemap.xml', 'manifest.json', 'manifest-admin.json']) {
         const src = resolve(root, f);
         if (existsSync(src)) {
           try { copyFileSync(src, resolve(dist, f)); console.log(`  ✓ Copied ${f}`); }
@@ -67,7 +67,7 @@ export default defineConfig({
   base: '/',
   build: {
     outDir: 'dist',
-    emptyOutDir: false,
+    emptyOutDir: true,
     rollupOptions: { input },
     assetsDir: 'assets/build',
     sourcemap: false,
