@@ -797,7 +797,7 @@ async function askAITutor(message){
     moduleTitle,
     lessonTitle,
     lessonContext:lessonContent,
-    ageGroup:S.ageGroup||'teen',
+    ageGroup:S.ageGroup||'adult',
     lang:typeof CURRENT_LANG!=='undefined'?CURRENT_LANG:'pt'
   };
 

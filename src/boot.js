@@ -31,7 +31,7 @@ function seedDemoData(){
   localStorage.setItem('escola_v2',JSON.stringify({
     name:'Aluno Demo',avatar:'🧑‍🎓',xp:750,lvl:4,streak:7,
     streakDays:_last7Days(),last:new Date().toDateString(),
-    done:done,quiz:quiz,ageGroup:'13-16',cMod:null,cLes:null
+    done:done,quiz:quiz,ageGroup:'adult',cMod:null,cLes:null
   }));
   // Seed some notes
   localStorage.setItem('escola_notes',JSON.stringify({'0-0':'O escambo surgiu antes da moeda.','0-2':'Teoria subjetiva do valor — Carl Menger.'}));
