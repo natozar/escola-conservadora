@@ -132,7 +132,7 @@ async function obVerifyAge(){
         var resp=await fetch((window.SUPABASE_URL||'')+'/functions/v1/verify-age',{
           method:'POST',
           headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
-          body:JSON.stringify({cpf:cpfRaw,birthDate:bdVal})
+          body:JSON.stringify({cpf:cpfRaw,birthDate:bdVal,cpfHash:cpfHash})
         });
         if(resp.ok){
           var result=await resp.json();

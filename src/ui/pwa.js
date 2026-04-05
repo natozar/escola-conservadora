@@ -96,18 +96,19 @@ function dismissInstall(){
 // ============================================================
 // VERSIONING + WHAT'S NEW
 // ============================================================
-const APP_VERSION='3.0.0';
+const APP_VERSION='4.0.0';
+window.APP_VERSION_NUM=APP_VERSION.replace(/[^0-9.]/g,'');
 const CHANGELOG=[
+  {emoji:'🔒',text:'<strong>Verificação de Idade</strong> — CPF validado pela Receita Federal (Lei Felca)'},
+  {emoji:'🛡️',text:'<strong>Age Gate 18+</strong> — 5 camadas de proteção (client + server + Edge Functions)'},
+  {emoji:'💬',text:'<strong>Debate ao Vivo</strong> — 15 salas temáticas com moderação IA'},
+  {emoji:'📜',text:'<strong>Certificados Verificáveis</strong> — URL pública para validação'},
   {emoji:'📱',text:'<strong>Instalar como App</strong> — Banner personalizado para instalar no celular ou desktop'},
   {emoji:'💾',text:'<strong>Backup Completo</strong> — Exporte e importe todo seu progresso em JSON'},
   {emoji:'📤',text:'<strong>Compartilhar Progresso</strong> — Gere uma imagem PNG bonita do seu avanço'},
   {emoji:'🔔',text:'<strong>Lembretes de Estudo</strong> — Notificações para manter a consistência'},
-  {emoji:'✨',text:'<strong>Salvamento Visual</strong> — Indicador de progresso salvo automaticamente'},
-  {emoji:'🍋',text:'<strong>Mini-Jogo Limonada</strong> — Aprenda oferta e demanda na prática'},
   {emoji:'🧠',text:'<strong>Revisão Espaçada</strong> — Sistema Leitner de 5 caixas para memorização'},
-  {emoji:'📝',text:'<strong>Simulado Geral</strong> — Prova abrangente com todas as matérias'},
-  {emoji:'🏅',text:'<strong>23 Conquistas</strong> — Desbloqueie badges ao longo da jornada'},
-  {emoji:'🔒',text:'<strong>PIN Parental</strong> — Painel protegido para responsáveis'}
+  {emoji:'📝',text:'<strong>Simulado Geral</strong> — Prova abrangente com todas as matérias'}
 ];
 function checkWhatsNew(){
   // Don't show What's New while onboarding is active

@@ -64,7 +64,6 @@ if('serviceWorker' in navigator){
 </style>
 </head>
 <body>
-<script src="pin-gate.js"></script>
 <!-- APP SPLASH — appears instantly, removed after boot -->
 <div class="app-splash" id="appSplash">
   <div class="app-splash-inner">
@@ -963,6 +962,14 @@ if('serviceWorker' in navigator){
       _updateBar(null,'⚠ Offline','avb-offline');
     }
   });
+
+  // Fallback: if SW doesn't respond within 3s, show app version
+  setTimeout(function(){
+    var v=document.getElementById('avbVersion');
+    if(v && v.textContent==='v--' && typeof window.APP_VERSION_NUM!=='undefined'){
+      _updateBar('v'+window.APP_VERSION_NUM,'✓','avb-ok');
+    }
+  },3000);
 
   // controllerchange so roda via applyUpdate() (com {once:true})
 })();

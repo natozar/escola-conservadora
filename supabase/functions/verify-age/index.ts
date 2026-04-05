@@ -107,7 +107,7 @@ serve(async (req) => {
       })
     }
 
-    const { cpf, birthDate } = await req.json()
+    const { cpf, birthDate, cpfHash } = await req.json()
     if (!cpf || !birthDate) {
       return new Response(JSON.stringify({ error: 'CPF e data de nascimento são obrigatórios' }), {
         status: 400, headers: { ...cors(req), 'Content-Type': 'application/json' }
@@ -159,6 +159,17 @@ serve(async (req) => {
     // Cross-check: compare Serpro birth date with user-provided birth date
     const clientAge = calculateAge(birthDate)
     const crossCheckMatch = Math.abs(serproAge - clientAge) <= 1 // 1 year tolerance
+
+    // Save verification result to profiles (server-side, authoritative)
+    if (user) {
+      await supabase.from('profiles').update({
+        cpf_hash: cpfHash || null,
+        verification_method: 'cpf_serpro',
+        age_group: isAdult ? 'adult' : 'blocked',
+        birth_year: parseInt(cpfData.nascimento.slice(-4)) || null,
+        age_verified_at: new Date().toISOString()
+      }).eq('id', user.id)
+    }
 
     return new Response(JSON.stringify({
       verified: true,

@@ -463,8 +463,50 @@ ALTER TABLE profiles ADD COLUMN IF NOT EXISTS cpf_hash TEXT;
 -- verification_method: 'cpf_serpro' | 'self_declaration' | 'self_declaration_fallback' | 'govbr'
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS verification_method TEXT DEFAULT 'self_declaration';
 
--- Verification: check CPF columns
+-- ============================================================
+-- 11. MODERATION LOG (resolve TODO moderation.js:356)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS moderation_log (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id),
+  room_id TEXT NOT NULL,
+  action TEXT NOT NULL,
+  reason TEXT,
+  message_preview TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE moderation_log ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Users read own moderation logs" ON moderation_log;
+CREATE POLICY "Users read own moderation logs" ON moderation_log FOR SELECT USING (auth.uid() = user_id);
+DROP POLICY IF EXISTS "Service role insert moderation logs" ON moderation_log;
+CREATE POLICY "Service role insert moderation logs" ON moderation_log FOR INSERT WITH CHECK (true);
+CREATE INDEX IF NOT EXISTS idx_moderation_log_user ON moderation_log(user_id);
+CREATE INDEX IF NOT EXISTS idx_moderation_log_room ON moderation_log(room_id);
+
+-- ============================================================
+-- 12. CERTIFICATES (verifiable via public URL)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS certificates (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  hash TEXT UNIQUE NOT NULL,
+  profile_id UUID REFERENCES profiles(id),
+  module_index INTEGER NOT NULL,
+  discipline TEXT,
+  user_name TEXT,
+  issued_at TIMESTAMPTZ DEFAULT NOW()
+);
+ALTER TABLE certificates ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Anyone can verify certificates" ON certificates;
+CREATE POLICY "Anyone can verify certificates" ON certificates FOR SELECT USING (true);
+DROP POLICY IF EXISTS "Authenticated users create certificates" ON certificates;
+CREATE POLICY "Authenticated users create certificates" ON certificates FOR INSERT WITH CHECK (auth.uid() = profile_id);
+
+-- Verification: check all new tables and columns
 SELECT column_name, data_type FROM information_schema.columns
   WHERE table_name = 'profiles'
   AND column_name IN ('cpf_hash', 'verification_method')
   ORDER BY column_name;
+SELECT table_name FROM information_schema.tables
+  WHERE table_schema = 'public'
+  AND table_name IN ('moderation_log', 'certificates')
+  ORDER BY table_name;

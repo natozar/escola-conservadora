@@ -348,7 +348,7 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 11. ~~**Barra dupla mobile**~~ — **RESOLVIDO**: `appVersionBar` escondido no mobile (`display:none!important`), safe-area removido do body (aplicado apenas no header e bottom nav), mobile header simplificado para flat single-row (← | 💬 Debate [N] | 🔥streak XP 👤).
 12. **Moderacao de debate — 2 camadas**: filtro local (palavroes, dados pessoais, rate limit) + API Claude Haiku via Edge Function `moderate-debate`. Custo ~$0.001/msg. Timeout 5s com fallback permissivo. Reacoes curtas pulam IA. OFFLINE_MODE usa so filtro local. Deploy: `supabase functions deploy moderate-debate` + configurar `ANTHROPIC_API_KEY` nos secrets.
 13. **Moderacao de debate implementada (detalhes)** — Filtro 3 camadas (palavras proibidas, relevancia ao tema, rate limit). Filtro LGPD bloqueia dados pessoais (regex telefone, CPF, email, redes sociais). Sistema de strikes com suspensao progressiva (aviso → 24h → 72h → 7d → ban). Consent LGPD obrigatorio no primeiro acesso. Banner de regras em cada sala. Painel dos pais: historico de infracoes, mensagens enviadas, resetar strikes, desativar/reativar debate. Tudo client-side, funciona offline. SW v89.
-14. **Age gate 18+ — 5 camadas**: client (enforceAgeGate + anti-tamper + block screen z-index 99999), server (RLS 6 tabelas + trigger validate_age_gate), Edge Functions (ai-tutor e create-checkout retornam 403 se blocked), sync (mergeLocalToCloud envia birth_year/age_group/age_verified_at). COMPLETO. SW v94.
+14. **Age gate 18+ — 6 camadas**: client (enforceAgeGate + anti-tamper + block screen + CPF validation), server (RLS 6 tabelas + trigger validate_age_gate), Edge Functions (verify-age Serpro + ai-tutor/create-checkout 403 blocked), sync (mergeLocalToCloud envia cpf_hash/birth_year/age_group/age_verified_at). COMPLETO. SW v96.
 
 ---
 
@@ -694,6 +694,19 @@ Deploy → SW novo detectado (polling 60s)
 - **SQL:** Secao 9 adicionada em EXECUTE-THIS.sql (ALTER TABLE, trigger, 6 policies).
 - **Arquivos alterados:** src/boot.js, src/features/onboarding.js, src/features/debate.js, src/core/navigation.js, app.html, supabase-client.js, supabase/functions/ai-tutor/index.ts, supabase/functions/create-checkout/index.ts, supabase/migrations/EXECUTE-THIS.sql, sw.js
 - SW v94
+
+### Concluido nesta sessao (2026-04-05 — Producao Completa)
+- Pin-gate removido do app.html (arquivo mantido no repo para referencia)
+- Versao UI corrigida: APP_VERSION 4.0.0, fallback 3s se SW nao responder
+- Verificacao CPF (Lei Felca): campo CPF + mascara + validacao client-side + Edge Function verify-age (Serpro) salva direto em profiles
+- Hash SHA-256 do CPF (nunca armazena raw), localStorage + Supabase sync
+- Fallback gracioso se Serpro nao configurado (self_declaration_fallback)
+- moderation_log table + funcao logModeration() (resolve TODO moderation.js:356)
+- Blog SEO: JSON-LD structured data ja existia nos 5 artigos (confirmado)
+- Certificados verificaveis: cert.html + tabela certificates + hash SHA-256 publico + URL verificavel
+- CHANGELOG atualizado (4.0.0): Verificacao Idade, Age Gate, Debate, Certificados
+- SQL secoes 11 (moderation_log) e 12 (certificates) em EXECUTE-THIS.sql
+- SW v96
 
 ### ✅ CONCLUÍDO: FASE 2 do update PWA
 - skipWaiting() removido do install event (só no message handler)

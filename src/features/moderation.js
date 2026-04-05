@@ -353,4 +353,17 @@ async function aiModerateMessage(text,roomId){
 }
 window.aiModerateMessage=aiModerateMessage;
 
-// TODO: Supabase table: moderation_log (id, user_id, room_id, action, reason, message_preview, created_at)
+// ============================================================
+// MODERATION LOG — persists to Supabase moderation_log table
+// ============================================================
+async function logModeration(userId,roomId,action,reason,messagePreview){
+  if(typeof window.OFFLINE_MODE!=='undefined'&&window.OFFLINE_MODE)return;
+  if(typeof window.sbClient==='undefined'||!window.sbClient)return;
+  try{
+    await window.sbClient.from('moderation_log').insert({
+      user_id:userId,room_id:roomId,action:action,
+      reason:reason,message_preview:messagePreview?messagePreview.substring(0,100):null
+    });
+  }catch(e){console.warn('[Mod] Log failed:',e.message)}
+}
+window.logModeration=logModeration;

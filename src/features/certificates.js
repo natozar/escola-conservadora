@@ -2,7 +2,7 @@
 // CERTIFICATE — extracted from app.js lines 954-1117, 2076-2208
 // ============================================================
 let certModIdx=0;
-function showCert(mi){
+async function showCert(mi){
   certModIdx=mi;
   const m=window.M[mi];
   const disc=window.DISCIPLINES[m.discipline||'economia']||{label:'Economia',icon:'📚'};
@@ -10,19 +10,53 @@ function showCert(mi){
   const hours=Math.max(1,Math.round(nLessons*5/60));
   const quizOk=m.lessons.filter((_,li)=>window.S.quiz[`${mi}-${li}`]).length;
   const quizTotal=m.lessons.filter(l=>l.quiz).length;
-  const certHash=_certId(mi);
+  // Generate verifiable hash
+  const certRaw=[mi,window.S.name||'Aluno',Date.now()].join('-');
+  const fullHash=await _hashStr(certRaw);
+  const certHash='EL-'+fullHash.substring(0,12).toUpperCase();
+  // Save certificate
+  _saveCert(mi,certHash);
   document.getElementById('certName').textContent=window.S.name;
   document.getElementById('certModule').textContent=`Concluiu: ${m.icon} ${m.title}`;
   document.getElementById('certDetails').innerHTML=`${disc.icon} ${disc.label} · ${nLessons} aulas · ${hours}h · ${quizTotal?Math.round(quizOk/quizTotal*100)+'% quizzes':''}`;
   document.getElementById('certDate').textContent=new Date().toLocaleDateString('pt-BR',{day:'numeric',month:'long',year:'numeric'});
   document.getElementById('certId').textContent=`ID: ${certHash}`;
+  // Show verification URL
+  var urlEl=document.getElementById('certUrl');
+  if(urlEl)urlEl.textContent='escolaliberal.com.br/cert.html?id='+certHash;
   document.getElementById('certOverlay').classList.add('show')
+}
+async function _hashStr(str){
+  const enc=new TextEncoder().encode(str);
+  const buf=await crypto.subtle.digest('SHA-256',enc);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
 function _certId(mi){
   const raw=`${window.S.name}-${mi}-${window.S.lvl}`;
   let h=0;for(let i=0;i<raw.length;i++){h=((h<<5)-h)+raw.charCodeAt(i);h|=0}
   return 'EL-'+Math.abs(h).toString(36).toUpperCase().slice(0,8)
 }
+async function _saveCert(mi,certHash){
+  // Save to localStorage
+  try{
+    var certs=JSON.parse(localStorage.getItem('escola_certs')||'[]');
+    if(!certs.find(function(c){return c.hash===certHash})){
+      var m=window.M[mi];
+      certs.push({hash:certHash,modIdx:mi,date:new Date().toISOString(),name:window.S.name,discipline:m.discipline||'economia'});
+      localStorage.setItem('escola_certs',JSON.stringify(certs));
+    }
+  }catch(e){}
+  // Save to Supabase if available
+  if(typeof window.sbClient!=='undefined'&&window.sbClient&&typeof window.currentUser!=='undefined'&&window.currentUser){
+    try{
+      await window.sbClient.from('certificates').upsert({
+        hash:certHash,profile_id:window.currentUser.id,module_index:mi,
+        discipline:window.M[mi].discipline||'economia',user_name:window.S.name
+      },{onConflict:'hash'});
+    }catch(e){console.warn('[Cert] Supabase save failed:',e.message)}
+  }
+}
+window._saveCert=_saveCert;
 function _discCertId(disc){
   const raw=`${window.S.name}-DISC-${disc}`;
   let h=0;for(let i=0;i<raw.length;i++){h=((h<<5)-h)+raw.charCodeAt(i);h|=0}
