@@ -108,7 +108,9 @@ function enforceAgeGate(){
 }
 function _showAgeBlockScreen(){
   // Prevent duplicate
-  if(document.getElementById('ageBlockScreen'))return;
+  // Use _origById for existence checks (Safe DOM Proxy makes getElementById always truthy)
+  var _id=window._origById||document.getElementById.bind(document);
+  if(_id('ageBlockScreen'))return;
   var screen=document.createElement('div');
   screen.id='ageBlockScreen';
   screen.style.cssText='position:fixed;inset:0;z-index:99999;background:var(--bg-primary,#0f1729);display:flex;align-items:center;justify-content:center;padding:2rem';
@@ -120,8 +122,8 @@ function _showAgeBlockScreen(){
     +'</div>';
   document.body.appendChild(screen);
   // Hide everything else
-  var onboard=document.getElementById('onboard');if(onboard)onboard.style.display='none';
-  var mainC=document.getElementById('mainC');if(mainC)mainC.style.display='none';
+  var onboard=_id('onboard');if(onboard)onboard.style.display='none';
+  var mainC=_id('mainC');if(mainC)mainC.style.display='none';
 }
 window.enforceAgeGate=enforceAgeGate;
 window._showAgeBlockScreen=_showAgeBlockScreen;
@@ -156,7 +158,8 @@ window.addEventListener('popstate',function(e){
 // ============================================================
 var _syncHideTimer=null;
 function showSyncStatus(state,msg){
-  var el=document.getElementById('syncIndicator');if(!el)return;
+  var _id=window._origById||document.getElementById.bind(document);
+  var el=_id('syncIndicator');if(!el)return;
   el.className='sync-indicator show '+state;
   el.innerHTML='<span class="sync-dot"></span>'+msg;
   clearTimeout(_syncHideTimer);
@@ -180,7 +183,8 @@ window.handleProfileNav=handleProfileNav;
 // ============================================================
 function showLoginPrompt(context){
   if(OFFLINE_MODE){handleProfileNav();return}
-  if(document.getElementById('loginPrompt'))return;
+  var _id=window._origById||document.getElementById.bind(document);
+  if(_id('loginPrompt'))return;
   var titles={
     perfil:{icon:'👤',h:'Entre para salvar seu progresso',sub:'Sincronize entre dispositivos e acesse seu perfil.'},
     debate:{icon:'💬',h:'Entre para participar do debate',sub:'Faca login para enviar mensagens.'}
@@ -245,8 +249,9 @@ export async function boot(){
   // AGE GATE — check BEFORE rendering any content
   if(enforceAgeGate()){
     // User is blocked — stop boot, show block screen only
-    var sp=document.getElementById('appSplash');if(sp)sp.remove();
-    var sp2=document.getElementById('splash');if(sp2)sp2.style.display='none';
+    var _id=window._origById||document.getElementById.bind(document);
+    var sp=_id('appSplash');if(sp)sp.remove();
+    var sp2=_id('splash');if(sp2)sp2.style.display='none';
     return;
   }
 
@@ -288,9 +293,9 @@ export async function boot(){
 
   // Remove splash overlays — but NOT onboard (age gate must persist)
   setTimeout(function(){
-    var sp=document.getElementById('appSplash');if(sp){sp.style.opacity='0';setTimeout(function(){sp.remove()},300)}
-    var sp2=document.getElementById('splash');if(sp2){sp2.style.opacity='0';sp2.style.pointerEvents='none';setTimeout(function(){sp2.style.display='none'},500)}
-    // Do NOT remove onboard here — it's the age gate for unverified users
+    var _id=window._origById||document.getElementById.bind(document);
+    var sp=_id('appSplash');if(sp){sp.style.opacity='0';setTimeout(function(){sp.remove()},300)}
+    var sp2=_id('splash');if(sp2){sp2.style.opacity='0';sp2.style.pointerEvents='none';setTimeout(function(){sp2.style.display='none'},500)}
   },600);
 
   // Hash navigation
@@ -370,9 +375,10 @@ export async function boot(){
   }
 
   function updateAuthUI(){
-    var loggedOut=document.getElementById('authLoggedOut');
-    var loggedIn=document.getElementById('authLoggedIn');
-    var nameEl=document.getElementById('authUserName');
+    var _id=window._origById||document.getElementById.bind(document);
+    var loggedOut=_id('authLoggedOut');
+    var loggedIn=_id('authLoggedIn');
+    var nameEl=_id('authUserName');
     if(!loggedOut||!loggedIn)return;
     if(typeof window.currentUser!=='undefined'&&window.currentUser){
       loggedOut.style.display='none';loggedIn.style.display='block';
