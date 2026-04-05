@@ -375,6 +375,8 @@ async function mergeLocalToCloud() {
     if (localState.birthYear) profileUpdate.birth_year = localState.birthYear;
     if (localState.ageGroup) profileUpdate.age_group = localState.ageGroup;
     if (localState.ageVerifiedAt) profileUpdate.age_verified_at = new Date(localState.ageVerifiedAt).toISOString();
+    if (localState.cpfHash) profileUpdate.cpf_hash = localState.cpfHash;
+    if (localState.verificationMethod) profileUpdate.verification_method = localState.verificationMethod;
     await sbClient
       .from('profiles')
       .update(profileUpdate)

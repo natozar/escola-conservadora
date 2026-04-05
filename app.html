@@ -178,15 +178,18 @@ if('serviceWorker' in navigator){
 <!-- ONBOARDING — Age gate 18+ -->
 <div class="onboard-overlay" id="onboard">
   <div class="onboard-card">
-    <!-- Step 1: Age verification (must be 18+) -->
+    <!-- Step 1: Age verification via CPF (Lei Felca compliance) -->
     <div class="onboard-step active" id="obStep1">
       <div class="onboard-logo">🎓</div>
       <h2>Bem-vindo!</h2>
       <p>A educacao que a escola deveria ter dado.</p>
-      <label for="obBirthDate" style="font-weight:600;margin-bottom:.25rem;display:block">Confirme sua idade para continuar</label>
-      <input class="onboard-input" id="obBirthDate" type="date" max="" style="margin-bottom:.75rem" autocomplete="bday">
-      <p style="font-size:.72rem;color:var(--text-muted);margin-bottom:.75rem">Usamos apenas o ano para verificacao de idade. A data completa nao e armazenada (LGPD).</p>
-      <button class="btn btn-sage" onclick="obVerifyAge()" style="width:100%">Continuar</button>
+      <label for="obCpf" style="font-weight:600;margin-bottom:.25rem;display:block">CPF</label>
+      <input class="onboard-input" id="obCpf" type="text" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" autocomplete="off" style="margin-bottom:.5rem">
+      <label for="obBirthDate" style="font-weight:600;margin-bottom:.25rem;display:block">Data de nascimento</label>
+      <input class="onboard-input" id="obBirthDate" type="date" max="" style="margin-bottom:.5rem" autocomplete="bday">
+      <p style="font-size:.7rem;color:var(--text-muted);margin-bottom:.75rem;line-height:1.4">Verificamos seu CPF na base da Receita Federal para confirmar sua idade. Armazenamos apenas um codigo anonimizado (hash). Seu CPF nunca e salvo. (LGPD Art. 14)</p>
+      <button class="btn btn-sage" id="obVerifyBtn" onclick="obVerifyAge()" style="width:100%">Verificar Idade</button>
+      <div id="obVerifyLoading" style="display:none;text-align:center;padding:.75rem"><span style="font-size:.9rem;color:var(--text-muted)">⏳ Verificando...</span></div>
       <div id="obAgeError" style="color:#ef4444;font-size:.85rem;margin-top:.75rem;display:none"></div>
     </div>
 

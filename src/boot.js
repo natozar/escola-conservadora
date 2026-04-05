@@ -92,8 +92,12 @@ function enforceAgeGate(){
   if(S.birthYear){
     var today=new Date();
     var age=today.getFullYear()-S.birthYear;
-    // Conservative: if born this year, age could be 0 or 1
     if(age<18){S.ageGroup='blocked';window.save()}
+  }
+  // Anti-tamper: if CPF-verified as blocked, prevent any override
+  if(S.verificationMethod==='cpf_serpro'&&S.ageGroup==='blocked'){
+    _showAgeBlockScreen();
+    return true;
   }
   // If blocked → show permanent block screen
   if(S.ageGroup==='blocked'){

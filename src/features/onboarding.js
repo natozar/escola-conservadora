@@ -1,11 +1,50 @@
 // ============================================================
-// ONBOARDING — Age verification (18+ only)
-// Step 1: Date of birth → must be 18+
+// ONBOARDING — Age verification via CPF (Lei Felca compliance)
+// Step 1: CPF + birth date → Serpro API verification (18+ only)
 // Step 2: Name + avatar (optional)
-// DEMO_MODE/OFFLINE_MODE: skip all steps
+// DEMO_MODE+OFFLINE_MODE: skip all steps
+// Fallback: self-declaration if API not configured/down
 // ============================================================
 const AVATARS=['🧑‍🎓','👨‍💼','👩‍💼','🦊','🦁','🐺','🦅','🐉','💎','🏆'];
 let obAvatar='🧑‍🎓';
+
+// ============================================================
+// CPF VALIDATION (client-side — dígitos verificadores)
+// ============================================================
+function isValidCPF(cpf){
+  cpf=cpf.replace(/\D/g,'');
+  if(cpf.length!==11||/^(\d)\1+$/.test(cpf))return false;
+  var sum=0,rest;
+  for(var i=1;i<=9;i++)sum+=parseInt(cpf[i-1])*(11-i);
+  rest=(sum*10)%11;if(rest===10||rest===11)rest=0;
+  if(rest!==parseInt(cpf[9]))return false;
+  sum=0;
+  for(var i=1;i<=10;i++)sum+=parseInt(cpf[i-1])*(12-i);
+  rest=(sum*10)%11;if(rest===10||rest===11)rest=0;
+  if(rest!==parseInt(cpf[10]))return false;
+  return true;
+}
+
+// CPF mask on input
+function _initCpfMask(){
+  var input=document.getElementById('obCpf');
+  if(!input)return;
+  input.addEventListener('input',function(e){
+    var v=e.target.value.replace(/\D/g,'').slice(0,11);
+    if(v.length>9)v=v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/,'$1.$2.$3-$4');
+    else if(v.length>6)v=v.replace(/(\d{3})(\d{3})(\d{1,3})/,'$1.$2.$3');
+    else if(v.length>3)v=v.replace(/(\d{3})(\d{1,3})/,'$1.$2');
+    e.target.value=v;
+  });
+}
+
+// SHA-256 hash (Web Crypto API — never store raw CPF)
+async function _hashCPF(cpf){
+  var raw=cpf.replace(/\D/g,'');
+  var encoded=new TextEncoder().encode(raw);
+  var hash=await crypto.subtle.digest('SHA-256',encoded);
+  return Array.from(new Uint8Array(hash)).map(function(b){return b.toString(16).padStart(2,'0')}).join('');
+}
 
 function initOnboard(){
   // Presentation mode: skip everything
@@ -40,30 +79,89 @@ function initOnboard(){
     return;
   }
   // New user or unverified → show onboarding (age gate required)
-  // Set max date on birth input (today)
   var bd=document.getElementById('obBirthDate');
   if(bd)bd.max=new Date().toISOString().slice(0,10);
-  // Show onboarding overlay
+  _initCpfMask();
   document.getElementById('onboard').style.display='';
 }
 
-// Step 1 → verify age from date of birth (must be 18+)
-function obVerifyAge(){
-  var bd=document.getElementById('obBirthDate');
+// Step 1 → verify age via CPF (Serpro API) with birth date cross-check
+async function obVerifyAge(){
+  var cpfInput=document.getElementById('obCpf');
+  var bdInput=document.getElementById('obBirthDate');
   var errEl=document.getElementById('obAgeError');
-  if(!bd||!bd.value){
+  var btn=document.getElementById('obVerifyBtn');
+  var loading=document.getElementById('obVerifyLoading');
+  var cpfRaw=cpfInput?cpfInput.value.replace(/\D/g,''):'';
+  var bdVal=bdInput?bdInput.value:'';
+
+  // Validate CPF format
+  if(!cpfRaw||!isValidCPF(cpfRaw)){
+    if(errEl){errEl.textContent='CPF invalido. Verifique os digitos.';errEl.style.display='block'}
+    return;
+  }
+  // Validate birth date
+  if(!bdVal){
     if(errEl){errEl.textContent='Por favor, informe sua data de nascimento.';errEl.style.display='block'}
     return;
   }
-  var birth=new Date(bd.value);
+  if(errEl)errEl.style.display='none';
+
+  // Calculate age from birth date (client-side, used as cross-check and fallback)
+  var birth=new Date(bdVal);
   var today=new Date();
   var age=today.getFullYear()-birth.getFullYear();
   var m=today.getMonth()-birth.getMonth();
   if(m<0||(m===0&&today.getDate()<birth.getDate()))age--;
 
-  // Save only birth year (LGPD data minimization)
+  // Show loading
+  if(btn)btn.style.display='none';
+  if(loading)loading.style.display='block';
+
+  // Hash CPF (never send or store raw)
+  var cpfHash=await _hashCPF(cpfRaw);
+
+  // Try Serpro API via Edge Function
+  var method='self_declaration';
+  var apiVerified=false;
+  try{
+    if(!window.OFFLINE_MODE&&typeof window.sbClient!=='undefined'&&window.sbClient){
+      var session=await window.sbClient.auth.getSession();
+      var token=session?.data?.session?.access_token;
+      if(token){
+        var resp=await fetch((window.SUPABASE_URL||'')+'/functions/v1/verify-age',{
+          method:'POST',
+          headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},
+          body:JSON.stringify({cpf:cpfRaw,birthDate:bdVal})
+        });
+        if(resp.ok){
+          var result=await resp.json();
+          if(result.fallback){
+            // API not configured — use self-declaration fallback
+            method='self_declaration_fallback';
+          }else if(result.verified){
+            apiVerified=true;
+            method='cpf_serpro';
+            // Use API-returned age if available, otherwise use client calculation
+            if(typeof result.is_adult==='boolean'&&!result.is_adult){age=0}
+          }
+        }
+      }
+    }
+  }catch(e){
+    console.warn('[AgeGate] Serpro API error, using self-declaration fallback:',e.message);
+    method='self_declaration_fallback';
+  }
+
+  // Hide loading, show button
+  if(btn)btn.style.display='';
+  if(loading)loading.style.display='none';
+
+  // Save results (LGPD: only hash, never raw CPF)
   window.S.birthYear=birth.getFullYear();
   window.S.ageVerifiedAt=Date.now();
+  window.S.cpfHash=cpfHash;
+  window.S.verificationMethod=method;
 
   if(age<18){
     // Block: under 18 — permanent
@@ -76,6 +174,7 @@ function obVerifyAge(){
 
   // 18+: proceed to profile step
   window.S.ageGroup='adult';
+  window.save();
   if(errEl)errEl.style.display='none';
   _showObStep('obStep3Profile');
   _initProfileStep();

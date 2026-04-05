@@ -452,3 +452,19 @@ SELECT column_name, data_type FROM information_schema.columns
 SELECT trigger_name FROM information_schema.triggers
   WHERE event_object_table = 'profiles'
   AND trigger_name = 'tr_validate_age_gate';
+
+-- ============================================================
+-- 10. CPF VERIFICATION: Schema (Lei Felca compliance)
+-- ============================================================
+
+-- cpf_hash: SHA-256 of CPF (NEVER store raw CPF)
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS cpf_hash TEXT;
+
+-- verification_method: 'cpf_serpro' | 'self_declaration' | 'self_declaration_fallback' | 'govbr'
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS verification_method TEXT DEFAULT 'self_declaration';
+
+-- Verification: check CPF columns
+SELECT column_name, data_type FROM information_schema.columns
+  WHERE table_name = 'profiles'
+  AND column_name IN ('cpf_hash', 'verification_method')
+  ORDER BY column_name;
