@@ -12,7 +12,7 @@ const OFFLINE_MODE = false;
 window.OFFLINE_MODE = OFFLINE_MODE;
 
 // DEMO_MODE: app abre sem exigir login. Paywall desabilitado.
-const DEMO_MODE = false;
+const DEMO_MODE = true;
 window.DEMO_MODE = DEMO_MODE;
 
 // ============================================================
