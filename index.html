@@ -138,15 +138,17 @@ nav.scrolled{background:rgba(15,23,41,.92);backdrop-filter:blur(20px) saturate(1
 .hero-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-xl);padding:2rem;position:relative;overflow:visible}
 .hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage),var(--sky),var(--honey));border-radius:var(--r-xl) var(--r-xl) 0 0}
 .hero-card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:1.5rem}
-.hc-module{display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:var(--r-md);transition:background .2s;margin-bottom:.5rem}
+.hc-module{display:flex;align-items:center;gap:1rem;padding:.75rem 1rem;border-radius:var(--r-md);transition:background .2s;margin-bottom:.25rem}
+.hc-module:last-of-type{margin-bottom:0}
 .hc-module:hover{background:var(--bg-hover)}
-.hc-icon{width:44px;height:44px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.hc-icon{width:48px;height:48px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
 .hc-icon.i1{background:var(--sage-muted);color:var(--sage-light)}
 .hc-icon.i2{background:var(--sky-muted);color:var(--sky)}
 .hc-icon.i3{background:var(--honey-muted);color:var(--honey)}
+.hc-text{flex:1;min-width:0;text-align:left}
 .hc-text h3.hc-h4{font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;margin-bottom:.15rem}
-.hc-text p{font-size:.78rem;color:var(--text-muted)}
-.hc-bar{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.hc-text p{font-size:.78rem;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hc-bar{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
 .hc-bar-label{display:flex;justify-content:space-between;font-size:.75rem;color:var(--text-muted);margin-bottom:.5rem}
 .hc-bar-track{height:6px;background:rgba(255,255,255,.04);border-radius:var(--r-full);overflow:hidden}
 .hc-bar-fill{height:100%;background:linear-gradient(90deg,var(--sage),var(--sage-light));border-radius:var(--r-full);width:0%;transition:width 2s var(--ease)}
@@ -260,6 +262,7 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
   .hamburger{display:block}
   .hero{padding:5rem 1.25rem 3rem;overflow-x:clip}
   .hero h1{font-size:2.2rem}
+  .hero-badge{display:none}
   .feat-grid{grid-template-columns:1fr}
   .think-grid{grid-template-columns:1fr;max-width:320px}
   .mod{grid-template-columns:44px 1fr 36px;padding:1.25rem;gap:1rem}
@@ -402,9 +405,9 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
     </div>
     <div class="fade d2">
       <div class="hero-card" style="position:relative">
-        <div class="hero-badge" style="top:-8px;right:16px;animation-delay:0s">🏅 Conquistas</div>
-        <div class="hero-badge" style="bottom:24px;left:8px;animation-delay:1.5s">🔥 Streaks</div>
-        <div class="hero-badge" style="top:40%;right:8px;animation-delay:3s">⭐ XP</div>
+        <div class="hero-badge" style="top:-12px;right:20px;animation-delay:0s">🏅 Conquistas</div>
+        <div class="hero-badge" style="bottom:-12px;left:20px;animation-delay:1.5s">🔥 Streaks</div>
+        <div class="hero-badge" style="top:50%;right:-14px;animation-delay:3s">⭐ XP</div>
         <div class="hero-card-title">21 Disciplinas · 66 Módulos · 660 Aulas</div>
         <div class="hc-module">
           <div class="hc-icon i1">💰</div>
