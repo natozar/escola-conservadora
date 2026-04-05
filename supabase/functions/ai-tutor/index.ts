@@ -56,13 +56,21 @@ serve(async (req: Request) => {
       if (!error && user) {
         userId = user.id
 
-        // Get user plan
+        // Get user plan + age verification
         const { data: profile } = await supabase
           .from('profiles')
-          .select('plan')
+          .select('plan, age_group')
           .eq('id', userId)
           .single()
         if (profile?.plan) userPlan = profile.plan
+
+        // Block if underage or unverified
+        if (profile && profile.age_group === 'blocked') {
+          return new Response(JSON.stringify({ error: 'Verificação de idade necessária' }), {
+            status: 403,
+            headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' }
+          })
+        }
       }
     }
 

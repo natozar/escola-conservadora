@@ -52,6 +52,19 @@ serve(async (req) => {
       })
     }
 
+    // Age gate: block underage users from purchasing
+    const { data: ageProfile } = await supabase
+      .from('profiles')
+      .select('age_group')
+      .eq('id', user.id)
+      .single()
+    if (ageProfile && ageProfile.age_group === 'blocked') {
+      return new Response(JSON.stringify({ error: 'Verificação de idade necessária' }), {
+        status: 403,
+        headers: { ...getCorsHeaders(req), 'Content-Type': 'application/json' }
+      })
+    }
+
     const { priceId, successUrl, cancelUrl } = await req.json()
 
     // Validate redirect URLs to prevent open redirect attacks

@@ -346,3 +346,109 @@ SELECT indexname, tablename FROM pg_indexes
   WHERE schemaname = 'public'
   AND indexname LIKE 'idx_%'
   ORDER BY tablename, indexname;
+
+-- ============================================================
+-- 9. AGE GATE: Schema + RLS + Trigger (18+ enforcement)
+-- ============================================================
+
+-- 9a. Add age columns to profiles
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS birth_year INTEGER;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS age_verified_at TIMESTAMPTZ;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS age_group TEXT DEFAULT NULL;
+
+-- 9b. Trigger: validate_age_gate — enforce consistency on every write
+CREATE OR REPLACE FUNCTION validate_age_gate()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- If birth_year indicates under 18, force blocked
+  IF NEW.birth_year IS NOT NULL AND (EXTRACT(YEAR FROM NOW()) - NEW.birth_year) < 18 THEN
+    NEW.age_group := 'blocked';
+  END IF;
+  -- Prevent changing blocked→adult if birth_year still indicates minor
+  IF OLD IS NOT NULL AND OLD.age_group = 'blocked' AND NEW.age_group = 'adult' THEN
+    IF NEW.birth_year IS NOT NULL AND (EXTRACT(YEAR FROM NOW()) - NEW.birth_year) < 18 THEN
+      NEW.age_group := 'blocked';
+    END IF;
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+DROP TRIGGER IF EXISTS tr_validate_age_gate ON profiles;
+CREATE TRIGGER tr_validate_age_gate
+  BEFORE INSERT OR UPDATE ON profiles
+  FOR EACH ROW EXECUTE FUNCTION validate_age_gate();
+
+-- 9c. RLS: block underage access on profiles
+DROP POLICY IF EXISTS "block_underage_profiles" ON profiles;
+CREATE POLICY "block_underage_profiles" ON profiles
+  FOR ALL USING (
+    age_group IS NULL   -- not yet verified (allow onboarding to complete)
+    OR age_group = 'adult'
+    -- age_group = 'blocked' → row invisible via RLS
+  );
+
+-- 9d. RLS: block underage access on progress (via JOIN)
+DROP POLICY IF EXISTS "block_underage_progress" ON progress;
+CREATE POLICY "block_underage_progress" ON progress
+  FOR ALL USING (
+    EXISTS (
+      SELECT 1 FROM profiles p
+      WHERE p.id = progress.profile_id
+      AND (p.age_group IS NULL OR p.age_group = 'adult')
+    )
+  );
+
+-- 9e. RLS: block underage access on notes
+DROP POLICY IF EXISTS "block_underage_notes" ON notes;
+CREATE POLICY "block_underage_notes" ON notes
+  FOR ALL USING (
+    EXISTS (
+      SELECT 1 FROM profiles p
+      WHERE p.id = notes.profile_id
+      AND (p.age_group IS NULL OR p.age_group = 'adult')
+    )
+  );
+
+-- 9f. RLS: block underage access on favorites
+DROP POLICY IF EXISTS "block_underage_favorites" ON favorites;
+CREATE POLICY "block_underage_favorites" ON favorites
+  FOR ALL USING (
+    EXISTS (
+      SELECT 1 FROM profiles p
+      WHERE p.id = favorites.profile_id
+      AND (p.age_group IS NULL OR p.age_group = 'adult')
+    )
+  );
+
+-- 9g. RLS: block underage access on timeline
+DROP POLICY IF EXISTS "block_underage_timeline" ON timeline;
+CREATE POLICY "block_underage_timeline" ON timeline
+  FOR ALL USING (
+    EXISTS (
+      SELECT 1 FROM profiles p
+      WHERE p.id = timeline.profile_id
+      AND (p.age_group IS NULL OR p.age_group = 'adult')
+    )
+  );
+
+-- 9h. RLS: block underage access on weekly_xp
+DROP POLICY IF EXISTS "block_underage_weekly_xp" ON weekly_xp;
+CREATE POLICY "block_underage_weekly_xp" ON weekly_xp
+  FOR ALL USING (
+    EXISTS (
+      SELECT 1 FROM profiles p
+      WHERE p.id = weekly_xp.profile_id
+      AND (p.age_group IS NULL OR p.age_group = 'adult')
+    )
+  );
+
+-- 9i. Verification: check age gate columns and trigger
+SELECT column_name, data_type FROM information_schema.columns
+  WHERE table_name = 'profiles'
+  AND column_name IN ('birth_year', 'age_verified_at', 'age_group')
+  ORDER BY column_name;
+
+SELECT trigger_name FROM information_schema.triggers
+  WHERE event_object_table = 'profiles'
+  AND trigger_name = 'tr_validate_age_gate';

@@ -361,18 +361,23 @@ async function mergeLocalToCloud() {
       if (typeof ui === 'function') ui();
     }
 
-    // 4. Sincronizar perfil
+    // 4. Sincronizar perfil (includes age gate fields)
+    const profileUpdate = {
+      name: localState.name || 'Aluno',
+      avatar: localState.avatar || '🧑‍🎓',
+      onboarding_done: localState.name !== 'Aluno',
+      theme: localStorage.getItem('escola_theme') || 'dark',
+      daily_goal: (typeof getDailyGoal === 'function' && getDailyGoal()?.target) ? getDailyGoal().target : 3,
+      pin: localStorage.getItem('escola_pin') || null,
+      state: localState.state || null
+    };
+    // Sync age verification to server (server trigger validates consistency)
+    if (localState.birthYear) profileUpdate.birth_year = localState.birthYear;
+    if (localState.ageGroup) profileUpdate.age_group = localState.ageGroup;
+    if (localState.ageVerifiedAt) profileUpdate.age_verified_at = new Date(localState.ageVerifiedAt).toISOString();
     await sbClient
       .from('profiles')
-      .update({
-        name: localState.name || 'Aluno',
-        avatar: localState.avatar || '🧑‍🎓',
-        onboarding_done: localState.name !== 'Aluno',
-        theme: localStorage.getItem('escola_theme') || 'dark',
-        daily_goal: (typeof getDailyGoal === 'function' && getDailyGoal()?.target) ? getDailyGoal().target : 3,
-        pin: localStorage.getItem('escola_pin') || null,
-        state: localState.state || null
-      })
+      .update(profileUpdate)
       .eq('id', currentUser.id);
 
   } catch (e) {
