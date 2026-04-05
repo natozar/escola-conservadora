@@ -135,8 +135,8 @@ nav.scrolled{background:rgba(15,23,41,.92);backdrop-filter:blur(20px) saturate(1
 .hero-actions{display:flex;gap:.75rem;flex-wrap:wrap}
 
 /* Hero Visual Card */
-.hero-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-xl);padding:2rem;position:relative;overflow:hidden}
-.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage),var(--sky),var(--honey))}
+.hero-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-xl);padding:2rem;position:relative;overflow:visible}
+.hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--sage),var(--sky),var(--honey));border-radius:var(--r-xl) var(--r-xl) 0 0}
 .hero-card-title{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:1.5rem}
 .hc-module{display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:var(--r-md);transition:background .2s;margin-bottom:.5rem}
 .hc-module:hover{background:var(--bg-hover)}
@@ -203,7 +203,7 @@ nav.scrolled{background:rgba(15,23,41,.92);backdrop-filter:blur(20px) saturate(1
 .think p{font-size:.82rem;color:var(--text-secondary);line-height:1.55;font-style:italic}
 
 /* ========== TESTIMONIALS ========== */
-.testimonials{padding:7rem 2rem}
+.testimonials{padding:7rem 2rem;background:var(--bg-secondary)}
 .test-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
 @media(max-width:900px){.test-grid{grid-template-columns:1fr}}
 .test{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:2rem;transition:all .3s var(--ease)}
@@ -235,9 +235,11 @@ nav.scrolled{background:rgba(15,23,41,.92);backdrop-filter:blur(20px) saturate(1
 .cta-actions{display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap}
 
 /* ========== FOOTER ========== */
-footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center}
-footer p{font-size:.82rem;color:var(--text-muted)}
-footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var(--text-secondary);margin-top:.5rem;font-size:.95rem}
+footer{padding:3rem 2rem 2.5rem;border-top:1px solid var(--border);text-align:center}
+footer p{font-size:.82rem;color:var(--text-muted);line-height:1.6}
+footer a{transition:color .2s}
+footer a:hover{opacity:.8}
+footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var(--text-secondary);margin-top:.75rem;font-size:.95rem}
 
 /* ========== RESPONSIVE ========== */
 @media(max-width:1024px){
@@ -256,7 +258,7 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
   .nav-links a{padding:.75rem 1rem;border-radius:var(--r-md);font-size:.95rem;width:100%}
   .nav-cta{text-align:center;margin-top:.5rem}
   .hamburger{display:block}
-  .hero{padding:5rem 1.25rem 3rem}
+  .hero{padding:5rem 1.25rem 3rem;overflow-x:clip}
   .hero h1{font-size:2.2rem}
   .feat-grid{grid-template-columns:1fr}
   .think-grid{grid-template-columns:1fr;max-width:320px}
@@ -297,7 +299,6 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Escola Liberal — A Educação que a Escola Deveria Ter Dado","description":"21 disciplinas, 660 aulas gratuitas para adultos 18+. Economia, Filosofia, Finanças, Oratória, Programação, IA e mais. Gamificação e certificados. Bilíngue PT/EN.","provider":{"@type":"Organization","name":"Escola Liberal","url":"https://escolaliberal.com.br"},"educationalLevel":"Adultos 18+","inLanguage":["pt-BR","en-US"],"isAccessibleForFree":true,"numberOfCredits":"660","hasCourseInstance":{"@type":"CourseInstance","courseMode":"online","courseWorkload":"PT660H"}}</script>
 </head>
 <body>
-<script src="pin-gate.js"></script>
 
 <!-- MOBILE WELCOME SCREEN -->
 <div class="mobile-welcome" id="mobileWelcome" style="display:none">
@@ -401,9 +402,9 @@ footer .tagline{font-family:'DM Serif Display',serif;font-style:italic;color:var
     </div>
     <div class="fade d2">
       <div class="hero-card" style="position:relative">
-        <div class="hero-badge" style="top:-12px;right:20px;animation-delay:0s">🏅 Conquistas</div>
-        <div class="hero-badge" style="bottom:30px;left:-16px;animation-delay:1.5s">🔥 Streaks</div>
-        <div class="hero-badge" style="top:40%;right:-20px;animation-delay:3s">⭐ XP</div>
+        <div class="hero-badge" style="top:-8px;right:16px;animation-delay:0s">🏅 Conquistas</div>
+        <div class="hero-badge" style="bottom:24px;left:8px;animation-delay:1.5s">🔥 Streaks</div>
+        <div class="hero-badge" style="top:40%;right:8px;animation-delay:3s">⭐ XP</div>
         <div class="hero-card-title">21 Disciplinas · 66 Módulos · 660 Aulas</div>
         <div class="hc-module">
           <div class="hc-icon i1">💰</div>
