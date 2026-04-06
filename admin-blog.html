@@ -97,10 +97,13 @@ function render(){
     const score=k.reviewScore;
     const bc=score===null?'badge-gray':score>=7?'badge-green':score>=5?'badge-yellow':'badge-red';
     const isApproved=approved.includes(k.slug);
-    return `<div class="card">
-      <div class="card-head"><div class="card-title">${k.title}</div><span class="badge ${bc}">${score!==null?score+'/10':'—'}</span></div>
+    const hasSafety = k.safetyFlags && k.safetyFlags.length > 0;
+    const safetyHtml = hasSafety ? '<div style="color:#e07460;font-size:.75rem;margin:.35rem 0;padding:.35rem .5rem;background:rgba(224,116,96,.1);border-radius:6px;border:1px solid rgba(224,116,96,.2)">' + k.safetyFlags.map(f=>'⚠ '+f).join('<br>') + '</div>' : '';
+    return `<div class="card" style="${hasSafety?'border-color:rgba(224,116,96,.4)':''}">
+      <div class="card-head"><div class="card-title">${k.title}</div><span class="badge ${bc}">${score!==null?score+'/10':'—'}</span>${hasSafety?'<span class="badge badge-red" style="margin-left:.25rem">VERIFICAR</span>':''}</div>
       <div class="card-meta">${k.tag} · ${k.cluster} · ${k.keyword}</div>
       ${k.reviewNotes?`<div class="card-review">${k.reviewNotes}</div>`:''}
+      ${safetyHtml}
       <div class="card-actions">
         ${k.status==='drafted'?`<button class="btn" onclick="preview('${k.slug}')">Visualizar</button>`:''}
         ${k.status==='drafted'&&!isApproved?`<button class="btn btn-approve" onclick="approve('${k.slug}')">Aprovar</button>`:''}

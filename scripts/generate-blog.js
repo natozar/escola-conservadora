@@ -56,26 +56,61 @@ async function callGemini(model, prompt, maxTokens) {
 // ============================================================
 function writerPrompt(kw, allSlugs) {
   const links = (kw.relatedSlugs || []).filter(s => allSlugs.includes(s)).map(s => `<a href="${s}.html">${s.replace(/-/g, ' ')}</a>`).join(', ');
+  const discCtx = kw.disciplineContext ? kw.disciplineContext.join(', ') : kw.discipline;
   return `Voce e redator senior da Escola Liberal, plataforma educacional brasileira gratuita para adultos 18+.
-TAREFA: Escreva artigo completo em HTML (apenas conteudo dentro de <article>, SEM <html>/<head>).
-REGRAS:
-1. Publico: adultos brasileiros 18+ que nao tiveram educacao de qualidade. Tom direto, respeitoso, pratico.
-2. Extensao: ${kw.targetWordCount || 1800} palavras minimo. Conteudo REAL com exemplos brasileiros.
-3. Estrutura: <h1>, 5-6 secoes <h2>, paragrafos <p>, listas <ul>/<ol>.
-4. Keyword "${kw.keyword}" no <h1>, primeiro paragrafo, 2+ subtitulos <h2>.
-5. NAO use emojis, cliches motivacionais, frases genericas de IA.
-6. Use exemplos reais brasileiros (R$, INSS, CLT, Selic).
-7. Ultima secao: "Na Escola Liberal, a disciplina de ${kw.discipline} cobre esse tema com aulas interativas e certificados — 100% gratuito."
-${links ? `8. Links internos: ${links}` : ''}
+TAREFA: Escreva artigo educacional completo em HTML (apenas conteudo dentro de <article>, SEM <html>/<head>).
+
+=== REGRAS DE VERACIDADE (INVIOLAVEIS) ===
+1. NAO INVENTE DADOS. Se nao tem certeza de um numero ou estatistica, NAO inclua. Prefira explicacoes qualitativas.
+2. NAO CITE ESTUDOS ESPECIFICOS a menos que sejam amplamente conhecidos e verificaveis.
+3. NAO ATRIBUA FRASES a pessoas reais a menos que sejam citacoes classicas documentadas. Se citar, adicione: <span style="font-size:.65rem;opacity:.6">(citacao para fins educacionais — Art. 46, Lei 9.610/98)</span>
+4. USE FONTES VERIFICAVEIS: IBGE, Banco Central, Receita Federal, INSS, Serasa, CAGED. Mencione a fonte.
+5. VALORES EM REAIS: use valores realistas para Brasil 2026 (salario minimo ~R$1.500, aluguel ~R$1.500-3.000).
+6. LEIS: cite apenas leis reais (CLT, CDC, Lei do Inquilinato). Se nao souber o artigo exato, diga "conforme a legislacao vigente".
+
+=== REGRAS DE NEUTRALIDADE (INVIOLAVEIS) ===
+1. ZERO posicionamento politico-partidario. Nunca mencionar partidos, candidatos, governos especificos.
+2. ZERO ideologia explicita. Nao usar "esquerda", "direita", "conservador", "progressista".
+3. ECONOMIA: apresentar conceitos de forma factual. Se houver escolas diferentes, apresentar AMBAS com respeito.
+4. IMPOSTOS/GOVERNO: explicar como funciona (educacional), nunca se e "justo" ou "injusto".
+5. Temas controversos: apresentar argumentos dos dois lados e encerrar com "cabe a cada cidadao formar sua propria opiniao".
+
+=== REGRAS DE VINCULACAO AS AULAS ===
+1. O artigo e extensao da disciplina "${kw.discipline}" da Escola Liberal.
+2. Na ultima secao, conectar: "Na Escola Liberal, a disciplina de ${kw.discipline} aprofunda esse tema com aulas interativas, quizzes e exercicios praticos. Sao 800 aulas gratuitas em 26 disciplinas."
+3. DISCIPLINAS RELACIONADAS (mencionar naturalmente): ${discCtx}
+4. O artigo deve ser util por si so — o leitor veio do Google, nao conhece a escola.
+
+=== REGRAS DE CONTEUDO ===
+1. Publico: adultos brasileiros 18+. Tom direto, respeitoso, pratico. NUNCA condescendente.
+2. Extensao: ${kw.targetWordCount || 1800} palavras minimo. Conteudo REAL e profundo.
+3. Estrutura: <h1>, 5-6 secoes <h2>, paragrafos <p>, listas quando util.
+4. Keyword "${kw.keyword}" no <h1>, primeiro paragrafo, 2+ <h2>.
+5. Exemplos brasileiros reais (R$, instituicoes BR).
+6. NAO usar: emojis, cliches motivacionais, "neste artigo vamos explorar", frases genericas de IA.
+7. NAO prometer: emprego, renda, resultados financeiros garantidos.
+8. Ultimo paragrafo antes do fim: "Este artigo e de natureza educacional e nao substitui orientacao profissional especializada."
+${links ? `9. Links internos: ${links}` : ''}
 KEYWORD: ${kw.title} | ${kw.keyword} | ${kw.discipline}
 FORMATO: Apenas HTML puro de <h1> ate ultimo </p>. Sem markdown, sem blocos de codigo.`;
 }
 
 function reviewerPrompt(html, kw) {
-  return `Voce e editor-chefe da Escola Liberal. Revise o artigo e de nota 0-10.
-CRITERIOS: Precisao, profundidade, clareza, SEO (keyword "${kw.keyword}"), tom, exemplos BR, originalidade, gramatica, extensao (1500+ palavras), etica.
-NOTA: 9-10 excelente, 7-8 bom, 5-6 precisa correcao, 0-4 reescrever.
-FORMATO (JSON estrito): {"score":N,"summary":"resumo","issues":["problema"],"suggestions":["sugestao"],"rewriteInstructions":"instrucoes se score<7"}
+  return `Voce e editor-chefe da Escola Liberal, plataforma educacional seria para adultos brasileiros 18+. Contexto: ano eleitoral 2026, tolerancia ZERO para fake news ou vies politico.
+TAREFA: Revise o artigo e de nota 0-10.
+CRITERIOS (1 ponto cada):
+1. VERACIDADE — Dados inventados, estatisticas sem fonte, citacoes fabricadas? (Se sim, nota maxima = 4)
+2. NEUTRALIDADE — Vies politico, ideologico, partidario? Menciona partidos? (Se sim, nota maxima = 3)
+3. PROFUNDIDADE — Vai alem do obvio? Exemplos concretos?
+4. CLAREZA — Linguagem acessivel? Estrutura logica?
+5. SEO — Keyword "${kw.keyword}" no H1, primeiro paragrafo, subtitulos?
+6. TOM — Direto e respeitoso? Sem cliche de IA?
+7. EXEMPLOS BR — Referencias ao Brasil (R$, leis, instituicoes)?
+8. VINCULACAO — Conecta o tema as aulas/disciplinas da Escola Liberal?
+9. GRAMATICA — Portugues correto?
+10. DISCLAIMER — Aviso "nao substitui orientacao profissional" quando aplicavel?
+REGRAS: Dado inventado → max 4. Vies politico → max 3. Promessa financeira → max 4.
+FORMATO (JSON estrito): {"score":N,"summary":"1 frase","issues":["problema"],"suggestions":["sugestao"],"flaggedClaims":["dado suspeito"],"biasFlags":["trecho com vies"],"rewriteInstructions":"instrucoes se score<7"}
 ARTIGO: ${html.substring(0, 12000)}`;
 }
 
@@ -84,6 +119,37 @@ ARTIGO: ${html.substring(0, 12000)}`;
 // ============================================================
 const CSS = `*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#0f1729;--bg2:#141d32;--card:#1a2540;--text:#e8e6e1;--muted:#9ba3b5;--dim:#6b7488;--sage:#4a9e7e;--sage-light:#5fbf96;--sage-muted:rgba(74,158,126,.12);--border:rgba(255,255,255,.06);--r-md:12px;--r-lg:16px;--r-xl:24px}[data-theme="light"]{--bg:#f5f3ef;--bg2:#eae7e1;--card:#ffffff;--text:#1a1a2e;--muted:#4a4a5e;--dim:#7a7a8e;--sage:#3d8b6e;--sage-light:#2e7a5f;--sage-muted:rgba(61,139,110,.1);--border:rgba(0,0,0,.08)}body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.8}a{color:var(--sage-light);text-decoration:none}a:hover{text-decoration:underline}.container{max-width:720px;margin:0 auto;padding:2rem 1.25rem 4rem}.breadcrumb{font-size:.8rem;color:var(--dim);margin-bottom:2rem;display:flex;gap:.4rem;flex-wrap:wrap}.breadcrumb a{color:var(--sage-light)}article h1{font-family:'DM Serif Display',serif;font-size:2rem;line-height:1.3;margin-bottom:.75rem}article .meta{font-size:.8rem;color:var(--dim);margin-bottom:2rem;display:flex;gap:1.5rem}article h2{font-family:'DM Serif Display',serif;font-size:1.4rem;margin:2rem 0 .75rem;color:var(--sage-light)}article h3{font-size:1.1rem;font-weight:700;margin:1.5rem 0 .5rem}article p{color:var(--muted);margin-bottom:1rem;font-size:.95rem}article ul,article ol{color:var(--muted);margin:0 0 1rem 1.5rem;font-size:.95rem}article li{margin-bottom:.4rem}article blockquote{border-left:3px solid var(--sage);padding:.75rem 1.25rem;margin:1.5rem 0;background:var(--sage-muted);border-radius:0 var(--r-md) var(--r-md) 0;font-style:italic;color:var(--muted)}.highlight{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.25rem;margin:1.5rem 0}.cta{text-align:center;background:var(--card);border:1px solid var(--border);border-radius:var(--r-xl);padding:2rem;margin:2.5rem 0}.cta h3{font-family:'DM Serif Display',serif;font-size:1.3rem;margin-bottom:.5rem;color:var(--text)}.cta p{color:var(--muted);font-size:.85rem;margin-bottom:1rem}.cta a{display:inline-block;background:var(--sage);color:#fff;padding:.75rem 2rem;border-radius:99px;font-weight:600;font-size:.9rem;text-decoration:none}.cta a:hover{background:var(--sage-light);text-decoration:none}.footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);text-align:center;font-size:.75rem;color:var(--dim)}.footer a{color:var(--sage-light)}.theme-btn{position:fixed;top:1rem;right:1rem;background:var(--card);border:1px solid var(--border);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;z-index:100}@media(max-width:600px){article h1{font-size:1.5rem}article h2{font-size:1.2rem}}`;
 
+// ============================================================
+// SAFETY VALIDATION
+// ============================================================
+function validateSafety(html) {
+  const text = html.replace(/<[^>]+>/g, '').toLowerCase();
+  const flags = [];
+  const political = ['pt ','psdb','mdb','psol','psd ','uniao brasil','podemos','lula','bolsonaro','temer','dilma','fhc','petista','bolsonarista','esquerdista','direitista','comunismo','fascismo','extrema-esquerda','extrema-direita','impeachment','golpe de estado'];
+  for (const t of political) { if (text.includes(t)) flags.push('Termo politico: "' + t.trim() + '"'); }
+  const promises = ['fique rico','enriqueca','ganhe dinheiro facil','renda garantida','lucro garantido','sem risco','rentabilidade garantida','multiplique seu dinheiro','formula secreta','metodo infalivel'];
+  for (const t of promises) { if (text.includes(t)) flags.push('Promessa financeira: "' + t + '"'); }
+  const fakePatterns = [/segundo (um )?estudo (recente )?(da|de) [a-z]/i, /\d{2,3}% (dos|das|de) /];
+  for (const p of fakePatterns) { const m = text.match(p); if (m) flags.push('Dado nao verificavel: "' + m[0] + '"'); }
+  return flags;
+}
+
+function getDisclaimer(cluster) {
+  const d = {
+    financas:'Este artigo e de natureza educacional e nao constitui recomendacao de investimento ou consultoria financeira. Consulte um profissional certificado antes de tomar decisoes financeiras.',
+    economia:'Este artigo e de natureza educacional e apresenta conceitos economicos de forma didatica. Diferentes escolas de pensamento podem ter interpretacoes distintas.',
+    empreendedorismo:'Este artigo e de natureza educacional e nao garante resultados financeiros. Todo empreendimento envolve riscos. Consulte um contador ou advogado.',
+    marketing:'Este artigo e de natureza educacional. Resultados de marketing variam conforme contexto, mercado e execucao.',
+    desenvolvimento:'Este artigo e de natureza educacional e nao substitui acompanhamento psicologico ou psiquiatrico profissional.',
+    direito:'Este artigo e de natureza educacional e nao constitui aconselhamento juridico. A legislacao pode sofrer alteracoes. Consulte um advogado.',
+    educacao:'Este artigo e de natureza educacional e apresenta metodos de estudo baseados em pesquisas amplamente divulgadas.'
+  };
+  return d[cluster] || 'Este artigo e de natureza educacional e nao substitui orientacao profissional especializada.';
+}
+
+// ============================================================
+// HTML TEMPLATE
+// ============================================================
 function wrapTemplate(kw, body, dateISO) {
   const words = body.replace(/<[^>]+>/g, '').split(/\s+/).length;
   const readTime = Math.ceil(words / 200);
@@ -119,6 +185,7 @@ function wrapTemplate(kw, body, dateISO) {
   <article>
     <div class="meta"><time datetime="${dateISO}">${dateFmt}</time><span>${readTime} min de leitura</span></div>
 ${body}
+    <p style="font-size:.8rem;color:var(--dim);font-style:italic;margin-top:2rem;padding-top:1rem;border-top:1px solid var(--border)">${getDisclaimer(kw.cluster)}</p>
   </article>
   <div class="cta"><h3>Comece hoje. E 100% gratuito.</h3><p>800 aulas interativas, 26 disciplinas, gamificacao completa. Para adultos. Funciona offline.</p><a href="../app.html">Comecar Gratuitamente →</a></div>
   <div class="footer"><p>Escola Liberal © 2026 · <a href="../termos.html">Termos</a> · <a href="../privacidade.html">Privacidade</a> · <a href="../contato.html">Contato</a></p></div>
@@ -168,16 +235,26 @@ async function processKw(kw, allSlugs) {
 
   if (review.score < 7 && review.rewriteInstructions) {
     console.log('  3/3 Reescrevendo...');
+    const flaggedInfo = review.flaggedClaims ? '\nDADOS FLAGGED COMO POSSIVELMENTE FALSOS:\n' + review.flaggedClaims.join('\n') : '';
+    const biasInfo = review.biasFlags ? '\nTRECHOS COM VIES DETECTADO:\n' + review.biasFlags.join('\n') : '';
     const rw = await callGemini('gemini-2.5-flash-lite',
-      `Corrija o artigo: ${review.issues.join('; ')}. Instrucoes: ${review.rewriteInstructions}. Manter keyword "${kw.keyword}" no H1. Retorne apenas HTML.\n\nARTIGO:\n${html}`, 8192);
+      `ATENCAO: O editor encontrou problemas graves. Ao reescrever:\n- REMOVA qualquer dado ou citacao nao verificavel\n- REMOVA qualquer frase com vies politico ou ideologico\n- SUBSTITUA numeros especificos por explicacoes qualitativas se nao tiver certeza da fonte\n- Mantenha tom educacional neutro\n${flaggedInfo}${biasInfo}\n\nCorrecoes: ${review.issues.join('; ')}. Instrucoes: ${review.rewriteInstructions}. Manter keyword "${kw.keyword}" no H1. Retorne apenas HTML.\n\nARTIGO:\n${html}`, 8192);
     if (rw) { html = rw.replace(/^```html?\n?/i, '').replace(/\n?```$/i, '').trim(); }
     const r2 = await callGemini('gemini-2.5-flash', reviewerPrompt(html, kw), 2048);
     if (r2) { try { const m = r2.match(/\{[\s\S]*\}/); if (m) review = JSON.parse(m[0]); } catch (e) {} }
     console.log(`  -> Pos-correcao: ${review.score}/10`);
   } else { console.log('  3/3 Aprovado'); }
 
+  // Safety validation (local, no API)
+  const safetyFlags = validateSafety(html);
+  if (safetyFlags.length > 0) {
+    console.log('  ! Red flags de seguranca:');
+    safetyFlags.forEach(f => console.log('    -> ' + f));
+  }
+
   kw.reviewScore = review.score;
   kw.reviewNotes = review.summary + (review.issues?.length ? ' | ' + review.issues.join('; ') : '');
+  kw.safetyFlags = safetyFlags.length > 0 ? safetyFlags : null;
   kw.status = 'drafted'; kw.draftedAt = new Date().toISOString();
   return { html: wrapTemplate(kw, html, dateISO), kw };
 }
@@ -210,7 +287,7 @@ async function main() {
   const drafts = data.keywords.filter(k => k.status === 'drafted');
   fs.writeFileSync(path.join(DRAFTS_DIR, 'manifest.json'), JSON.stringify({
     generated: new Date().toISOString(), count: drafts.length,
-    articles: drafts.map(k => ({ slug: k.slug, title: k.title, cluster: k.cluster, tag: k.tag, reviewScore: k.reviewScore, reviewNotes: k.reviewNotes, draftedAt: k.draftedAt }))
+    articles: drafts.map(k => ({ slug: k.slug, title: k.title, cluster: k.cluster, tag: k.tag, reviewScore: k.reviewScore, reviewNotes: k.reviewNotes, safetyFlags: k.safetyFlags || null, draftedAt: k.draftedAt }))
   }, null, 2));
 
   console.log('\n' + '='.repeat(50));

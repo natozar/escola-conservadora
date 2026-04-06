@@ -32,7 +32,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-fazer-orcamento-pessoal",
@@ -52,7 +57,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "o-que-e-juros-compostos",
@@ -72,7 +82,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-economizar-dinheiro",
@@ -92,7 +107,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "tesouro-direto-para-iniciantes",
@@ -112,7 +132,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-calcular-juros-emprestimo",
@@ -132,7 +157,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "reserva-emergencia-quanto-guardar",
@@ -152,7 +182,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-negociar-dividas-banco",
@@ -172,7 +207,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "o-que-e-cdi-como-funciona",
@@ -192,7 +232,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "diferenca-poupanca-cdb-tesouro",
@@ -212,7 +257,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-organizar-financas-casal",
@@ -232,7 +282,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "o-que-e-taxa-selic",
@@ -252,7 +307,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-funciona-financiamento-imovel",
@@ -272,7 +332,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "score-credito-como-aumentar",
@@ -292,7 +357,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-declarar-imposto-renda",
@@ -312,7 +382,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "planejamento-financeiro-familiar",
@@ -332,7 +407,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-ganhar-dinheiro-extra",
@@ -352,7 +432,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "o-que-e-renda-fixa-variavel",
@@ -372,7 +457,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-funciona-fgts",
@@ -392,7 +482,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "consorcio-vale-a-pena",
@@ -412,7 +507,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-calcular-aposentadoria",
@@ -432,7 +532,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "educacao-financeira-pratica",
@@ -452,7 +557,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-fazer-dinheiro-render",
@@ -472,7 +582,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "cdb-ou-tesouro-selic",
@@ -492,7 +607,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-sair-cheque-especial",
@@ -512,7 +632,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-controlar-gastos-cartao",
@@ -532,7 +657,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-investir-100-reais",
@@ -552,7 +682,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "divida-boa-divida-ruim",
@@ -572,7 +707,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "tabela-price-sac-qual-escolher",
@@ -592,7 +732,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-funciona-consignado",
@@ -612,7 +757,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "o-que-e-liberalismo-economico",
@@ -632,7 +782,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "lei-oferta-demanda-exemplos",
@@ -652,7 +807,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-e-capitalismo-livre-mercado",
@@ -672,7 +832,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "diferenca-socialismo-capitalismo",
@@ -692,7 +857,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "como-funciona-livre-mercado",
@@ -712,7 +882,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-e-pib",
@@ -732,7 +907,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-causa-inflacao-brasil",
@@ -752,7 +932,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "politica-monetaria-banco-central",
@@ -772,7 +957,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "banco-central-o-que-faz",
@@ -792,7 +982,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-e-deficit-publico",
@@ -812,7 +1007,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "como-preparar-crise-economica",
@@ -832,7 +1032,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "quem-foi-ludwig-von-mises",
@@ -852,7 +1057,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "quem-foi-friedrich-hayek",
@@ -872,7 +1082,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "austriaca-vs-keynesianismo",
@@ -892,7 +1107,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-e-custo-oportunidade",
@@ -912,7 +1132,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "hiperinflacao-exemplos-historicos",
@@ -932,7 +1157,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "como-comecar-negocio-pouco-dinheiro",
@@ -952,7 +1182,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-validar-ideia-negocio",
@@ -972,7 +1207,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-precificar-servico",
@@ -992,7 +1232,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-plano-negocios-simples",
@@ -1012,7 +1257,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-vender-whatsapp",
@@ -1032,7 +1282,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-montar-loja-virtual",
@@ -1052,7 +1307,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-emitir-nota-fiscal-mei",
@@ -1072,7 +1332,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "diferenca-mei-me-epp",
@@ -1092,7 +1357,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-conseguir-primeiro-cliente",
@@ -1112,7 +1382,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "negocios-pouco-investimento-2026",
@@ -1132,7 +1407,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-escalar-pequeno-negocio",
@@ -1152,7 +1432,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-calcular-lucro-margem",
@@ -1172,7 +1457,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-atender-bem-cliente",
@@ -1192,7 +1482,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-criar-marca-pequeno-negocio",
@@ -1212,7 +1507,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-trabalhar-freelancer",
@@ -1232,7 +1532,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "o-que-e-funil-vendas",
@@ -1252,7 +1557,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-aparecer-google-gratis",
@@ -1272,7 +1582,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "seo-o-que-e-como-funciona",
@@ -1292,7 +1607,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-criar-pagina-vendas",
@@ -1312,7 +1632,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "copywriting-o-que-e",
@@ -1332,7 +1657,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-fazer-email-marketing",
@@ -1352,7 +1682,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "trafego-organico-vs-pago",
@@ -1372,7 +1707,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-criar-conteudo-que-vende",
@@ -1392,7 +1732,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "google-meu-negocio-como-cadastrar",
@@ -1412,7 +1757,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "storytelling-marketing-como-usar",
@@ -1432,7 +1782,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "gatilhos-mentais-vendas",
@@ -1452,7 +1807,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-ter-mais-disciplina",
@@ -1472,7 +1832,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-vencer-procrastinacao",
@@ -1492,7 +1857,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-desenvolver-inteligencia-emocional",
@@ -1512,7 +1882,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-lidar-ansiedade-trabalho",
@@ -1532,7 +1907,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-ser-mais-produtivo",
@@ -1552,7 +1932,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "tecnica-pomodoro-como-funciona",
@@ -1572,7 +1957,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-melhorar-comunicacao",
@@ -1592,7 +1982,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "growth-mindset-o-que-e",
@@ -1612,7 +2007,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-criar-habitos",
@@ -1632,7 +2032,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-definir-metas-smart",
@@ -1652,7 +2057,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "estoicismo-pratica-como-aplicar",
@@ -1672,7 +2082,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-lidar-pessoas-dificeis",
@@ -1692,7 +2107,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "sindrome-impostor-como-superar",
@@ -1712,7 +2132,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-aprender-dizer-nao",
@@ -1732,7 +2157,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "direitos-consumidor-ninguem-conta",
@@ -1752,7 +2182,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "como-funciona-clt-trabalhador",
@@ -1772,7 +2207,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "como-calcular-rescisao",
@@ -1792,7 +2232,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "direitos-trabalhador-informal",
@@ -1812,7 +2257,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "como-reclamar-procon",
@@ -1832,7 +2282,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "codigo-defesa-consumidor-resumo",
@@ -1852,7 +2307,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "como-funciona-aposentadoria-inss",
@@ -1872,7 +2332,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "direitos-demissao-sem-justa-causa",
@@ -1892,7 +2357,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "como-funciona-seguro-desemprego",
@@ -1912,7 +2382,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "assedio-moral-trabalho-como-provar",
@@ -1932,7 +2407,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "como-voltar-estudar-depois-30",
@@ -1952,7 +2432,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "metodos-estudo-mais-eficientes",
@@ -1972,7 +2458,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-fazer-resumo-estudar",
@@ -1992,7 +2484,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "flashcards-como-usar",
@@ -2012,7 +2510,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "repeticao-espacada-como-funciona",
@@ -2032,7 +2536,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-estudar-trabalhando",
@@ -2052,7 +2562,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-aprender-matematica-sozinho",
@@ -2072,7 +2588,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "melhores-apps-estudar-gratis",
@@ -2092,7 +2614,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-manter-motivacao-estudar",
@@ -2112,7 +2640,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "autodidatismo-como-organizar",
@@ -2132,7 +2666,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-fazer-poupanca-emergencia",
@@ -2152,7 +2692,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-usar-cashback",
@@ -2171,7 +2716,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "armadilhas-financeiras-comuns",
@@ -2191,7 +2741,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "conta-digital-melhor-2026",
@@ -2210,7 +2765,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-montar-carteira-investimentos",
@@ -2229,7 +2789,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "tesouro-ipca-quando-investir",
@@ -2248,7 +2813,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "investimento-aposentadoria",
@@ -2267,7 +2837,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-calcular-custo-vida",
@@ -2286,7 +2861,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "o-que-e-amortizacao",
@@ -2305,7 +2885,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "planejamento-comprar-imovel",
@@ -2324,7 +2909,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "renegociar-divida-serasa",
@@ -2343,7 +2933,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-sair-nome-sujo",
@@ -2362,7 +2957,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-funciona-credito-rotativo",
@@ -2381,7 +2981,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "pix-tem-limite",
@@ -2400,7 +3005,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-funciona-emprestimo-p2p",
@@ -2419,7 +3029,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-funciona-restituicao-ir",
@@ -2438,7 +3053,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "financas-jovens-adultos",
@@ -2457,7 +3077,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-recuperar-golpe",
@@ -2476,7 +3101,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "como-planejar-viagem",
@@ -2495,7 +3125,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "o-que-e-cdi-over",
@@ -2514,7 +3149,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Financas Pessoais",
+        "Economia",
+        "Matematica Financeira"
+      ]
     },
     {
       "slug": "o-que-e-escassez-economia",
@@ -2533,7 +3173,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "como-funciona-cambio",
@@ -2552,7 +3197,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-e-monopolio",
@@ -2571,7 +3221,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "economia-mercado-vs-planificada",
@@ -2590,7 +3245,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "mao-invisivel-adam-smith",
@@ -2609,7 +3269,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "como-funciona-sistema-tributario",
@@ -2628,7 +3293,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-e-curva-laffer",
@@ -2647,7 +3317,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-sao-externalidades",
@@ -2666,7 +3341,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "como-funciona-previdencia",
@@ -2685,7 +3365,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "dolarizacao-o-que-e",
@@ -2704,7 +3389,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-e-balanca-comercial",
@@ -2723,7 +3413,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "o-que-significa-laissez-faire",
@@ -2742,7 +3437,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "empreendedorismo-social",
@@ -2761,7 +3461,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "bolsa-valores-iniciantes",
@@ -2780,7 +3485,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Economia",
+        "Historia do Brasil",
+        "Educacao Tributaria"
+      ]
     },
     {
       "slug": "como-fazer-proposta-comercial",
@@ -2799,7 +3509,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-networking",
@@ -2818,7 +3533,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-controle-estoque",
@@ -2837,7 +3557,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-contrato-servico",
@@ -2856,7 +3581,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-organizar-financas-empresa",
@@ -2875,7 +3605,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "o-que-e-fluxo-caixa",
@@ -2894,7 +3629,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-pos-venda-eficiente",
@@ -2913,7 +3653,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-definir-publico-alvo",
@@ -2932,7 +3677,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-pesquisa-mercado",
@@ -2951,7 +3701,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "quanto-custa-abrir-empresa",
@@ -2970,7 +3725,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-funciona-simples-nacional",
@@ -2989,7 +3749,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "marketplace-ou-loja-propria",
@@ -3008,7 +3773,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-transformar-hobby",
@@ -3027,7 +3797,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-usar-instagram-vender",
@@ -3046,7 +3821,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-funciona-dropshipping",
@@ -3065,7 +3845,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-pitch-vendas",
@@ -3084,7 +3869,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "economia-criativa",
@@ -3103,7 +3893,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-lidar-concorrencia",
@@ -3122,7 +3917,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-parcerias",
@@ -3141,7 +3941,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-pitch-investidor",
@@ -3160,7 +3965,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Empreendedorismo",
+        "Marketing Digital",
+        "Financas Pessoais"
+      ]
     },
     {
       "slug": "como-fazer-pesquisa-mercado-online",
@@ -3179,7 +3989,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "o-que-e-marketing-conteudo",
@@ -3198,7 +4013,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-usar-whatsapp-business",
@@ -3217,7 +4037,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "o-que-e-remarketing",
@@ -3236,7 +4061,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-medir-resultados-marketing",
@@ -3255,7 +4085,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "landing-page-como-criar",
@@ -3274,7 +4109,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-criar-autoridade-digital",
@@ -3293,7 +4133,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "o-que-e-inbound-marketing",
@@ -3312,7 +4157,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "marketing-negocio-local",
@@ -3331,7 +4181,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-escrever-titulos",
@@ -3350,7 +4205,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "marketing-indicacao",
@@ -3369,7 +4229,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-criar-blog",
@@ -3388,7 +4253,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-fazer-promocao",
@@ -3407,7 +4277,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-usar-canva",
@@ -3426,7 +4301,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Marketing Digital",
+        "Empreendedorismo",
+        "Comunicacao"
+      ]
     },
     {
       "slug": "como-falar-confianca",
@@ -3445,7 +4325,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "linguagem-corporal",
@@ -3464,7 +4349,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-negociar-salario",
@@ -3483,7 +4373,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-lidar-criticas",
@@ -3502,7 +4397,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-melhorar-memoria",
@@ -3521,7 +4421,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-ter-mais-foco",
@@ -3540,7 +4445,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-melhorar-autoestima",
@@ -3559,7 +4469,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-tomar-decisoes",
@@ -3578,7 +4493,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "mindfulness-iniciantes",
@@ -3597,7 +4517,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-lidar-perfeccionismo",
@@ -3616,7 +4541,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-melhorar-escrita",
@@ -3635,7 +4565,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-desenvolver-criatividade",
@@ -3654,7 +4589,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-gerenciar-tempo",
@@ -3673,7 +4613,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-desenvolver-resiliencia",
@@ -3692,7 +4637,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-sair-zona-conforto",
@@ -3711,7 +4661,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "como-desenvolver-pensamento-estrategico",
@@ -3730,7 +4685,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Inteligencia Emocional",
+        "Psicologia do Crescimento",
+        "Oratoria"
+      ]
     },
     {
       "slug": "o-que-e-dano-moral",
@@ -3749,7 +4709,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "consumidor-gov-como-reclamar",
@@ -3768,7 +4733,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "direitos-inquilino",
@@ -3787,7 +4757,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "juizado-pequenas-causas",
@@ -3806,7 +4781,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "seguro-desemprego-detalhado",
@@ -3825,7 +4805,12 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Direito Trabalhista",
+        "Educacao Tributaria",
+        "Cidadania"
+      ]
     },
     {
       "slug": "como-preparar-concurso",
@@ -3844,7 +4829,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-melhorar-interpretacao",
@@ -3863,7 +4854,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-desenvolver-leitura",
@@ -3882,7 +4879,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-fazer-anotacoes",
@@ -3901,7 +4904,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     },
     {
       "slug": "como-estudar-concurso-trabalhando",
@@ -3920,7 +4929,13 @@
       "draftedAt": null,
       "reviewScore": null,
       "reviewNotes": null,
-      "publishedAt": null
+      "publishedAt": null,
+      "disciplineContext": [
+        "Portugues",
+        "Matematica",
+        "Filosofia",
+        "Ciencias"
+      ]
     }
   ]
 }
