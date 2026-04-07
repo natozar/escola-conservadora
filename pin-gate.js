@@ -1,3 +1,4 @@
+// DEPRECATED — auth migrada para Supabase. Mantido para referencia.
 (function(){
   var K='escola_pin_ts',E=3600000;
   try{var t=parseInt(sessionStorage.getItem(K)||'0',10);if(Date.now()-t<E)return}catch(e){}

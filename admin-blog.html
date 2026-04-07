@@ -58,6 +58,7 @@ h1{font-size:1.4rem;margin-bottom:.5rem}
 <div id="preview"><button class="close" onclick="closePreview()">X</button><iframe id="previewFrame"></iframe></div>
 
 <script>
+function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML}
 let keywords=[], manifest=[], approved=JSON.parse(localStorage.getItem('escola_blog_approved')||'[]');
 
 async function init(){
@@ -116,7 +117,7 @@ function render(){
   const sec=document.getElementById('approvedSection');
   if(approved.length){
     sec.style.display='';
-    document.getElementById('approvedList').innerHTML=approved.map(s=>`<div class="approved-item">${s}</div>`).join('');
+    document.getElementById('approvedList').innerHTML=approved.map(s=>`<div class="approved-item">${esc(s)}</div>`).join('');
     const cmd=`node scripts/publish-blog.js --slugs=${approved.join(',')}`;
     document.getElementById('cmdBox').innerHTML=cmd+`<button class="cmd-copy" onclick="navigator.clipboard.writeText('${cmd}')">Copiar</button>`;
   }else{sec.style.display='none'}

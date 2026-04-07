@@ -1225,7 +1225,7 @@ function createXPEvent(){
       if(error){admToast('❌ Erro: '+error.message);return}
       admToast('⚡ Evento criado: '+name+' ('+mult+'x por '+days+' dia'+(days>1?'s':'')+')');
       admLog('Evento XP criado: '+name+' '+mult+'x por '+days+'d');
-      document.getElementById('evtStatus').innerHTML=`<div style="color:var(--green);font-size:.82rem">✓ Evento "${name}" ativo até ${end.toLocaleDateString('pt-BR')}</div>`;
+      document.getElementById('evtStatus').innerHTML=`<div style="color:var(--green);font-size:.82rem">✓ Evento "${esc(name)}" ativo até ${end.toLocaleDateString('pt-BR')}</div>`;
       renderActiveEvents();
     });
   }else{

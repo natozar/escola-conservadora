@@ -193,6 +193,7 @@ function _renderRoom(room){
 // SEND
 // ============================================================
 async function sendDebateMsg(){
+  if(typeof window.rateLimitDebate==='function'&&!window.rateLimitDebate())return;
   if(!_isDebateAuthed()){
     if(_currentRoom)_showDebateOfflineLogin(_currentRoom.id);
     else if(typeof window.showLoginPrompt==='function')window.showLoginPrompt('debate');

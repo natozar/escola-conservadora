@@ -136,6 +136,7 @@ async function sendChat(){
 }
 
 async function askAITutor(message){
+  if(typeof window.rateLimitAITutor==='function'&&!window.rateLimitAITutor()){throw new Error('Rate limited. Aguarde antes de enviar outra pergunta.')}
   // OFFLINE_MODE: skip API call, go straight to local KB
   if(window.OFFLINE_MODE) throw new Error('offline');
   // Build context from current lesson

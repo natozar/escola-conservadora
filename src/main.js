@@ -22,6 +22,7 @@ import './ui/dashboard.js';     // ui, renderCards, renderAch, renderXPEvent, et
 
 // Phase 4: Features
 import './core/i18n-content.js';    // getLocalizedField → window
+import './core/rate-limit.js';     // rateLimitDebate, rateLimitAITutor, rateLimitQuiz → window
 import './features/timeline.js';    // logActivity, loadTimeline, goTimeline
 import './features/performance.js'; // goPerf
 import './features/notes.js';
