@@ -1598,3 +1598,48 @@ body{overscroll-behavior-y:contain}
   .gp-stat-val{font-size:1.1rem!important}
   .gp-meta{font-size:.65rem!important}
 }
+
+/* === DASHBOARD SLIM V3 — Ultra-compact mobile === */
+@media(max-width:768px){
+  /* V3: Welcome ultra-compact */
+  #welcomeMsg{display:none!important}
+  #streakB{font-size:.75rem!important;padding:.2rem .5rem!important;margin:.2rem 0!important}
+  .streak-calendar{gap:.15rem!important;margin-top:.1rem!important}
+  .streak-day{width:26px!important;height:26px!important;font-size:.65rem!important}
+  .streak-day-label{font-size:.5rem!important}
+  .streak-day-col{gap:0!important}
+  /* V3: Continue card */
+  .continue-card{padding:.5rem .6rem!important;gap:.5rem!important;min-height:auto!important}
+  .cc-icon{font-size:1.3rem!important;width:36px!important;height:36px!important;min-width:36px!important}
+  .cc-title{font-size:.8rem!important;line-height:1.2!important}
+  .cc-sub{font-size:.65rem!important;line-height:1.2!important}
+  .cc-btn{font-size:.7rem!important;padding:.25rem .5rem!important}
+  #continueSection{margin-bottom:.25rem!important}
+  /* V3: Progress inline */
+  .gp-card{padding:.5rem .6rem!important}
+  .gp-stat-val{font-size:.9rem!important}
+  .gp-stat-lbl{font-size:.6rem!important}
+  .gp-bar-track{height:4px!important;margin-top:.2rem!important}
+  .gp-meta{font-size:.6rem!important;margin-top:.2rem!important}
+  /* V3: Hide activeDisc + Social on mobile */
+  #activeDiscSection{display:none!important}
+  #dashSocial{display:none!important}
+  /* V3: Daily goal compact */
+  .daily-goal{padding:.4rem .6rem!important;margin-bottom:.2rem!important}
+  .daily-goal h3{font-size:.75rem!important;margin-bottom:.2rem!important}
+  .dg-bar-track{height:6px!important}
+  .dg-info{font-size:.7rem!important;margin-top:.15rem!important}
+  .dg-config{margin-top:.1rem!important}
+  .dg-config label{font-size:.65rem!important}
+  /* V3: Tighter spacing */
+  #vDash>.dash-section{padding:.5rem .6rem!important;margin-bottom:.3rem!important}
+  .dash-section-label{font-size:.65rem!important;margin-bottom:.25rem!important}
+  #vDash .btn-ghost{font-size:.78rem!important;padding:.35rem!important;margin-top:.3rem!important}
+  .debate-dash-card{padding:.4rem .6rem!important;border-radius:10px!important}
+  .debate-dash-icon{font-size:1.2rem!important}
+}
+/* === LEADERBOARD MINI === */
+.lb-mini{display:flex!important;align-items:center;gap:.5rem;padding:.6rem .75rem!important;border-radius:12px;background:var(--bg-card);border:1px solid var(--border);font-size:.8rem}
+.lb-mini-rank{font-weight:700;color:var(--text-primary);flex:1}
+.lb-mini-timer{font-size:.7rem;color:var(--text-muted)}
+.lb-mini-arrow{color:var(--text-muted)}

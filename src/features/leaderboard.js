@@ -217,19 +217,28 @@ function renderLeaderboardWidget(){
     const L=LEAGUES[st.league];
     const sorted=[...st.competitors].sort((a,b)=>b.xp-a.xp);
     const userRank=sorted.findIndex(c=>c.isUser)+1;
-    const top3=sorted.slice(0,3);
     const end=getWeekEndDate();const diff=end-new Date();const days=Math.floor(diff/864e5);
-    el.innerHTML=`<div class="lb-widget" onclick="goLeaderboard()" style="cursor:pointer">`+
-      `<div class="lb-widget-head"><span style="color:${L.color}">${L.icon} Liga ${L.name}</span><span class="lb-widget-timer">${days}d restantes</span></div>`+
-      `<div class="lb-widget-body">`+
-        top3.map((c,i)=>`<div class="lb-widget-row${c.isUser?' lb-widget-you':''}">`+
-          `<span class="lb-widget-rank">${['🥇','🥈','🥉'][i]}</span>`+
-          `<span class="lb-widget-name">${c.isUser?'Você':c.name}</span>`+
-          `<span class="lb-widget-xp">${c.xp.toLocaleString('pt-BR')} XP</span></div>`).join('')+
-        (userRank>3?`<div class="lb-widget-row lb-widget-you"><span class="lb-widget-rank">${userRank}°</span><span class="lb-widget-name">Você</span><span class="lb-widget-xp">${st.userWeekXP.toLocaleString('pt-BR')} XP</span></div>`:'')+
-      `</div>`+
-      `<div class="lb-widget-foot">Ver ranking completo →</div>`+
-    `</div>`;
+    var isMobile=window.innerWidth<=768;
+    if(isMobile){
+      el.innerHTML='<div class="lb-widget lb-mini" onclick="goLeaderboard()" style="cursor:pointer">'
+        +'<span style="color:'+L.color+'">'+L.icon+' '+L.name+'</span>'
+        +'<span class="lb-mini-rank">#'+userRank+' · '+st.userWeekXP.toLocaleString('pt-BR')+' XP</span>'
+        +'<span class="lb-mini-timer">'+days+'d</span>'
+        +'<span class="lb-mini-arrow">→</span></div>';
+    } else {
+      const top3=sorted.slice(0,3);
+      el.innerHTML=`<div class="lb-widget" onclick="goLeaderboard()" style="cursor:pointer">`+
+        `<div class="lb-widget-head"><span style="color:${L.color}">${L.icon} Liga ${L.name}</span><span class="lb-widget-timer">${days}d restantes</span></div>`+
+        `<div class="lb-widget-body">`+
+          top3.map((c,i)=>`<div class="lb-widget-row${c.isUser?' lb-widget-you':''}">`+
+            `<span class="lb-widget-rank">${['🥇','🥈','🥉'][i]}</span>`+
+            `<span class="lb-widget-name">${c.isUser?'Você':c.name}</span>`+
+            `<span class="lb-widget-xp">${c.xp.toLocaleString('pt-BR')} XP</span></div>`).join('')+
+          (userRank>3?`<div class="lb-widget-row lb-widget-you"><span class="lb-widget-rank">${userRank}°</span><span class="lb-widget-name">Você</span><span class="lb-widget-xp">${st.userWeekXP.toLocaleString('pt-BR')} XP</span></div>`:'')+
+        `</div>`+
+        `<div class="lb-widget-foot">Ver ranking completo →</div>`+
+      `</div>`;
+    }
   }catch(e){el.innerHTML=''}
 }
 
