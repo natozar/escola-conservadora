@@ -288,12 +288,17 @@ function renderWeeklySummary(){
     el=document.createElement('div');el.id='weeklySummary';el.className='weekly-summary';
     if(mcards)dash.insertBefore(el,mcards);else dash.appendChild(el)
   }
-  el.innerHTML=`<h3>📊 Resumo Semanal</h3>
+  var isMobile=window.innerWidth<=768;
+  if(isMobile){
+    el.innerHTML='<div class="ws-inline"><span class="ws-inline-label">📊 Semana:</span><span class="ws-inline-stat"><b>'+twLessons+'</b> aulas <span class="arrow-'+cL.cls+'">'+cL.arrow+'</span></span><span class="ws-inline-stat"><b>'+twQuiz+'</b> quizzes <span class="arrow-'+cQ.cls+'">'+cQ.arrow+'</span></span><span class="ws-inline-stat"><b>'+twXP+'</b> ativ. <span class="arrow-'+cX.cls+'">'+cX.arrow+'</span></span></div>';
+  } else {
+    el.innerHTML=`<h3>📊 Resumo Semanal</h3>
     <div class="ws-grid">
       <div class="ws-item"><div class="ws-val ${cL.cls}">${twLessons}</div><div class="ws-lbl">Aulas</div><div class="ws-compare"><span class="arrow-${cL.cls}">${cL.arrow} ${cL.diff} vs anterior</span></div></div>
       <div class="ws-item"><div class="ws-val ${cQ.cls}">${twQuiz}</div><div class="ws-lbl">Quizzes</div><div class="ws-compare"><span class="arrow-${cQ.cls}">${cQ.arrow} ${cQ.diff} vs anterior</span></div></div>
       <div class="ws-item"><div class="ws-val ${cX.cls}">${twXP}</div><div class="ws-lbl">Atividades</div><div class="ws-compare"><span class="arrow-${cX.cls}">${cX.arrow} ${cX.diff} vs anterior</span></div></div>
-    </div>`
+    </div>`;
+  }
 }
 
 // ============================================================

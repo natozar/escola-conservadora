@@ -32,17 +32,19 @@ function getMissionProgress(m){
 function renderMissions(){
   const data=getMissions();
   const daysLeft=7-new Date().getDay();
-  let html=`<div class="missions-card"><div class="missions-head">🎯 <span>Missões Semanais</span><span class="missions-timer">${daysLeft} dia${daysLeft!==1?'s':''} restante${daysLeft!==1?'s':''}</span></div>`;
-  data.list.forEach(m=>{
-    const prog=getMissionProgress(m);
-    const pct=Math.round(prog/m.target*100);
-    const done=prog>=m.target;
-    const claimed=data.claimed.includes(m.id);
-    const mAction=m.id==='lessons5'?'goNextLesson()':m.id==='quiz3row'?'goNextQuiz()':'goDash()';
-    html+=`<div class="mission${done?' done':''}" onclick="${done&&!claimed?'':mAction}" style="cursor:pointer"><div class="mission-icon">${m.icon}</div><div class="mission-info"><div class="mission-name">${m.name}</div><div class="mission-prog">${prog}/${m.target}${claimed?' · ✓ Resgatado':''}</div><div class="mission-bar"><div class="mission-fill" style="width:${pct}%${done?';background:var(--honey)':''}"></div></div>${!done?'<div class="mission-hint">Toque para ir →</div>':''}</div><div class="mission-xp">${done&&!claimed?`<button class="btn btn-sage" style="font-size:.7rem;padding:.25rem .6rem" onclick="event.stopPropagation();claimMission('${m.id}',${m.xp})">+${m.xp} XP</button>`:`+${m.xp} XP`}</div></div>`
+  var completed=0,claimable=0;
+  data.list.forEach(function(m){var prog=getMissionProgress(m);if(prog>=m.target){completed++;if(!data.claimed.includes(m.id))claimable++}});
+  var isMobile=window.innerWidth<=768;
+  var html='<div class="missions-card missions-compact'+(isMobile?'':' expanded')+'" onclick="this.classList.toggle(\'expanded\')">';
+  html+='<div class="missions-head">🎯 <span>Missões Semanais</span><span class="missions-summary">'+(claimable>0?claimable+' para resgatar':completed+'/'+data.list.length)+'</span><span class="missions-timer">'+daysLeft+'d</span><span class="missions-chevron">›</span></div>';
+  html+='<div class="missions-expand-body" onclick="event.stopPropagation()">';
+  data.list.forEach(function(m){
+    var prog=getMissionProgress(m),pct=Math.round(prog/m.target*100),done=prog>=m.target,claimed=data.claimed.includes(m.id);
+    var mAction=m.id==='lessons5'?'goNextLesson()':m.id==='quiz3row'?'goNextQuiz()':'goDash()';
+    html+='<div class="mission'+(done?' done':'')+'" onclick="'+(done&&!claimed?'':mAction)+'" style="cursor:pointer"><div class="mission-icon">'+m.icon+'</div><div class="mission-info"><div class="mission-name">'+m.name+'</div><div class="mission-prog">'+prog+'/'+m.target+(claimed?' · ✓':'')+'</div><div class="mission-bar"><div class="mission-fill" style="width:'+pct+'%'+(done?';background:var(--honey)':'')+'"></div></div></div><div class="mission-xp">'+(done&&!claimed?'<button class="btn btn-sage" style="font-size:.7rem;padding:.25rem .6rem" onclick="event.stopPropagation();claimMission(\''+m.id+'\','+m.xp+')">+'+m.xp+' XP</button>':'+'+m.xp+' XP')+'</div></div>';
   });
-  html+='</div>';
-  document.getElementById('missionsSection').innerHTML=html
+  html+='</div></div>';
+  document.getElementById('missionsSection').innerHTML=html;
 }
 function goNextLesson(){
   for(let mi=0;mi<window.M.length;mi++){if(!window.isModUnlocked(mi))continue;for(let li=0;li<window.M[mi].lessons.length;li++){if(!window.S.done[`${mi}-${li}`]){window.openL(mi,li);return}}}

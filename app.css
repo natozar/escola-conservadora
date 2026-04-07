@@ -1553,3 +1553,48 @@ body{overscroll-behavior-y:contain}
   .ach-mini-text{flex:1;font-size:.85rem;font-weight:600;color:var(--text-primary)}
   .ach-mini-arrow{color:var(--text-muted);font-size:1rem}
 }
+
+/* === DAILY CHALLENGE COLLAPSIBLE === */
+.daily-compact .daily-expand-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.daily-compact.expanded .daily-expand-body{max-height:500px}
+.daily-head{display:flex;align-items:center;gap:.5rem;padding:.6rem .75rem;cursor:pointer}
+.daily-tag{font-size:.7rem;font-weight:600;color:var(--sage-light);margin-left:auto}
+.daily-chevron{display:inline-block;transition:transform .3s;font-size:1.2rem;color:var(--text-muted)}
+.daily-compact.expanded .daily-chevron{transform:rotate(90deg)}
+@media(min-width:769px){.daily-compact .daily-expand-body{max-height:500px!important}.daily-chevron{display:none}}
+/* === MISSIONS COLLAPSIBLE === */
+.missions-compact .missions-expand-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.missions-compact.expanded .missions-expand-body{max-height:600px}
+.missions-head{display:flex;align-items:center;gap:.5rem;padding:.6rem .75rem;cursor:pointer;font-size:.85rem;font-weight:600}
+.missions-summary{font-size:.75rem;color:var(--honey);font-weight:600}
+.missions-timer{font-size:.65rem;color:var(--text-muted)}
+.missions-chevron{display:inline-block;transition:transform .3s;font-size:1.2rem;color:var(--text-muted);margin-left:auto}
+.missions-compact.expanded .missions-chevron{transform:rotate(90deg)}
+@media(min-width:769px){.missions-compact .missions-expand-body{max-height:600px!important}.missions-chevron{display:none}}
+/* === WEEKLY SUMMARY INLINE (mobile) === */
+.ws-inline{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .75rem;padding:.6rem .75rem;border-radius:12px;background:var(--bg-card);border:1px solid var(--border)}
+.ws-inline-label{font-size:.75rem;font-weight:700;color:var(--text-muted)}
+.ws-inline-stat{font-size:.8rem;color:var(--text-primary)}
+.ws-inline-stat b{font-weight:700}
+/* === DASHBOARD SLIM V2 — tighter on mobile === */
+@media(max-width:768px){
+  .welcome{padding:.5rem .75rem!important;margin-bottom:.5rem!important}
+  .welcome h2{font-size:1rem!important;margin-bottom:.15rem!important}
+  .welcome p#welcomeMsg{font-size:.75rem!important;margin-bottom:.3rem!important}
+  #streakB{font-size:.8rem!important;margin-bottom:.3rem!important}
+  .streak-calendar{gap:.2rem!important}
+  .streak-day{width:28px!important;height:28px!important;font-size:.7rem!important}
+  .continue-card{padding:.6rem .75rem!important;gap:.6rem!important}
+  .cc-title{font-size:.85rem!important}
+  .cc-sub{font-size:.7rem!important}
+  .daily-goal h3{font-size:.8rem!important;margin-bottom:.3rem!important}
+  .lb-widget{padding:.6rem!important}
+  .lb-widget-head{font-size:.8rem!important}
+  .lb-widget-row{padding:.25rem 0!important;font-size:.8rem!important}
+  .debate-dash-card{padding:.6rem .75rem!important}
+  .debate-dash-title{font-size:.85rem!important}
+  .debate-dash-sub{font-size:.7rem!important}
+  .gp-card{padding:.75rem!important}
+  .gp-stat-val{font-size:1.1rem!important}
+  .gp-meta{font-size:.65rem!important}
+}

@@ -5,15 +5,23 @@ const DAILY_KEY='escola_daily';
 function renderDaily(){
   const today=new Date().toDateString();
   let daily;try{daily=JSON.parse(localStorage.getItem(DAILY_KEY)||'{}')}catch(e){daily={}}
+  var container=document.getElementById('dailyChallenge');if(!container)return;
+  var isMobile=window.innerWidth<=768;
   if(daily.date===today&&daily.answered){
-    document.getElementById('dailyChallenge').innerHTML=`<div class="daily-card"><div class="daily-head">⚡ <span>Desafio Diário</span><span class="daily-tag">✓ Concluído</span></div><div style="font-size:.85rem;color:var(--text-muted)">Volte amanhã para um novo desafio! ${daily.correct?'+50 XP conquistados 🎉':'Tente de novo amanhã!'}</div></div>`;return
+    container.innerHTML='<div class="daily-card daily-compact" onclick="this.classList.toggle(\'expanded\')"><div class="daily-head"><span>⚡ Desafio Diário</span><span class="daily-tag">✓ Feito</span><span class="daily-chevron">›</span></div><div class="daily-expand-body"><div style="font-size:.85rem;color:var(--text-muted);padding:.75rem">'+(daily.correct?'+50 XP conquistados!':'Tente amanhã!')+'</div></div></div>';return;
   }
-  // Pick a deterministic quiz for today
   const seed=today.split('').reduce((s,c)=>s+c.charCodeAt(0),0);
   const allQ=[];window.M.forEach((m,mi)=>m.lessons.forEach((l,li)=>{if(l.quiz)allQ.push({mi,li,q:l.quiz.q,o:l.quiz.o,c:l.quiz.c,exp:l.quiz.exp,mod:m.title,icon:m.icon})}));
-  if(!allQ.length){document.getElementById('dailyChallenge').innerHTML='<div class="daily-card"><div class="daily-head">⚡ <span>Desafio Diário</span></div><div style="font-size:.85rem;color:var(--text-muted)">Nenhum quiz disponível ainda.</div></div>';return}
+  if(!allQ.length){container.innerHTML='';return}
   const dq=allQ[seed%allQ.length];
-  document.getElementById('dailyChallenge').innerHTML=`<div class="daily-card"><div class="daily-head">⚡ <span>Desafio Diário</span><span class="daily-tag">+50 XP</span></div><div class="daily-q">${dq.q}</div><div class="daily-opts">${dq.o.map((o,i)=>`<button class="daily-o" onclick="window.answerDaily(${i},${dq.c},'${dq.exp.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div><div class="daily-fb" id="dailyFb"></div><div style="font-size:.7rem;color:var(--text-muted);margin-top:.4rem">${dq.icon} ${dq.mod}</div></div>`
+  container.innerHTML='<div class="daily-card daily-compact'+(isMobile?'':' expanded')+'" onclick="this.classList.toggle(\'expanded\')">'
+    +'<div class="daily-head"><span>⚡ Desafio Diário</span><span class="daily-tag">+50 XP</span><span class="daily-chevron">›</span></div>'
+    +'<div class="daily-expand-body" onclick="event.stopPropagation()">'
+    +'<div class="daily-q">'+dq.q+'</div>'
+    +'<div class="daily-opts">'+dq.o.map(function(o,i){return'<button class="daily-o" onclick="window.answerDaily('+i+','+dq.c+',\''+dq.exp.replace(/'/g,"\\'")+'\')">'+o+'</button>'}).join('')+'</div>'
+    +'<div class="daily-fb" id="dailyFb"></div>'
+    +'<div style="font-size:.7rem;color:var(--text-muted);margin-top:.4rem">'+dq.icon+' '+dq.mod+'</div>'
+    +'</div></div>';
 }
 function answerDaily(a,c,exp){
   const ok=a===c;
