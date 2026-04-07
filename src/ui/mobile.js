@@ -22,19 +22,20 @@ function updateMobileHeader(title,showBack){
   if(titleEl)titleEl.textContent=title||'';
   var backEl=document.getElementById('mhBack');
   if(backEl)backEl.style.display=showBack?'flex':'none';
-  var xpEl=document.getElementById('mhXP');
+  // Logo: visible on dashboard (no title), hidden on subpages
+  var logoEl=document.getElementById('mhLogo');
+  if(logoEl)logoEl.style.display=(!title||title==='')?'flex':'none';
+  // Stats: visible on dashboard, hidden on subpages
+  var statsEl=document.getElementById('mhStats');
+  if(statsEl)statsEl.style.display=(!title||title==='')?'flex':'none';
+  // Update stat values
+  var streakVal=document.getElementById('mhStreakVal');
+  var xpVal=document.getElementById('mhXPVal');
   var totalXp=typeof window.totalXP==='function'?window.totalXP():window.S.xp||0;
-  if(xpEl)xpEl.textContent='⚡'+_formatXP(totalXp);
-  var streakEl=document.getElementById('mhStreak');
-  if(streakEl)streakEl.textContent='🔥'+(window.S.streak||0);
+  if(streakVal)streakVal.textContent=window.S.streak||0;
+  if(xpVal)xpVal.textContent=_formatXP(totalXp);
   var avatarEl=document.getElementById('mhAvatar');
   if(avatarEl)avatarEl.textContent=window.S.avatar||(window.S.name?window.S.name[0]:'🧑‍🎓');
-  // Update debate dashboard online count
-  var debateDash=document.getElementById('debateDashOnline');
-  if(debateDash&&window.DEBATE_ROOMS){
-    var total=window.DEBATE_ROOMS.reduce(function(s,r){return s+r.online},0);
-    debateDash.textContent=total;
-  }
 }
 
 let _mobileBackFn=null;
@@ -266,7 +267,7 @@ const _origGoDash=window.goDash;
 window.goDash=function(){
   _origGoDash();
   updateBottomNav('dash');
-  updateMobileHeader('escola liberal',false);
+  updateMobileHeader('',false);
   _mobileBackFn=null;
   closeSideMobile();
 };
