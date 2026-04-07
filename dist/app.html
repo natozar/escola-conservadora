@@ -17,7 +17,7 @@ if('serviceWorker' in navigator){
   });
 }
 </script>
-<meta name="description" content="Escola Liberal — A educação que a escola deveria ter dado. 21 disciplinas, 660 aulas gratuitas com gamificação, certificados e tutor IA. Para maiores de 18 anos.">
+<meta name="description" content="Escola Liberal — A educação que a escola deveria ter dado. 26 disciplinas, 800 aulas gratuitas com gamificação, certificados e tutor IA. Para maiores de 18 anos.">
 <meta name="robots" content="index, follow">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -29,7 +29,7 @@ if('serviceWorker' in navigator){
 <link rel="apple-touch-icon" href="/assets/build/icon-192-DytM3zcK.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/build/icon-192-DytM3zcK.png">
 <link rel="apple-touch-startup-image" href="/assets/build/icon-512-D2RgERrO.png">
-<link rel="manifest" href="/assets/build/manifest-CBJ7fpvV.json">
+<link rel="manifest" href="/assets/build/manifest-Bq85YAER.json">
 <title>Escola Liberal — Aprendizado</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,11 +61,10 @@ if('serviceWorker' in navigator){
   .main{padding:.5rem!important}
 }
 </style>
-  <script type="module" crossorigin src="/assets/build/app-BkPJ-wQZ.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/build/app-DIlzPKoj.css">
+  <script type="module" crossorigin src="/assets/build/app-CEhv1RMN.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/build/app-BkrkQsj3.css">
 </head>
 <body>
-<script src="pin-gate.js"></script>
 <!-- APP SPLASH — appears instantly, removed after boot -->
 <div class="app-splash" id="appSplash">
   <div class="app-splash-inner">
@@ -179,16 +178,18 @@ if('serviceWorker' in navigator){
 <!-- ONBOARDING — Age gate 18+ -->
 <div class="onboard-overlay" id="onboard">
   <div class="onboard-card">
-    <!-- Step 1: Age verification (must be 18+) -->
+    <!-- Step 1: Age verification via CPF (Lei Felca compliance) -->
     <div class="onboard-step active" id="obStep1">
       <div class="onboard-logo">🎓</div>
       <h2>Bem-vindo!</h2>
       <p>A educacao que a escola deveria ter dado.</p>
-      <label for="obBirthDate" style="font-weight:600;margin-bottom:.25rem;display:block">Confirme sua idade para continuar</label>
-      <input class="onboard-input" id="obBirthDate" type="date" max="" style="margin-bottom:.75rem" autocomplete="bday">
-      <p style="font-size:.72rem;color:var(--text-muted);margin-bottom:.75rem">Usamos apenas o ano para verificacao de idade. A data completa nao e armazenada (LGPD).</p>
-      <button class="btn btn-sage" onclick="obVerifyAge()" style="width:100%">Continuar</button>
-      <button class="btn btn-ghost" onclick="obSkip()" style="width:100%;margin-top:.5rem;font-size:.82rem">Pular →</button>
+      <label for="obCpf" style="font-weight:600;margin-bottom:.25rem;display:block">CPF</label>
+      <input class="onboard-input" id="obCpf" type="text" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" autocomplete="off" style="margin-bottom:.5rem">
+      <label for="obBirthDate" style="font-weight:600;margin-bottom:.25rem;display:block">Data de nascimento</label>
+      <input class="onboard-input" id="obBirthDate" type="date" max="" style="margin-bottom:.5rem" autocomplete="bday">
+      <p style="font-size:.7rem;color:var(--text-muted);margin-bottom:.75rem;line-height:1.4">Verificamos seu CPF na base da Receita Federal para confirmar sua idade. Armazenamos apenas um codigo anonimizado (hash). Seu CPF nunca e salvo. (LGPD Art. 14)</p>
+      <button class="btn btn-sage" id="obVerifyBtn" onclick="obVerifyAge()" style="width:100%">Verificar Idade</button>
+      <div id="obVerifyLoading" style="display:none;text-align:center;padding:.75rem"><span style="font-size:.9rem;color:var(--text-muted)">⏳ Verificando...</span></div>
       <div id="obAgeError" style="color:#ef4444;font-size:.85rem;margin-top:.75rem;display:none"></div>
     </div>
 
@@ -233,6 +234,7 @@ if('serviceWorker' in navigator){
     <span class="mh-title" id="mhTitle"></span>
   </div>
   <div class="mh-right">
+    <button class="mh-debate-btn" id="mhDebateBtn" onclick="goDebate()" aria-label="Debate ao Vivo">💬<span class="mh-debate-count" id="mhDebateCount"></span></button>
     <span class="mh-streak" id="mhStreak">🔥0</span>
     <span class="mh-xp" id="mhXP">⚡0</span>
     <button class="mh-update-btn" id="mhUpdateBtn" onclick="applyUpdate()" style="display:none" aria-label="Atualizar app">🔄</button>
@@ -287,7 +289,7 @@ if('serviceWorker' in navigator){
     <!-- Disciplinas — single link, modules render in main area -->
     <div class="ni" onclick="goAulasTab()" id="nDisc" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goAulasTab()" style="margin-top:.75rem">
       <div class="ni-icon" style="background:var(--sage-muted);color:var(--sage)">📚</div>
-      <div><div class="ni-txt">Disciplinas</div><div class="ni-sub" id="discSubtitle">21 disciplinas</div></div>
+      <div><div class="ni-txt">Disciplinas</div><div class="ni-sub" id="discSubtitle">26 disciplinas</div></div>
     </div>
 
     <!-- GRUPO 2: Ferramentas (colapsável, aberto por padrão) -->
@@ -337,6 +339,10 @@ if('serviceWorker' in navigator){
     <div class="ni" onclick="goBadges()" id="nBadges" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goBadges()">
       <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">🏅</div>
       <div><div class="ni-txt">Conquistas</div><div class="ni-sub">Suas medalhas</div></div>
+    </div>
+    <div class="ni" onclick="goCertificates()" id="nCerts" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goCertificates()">
+      <div class="ni-icon" style="background:var(--honey-muted);color:var(--honey)">📜</div>
+      <div><div class="ni-txt">Certificados</div><div class="ni-sub">Seus diplomas</div></div>
     </div>
     <div class="ni" onclick="goErrorReview()" id="nErrorReview" role="button" tabindex="0" onkeydown="if(event.key==='Enter')goErrorReview()">
       <div class="ni-icon" style="background:var(--coral-muted);color:var(--coral)">❌</div>
@@ -412,15 +418,28 @@ if('serviceWorker' in navigator){
       <div id="continueSection"></div>
       <div id="dailyGoalSection"></div>
 
-      <!-- ZONA APRENDIZADO -->
+      <!-- ZONA PROGRESSO -->
       <div class="dash-section">
-        <div class="dash-section-label">Suas Disciplinas</div>
-        <div class="search-wrap">
+        <div class="dash-section-label">Seu Progresso</div>
+        <div class="search-wrap" style="margin-bottom:.75rem">
           <span class="search-icon">🔍</span>
           <input class="search-box" id="searchBox" placeholder="Buscar em todas as aulas..." oninput="doSearch(this.value)" aria-label="Buscar em todas as aulas">
-        <div class="search-results" id="searchResults"></div>
+          <div class="search-results" id="searchResults"></div>
+        </div>
+        <div id="globalProgressSection"></div>
+        <div id="activeDiscSection"></div>
+        <button class="btn btn-ghost" onclick="goAulasTab()" style="width:100%;margin-top:.75rem;text-align:center">📚 Ver Todas as Disciplinas →</button>
       </div>
-      <div class="mcards" id="mcards"></div>
+      <div class="mcards" id="mcards" style="display:none" aria-hidden="true"></div>
+
+      <!-- DEBATE CARD -->
+      <div class="debate-dash-card" onclick="goDebate()" role="button" tabindex="0">
+        <div class="debate-dash-icon">💬</div>
+        <div class="debate-dash-text">
+          <div class="debate-dash-title">Debate ao Vivo</div>
+          <div class="debate-dash-sub">15 salas tematicas · <span id="debateDashOnline2">0</span> online</div>
+        </div>
+        <span class="debate-dash-arrow">→</span>
       </div>
 
       <!-- ZONA ENGAJAMENTO -->
@@ -576,7 +595,7 @@ if('serviceWorker' in navigator){
       <div class="parent-header">
         <div>
           <h3>👨‍👩‍👧‍👦 Painel do Responsável</h3>
-          <p>Acompanhe o progresso de estudo dos seus filhos.</p>
+          <p>Acompanhe o progresso de estudo dos perfis vinculados.</p>
         </div>
         <div class="parent-actions">
           <button class="btn btn-ghost btn-sm" onclick="exportParentReport()">📄 Exportar PDF</button>
@@ -596,6 +615,16 @@ if('serviceWorker' in navigator){
       </div>
       <div class="badges-progress" id="badgesProgress"></div>
       <div class="badges-grid" id="badgesGrid"></div>
+    </div>
+
+    <!-- CERTIFICATES GALLERY VIEW -->
+    <div class="xview" id="vCertificates">
+      <div class="xview-head">
+        <button class="btn btn-ghost" onclick="mobileBack()">← Voltar</button>
+        <div><h2>📜 Certificados</h2></div>
+      </div>
+      <div class="certs-progress" id="certsProgress"></div>
+      <div class="certs-grid" id="certsGrid"></div>
     </div>
 
     <!-- EXAM/SIMULADO VIEW -->
@@ -961,6 +990,14 @@ if('serviceWorker' in navigator){
       _updateBar(null,'⚠ Offline','avb-offline');
     }
   });
+
+  // Fallback: if SW doesn't respond within 3s, show app version
+  setTimeout(function(){
+    var v=document.getElementById('avbVersion');
+    if(v && v.textContent==='v--' && typeof window.APP_VERSION_NUM!=='undefined'){
+      _updateBar('v'+window.APP_VERSION_NUM,'✓','avb-ok');
+    }
+  },3000);
 
   // controllerchange so roda via applyUpdate() (com {once:true})
 })();

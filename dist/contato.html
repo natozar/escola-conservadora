@@ -53,7 +53,7 @@ select option{background:var(--card);color:var(--text)}
 .success .icon{font-size:3rem;margin-bottom:1rem}
 .success h2{font-family:'DM Serif Display',serif;font-size:1.5rem;margin-bottom:.5rem}
 .success p{color:var(--muted);font-size:.88rem}
-.contact-options{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.contact-options{display:grid;grid-template-columns:1fr;gap:1rem;margin-bottom:2rem;max-width:320px}
 .contact-opt{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.25rem;text-align:center;text-decoration:none;color:var(--text);transition:all .2s}
 .contact-opt:hover{border-color:var(--sage);transform:translateY(-2px)}
 .contact-opt .co-icon{font-size:1.5rem;margin-bottom:.4rem;display:block}
@@ -67,7 +67,6 @@ select option{background:var(--card);color:var(--text)}
 <script src="cookie-consent.js"></script>
 </head>
 <body>
-<script src="pin-gate.js"></script>
 <button class="theme-btn" onclick="toggleTheme()" aria-label="Alternar tema">🌙</button>
 <div class="container">
   <a href="index.html" class="back">← Voltar ao início</a>
@@ -81,11 +80,6 @@ select option{background:var(--card);color:var(--text)}
       <div class="co-label">E-mail</div>
       <div class="co-sub">Resposta em até 48h</div>
     </a>
-    <a href="https://wa.me/5511999999999" class="contact-opt" target="_blank">
-      <span class="co-icon">💬</span>
-      <div class="co-label">WhatsApp</div>
-      <div class="co-sub">Mensagem direta</div>
-    </a>
   </div>
 
   <div id="formArea">
@@ -97,6 +91,24 @@ select option{background:var(--card);color:var(--text)}
       <div class="form-group">
         <label>E-mail</label>
         <input type="email" id="cEmail" placeholder="seu@email.com" required>
+      </div>
+      <div class="form-group">
+        <label>Telefone (opcional)</label>
+        <div style="display:flex;gap:.5rem;align-items:stretch">
+          <div style="position:relative;min-width:100px">
+            <select id="cDDI" style="width:100%;padding-left:2.2rem">
+              <option value="+55" selected>+55</option>
+              <option value="+1">+1</option>
+              <option value="+351">+351</option>
+              <option value="+44">+44</option>
+              <option value="+54">+54</option>
+              <option value="+52">+52</option>
+            </select>
+            <span id="ddiFlagDisplay" style="position:absolute;left:.6rem;top:50%;transform:translateY(-50%);font-size:1.1rem;pointer-events:none">&#x1F1E7;&#x1F1F7;</span>
+          </div>
+          <input type="tel" id="cPhone" placeholder="(16) 99137-0000" style="flex:1" oninput="this.value=this.value.replace(/[^0-9()\-\s]/g,'')" maxlength="20">
+        </div>
+        <div style="font-size:.68rem;color:var(--muted);margin-top:.3rem">Usado apenas para retorno. Nunca compartilhado.</div>
       </div>
       <div class="form-group">
         <label>Assunto</label>
@@ -132,16 +144,22 @@ select option{background:var(--card);color:var(--text)}
 function initTheme(){const t=localStorage.getItem('escola_theme')||'dark';document.documentElement.setAttribute('data-theme',t);updateBtn()}
 function toggleTheme(){const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('escola_theme',t);updateBtn()}
 function updateBtn(){document.querySelector('.theme-btn').textContent=document.documentElement.getAttribute('data-theme')==='dark'?'🌙':'☀️'}
+document.getElementById('cDDI').addEventListener('change',function(){
+  var flags={'+55':'\u{1F1E7}\u{1F1F7}','+1':'\u{1F1FA}\u{1F1F8}','+351':'\u{1F1F5}\u{1F1F9}','+44':'\u{1F1EC}\u{1F1E7}','+54':'\u{1F1E6}\u{1F1F7}','+52':'\u{1F1F2}\u{1F1FD}'};
+  document.getElementById('ddiFlagDisplay').textContent=flags[this.value]||'\u{1F30D}';
+});
 function sendForm(e){
   e.preventDefault();
   const name=document.getElementById('cName').value;
   const email=document.getElementById('cEmail').value;
+  const ddi=document.getElementById('cDDI').value;
+  const phone=document.getElementById('cPhone').value;
   const subject=document.getElementById('cSubject').value;
   const message=document.getElementById('cMessage').value;
-  // For now, open mailto. Replace with API call when backend is ready.
   const subjectMap={sugestao:'Sugestão de Melhoria',bug:'Reportar Problema',conteudo:'Sugestão de Conteúdo',parceria:'Proposta de Parceria',outro:'Contato Geral'};
-  const body=`Nome: ${name}\nE-mail: ${email}\nAssunto: ${subjectMap[subject]}\n\nMensagem:\n${message}`;
-  window.location.href=`mailto:contato@escolaliberal.com.br?subject=${encodeURIComponent('escola liberal — '+subjectMap[subject])}&body=${encodeURIComponent(body)}`;
+  const phoneLine=phone?'\nTelefone: '+ddi+' '+phone:'';
+  const body='Nome: '+name+'\nE-mail: '+email+phoneLine+'\nAssunto: '+subjectMap[subject]+'\n\nMensagem:\n'+message;
+  window.location.href='mailto:contato@escolaliberal.com.br?subject='+encodeURIComponent('escola liberal — '+subjectMap[subject])+'&body='+encodeURIComponent(body);
   document.getElementById('formArea').style.display='none';
   document.getElementById('successMsg').classList.add('show')
 }
@@ -150,6 +168,9 @@ function resetForm(){
   document.getElementById('successMsg').classList.remove('show');
   document.getElementById('cName').value='';
   document.getElementById('cEmail').value='';
+  document.getElementById('cPhone').value='';
+  document.getElementById('cDDI').value='+55';
+  document.getElementById('ddiFlagDisplay').textContent='\u{1F1E7}\u{1F1F7}';
   document.getElementById('cSubject').value='sugestao';
   document.getElementById('cMessage').value='';
 }

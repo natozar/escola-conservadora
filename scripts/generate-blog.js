@@ -68,12 +68,15 @@ TAREFA: Escreva artigo educacional completo em HTML (apenas conteudo dentro de <
 5. VALORES EM REAIS: use valores realistas para Brasil 2026 (salario minimo ~R$1.500, aluguel ~R$1.500-3.000).
 6. LEIS: cite apenas leis reais (CLT, CDC, Lei do Inquilinato). Se nao souber o artigo exato, diga "conforme a legislacao vigente".
 
-=== REGRAS DE NEUTRALIDADE (INVIOLAVEIS) ===
-1. ZERO posicionamento politico-partidario. Nunca mencionar partidos, candidatos, governos especificos.
-2. ZERO ideologia explicita. Nao usar "esquerda", "direita", "conservador", "progressista".
-3. ECONOMIA: apresentar conceitos de forma factual. Se houver escolas diferentes, apresentar AMBAS com respeito.
-4. IMPOSTOS/GOVERNO: explicar como funciona (educacional), nunca se e "justo" ou "injusto".
-5. Temas controversos: apresentar argumentos dos dois lados e encerrar com "cabe a cada cidadao formar sua propria opiniao".
+=== REGRAS DE NEUTRALIDADE (INVIOLAVEIS — TOLERANCIA ZERO) ===
+1. PROIBIDO CITAR NOMES DE POLITICOS. Nenhum. Zero. Nem presidentes, ex-presidentes, governadores, prefeitos, deputados, senadores, ministros. Nem para elogiar, nem para criticar. Se precisar de contexto, use "o governo federal da epoca" ou "a gestao vigente".
+2. PROIBIDO CITAR PARTIDOS POLITICOS. Nenhum. PT, PSDB, MDB, PSD, PSOL, PL, PP — NENHUM pode aparecer.
+3. PROIBIDO CITAR MINISTROS DO STF, STJ ou qualquer tribunal por nome. Use "conforme entendimento dos tribunais superiores".
+4. ZERO ideologia. Nao usar: "esquerda", "direita", "conservador", "progressista", "neoliberal", "socialista", "comunista", "fascista".
+5. ZERO opiniao sobre governo. IMPOSTOS: explicar como funciona, nunca se e "justo" ou "injusto". POLITICAS PUBLICAS: explicar o que sao, nunca se funcionam ou nao.
+6. ECONOMIA: apresentar conceitos de forma factual. Se houver escolas diferentes, apresentar AMBAS com respeito.
+7. Temas controversos: apresentar fatos dos dois lados e encerrar com "cabe a cada cidadao formar sua propria opiniao com base nos fatos".
+8. NA DUVIDA, NAO INCLUA. Se um trecho pode ser interpretado como posicionamento politico, remova.
 
 === REGRAS DE VINCULACAO AS AULAS ===
 1. O artigo e extensao da disciplina "${kw.discipline}" da Escola Liberal.
@@ -100,7 +103,7 @@ function reviewerPrompt(html, kw) {
 TAREFA: Revise o artigo e de nota 0-10.
 CRITERIOS (1 ponto cada):
 1. VERACIDADE — Dados inventados, estatisticas sem fonte, citacoes fabricadas? (Se sim, nota maxima = 4)
-2. NEUTRALIDADE — Vies politico, ideologico, partidario? Menciona partidos? (Se sim, nota maxima = 3)
+2. NEUTRALIDADE — Menciona QUALQUER nome de politico, partido, ministro do STF/STJ? Menciona ideologia (esquerda/direita)? SE SIM → nota ZERO, artigo REPROVADO.
 3. PROFUNDIDADE — Vai alem do obvio? Exemplos concretos?
 4. CLAREZA — Linguagem acessivel? Estrutura logica?
 5. SEO — Keyword "${kw.keyword}" no H1, primeiro paragrafo, subtitulos?
@@ -109,7 +112,7 @@ CRITERIOS (1 ponto cada):
 8. VINCULACAO — Conecta o tema as aulas/disciplinas da Escola Liberal?
 9. GRAMATICA — Portugues correto?
 10. DISCLAIMER — Aviso "nao substitui orientacao profissional" quando aplicavel?
-REGRAS: Dado inventado → max 4. Vies politico → max 3. Promessa financeira → max 4.
+REGRAS: Nome de politico/partido/ministro STF → nota 0 (REPROVADO). Dado inventado → max 4. Vies ideologico → max 3. Promessa financeira → max 4.
 FORMATO (JSON estrito): {"score":N,"summary":"1 frase","issues":["problema"],"suggestions":["sugestao"],"flaggedClaims":["dado suspeito"],"biasFlags":["trecho com vies"],"rewriteInstructions":"instrucoes se score<7"}
 ARTIGO: ${html.substring(0, 12000)}`;
 }
@@ -125,10 +128,22 @@ const CSS = `*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#0f1729;--bg2
 function validateSafety(html) {
   const text = html.replace(/<[^>]+>/g, '').toLowerCase();
   const flags = [];
-  const political = ['pt ','psdb','mdb','psol','psd ','uniao brasil','podemos','lula','bolsonaro','temer','dilma','fhc','petista','bolsonarista','esquerdista','direitista','comunismo','fascismo','extrema-esquerda','extrema-direita','impeachment','golpe de estado'];
-  for (const t of political) { if (text.includes(t)) flags.push('Termo politico: "' + t.trim() + '"'); }
+  // === NOMES DE POLITICOS (PROIBIDO TOTAL) ===
+  const politicians = ['lula','bolsonaro','dilma','temer','fhc','fernando henrique','collor','itamar','sarney','lira','pacheco','alckmin','haddad','ciro','marina silva','boulos','marielle','moro','sergio moro','dallagnol','janot','eduardo cunha','renan calheiros','lula da silva','jair bolsonaro'];
+  for (const name of politicians) { const re = new RegExp('\\b' + name.replace(/\s+/g, '\\s+') + '\\b', 'i'); if (re.test(text)) flags.push('Nome de politico: "' + name + '"'); }
+  // === MINISTROS STF/STJ ===
+  const ministers = ['barroso','mendonca','nunes marques','alexandre de moraes','gilmar mendes','lewandowski','fachin','rosa weber','carmem lucia','carmen lucia','toffoli','fux','luiz fux','flavio dino','cristiano zanin'];
+  for (const name of ministers) { const re = new RegExp('\\b' + name.replace(/\s+/g, '\\s+') + '\\b', 'i'); if (re.test(text)) flags.push('Ministro STF/STJ: "' + name + '"'); }
+  // === PARTIDOS POLITICOS ===
+  const parties = [{re:/\bpt\b/,label:'PT'},{re:/\bpsd\b/,label:'PSD'},{re:/\bpsdb\b/,label:'PSDB'},{re:/\bmdb\b/,label:'MDB'},{re:/\bpsol\b/,label:'PSOL'},{re:/\buniao brasil\b/i,label:'Uniao Brasil'},{re:/\bpl\b(?=\s+(partido|deputad|senad|govern|candidat|chapa|coliga|filia))/,label:'PL (partido)'},{re:/\bpodemos\b(?=\s+(partido|chapa|coliga|deputad|senad|filia))/i,label:'Podemos (partido)'},{re:/\bpartido\s+(dos\s+trabalhadores|social|liberal|novo|verde|comunista|socialista)/i,label:'Nome de partido'}];
+  for (const {re,label} of parties) { if (re.test(text)) flags.push('Partido politico: "' + label + '"'); }
+  // === TERMOS IDEOLOGICOS ===
+  const ideology = ['petista','bolsonarista','lulista','esquerdista','direitista','comunismo','fascismo','socialismo','neoliberal','neoliberalismo','extrema-esquerda','extrema-direita','extrema esquerda','extrema direita','impeachment','golpe de estado','golpe militar'];
+  for (const t of ideology) { if (text.includes(t)) flags.push('Termo ideologico: "' + t + '"'); }
+  // === PROMESSAS FINANCEIRAS ===
   const promises = ['fique rico','enriqueca','ganhe dinheiro facil','renda garantida','lucro garantido','sem risco','rentabilidade garantida','multiplique seu dinheiro','formula secreta','metodo infalivel'];
   for (const t of promises) { if (text.includes(t)) flags.push('Promessa financeira: "' + t + '"'); }
+  // === DADOS NAO VERIFICAVEIS ===
   const fakePatterns = [/segundo (um )?estudo (recente )?(da|de) [a-z]/i, /\d{2,3}% (dos|das|de) /];
   for (const p of fakePatterns) { const m = text.match(p); if (m) flags.push('Dado nao verificavel: "' + m[0] + '"'); }
   return flags;
@@ -238,7 +253,7 @@ async function processKw(kw, allSlugs) {
     const flaggedInfo = review.flaggedClaims ? '\nDADOS FLAGGED COMO POSSIVELMENTE FALSOS:\n' + review.flaggedClaims.join('\n') : '';
     const biasInfo = review.biasFlags ? '\nTRECHOS COM VIES DETECTADO:\n' + review.biasFlags.join('\n') : '';
     const rw = await callGemini('gemini-2.5-flash-lite',
-      `ATENCAO: O editor encontrou problemas graves. Ao reescrever:\n- REMOVA qualquer dado ou citacao nao verificavel\n- REMOVA qualquer frase com vies politico ou ideologico\n- SUBSTITUA numeros especificos por explicacoes qualitativas se nao tiver certeza da fonte\n- Mantenha tom educacional neutro\n${flaggedInfo}${biasInfo}\n\nCorrecoes: ${review.issues.join('; ')}. Instrucoes: ${review.rewriteInstructions}. Manter keyword "${kw.keyword}" no H1. Retorne apenas HTML.\n\nARTIGO:\n${html}`, 8192);
+      `ATENCAO: O editor encontrou problemas graves. Ao reescrever:\n- REMOVA TODOS os nomes de politicos, partidos, ministros de tribunais e servidores publicos\n- NAO mencione STF, STJ, TSE, Congresso em contexto de disputa politica\n- Se precisar de contexto governamental, use termos genericos: "o governo federal", "a gestao vigente", "os tribunais superiores"\n- REMOVA qualquer dado ou citacao nao verificavel\n- REMOVA qualquer frase com vies politico ou ideologico\n- SUBSTITUA numeros especificos por explicacoes qualitativas se nao tiver certeza da fonte\n- Mantenha tom educacional neutro\n${flaggedInfo}${biasInfo}\n\nCorrecoes: ${review.issues.join('; ')}. Instrucoes: ${review.rewriteInstructions}. Manter keyword "${kw.keyword}" no H1. Retorne apenas HTML.\n\nARTIGO:\n${html}`, 8192);
     if (rw) { html = rw.replace(/^```html?\n?/i, '').replace(/\n?```$/i, '').trim(); }
     const r2 = await callGemini('gemini-2.5-flash', reviewerPrompt(html, kw), 2048);
     if (r2) { try { const m = r2.match(/\{[\s\S]*\}/); if (m) review = JSON.parse(m[0]); } catch (e) {} }
