@@ -191,6 +191,7 @@ function wrapTemplate(kw, body, dateISO) {
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"${escJ(kw.title)}","description":"${escJ(kw.description150)}","datePublished":"${dateISO}","author":{"@type":"Organization","name":"Escola Liberal"},"publisher":{"@type":"Organization","name":"Escola Liberal","logo":{"@type":"ImageObject","url":"https://escolaliberal.com.br/assets/icons/icon-512.png"}},"mainEntityOfPage":"https://escolaliberal.com.br/blog/${kw.slug}.html"}<\/script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://escolaliberal.com.br/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://escolaliberal.com.br/blog.html"},{"@type":"ListItem","position":3,"name":"${escJ(kw.title)}"}]}<\/script>
 <style>${CSS}</style>
+<link rel="stylesheet" href="../blog-marketing.css">
 <script src="../cookie-consent.js"><\/script>
 </head>
 <body>
@@ -209,6 +210,7 @@ ${body}
 function toggleTheme(){var t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('escola_theme',t);document.querySelector('.theme-btn').textContent=t==='light'?'☀️':'🌙'}
 (function(){var t=localStorage.getItem('escola_theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');document.querySelector('.theme-btn').textContent=(t==='light')?'☀️':'🌙'})();
 <\/script>
+<script src="../blog-marketing.js" defer><\/script>
 </body>
 </html>`;
 }

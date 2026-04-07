@@ -1,8 +1,8 @@
-// Escola Liberal PWA — Service Worker v96
+// Escola Liberal PWA — Service Worker v118
 // Estratégia: Network-first (navigation + Vite bundles) + Stale-While-Revalidate (other assets) + Cache-first (fonts)
-const SW_VERSION = 'v111';
-const CACHE_NAME = 'escola-liberal-v111';
-const STATIC_CACHE = 'escola-static-v111';
+const SW_VERSION = 'v118';
+const CACHE_NAME = 'escola-liberal-v118';
+const STATIC_CACHE = 'escola-static-v118';
 const FONT_CACHE = 'escola-fonts-v1';
 
 // Core assets — cached on install (only stable filenames that exist in dist root)
@@ -23,7 +23,10 @@ const CORE_ASSETS = [
   './stripe-billing.js',
   './lessons/index.json',
   './cert.html',
-  './manifest.json'
+  './institucional.html',
+  './manifest.json',
+  './blog-marketing.css',
+  './blog-marketing.js'
 ];
 
 // Lazy-loaded: lesson data — cached on first use
@@ -157,4 +160,20 @@ self.addEventListener('fetch', e => {
   // 4. All other app assets: Stale-While-Revalidate (fast + fresh)
   e.respondWith(
     caches.match(request).then(cached => {
-  
+      const fetchPromise = fetch(request).then(res => {
+        if (res.status === 200 && res.type === 'basic') {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then(c => c.put(request, clone));
+        }
+        return res;
+      });
+      return cached || fetchPromise;
+    }).catch(() => {
+      if (request.destination === 'image') {
+        return new Response('<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150"><rect fill="#1e293b" width="200" height="150"/><text fill="#64748b" x="100" y="80" text-anchor="middle" font-size="14">Offline</text></svg>', {
+          headers: { 'Content-Type': 'image/svg+xml' }
+        });
+      }
+    })
+  );
+});

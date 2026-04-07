@@ -55,6 +55,7 @@ article blockquote{border-left:3px solid var(--sage);padding:.75rem 1.25rem;marg
 @media(max-width:600px){article h1{font-size:1.5rem}article h2{font-size:1.2rem}}
 </style>
 <script src="../cookie-consent.js"></script>
+<link rel="stylesheet" href="../blog-marketing.css">
 </head>
 <body>
 <button class="theme-btn" onclick="toggleTheme()" aria-label="Alternar tema">🌙</button>
@@ -146,5 +147,6 @@ article blockquote{border-left:3px solid var(--sage);padding:.75rem 1.25rem;marg
 function toggleTheme(){const t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';document.documentElement.setAttribute('data-theme',t);localStorage.setItem('escola_theme',t);document.querySelector('.theme-btn').textContent=t==='light'?'☀️':'🌙'}
 (function(){const t=localStorage.getItem('escola_theme');if(t==='light')document.documentElement.setAttribute('data-theme','light');document.querySelector('.theme-btn').textContent=(t==='light')?'☀️':'🌙'})();
 </script>
+<script src="../blog-marketing.js" defer></script>
 </body>
 </html>

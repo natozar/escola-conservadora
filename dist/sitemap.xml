@@ -107,6 +107,8 @@
   <url><loc>https://escolaliberal.com.br/blog/tesouro-direto-para-iniciantes.html</loc><lastmod>2026-04-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://escolaliberal.com.br/blog/como-calcular-juros-emprestimo.html</loc><lastmod>2026-04-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://escolaliberal.com.br/blog/como-vender-whatsapp.html</loc><lastmod>2026-04-07</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+    <url><loc>https://escolaliberal.com.br/institucional.html</loc><lastmod>2026-04-07</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+    <url><loc>https://escolaliberal.com.br/cert.html</loc><lastmod>2026-04-05</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <!-- Offline fallback (crawlable for PWA) -->
   <url>
     <loc>https://escolaliberal.com.br/offline.html</loc>
