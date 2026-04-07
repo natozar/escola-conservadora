@@ -9,6 +9,8 @@ Allow: /termos.html
 Allow: /privacidade.html
 Allow: /blog.html
 Allow: /blog/
+Allow: /institucional.html
+Allow: /cert.html
 Disallow: /app.html
 Disallow: /admin.html
 Disallow: /admin-stripe
