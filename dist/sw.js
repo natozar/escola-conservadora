@@ -1,8 +1,8 @@
 // Escola Liberal PWA — Service Worker v118
 // Estratégia: Network-first (navigation + Vite bundles) + Stale-While-Revalidate (other assets) + Cache-first (fonts)
-const SW_VERSION = 'v153';
-const CACHE_NAME = 'escola-liberal-v153';
-const STATIC_CACHE = 'escola-static-v153';
+const SW_VERSION = 'v154';
+const CACHE_NAME = 'escola-liberal-v154';
+const STATIC_CACHE = 'escola-static-v154';
 const FONT_CACHE = 'escola-fonts-v1';
 
 // Core assets — cached on install (only stable filenames that exist in dist root)
