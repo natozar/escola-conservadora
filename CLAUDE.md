@@ -341,7 +341,7 @@ O arquivo é monolítico (~4500 linhas). Estas são as seções principais e sua
 4. **AI Tutor/Quiz desabilitado** — precisa de créditos na API Anthropic. Disclaimer LGPD e system prompt já implementados.
 5. ~~**Leaderboard migration**~~ — **RESOLVIDO** — consolidado em `supabase/migrations/EXECUTE-THIS.sql`
 6. ~~**Migration pendente**~~ — **RESOLVIDO** — consolidado em `supabase/migrations/EXECUTE-THIS.sql`. Para executar: copiar conteúdo de `supabase/migrations/EXECUTE-THIS.sql` e colar no SQL Editor do Supabase Dashboard.
-7. ~~**App exigia login para acessar**~~ — **RESOLVIDO**: `DEMO_MODE = true` em boot.js permite acesso total sem auth. Todos os modulos desbloqueados, sem paywall, sem save modal. Login apenas via botao Perfil. Para reativar auth obrigatorio: mudar `DEMO_MODE` para `false`.
+7. ~~**App exigia login para acessar**~~ — **RESOLVIDO e REVERTIDO 2026-04-24**: DEMO_MODE foi usado entre 2026-04-02 e 2026-04-24 para apresentacoes (acesso total sem auth). Em 2026-04-24 `DEMO_MODE = false` foi ativado para comecar captura de dados reais de engajamento. Agora: onboarding obrigatorio para novos visitantes (age gate + CPF), modal "crie conta" ativo, `isModUnlocked` continua destravado (paywall e controlado por `admin_settings.paywall_enabled` no Supabase, nao mais pelo DEMO_MODE). Para reativar modo apresentacao: mudar `DEMO_MODE` para `true` em src/boot.js.
 8. ~~**App nao forcava atualizacao do SW**~~ — **RESOLVIDO**: `updateViaCache:'none'` no registro, polling `reg.update()` a cada 60s, `controllerchange` faz reload automatico, `skipWaiting()` + `clients.claim()` no SW.
 9. ~~**App dependia de Supabase para boot**~~ — **RESOLVIDO**: `OFFLINE_MODE = true` desliga Supabase completamente. Zero fetch de rede, zero erros no console. Boot em <2s. Dados demo pre-populados (seedDemoData). Para reconectar: mudar `OFFLINE_MODE` para `false` em src/boot.js.
 10. **Debate implementado** — 15 salas tematicas com presenca online, botao destaque verde, grid responsivo, chat com bolhas. Auth requerido para enviar.
@@ -708,6 +708,21 @@ Deploy → SW novo detectado (polling 60s)
 - SQL secoes 11 (moderation_log) e 12 (certificates) em EXECUTE-THIS.sql
 - SW v96
 
+### Concluido nesta sessao (2026-04-24 — DEMO_MODE desligado)
+- **Motivacao:** comecar a capturar dados reais de engajamento para priorizar expansao de conteudo (distribuicao atual desigual: 81 modulos em 27 disciplinas, variando de 1 a 6 modulos por disciplina)
+- `DEMO_MODE = false` em src/boot.js (antes era true desde 2026-04-02)
+- OFFLINE_MODE permanece false (Supabase ativo em producao)
+- **Comportamento novo:** visitantes sem `ageGroup` no localStorage sao forcados ao onboarding (age gate + CPF Serpro ou auto-declaracao). Menores de 18 bloqueados. Modal "crie conta" volta a aparecer nos gatilhos (debate, save progresso, etc.)
+- **Comportamento preservado:** `isModUnlocked` continua destravando todos os modulos — paywall agora controlado EXCLUSIVAMENTE por `admin_settings.paywall_enabled` no Supabase (nao mais pelo DEMO_MODE)
+- **Usuarios existentes** com dados demo ja seedados (`ageGroup:'adult'`) passam direto sem re-onboarding
+- Arquivos alterados: src/boot.js (linha 15), sw.js (v129→v130), dist/* (rebuild)
+- SW v130
+
+### Pendencia identificada — curriculo
+- Distribuicao desigual de modulos: Economia(6), Matematica/Financas(5), maioria(3), Marketing/Tributario/Trabalhista(2), Sustentabilidade/Espanhol(1)
+- Duplicata `historia`(3) e `history`(3) como disciplinas separadas no index.json — investigar se sao PT/EN ou bug
+- Total atual: 81 modulos em 27 disciplinas (CLAUDE.md "Identidade" diz 66/21 — desatualizado, mas preservado ate decidir expansao)
+
 ### ✅ CONCLUÍDO: FASE 2 do update PWA
 - skipWaiting() removido do install event (só no message handler)
 - controllerchange condicionado a _userRequestedUpdate
@@ -747,13 +762,14 @@ Deploy → SW novo detectado (polling 60s)
 
 ## Agentes Disponíveis
 
-Sistema de 31 agentes em `.agents/`. Invoque por objetivo:
+Sistema de 32 agentes em `.agents/`. Invoque por objetivo:
 
 | Objetivo | Agentes |
 |----------|---------|
 | Melhorar performance | Performance + Frontend + DevOps + QA |
 | Nova feature | Architect + PM → Frontend + Backend + QA |
 | Bug mobile | Mobile + QA |
+| Regressao cross-OS (iOS/Android) | QA-Mobile + Mobile + Frontend |
 | Campanha marketing | Marketing + Copywriter + Social + Traffic |
 | Revisar segurança | Security + LGPD + Backend |
 | Melhorar conversão | UX + Copywriter + Data + Frontend |
