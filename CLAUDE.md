@@ -766,6 +766,14 @@ Deploy → SW novo detectado (polling 60s)
 - **D** `DISCIPLINES.history.label` → "American History (English)" — clarifica natureza bilingue CLIL
 - Build verificado: 175 modulos com watermark, integrity manifest atualizado (build_id `29d8df8e2f90`)
 - SW v163
+- **Commits desta sessao:** `810feb3` (editorial audit + anti-cloning, 386 arquivos) → `6d3e8fd` (docs CLAUDE.md atualizado: 29 disciplinas/174 modulos)
+- **Deploy:** push para `main` → GitHub Actions (build + Pages + QA) → ao vivo em escolaliberal.com.br
+- **Anti-cloning ativo em producao:**
+  - Watermark forense (zero-width Unicode + `_sig` + canaries) em todos os 175 mods
+  - `domain-guard.js` em Phase 0 do boot — bloqueia clone fora da allowlist
+  - Origin lock nas 5 Edge Functions (Origin + Referer fallback, retorna 403 `origin_blocked`)
+  - `LICENSE.md` proprietaria + `robots.txt` anti-AI-scraping (GPTBot, ClaudeBot, etc bloqueados)
+  - Pipeline build: copy lessons → watermark dist → integrity hash dist (manifesto bate com conteudo deployado)
 
 ### ✅ CONCLUÍDO: FASE 2 do update PWA
 - skipWaiting() removido do install event (só no message handler)
