@@ -176,5 +176,6 @@
         "exp": "Validação correta começa pelo cliente (persona + job), testa disposição a pagar (entrevistas + pré-venda), constrói MVP, mede comportamento real e itera."
       }
     }
-  ]
+  ],
+  "order": 151
 }

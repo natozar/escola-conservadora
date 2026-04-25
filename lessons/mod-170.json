@@ -2,7 +2,7 @@
   "id": 170,
   "title": "Deep Work e Foco",
   "icon": "🎯",
-  "color":"lavender",
+  "color": "lavender",
   "desc": "O trabalho profundo de Cal Newport — por que foco é raro hoje, como construir capacidade de concentração e a vida em modo deep work.",
   "discipline": "produtividade",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "Profissionais que praticam deep work consistente costumam reportar: menos horas, mais valor entregue, carreira progredindo mais rápido, vida pessoal mais presente, estresse menor. A explicação é simples: 3 horas profundas batem 8 fragmentadas, e a economia de energia permite vida fora do trabalho."
       }
     }
-  ]
+  ],
+  "order": 170
 }

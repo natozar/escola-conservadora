@@ -13,7 +13,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a única coisa de que Descartes conclui não poder duvidar?",
-        "o": ["A existência de Deus", "Que ele próprio existe enquanto pensa", "Os teoremas matemáticos", "Os dados dos sentidos"],
+        "o": [
+          "A existência de Deus",
+          "Que ele próprio existe enquanto pensa",
+          "Os teoremas matemáticos",
+          "Os dados dos sentidos"
+        ],
         "c": 1,
         "exp": "O cogito: para duvidar é preciso pensar; para pensar é preciso existir. \"Penso, logo existo\"."
       }
@@ -22,10 +27,15 @@
       "title": "Spinoza e Leibniz — racionalismo continental",
       "sub": "Deus-Natureza e o melhor dos mundos possíveis",
       "content": "<h2>Spinoza e Leibniz — racionalismo continental</h2><p class=\"lesson-subtitle\">Deus-Natureza e o melhor dos mundos possíveis</p><p>Após Descartes, dois grandes racionalistas continuaram a tradição: <strong>Baruch Spinoza</strong> (1632-1677), holandês de origem judaica, e <strong>Gottfried Wilhelm Leibniz</strong> (1646-1716), polímata alemão.</p><h3>Spinoza — Deus sive Natura</h3><p>Em sua obra <em>Ética</em> (publicada postumamente em 1677), Spinoza apresenta um sistema rigoroso, organizado como um livro de geometria (definições, axiomas, proposições, demonstrações).</p><div class=\"highlight\"><p>• <strong>Substância única:</strong> só existe uma substância — Deus, que é igual à Natureza (\"Deus sive Natura\").</p><p>• <strong>Panteísmo:</strong> Deus não é um ser pessoal externo ao mundo; Deus é o próprio universo em sua totalidade.</p><p>• <strong>Determinismo:</strong> tudo o que acontece é necessário, segue das leis da Natureza. Não há livre-arbítrio no sentido tradicional.</p><p>• <strong>Liberdade como conhecimento:</strong> ser livre é compreender as causas que nos movem; o ignorante se acha livre porque não vê as cordas que o puxam.</p></div><p>Spinoza foi excomungado da comunidade judaica de Amsterdã aos 23 anos por essas ideias e viveu humildemente como polidor de lentes.</p><h3>Leibniz — mônadas e o melhor dos mundos</h3><p>Leibniz era matemático (inventou o cálculo independentemente de Newton), diplomata e filósofo. Suas ideias centrais:</p><div class=\"highlight\"><p>• <strong>Mônadas:</strong> a realidade é composta de unidades simples, espirituais, sem partes — \"átomos metafísicos\" que refletem o universo inteiro de seu ponto de vista.</p><p>• <strong>Princípio de razão suficiente:</strong> nada acontece sem uma razão; tudo tem causa.</p><p>• <strong>Harmonia preestabelecida:</strong> Deus organizou o universo de modo que tudo se encaixa perfeitamente, como dois relógios sincronizados.</p><p>• <strong>Melhor dos mundos possíveis:</strong> Deus, sendo perfeito, escolheu criar o mundo com o maior bem possível. O mal existente é necessário para esse máximo bem.</p></div><h3>Voltaire e a sátira</h3><p>O \"melhor dos mundos\" foi satirizado por Voltaire em <em>Cândido</em> (1759), após o terremoto de Lisboa de 1755 ter matado dezenas de milhares: como pode ser este o melhor dos mundos?</p><div class=\"example\"><p><strong>Por que estudar:</strong> Spinoza influencia hoje a neurociência (determinismo, ausência de livre-arbítrio absoluto) e a ecologia (Deus-Natureza). Leibniz é base da lógica moderna e da computação (sistema binário, princípio de identidade dos indiscerníveis).</p></div>",
-        "xp": 30,
+      "xp": 30,
       "quiz": {
         "q": "Qual é a tese central do panteísmo de Spinoza?",
-        "o": ["Existem muitos deuses", "Deus criou o mundo do nada", "Deus é igual à Natureza — uma única substância", "Não existe Deus algum"],
+        "o": [
+          "Existem muitos deuses",
+          "Deus criou o mundo do nada",
+          "Deus é igual à Natureza — uma única substância",
+          "Não existe Deus algum"
+        ],
         "c": 2,
         "exp": "\"Deus sive Natura\": para Spinoza, Deus e a Natureza são uma só substância infinita."
       }
@@ -37,7 +47,12 @@
       "xp": 35,
       "quiz": {
         "q": "Quais são os três direitos naturais segundo Locke?",
-        "o": ["Saúde, educação e moradia", "Vida, liberdade e propriedade", "Igualdade, fraternidade e justiça", "Trabalho, lazer e descanso"],
+        "o": [
+          "Saúde, educação e moradia",
+          "Vida, liberdade e propriedade",
+          "Igualdade, fraternidade e justiça",
+          "Trabalho, lazer e descanso"
+        ],
         "c": 1,
         "exp": "Vida, liberdade e propriedade — direitos que preexistem ao governo, cuja função é apenas protegê-los."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é o problema da indução, segundo Hume?",
-        "o": ["Não há sentidos confiáveis", "Não há prova racional de que o futuro será como o passado", "Os números não existem fora da mente", "Deus não pode ser provado"],
+        "o": [
+          "Não há sentidos confiáveis",
+          "Não há prova racional de que o futuro será como o passado",
+          "Os números não existem fora da mente",
+          "Deus não pode ser provado"
+        ],
         "c": 1,
         "exp": "Apenas o hábito, não a razão, nos faz esperar que o futuro siga o padrão do passado."
       }
@@ -61,7 +81,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a diferença entre \"vontade geral\" e \"vontade de todos\" em Rousseau?",
-        "o": ["Não há diferença", "A vontade geral é o bem comum; vontade de todos é a soma das vontades individuais", "A vontade geral é dos governantes; vontade de todos é dos súditos", "A vontade geral é divina; vontade de todos é humana"],
+        "o": [
+          "Não há diferença",
+          "A vontade geral é o bem comum; vontade de todos é a soma das vontades individuais",
+          "A vontade geral é dos governantes; vontade de todos é dos súditos",
+          "A vontade geral é divina; vontade de todos é humana"
+        ],
         "c": 1,
         "exp": "Para Rousseau, vontade geral aponta para o bem comum, enquanto vontade de todos é apenas a agregação aritmética de interesses individuais."
       }
@@ -73,7 +98,12 @@
       "xp": 40,
       "quiz": {
         "q": "Qual é a primeira formulação do imperativo categórico de Kant?",
-        "o": ["Faça aos outros o que gostaria que fizessem a você", "Aja apenas segundo máxima que possa ser lei universal", "Busque sempre o maior prazer", "Obedeça à autoridade legítima"],
+        "o": [
+          "Faça aos outros o que gostaria que fizessem a você",
+          "Aja apenas segundo máxima que possa ser lei universal",
+          "Busque sempre o maior prazer",
+          "Obedeça à autoridade legítima"
+        ],
         "c": 1,
         "exp": "A fórmula da universalização: só é moral o ato cuja regra você poderia querer que valesse para todos sempre."
       }
@@ -85,7 +115,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual é a tese central de Berkeley resumida na frase \"esse est percipi\"?",
-        "o": ["Pensar é existir", "Ser é ser percebido", "A matéria é eterna", "Deus criou tudo"],
+        "o": [
+          "Pensar é existir",
+          "Ser é ser percebido",
+          "A matéria é eterna",
+          "Deus criou tudo"
+        ],
         "c": 1,
         "exp": "Para Berkeley, existir é ser percebido por alguma mente — humana ou divina."
       }
@@ -97,7 +132,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual filósofo iluminista propôs a separação dos três poderes (Executivo, Legislativo, Judiciário)?",
-        "o": ["Voltaire", "Rousseau", "Montesquieu", "Locke"],
+        "o": [
+          "Voltaire",
+          "Rousseau",
+          "Montesquieu",
+          "Locke"
+        ],
         "c": 2,
         "exp": "Montesquieu, em \"O Espírito das Leis\" (1748), formulou a separação de poderes que fundamenta as Constituições modernas."
       }
@@ -109,7 +149,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é a tese da \"mão invisível\" de Adam Smith?",
-        "o": ["Deus controla a economia", "Indivíduos buscando interesse próprio promovem, sem intenção, o bem geral", "Os reis devem comandar o mercado", "O Estado deve dirigir a produção"],
+        "o": [
+          "Deus controla a economia",
+          "Indivíduos buscando interesse próprio promovem, sem intenção, o bem geral",
+          "Os reis devem comandar o mercado",
+          "O Estado deve dirigir a produção"
+        ],
         "c": 1,
         "exp": "A coordenação descentralizada do mercado canaliza o auto-interesse individual em benefício social agregado."
       }
@@ -121,10 +166,16 @@
       "xp": 40,
       "quiz": {
         "q": "Qual ideia da filosofia moderna fundamenta o Art. 5º da Constituição brasileira sobre direitos individuais?",
-        "o": ["Mão invisível de Smith", "Cogito de Descartes", "Direitos naturais de Locke", "Vontade geral de Rousseau"],
+        "o": [
+          "Mão invisível de Smith",
+          "Cogito de Descartes",
+          "Direitos naturais de Locke",
+          "Vontade geral de Rousseau"
+        ],
         "c": 2,
         "exp": "Vida, liberdade e propriedade — direitos naturais lockeanos — são a matriz dos direitos individuais constitucionais."
       }
     }
-  ]
+  ],
+  "order": 3
 }

@@ -718,10 +718,52 @@ Deploy → SW novo detectado (polling 60s)
 - Arquivos alterados: src/boot.js (linha 15), sw.js (v129→v130), dist/* (rebuild)
 - SW v130
 
+### Concluido nesta sessao (2026-04-25 — Auditoria Editorial)
+- **Auditoria estrutural completa** dos 174 modulos (29 disciplinas × 6 mods × 10 aulas = 1.740 aulas).
+- **Fixes aplicados:**
+  - 28 modulos sem `id` (mod-38 a mod-65) ganharam IDs semanticos via slugify do title
+  - Colisao de id `finance` resolvida: mod-3 renomeado `economia-financas` (mod-23 mantem `finance`)
+  - Ortografia `espanol` -> `espanhol` em PT (disciplines.js + 6 modulos + IDs `espanhol-*`)
+  - Sequencia de aulas em mod-0 (Dinheiro) reorganizada: macro contiguo (1-7) -> pessoal (8-9) -> futuro (10)
+- **scripts/editorial-fixes.mjs** criado (idempotente, pode rodar novamente)
+- **RELATORIO-EDITORIAL.md** documenta decisoes pendentes que exigem julgamento humano:
+  - Sobreposicao economia ⇄ financas/empreendedorismo/logica
+  - Titulos similares (Marketing Digital x2, Falacias x2)
+  - Sequencia entre modulos dentro da disciplina (filosofia, matematica, financas, logica) — exige campo `order` ou rename de arquivos
+  - Decisao sobre `historia` vs `history` (PT/EN bilingue)
+- SW v162
+
+### Concluido nesta sessao (2026-04-25 — Anti-Cloning Defense)
+- **Watermarking forense (scripts/watermark-content.mjs):** roda no build em dist/lessons/, embute 3 camadas — `_sig` field (build_id + hash + copyright + license + notice), zero-width Unicode em `desc` (codifica build_id), 3 frases canonicas rotacionadas. Idempotente (strip regex antes de re-aplicar). Gera `canaries.json` com registry. 175 arquivos assinados/build.
+- **Pipeline build (vite.config.js):** copia lessons → watermark dist → integrity hash dist (assim manifesto bate com conteudo deployado).
+- **Domain guard (src/core/domain-guard.js):** verifica hostname allowlist no boot. Se rodando em clone: reporta via Beacon API (kind:clone_detected, severity:critical), bloqueia render com overlay fullscreen, intercepta `fetch` para `/lessons/`. Wired em main.js Phase 0.
+- **Edge Functions origin lock:** `isOriginAllowed()` adicionado em ai-tutor, create-checkout, verify-age, moderate-debate, admin-stripe-ops. Retorna 403 `origin_blocked` para chamadas fora da allowlist (verifica Origin + Referer fallback).
+- **robots.txt:** Disallow /lessons/ /src/ /scripts/ /qa/ /SECURITY.md /LICENSE.md. Block GPTBot, ClaudeBot, anthropic-ai, CCBot, Google-Extended, PerplexityBot, Bytespider, Diffbot, etc (anti-AI-training scraping).
+- **LICENSE.md:** licenca proprietaria explicita, lista atos proibidos, descreve marcadores forenses como prova juridica, cita Lei 9.610/98 + 9.279/96 + Berne + TRIPS.
+- **gen-integrity.mjs:** parametrizado para aceitar dir/output via CLI args.
+- SW v161
+
 ### Pendencia identificada — curriculo
 - Distribuicao desigual de modulos: Economia(6), Matematica/Financas(5), maioria(3), Marketing/Tributario/Trabalhista(2), Sustentabilidade/Espanhol(1)
 - Duplicata `historia`(3) e `history`(3) como disciplinas separadas no index.json — investigar se sao PT/EN ou bug
 - Total atual: 81 modulos em 27 disciplinas (CLAUDE.md "Identidade" diz 66/21 — desatualizado, mas preservado ate decidir expansao)
+
+### Concluido nesta sessao (2026-04-25 — Editorial Audit Sessao 2)
+- Aplicadas TODAS as decisoes pendentes do RELATORIO-EDITORIAL.md via `scripts/editorial-fixes-v2.mjs` (idempotente)
+- **A.1** mod-3 "Financas Pessoais" → "Financas Pessoais: Fundamentos" (desc redireciona pra disciplina `financas`)
+- **A.2** mod-2 "Empreendedorismo" → "Empreendedorismo: Visao Economica" (desc redireciona pra disciplina `empreendedorismo`)
+- **A.3** mod-5 "Pensamento Critico" → "Falacias Economicas" (conteudo ja era 100% falacias)
+- **B.1** mod-91 "Marketing Digital" → "Marketing Digital: Estrategia e Praticas" (mod-71 e Fundamentos)
+- **B.2** mod-146 "Falacias e Manipulacao Argumentativa" → "Argumentacao e Defesa Logica" + id corrigido `argumentacao-defesa-logica` (era so "146")
+- **C** Campo `order` numerico aplicado em 174 modulos. 24 com overrides:
+  - filosofia: 7 → 103 → 104 → 105 → 22 → 61
+  - matematica: 6 → 14 → 15 → 160 → 74 → 73
+  - financas: 27 → 23 → 37 → 69 → 70 → 161
+  - logica: 36 → 145 → 44 → 146 → 45 → 147
+- `getDiscModules()` em `src/core/disciplines.js` agora ordena por `order` (fallback: idx)
+- **D** `DISCIPLINES.history.label` → "American History (English)" — clarifica natureza bilingue CLIL
+- Build verificado: 175 modulos com watermark, integrity manifest atualizado (build_id `29d8df8e2f90`)
+- SW v163
 
 ### ✅ CONCLUÍDO: FASE 2 do update PWA
 - skipWaiting() removido do install event (só no message handler)

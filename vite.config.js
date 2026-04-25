@@ -19,7 +19,7 @@ function minifyLegacyJS() {
       console.log('  [plugin] writeBundle running, root:', root);
       const dist = resolve(root, 'dist');
       // app.js removed — now bundled as ES modules via src/main.js (Vite handles it)
-      const jsFiles = ['i18n.js', 'cookie-consent.js', 'supabase-client.js', 'stripe-billing.js'];
+      const jsFiles = ['i18n.js', 'cookie-consent.js', 'supabase-client.js', 'stripe-billing.js', 'admin-app.js'];
       for (const file of jsFiles) {
         const src = resolve(root, file);
         if (!existsSync(src)) continue;
@@ -44,6 +44,16 @@ function minifyLegacyJS() {
           catch(e) { console.error(`  ✗ ${dir}:`, e.message); }
         }
       }
+
+      // Watermark dist/lessons (forensic canaries) — must run BEFORE integrity hashing
+      try {
+        execSync('node scripts/watermark-content.mjs dist/lessons', { stdio: 'inherit', cwd: root });
+      } catch(e) { console.error('  ✗ watermark:', e.message); }
+
+      // Regenerate integrity manifest AFTER watermark (so hashes match deployed content)
+      try {
+        execSync('node scripts/gen-integrity.mjs dist/lessons dist/lessons/integrity.json', { stdio: 'inherit', cwd: root });
+      } catch(e) { console.error('  ✗ integrity manifest:', e.message); }
       // assets/ — merge with Vite's assets/build/ output
       try {
         const assetsSrc = resolve(root, 'assets');

@@ -176,5 +176,6 @@
         "exp": "Commits pequenos com mensagens claras + branches curtas + PRs focadas tornam revisão rápida, conflitos raros e rollback fácil. É a base de qualquer time de software produtivo."
       }
     }
-  ]
+  ],
+  "order": 159
 }

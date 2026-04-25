@@ -2,7 +2,7 @@
   "id": 162,
   "title": "Renda Fixa Avançada",
   "icon": "🏦",
-  "color":"mint",
+  "color": "mint",
   "desc": "Tesouro Direto, CDB, LCI, LCA, debêntures, fundos de RF, marcação a mercado, tributação e estratégia. O que está por trás do produto que parece simples mas esconde armadilhas.",
   "discipline": "investimentos",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "Poupança rende abaixo de outras opções de risco semelhante (Tesouro Selic, CDB de banco grande) e em períodos de inflação alta perde poder de compra. A 'segurança' percebida é uma ilusão — o risco é a perda silenciosa de patrimônio real."
       }
     }
-  ]
+  ],
+  "order": 162
 }

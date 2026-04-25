@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual desses NÃO é um sinal de relacionamento saudável?",
-        "o": ["Confiança mútua", "Conflitos sem retaliações pessoais", "Controle do celular do parceiro", "Crescimento individual preservado"],
+        "o": [
+          "Confiança mútua",
+          "Conflitos sem retaliações pessoais",
+          "Controle do celular do parceiro",
+          "Crescimento individual preservado"
+        ],
         "c": 2,
         "exp": "Controle de celular, redes sociais, amizades é sinal de relacionamento doentio. Confiança não inclui vigilância."
       }
@@ -25,7 +30,12 @@
       "xp": 35,
       "quiz": {
         "q": "Quais são os 4 passos da Comunicação Não-Violenta?",
-        "o": ["Falar, escutar, refletir, decidir", "Observação, sentimento, necessidade, pedido", "Acusação, defesa, contra-ataque, recuo", "Pensar, sentir, agir, avaliar"],
+        "o": [
+          "Falar, escutar, refletir, decidir",
+          "Observação, sentimento, necessidade, pedido",
+          "Acusação, defesa, contra-ataque, recuo",
+          "Pensar, sentir, agir, avaliar"
+        ],
         "c": 1,
         "exp": "Observação (fato), sentimento (sem julgamento), necessidade (universal) e pedido específico — estrutura de Marshall Rosenberg."
       }
@@ -37,7 +47,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual a função principal de limites saudáveis em relacionamentos?",
-        "o": ["Isolar você dos outros", "Proteger sua energia, dignidade e valores, permitindo dar de plenitude e não de obrigação", "Punir quem te incomoda", "Mostrar autoridade"],
+        "o": [
+          "Isolar você dos outros",
+          "Proteger sua energia, dignidade e valores, permitindo dar de plenitude e não de obrigação",
+          "Punir quem te incomoda",
+          "Mostrar autoridade"
+        ],
         "c": 1,
         "exp": "Limites são portas que você controla — não muros. Permitem dar com sinceridade, não por medo ou culpa."
       }
@@ -49,7 +64,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual atitude NÃO promove empatia genuína?",
-        "o": ["Fazer perguntas abertas", "Refletir o sentimento do outro", "Dar conselho imediato sem ser pedido", "Validar a emoção"],
+        "o": [
+          "Fazer perguntas abertas",
+          "Refletir o sentimento do outro",
+          "Dar conselho imediato sem ser pedido",
+          "Validar a emoção"
+        ],
         "c": 2,
         "exp": "Conselhos não pedidos comunicam \"calado, deixa eu resolver pra você\". Empatia primeiro escuta — solução vem só se for pedida."
       }
@@ -61,7 +81,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual dos \"4 cavaleiros\" de Gottman é considerado o mais tóxico e principal preditor de divórcio?",
-        "o": ["Crítica", "Desprezo", "Defensividade", "Bloqueio"],
+        "o": [
+          "Crítica",
+          "Desprezo",
+          "Defensividade",
+          "Bloqueio"
+        ],
         "c": 1,
         "exp": "Desprezo — sarcasmo, zombaria, superioridade moral — é o pior porque comunica \"você é inferior\" e corrói o respeito básico."
       }
@@ -73,7 +98,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a característica do estilo de apego ansioso-preocupado em adultos?",
-        "o": ["Confortável com intimidade e autonomia", "Medo de abandono, busca constante de reasseguramento", "Desconforto com proximidade emocional", "Padrões contraditórios extremos"],
+        "o": [
+          "Confortável com intimidade e autonomia",
+          "Medo de abandono, busca constante de reasseguramento",
+          "Desconforto com proximidade emocional",
+          "Padrões contraditórios extremos"
+        ],
         "c": 1,
         "exp": "O ansioso, por inconsistência precoce dos cuidadores, busca confirmar continuamente que é amado e teme abandono."
       }
@@ -85,7 +115,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual elemento é o mais importante em um pedido de desculpas eficaz?",
-        "o": ["Justificar o que aconteceu", "Reconhecer a própria responsabilidade pelo erro", "Pedir perdão imediato", "Oferecer presente"],
+        "o": [
+          "Justificar o que aconteceu",
+          "Reconhecer a própria responsabilidade pelo erro",
+          "Pedir perdão imediato",
+          "Oferecer presente"
+        ],
         "c": 1,
         "exp": "Pesquisas mostram que reconhecer responsabilidade explicitamente é o componente mais valorizado pelo magoado."
       }
@@ -97,7 +132,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é o princípio chave para relacionamentos saudáveis com pais na vida adulta?",
-        "o": ["Obediência total", "Cortar contato sempre", "Interagir como adulto-adulto, sem retomar dinâmica pai-criança", "Manter distância emocional total"],
+        "o": [
+          "Obediência total",
+          "Cortar contato sempre",
+          "Interagir como adulto-adulto, sem retomar dinâmica pai-criança",
+          "Manter distância emocional total"
+        ],
         "c": 2,
         "exp": "Adulto-adulto significa: você não precisa de permissão; você pode discordar sem desrespeitar; você ama e estabelece limites."
       }
@@ -109,7 +149,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a diferença entre solidão e isolamento?",
-        "o": ["São sinônimos", "Solidão é sentimento subjetivo; isolamento é fato objetivo de ter poucos contatos", "Solidão é boa; isolamento é ruim", "Solidão é dos extrovertidos; isolamento dos introvertidos"],
+        "o": [
+          "São sinônimos",
+          "Solidão é sentimento subjetivo; isolamento é fato objetivo de ter poucos contatos",
+          "Solidão é boa; isolamento é ruim",
+          "Solidão é dos extrovertidos; isolamento dos introvertidos"
+        ],
         "c": 1,
         "exp": "Pode-se estar isolado sem solidão (ermitão satisfeito) ou solitário sem isolamento (cercado de pessoas, sem conexão real)."
       }
@@ -121,10 +166,16 @@
       "xp": 40,
       "quiz": {
         "q": "Segundo o Estudo de Harvard sobre Desenvolvimento Adulto, qual é o segredo principal de uma vida feliz e saudável?",
-        "o": ["Riqueza acumulada", "Carreira de sucesso", "Boas relações pessoais", "Boa genética"],
+        "o": [
+          "Riqueza acumulada",
+          "Carreira de sucesso",
+          "Boas relações pessoais",
+          "Boa genética"
+        ],
         "c": 2,
         "exp": "Mais de 80 anos de pesquisa apontam relacionamentos de qualidade como o fator mais determinante da felicidade e saúde ao longo da vida."
       }
     }
-  ]
+  ],
+  "order": 107
 }

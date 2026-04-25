@@ -19,6 +19,22 @@ const ALLOWED_ORIGINS = [
   'https://escolaliberal.com.br',
 ]
 
+function isOriginAllowed(req: Request): boolean {
+  const origin = req.headers.get('Origin') || ''
+  const referer = req.headers.get('Referer') || ''
+  // OPTIONS preflight pode nao ter origin (ex: alguns proxies) — permitir
+  if (!origin && !referer) return true
+  if (origin && ALLOWED_ORIGINS.includes(origin)) return true
+  // Fallback referer (alguns clientes nao enviam Origin em POST same-origin)
+  if (referer) {
+    try {
+      const u = new URL(referer)
+      if (ALLOWED_ORIGINS.includes(u.origin)) return true
+    } catch {}
+  }
+  return false
+}
+
 function getCorsHeaders(req: Request) {
   const origin = req.headers.get('Origin') || ''
   const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
@@ -37,6 +53,14 @@ const RATE_LIMITS: Record<string, { free: number; premium: number }> = {
 serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: getCorsHeaders(req) })
+  }
+
+  // Anti-cloning: bloqueia chamadas de dominios nao autorizados
+  if (!isOriginAllowed(req)) {
+    return new Response(JSON.stringify({ error: 'origin_blocked' }), {
+      status: 403,
+      headers: { 'Content-Type': 'application/json' }
+    })
   }
 
   try {

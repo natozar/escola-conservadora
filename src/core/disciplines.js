@@ -10,7 +10,7 @@ const DISCIPLINES={
   portugues:{label:'Português e Redação',icon:'📝',order:5},
   ciencias:{label:'Ciências da Natureza',icon:'🔬',order:6},
   historia:{label:'História do Brasil',icon:'🇧🇷',order:7},
-  history:{label:'American History',icon:'🇺🇸',order:8},
+  history:{label:'American History (English)',icon:'🇺🇸',order:8},
   financas:{label:'Educação Financeira',icon:'💳',order:9},
   ingles:{label:'Inglês',icon:'🇬🇧',order:10},
   geografia:{label:'Geografia',icon:'🌍',order:11},
@@ -28,7 +28,7 @@ const DISCIPLINES={
   trabalhista:{label:'Direito Trabalhista',icon:'👷',order:23},
   marketing:{label:'Marketing Digital',icon:'📱',order:24},
   sustentabilidade:{label:'Sustentabilidade',icon:'🌱',order:25},
-  espanol:{label:'Espanhol',icon:'🇪🇸',order:26},
+  espanhol:{label:'Espanhol',icon:'🇪🇸',order:26},
   investimentos:{label:'Investimentos',icon:'📈',order:27},
   produtividade:{label:'Produtividade',icon:'⚡',order:28}
 };
@@ -51,7 +51,7 @@ const DISC_ACCENT={
   ia:'lavender',midia:'coral',direito:'sage',saude:'mint',artes:'honey',logica:'lavender',
   programacao:'sky',oratoria:'honey',civica:'sage',
   empreendedorismo:'coral',tributario:'sage',trabalhista:'honey',marketing:'sky',sustentabilidade:'mint',
-  espanol:'coral',
+  espanhol:'coral',
   investimentos:'mint',produtividade:'lavender'
 };
 function setDiscAccent(disc){
@@ -66,8 +66,16 @@ function clearDiscAccent(){
   document.documentElement.style.removeProperty('--accent-active-muted');
 }
 
-// Get first module index of a discipline within M
-function getDiscModules(disc){return window.M.map((m,i)=>({mod:m,idx:i})).filter(x=>x.mod.discipline===disc)}
+// Get modules of a discipline within M, ordered by `order` field (fallback: index)
+function getDiscModules(disc){
+  return window.M.map((m,i)=>({mod:m,idx:i}))
+    .filter(x=>x.mod.discipline===disc)
+    .sort((a,b)=>{
+      const oa = (typeof a.mod.order === 'number') ? a.mod.order : a.idx;
+      const ob = (typeof b.mod.order === 'number') ? b.mod.order : b.idx;
+      return oa - ob;
+    });
+}
 
 window.DISCIPLINES = DISCIPLINES;
 window.COLOR_MAP = COLOR_MAP;

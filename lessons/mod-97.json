@@ -13,7 +13,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual a diferença fundamental entre elisão e evasão fiscal?",
-        "o": ["Elisão usa a lei para pagar menos; evasão viola a lei escondendo receita", "Elisão é para pessoa física e evasão é para empresa", "Não há diferença — são sinônimos", "Elisão é ilegal; evasão é legal"],
+        "o": [
+          "Elisão usa a lei para pagar menos; evasão viola a lei escondendo receita",
+          "Elisão é para pessoa física e evasão é para empresa",
+          "Não há diferença — são sinônimos",
+          "Elisão é ilegal; evasão é legal"
+        ],
         "c": 0,
         "exp": "Elisão usa as regras legais para reduzir carga tributária — totalmente permitido. Evasão é crime tributário (Lei 8.137/90), com pena de prisão."
       }
@@ -25,7 +30,12 @@
       "xp": 20,
       "quiz": {
         "q": "Uma empresa de consultoria fatura R$ 60.000/mês. Pagando pró-labore ao sócio de R$ 18.000/mês (30% do faturamento), o que acontece no Simples?",
-        "o": ["Continua no Anexo V (mais caro)", "Migra para o Anexo III (mais barato) pelo Fator R", "Sai do Simples automaticamente", "Paga mais imposto por aumentar a folha"],
+        "o": [
+          "Continua no Anexo V (mais caro)",
+          "Migra para o Anexo III (mais barato) pelo Fator R",
+          "Sai do Simples automaticamente",
+          "Paga mais imposto por aumentar a folha"
+        ],
         "c": 1,
         "exp": "O Fator R migra a empresa para o Anexo III (alíquota menor) quando a folha atinge 28% ou mais do faturamento. É a principal oportunidade de planejamento para serviços intelectuais."
       }
@@ -37,7 +47,12 @@
       "xp": 20,
       "quiz": {
         "q": "No Lucro Presumido, qual a presunção para empresas de serviços em geral?",
-        "o": ["8%", "12%", "16%", "32%"],
+        "o": [
+          "8%",
+          "12%",
+          "16%",
+          "32%"
+        ],
         "c": 3,
         "exp": "Serviços em geral têm presunção de 32% tanto para IRPJ quanto para CSLL. É alta, mas permite distribuição isenta de lucros — principal vantagem sobre o Simples."
       }
@@ -49,7 +64,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quando o Lucro Real tende a ser mais vantajoso que o Presumido?",
-        "o": ["Quando a margem líquida real é maior que a presumida", "Quando a margem líquida real é menor que a presumida", "Sempre que a empresa tiver mais de R$ 1 milhão de faturamento", "Nunca — Presumido é sempre melhor"],
+        "o": [
+          "Quando a margem líquida real é maior que a presumida",
+          "Quando a margem líquida real é menor que a presumida",
+          "Sempre que a empresa tiver mais de R$ 1 milhão de faturamento",
+          "Nunca — Presumido é sempre melhor"
+        ],
         "c": 1,
         "exp": "Se a margem real é menor que a presumida, você paga imposto sobre uma base menor no Lucro Real. Se é maior, o Presumido ganha. Simular os dois é regra."
       }
@@ -61,7 +81,12 @@
       "xp": 20,
       "quiz": {
         "q": "Por que distribuição de lucros é geralmente mais vantajosa que pró-labore alto para o sócio em 2025?",
-        "o": ["É isenta de IR pessoal, enquanto pró-labore tributa INSS + IR", "Paga menos contribuição sindical", "Não precisa ser declarada", "É a única forma de tirar dinheiro da empresa"],
+        "o": [
+          "É isenta de IR pessoal, enquanto pró-labore tributa INSS + IR",
+          "Paga menos contribuição sindical",
+          "Não precisa ser declarada",
+          "É a única forma de tirar dinheiro da empresa"
+        ],
         "c": 0,
         "exp": "Em 2025, distribuição de lucros é isenta de IR pessoal. O pró-labore paga INSS (11%) e IR progressivo (até 27,5%). A reforma tributária muda isso a partir de 2026."
       }
@@ -73,7 +98,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual situação pode caracterizar \"segregação artificial\" (autuável pela Receita)?",
-        "o": ["Duas empresas do mesmo sócio com atividades totalmente diferentes e clientes próprios", "Duas empresas do mesmo sócio, mesma atividade, mesmo endereço, mesmos funcionários, divididas só para ficar dentro do teto do Simples", "Holding patrimonial separada da operacional", "Uma empresa de comércio e outra de consultoria do mesmo dono"],
+        "o": [
+          "Duas empresas do mesmo sócio com atividades totalmente diferentes e clientes próprios",
+          "Duas empresas do mesmo sócio, mesma atividade, mesmo endereço, mesmos funcionários, divididas só para ficar dentro do teto do Simples",
+          "Holding patrimonial separada da operacional",
+          "Uma empresa de comércio e outra de consultoria do mesmo dono"
+        ],
         "c": 1,
         "exp": "A Receita autua quando a divisão é fictícia — mesmas atividades, funcionários e clientes. Para ser legítima, cada empresa precisa ter independência real."
       }
@@ -85,7 +115,12 @@
       "xp": 20,
       "quiz": {
         "q": "O que a Lei do Bem permite para empresas no Lucro Real?",
-        "o": ["Isenção total de IRPJ por 5 anos", "Deduzir até 200% dos gastos com pesquisa e desenvolvimento do lucro tributável", "Não pagar ICMS em compras", "Isenção de INSS patronal"],
+        "o": [
+          "Isenção total de IRPJ por 5 anos",
+          "Deduzir até 200% dos gastos com pesquisa e desenvolvimento do lucro tributável",
+          "Não pagar ICMS em compras",
+          "Isenção de INSS patronal"
+        ],
         "c": 1,
         "exp": "Empresas inovadoras podem deduzir até 200% dos gastos com P&D do lucro tributável. Na prática, o governo financia parte da inovação privada via redução de impostos."
       }
@@ -97,7 +132,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual a multa típica para uma empresa que entrega com atraso uma declaração acessória como DCTF?",
-        "o": ["R$ 50", "R$ 500 a R$ 1.500", "R$ 10.000 fixo", "Nenhuma"],
+        "o": [
+          "R$ 50",
+          "R$ 500 a R$ 1.500",
+          "R$ 10.000 fixo",
+          "Nenhuma"
+        ],
         "c": 1,
         "exp": "Multas por atraso em declarações acessórias vão de R$ 500 a R$ 1.500 ou mais, por declaração. Há também multas proporcionais à operação omitida. Cumprir prazo é mais barato que pagar multa."
       }
@@ -109,7 +149,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é a principal regra de ouro para evitar estresse tributário?",
-        "o": ["Esperar o prazo final para pagar", "Separar o valor do imposto em conta específica logo após cada recebimento", "Atrasar e aderir a Refis depois", "Pegar empréstimo todo mês para pagar"],
+        "o": [
+          "Esperar o prazo final para pagar",
+          "Separar o valor do imposto em conta específica logo após cada recebimento",
+          "Atrasar e aderir a Refis depois",
+          "Pegar empréstimo todo mês para pagar"
+        ],
         "c": 1,
         "exp": "Separar o imposto do restante do caixa, na hora do recebimento, garante que o dinheiro estará disponível no vencimento. É o hábito que diferencia empresa saudável de empresa em risco."
       }
@@ -121,10 +166,16 @@
       "xp": 25,
       "quiz": {
         "q": "Qual o momento crítico do ano para revisar o regime tributário da empresa?",
-        "o": ["Dezembro, ao fechar o balanço", "Janeiro, antes do prazo de opção pelo Simples ou forma de pagamento do primeiro tributo", "Junho, no meio do ano", "Quando cair na malha fina"],
+        "o": [
+          "Dezembro, ao fechar o balanço",
+          "Janeiro, antes do prazo de opção pelo Simples ou forma de pagamento do primeiro tributo",
+          "Junho, no meio do ano",
+          "Quando cair na malha fina"
+        ],
         "c": 1,
         "exp": "A opção pelo Simples precisa ser feita até o último dia útil de janeiro. Nos demais regimes, a forma de pagar o primeiro tributo já indica o enquadramento. Janeiro é a janela crítica."
       }
     }
-  ]
+  ],
+  "order": 97
 }

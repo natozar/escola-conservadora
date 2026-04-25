@@ -2,7 +2,7 @@
   "id": 164,
   "title": "Fundos Imobiliários",
   "icon": "🏢",
-  "color":"mint",
+  "color": "mint",
   "desc": "FIIs de tijolo, papel, FoF e híbridos. Como avaliar (DY, P/VP, vacância), riscos, vantagens fiscais e estratégia. Imóvel sem dor de cabeça de imóvel.",
   "discipline": "investimentos",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "FII combina vantagens fiscais (isenção de IR para PF), operacionais (vacância diluída, gestão profissional, sem manutenção direta) e financeiras (sem custo de transação alto) que tornam o yield líquido tipicamente 2-3 vezes superior ao aluguel direto de imóvel físico para mesma quantia investida. Não é mágica — é eficiência."
       }
     }
-  ]
+  ],
+  "order": 164
 }

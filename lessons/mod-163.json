@@ -2,7 +2,7 @@
   "id": 163,
   "title": "Bolsa de Valores",
   "icon": "📈",
-  "color":"mint",
+  "color": "mint",
   "desc": "B3, ações, análise fundamentalista e técnica, indicadores, balanço, dividendos, day trade, tributação e construção de carteira. Comprar ação é comprar empresa.",
   "discipline": "investimentos",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "Aporte mensal regular (Dollar Cost Averaging) gera custo médio de aquisição próximo à média histórica do ativo. Tentar acertar fundos e topos é estatisticamente perdedor para quase todos os investidores — até profissionais erram. A disciplina vence o talento na maioria dos casos."
       }
     }
-  ]
+  ],
+  "order": 163
 }

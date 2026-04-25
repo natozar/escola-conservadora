@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual a diferença entre temperamento e personalidade?",
-        "o": ["São sinônimos", "Temperamento é base biológica; personalidade é temperamento + experiência + escolhas", "Personalidade muda; temperamento não muda nada", "Temperamento é só de adultos"],
+        "o": [
+          "São sinônimos",
+          "Temperamento é base biológica; personalidade é temperamento + experiência + escolhas",
+          "Personalidade muda; temperamento não muda nada",
+          "Temperamento é só de adultos"
+        ],
         "c": 1,
         "exp": "Temperamento é o substrato biológico observável desde bebê; personalidade é o padrão adulto resultante de temperamento, vivência e escolhas."
       }
@@ -25,7 +30,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual traço do Big Five é mais correlacionado com sucesso profissional e saúde de longo prazo?",
-        "o": ["Abertura", "Conscienciosidade", "Extroversão", "Amabilidade"],
+        "o": [
+          "Abertura",
+          "Conscienciosidade",
+          "Extroversão",
+          "Amabilidade"
+        ],
         "c": 1,
         "exp": "Conscienciosidade (organização, disciplina, persistência) é o melhor preditor isolado de resultados profissionais e saúde — mais que QI em muitos estudos."
       }
@@ -37,7 +47,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual o critério principal para distinguir introversão e extroversão?",
-        "o": ["Quantidade de amigos", "Como a pessoa recarrega energia (sozinho vs em grupo)", "Habilidade de falar em público", "Inteligência social"],
+        "o": [
+          "Quantidade de amigos",
+          "Como a pessoa recarrega energia (sozinho vs em grupo)",
+          "Habilidade de falar em público",
+          "Inteligência social"
+        ],
         "c": 1,
         "exp": "Não é timidez nem socialização — é se a pessoa ganha ou perde energia em interação social. Diferença fisiológica, não defeito."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "Segundo Dan McAdams, qual o terceiro nível de personalidade?",
-        "o": ["Inconsciente coletivo", "Identidade narrativa — história integradora da vida", "Inteligência emocional", "Ego e id"],
+        "o": [
+          "Inconsciente coletivo",
+          "Identidade narrativa — história integradora da vida",
+          "Inteligência emocional",
+          "Ego e id"
+        ],
         "c": 1,
         "exp": "Os 3 níveis: traços (Big Five), adaptações características, e identidade narrativa. A história que você conta sobre si organiza significado."
       }
@@ -61,7 +81,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual ideia freudiana se confirmou pela ciência cognitiva moderna?",
-        "o": ["Complexo de Édipo universal", "Existência de processos mentais fora da consciência", "Fases psicossexuais", "Interpretação sexual de sonhos"],
+        "o": [
+          "Complexo de Édipo universal",
+          "Existência de processos mentais fora da consciência",
+          "Fases psicossexuais",
+          "Interpretação sexual de sonhos"
+        ],
         "c": 1,
         "exp": "O conceito de inconsciente — processos mentais que afetam comportamento sem você saber — foi confirmado, embora sob mecanismos diferentes dos propostos por Freud."
       }
@@ -73,7 +98,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual o antídoto para a falácia do custo afundado?",
-        "o": ["Persistir mais", "Perguntar: \"se eu começasse hoje, faria essa escolha?\"", "Aumentar o investimento", "Pedir mais tempo"],
+        "o": [
+          "Persistir mais",
+          "Perguntar: \"se eu começasse hoje, faria essa escolha?\"",
+          "Aumentar o investimento",
+          "Pedir mais tempo"
+        ],
         "c": 1,
         "exp": "Custo passado é irrecuperável. A decisão racional olha apenas para custo e benefício futuros — não justifica continuar pelo já investido."
       }
@@ -85,7 +115,12 @@
       "xp": 30,
       "quiz": {
         "q": "Quais são os 3 fatores de motivação adulta segundo Daniel Pink?",
-        "o": ["Salário, status, segurança", "Autonomia, maestria, propósito", "Família, dinheiro, lazer", "Inteligência, beleza, saúde"],
+        "o": [
+          "Salário, status, segurança",
+          "Autonomia, maestria, propósito",
+          "Família, dinheiro, lazer",
+          "Inteligência, beleza, saúde"
+        ],
         "c": 1,
         "exp": "Pink, sintetizando décadas de pesquisa em autodeterminação: autonomia (escolha), maestria (crescer em algo importante), propósito (sentido)."
       }
@@ -97,7 +132,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual a diferença entre inteligência fluida e cristalizada (Cattell)?",
-        "o": ["Fluida é em situação nova; cristalizada é conhecimento acumulado", "Fluida é genética; cristalizada é aprendida", "Fluida é em jovens; cristalizada em idosos", "São sinônimos"],
+        "o": [
+          "Fluida é em situação nova; cristalizada é conhecimento acumulado",
+          "Fluida é genética; cristalizada é aprendida",
+          "Fluida é em jovens; cristalizada em idosos",
+          "São sinônimos"
+        ],
         "c": 0,
         "exp": "Fluida = raciocinar do zero, pico cedo, declina. Cristalizada = conhecimento acumulado, cresce a vida toda. Idosos compensam declínio fluido com cristalizada."
       }
@@ -109,7 +149,12 @@
       "xp": 30,
       "quiz": {
         "q": "Quando um sintoma psicológico merece atenção clínica?",
-        "o": ["Sempre que aparece", "Quando é persistente, intenso, atrapalha funcionamento e causa sofrimento", "Apenas se outros notarem", "Apenas se o médico clínico mencionar"],
+        "o": [
+          "Sempre que aparece",
+          "Quando é persistente, intenso, atrapalha funcionamento e causa sofrimento",
+          "Apenas se outros notarem",
+          "Apenas se o médico clínico mencionar"
+        ],
         "c": 1,
         "exp": "Os 4 critérios gerais. Tristeza e ansiedade comuns existem; transtorno é quando persiste, intensifica, prejudica e causa sofrimento significativo."
       }
@@ -121,10 +166,16 @@
       "xp": 40,
       "quiz": {
         "q": "O que NÃO é autoconhecimento saudável?",
-        "o": ["Observar padrões repetidos", "Pedir feedback sobre o ponto cego", "Rotular a si mesmo de forma fixa para justificar evitação", "Testar hipóteses sobre si na prática"],
+        "o": [
+          "Observar padrões repetidos",
+          "Pedir feedback sobre o ponto cego",
+          "Rotular a si mesmo de forma fixa para justificar evitação",
+          "Testar hipóteses sobre si na prática"
+        ],
         "c": 2,
         "exp": "Autoconhecimento saudável gera ação e flexibilidade. Rotular-se rigidamente (\"sou assim, não dá\") é desculpa para não crescer — não é diagnóstico útil."
       }
     }
-  ]
+  ],
+  "order": 109
 }

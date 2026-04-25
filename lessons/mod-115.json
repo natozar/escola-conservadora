@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual cientista formulou que \"na natureza nada se cria, nada se perde, tudo se transforma\"?",
-        "o": ["Albert Einstein", "Marie Curie", "Antoine Lavoisier", "Isaac Newton"],
+        "o": [
+          "Albert Einstein",
+          "Marie Curie",
+          "Antoine Lavoisier",
+          "Isaac Newton"
+        ],
         "c": 2,
         "exp": "Antoine Lavoisier (francês, 1789) provou a conservação da massa em reações químicas. Princípio fundamental que abriu a química moderna."
       }
@@ -25,7 +30,12 @@
       "xp": 30,
       "quiz": {
         "q": "Por que o gelo flutua na água líquida?",
-        "o": ["Porque tem ar dentro", "Porque é mais frio", "Porque a água ao solidificar expande, criando estrutura hexagonal aberta menos densa", "Porque o frio empurra para cima"],
+        "o": [
+          "Porque tem ar dentro",
+          "Porque é mais frio",
+          "Porque a água ao solidificar expande, criando estrutura hexagonal aberta menos densa",
+          "Porque o frio empurra para cima"
+        ],
         "c": 2,
         "exp": "Anomalia da água: ao congelar, pontes de hidrogênio formam estrutura aberta com mais espaço entre moléculas. Densidade do gelo (0,92 g/cm³) é menor que da água líquida (1,00 g/cm³)."
       }
@@ -37,7 +47,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual o pH aproximado do sangue humano saudável?",
-        "o": ["1-2 (muito ácido)", "5 (ácido)", "7,4 (ligeiramente alcalino)", "10 (alcalino)"],
+        "o": [
+          "1-2 (muito ácido)",
+          "5 (ácido)",
+          "7,4 (ligeiramente alcalino)",
+          "10 (alcalino)"
+        ],
         "c": 2,
         "exp": "Sangue humano tem pH ~7,4 (ligeiramente alcalino, faixa 7,35-7,45). Variações fora dessa faixa são emergências médicas. Dieta não altera significativamente."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "Por que o carbono é a base da química da vida?",
-        "o": ["Porque é o elemento mais leve", "Porque pode formar 4 ligações estáveis e cadeias complexas", "Porque é o mais raro", "Porque conduz eletricidade"],
+        "o": [
+          "Porque é o elemento mais leve",
+          "Porque pode formar 4 ligações estáveis e cadeias complexas",
+          "Porque é o mais raro",
+          "Porque conduz eletricidade"
+        ],
         "c": 1,
         "exp": "Carbono tem 4 elétrons na camada externa, formando 4 ligações estáveis. Pode ligar consigo mesmo formando cadeias longas, ramificadas e anéis — versatilidade única essencial para vida."
       }
@@ -61,7 +81,12 @@
       "xp": 35,
       "quiz": {
         "q": "Que reação química produz o sabor e a cor marrom de uma carne bem grelhada?",
-        "o": ["Caramelização", "Reação de Maillard", "Fermentação", "Oxidação"],
+        "o": [
+          "Caramelização",
+          "Reação de Maillard",
+          "Fermentação",
+          "Oxidação"
+        ],
         "c": 1,
         "exp": "Reação de Maillard (descrita por Louis-Camille Maillard, 1912): proteína + açúcar acima de 140°C produzem centenas de compostos novos com cor marrom e sabor complexo."
       }
@@ -73,7 +98,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual a diferença entre termoplástico e termofixo?",
-        "o": ["Termoplástico é mais barato", "Termoplástico amolece com calor e pode ser reciclado por fusão; termofixo não derrete", "Termoplástico é só transparente", "Termofixo é biodegradável"],
+        "o": [
+          "Termoplástico é mais barato",
+          "Termoplástico amolece com calor e pode ser reciclado por fusão; termofixo não derrete",
+          "Termoplástico é só transparente",
+          "Termofixo é biodegradável"
+        ],
         "c": 1,
         "exp": "Termoplástico (PET, PE, PP) amolece com calor — fácil reciclar. Termofixo (baquelite, epóxi, borracha vulcanizada) tem ligações cruzadas que não desfazem — difícil reciclar."
       }
@@ -85,7 +115,12 @@
       "xp": 35,
       "quiz": {
         "q": "Por que nenhum motor pode ser 100% eficiente?",
-        "o": ["Limitação tecnológica que será superada", "Pela 2ª lei da termodinâmica, sempre há entropia/calor desperdiçado", "Pelo atrito apenas", "Por causa do material das peças"],
+        "o": [
+          "Limitação tecnológica que será superada",
+          "Pela 2ª lei da termodinâmica, sempre há entropia/calor desperdiçado",
+          "Pelo atrito apenas",
+          "Por causa do material das peças"
+        ],
         "c": 1,
         "exp": "A 2ª lei da termodinâmica garante que toda transformação de energia gera entropia (calor não-aproveitável). É lei física fundamental, não limitação técnica."
       }
@@ -97,7 +132,12 @@
       "xp": 35,
       "quiz": {
         "q": "Por que NUNCA se deve trocar disjuntor que está \"caindo\" por um de capacidade maior?",
-        "o": ["Porque é caro", "Porque o fio do circuito não suporta a corrente maior, pode aquecer e causar incêndio", "Porque o disjuntor maior dura menos", "Porque é proibido por lei"],
+        "o": [
+          "Porque é caro",
+          "Porque o fio do circuito não suporta a corrente maior, pode aquecer e causar incêndio",
+          "Porque o disjuntor maior dura menos",
+          "Porque é proibido por lei"
+        ],
         "c": 1,
         "exp": "Disjuntor é dimensionado para proteger o fio. Se aumenta capacidade do disjuntor sem trocar o fio, este pode aquecer além do limite e provocar incêndio. Risco grave."
       }
@@ -109,7 +149,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual caso histórico mostra que problema químico ambiental global pode ser resolvido com coordenação internacional?",
-        "o": ["Acidificação oceânica", "Aquecimento global", "Banimento de CFCs pelo Protocolo de Montreal — recuperação da camada de ozônio", "Poluição por microplásticos"],
+        "o": [
+          "Acidificação oceânica",
+          "Aquecimento global",
+          "Banimento de CFCs pelo Protocolo de Montreal — recuperação da camada de ozônio",
+          "Poluição por microplásticos"
+        ],
         "c": 2,
         "exp": "Protocolo de Montreal (1987) baniu CFCs globalmente. Camada de ozônio está se restaurando — projeção: recuperação total 2060-70. Caso raro de coordenação global eficaz."
       }
@@ -121,10 +166,16 @@
       "xp": 45,
       "quiz": {
         "q": "Qual frase resume corretamente a química?",
-        "o": ["Substâncias químicas são todas perigosas e devem ser evitadas", "Tudo que existe materialmente é química — toxicidade depende da dose, não da origem", "Química só é importante para cientistas", "\"Natural\" é sempre mais seguro que \"químico\""],
+        "o": [
+          "Substâncias químicas são todas perigosas e devem ser evitadas",
+          "Tudo que existe materialmente é química — toxicidade depende da dose, não da origem",
+          "Química só é importante para cientistas",
+          "\"Natural\" é sempre mais seguro que \"químico\""
+        ],
         "c": 1,
         "exp": "Tudo material é química. Distinção \"natural vs químico\" é falsa. Princípio de Paracelso (1500): a dose faz o veneno. Arsênico (natural) mata; aspirina (química) cura."
       }
     }
-  ]
+  ],
+  "order": 115
 }

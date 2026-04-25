@@ -13,7 +13,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quais são os 5 elementos que caracterizam o vínculo CLT?",
-        "o": ["Carteira assinada, INSS, FGTS, salário mínimo, férias", "Pessoa física, habitualidade, subordinação, onerosidade, pessoalidade", "Contrato escrito, registro em carteira, holerite, ponto, e-mail", "Idade mínima, escolaridade, experiência, residência, RG"],
+        "o": [
+          "Carteira assinada, INSS, FGTS, salário mínimo, férias",
+          "Pessoa física, habitualidade, subordinação, onerosidade, pessoalidade",
+          "Contrato escrito, registro em carteira, holerite, ponto, e-mail",
+          "Idade mínima, escolaridade, experiência, residência, RG"
+        ],
         "c": 1,
         "exp": "Os 5 elementos (Art. 3º CLT) são pessoa física, habitualidade, subordinação, onerosidade e pessoalidade. Faltando um, não há vínculo empregatício."
       }
@@ -25,7 +30,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual desses descontos NÃO é permitido pela CLT?",
-        "o": ["INSS de 11% a 14%", "Contribuição sindical não autorizada por escrito", "Vale-transporte até 6%", "Plano de saúde acordado em contrato"],
+        "o": [
+          "INSS de 11% a 14%",
+          "Contribuição sindical não autorizada por escrito",
+          "Vale-transporte até 6%",
+          "Plano de saúde acordado em contrato"
+        ],
         "c": 1,
         "exp": "Após a reforma de 2017, a contribuição sindical só pode ser descontada com autorização expressa por escrito do empregado. Sem autorização, é desconto indevido."
       }
@@ -37,7 +47,12 @@
       "xp": 20,
       "quiz": {
         "q": "Empregado ganha R$ 2.200/mês e trabalhou 8 horas extras em um mês. Aproximadamente quanto deve receber por essas horas extras (apenas o adicional)?",
-        "o": ["R$ 80", "R$ 120", "R$ 150", "R$ 240"],
+        "o": [
+          "R$ 80",
+          "R$ 120",
+          "R$ 150",
+          "R$ 240"
+        ],
         "c": 1,
         "exp": "Hora normal: R$ 2.200/220 = R$ 10. Adicional 50%: R$ 10 × 1,5 = R$ 15/hora extra. 8 horas × R$ 15 = R$ 120. Mais reflexos (DSR, férias, 13º, FGTS) elevam o total final."
       }
@@ -49,7 +64,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quanto antes do início das férias o pagamento deve ser feito ao trabalhador?",
-        "o": ["No primeiro dia das férias", "Até 2 dias antes do início do gozo", "Até 5 dias antes", "Até o último dia útil do mês"],
+        "o": [
+          "No primeiro dia das férias",
+          "Até 2 dias antes do início do gozo",
+          "Até 5 dias antes",
+          "Até o último dia útil do mês"
+        ],
         "c": 1,
         "exp": "A CLT determina pagamento até 2 dias antes do início das férias. Se a empresa pagar junto ou depois, pode ser obrigada a pagar em dobro pela jurisprudência do TST."
       }
@@ -61,7 +81,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quem é admitido em 17 de janeiro tem janeiro contado para o 13º salário?",
-        "o": ["Sim, sempre conta", "Não, porque não trabalhou 15 dias no mês", "Só se trabalhar nos sábados", "Só se for aprovado pelo RH"],
+        "o": [
+          "Sim, sempre conta",
+          "Não, porque não trabalhou 15 dias no mês",
+          "Só se trabalhar nos sábados",
+          "Só se for aprovado pelo RH"
+        ],
         "c": 1,
         "exp": "A regra é que o mês conta se o empregado trabalhou pelo menos 15 dias. Admitido em 17 de janeiro, ele só trabalhou 14 dias úteis nesse mês — não conta. O 13º começa a contar fevereiro."
       }
@@ -73,7 +98,12 @@
       "xp": 20,
       "quiz": {
         "q": "Empregado é demitido sem justa causa com saldo de R$ 10.000 no FGTS. Quanto recebe ao todo (saldo + multa rescisória)?",
-        "o": ["R$ 10.000", "R$ 12.000", "R$ 14.000", "R$ 18.000"],
+        "o": [
+          "R$ 10.000",
+          "R$ 12.000",
+          "R$ 14.000",
+          "R$ 18.000"
+        ],
         "c": 2,
         "exp": "Demissão sem justa causa: saca o saldo (R$ 10.000) + multa rescisória de 40% sobre o saldo (R$ 4.000) = R$ 14.000 totais."
       }
@@ -85,7 +115,12 @@
       "xp": 20,
       "quiz": {
         "q": "Em um auxílio-doença comum, quantos dias a empresa paga antes do INSS assumir?",
-        "o": ["5 dias", "10 dias", "15 dias", "30 dias"],
+        "o": [
+          "5 dias",
+          "10 dias",
+          "15 dias",
+          "30 dias"
+        ],
         "c": 2,
         "exp": "Os primeiros 15 dias de afastamento por doença são pagos pela empresa (licença remunerada). A partir do 16º dia, o INSS assume mediante perícia médica."
       }
@@ -97,7 +132,12 @@
       "xp": 20,
       "quiz": {
         "q": "Empregado retorna de auxílio-doença acidentário após acidente de trabalho. Por quanto tempo tem estabilidade?",
-        "o": ["3 meses", "6 meses", "12 meses", "24 meses"],
+        "o": [
+          "3 meses",
+          "6 meses",
+          "12 meses",
+          "24 meses"
+        ],
         "c": 2,
         "exp": "Art. 118 da Lei 8.213/91: empregado que retorna de afastamento por acidente de trabalho tem 12 meses de estabilidade contados do retorno. Demissão sem justa causa nesse período é nula."
       }
@@ -109,7 +149,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quem trabalha 3 dias por semana fixos na mesma casa é considerado:",
-        "o": ["Diarista autônomo, sem vínculo", "Empregado doméstico CLT, com todos os direitos da LC 150/2015", "Trabalhador eventual sem direitos", "Estagiário"],
+        "o": [
+          "Diarista autônomo, sem vínculo",
+          "Empregado doméstico CLT, com todos os direitos da LC 150/2015",
+          "Trabalhador eventual sem direitos",
+          "Estagiário"
+        ],
         "c": 1,
         "exp": "A jurisprudência do TST estabeleceu que continuidade (3 ou mais dias na semana) configura vínculo doméstico. Direitos integrais: registro, FGTS, INSS, férias, 13º, etc."
       }
@@ -121,10 +166,16 @@
       "xp": 25,
       "quiz": {
         "q": "Por quanto tempo após sair da empresa o trabalhador deve guardar documentos trabalhistas como holerites e contracheques?",
-        "o": ["1 ano", "2 anos", "Pelo menos 5 anos", "1 mês"],
+        "o": [
+          "1 ano",
+          "2 anos",
+          "Pelo menos 5 anos",
+          "1 mês"
+        ],
         "c": 2,
         "exp": "Direitos trabalhistas prescrevem em 5 anos retroativos durante o contrato e 2 anos após. Para segurança total, guardar pelo menos 5 anos após sair. Documentos previdenciários, até a aposentadoria."
       }
     }
-  ]
+  ],
+  "order": 99
 }

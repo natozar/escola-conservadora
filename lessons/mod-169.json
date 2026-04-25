@@ -2,7 +2,7 @@
   "id": 169,
   "title": "Sistema GTD",
   "icon": "📋",
-  "color":"lavender",
+  "color": "lavender",
   "desc": "Getting Things Done de David Allen — método para esvaziar a cabeça, organizar o trabalho e agir com clareza. Os cinco passos, a próxima ação, a revisão semanal.",
   "discipline": "produtividade",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "Tentar implementar GTD completo em uma semana é receita pra abandono. O método é incremental: semana 1 só captura, semana 2 mind sweep + listas mínimas, semana 3 rotinas (diária + semanal), semana 4 refinamento. Quem respeita as fases consolida o sistema; quem não respeita desiste."
       }
     }
-  ]
+  ],
+  "order": 169
 }

@@ -2,7 +2,7 @@
   "id": 171,
   "title": "Gestão de Tempo",
   "icon": "⏱",
-  "color":"lavender",
+  "color": "lavender",
   "desc": "Auditoria do tempo, time blocking, Pomodoro, calendário como sistema operacional, MIT, reuniões e o cronotipo individual.",
   "discipline": "produtividade",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "Pesquisa de Till Roenneberg, Michael Breus e outros mostra que cronotipo é genético em grande parte. Lobos forçados em horário matinal sofrem \"social jet lag\" — performance cai, saúde piora. Trabalhar no horário de pico cognitivo pessoal (manhã pra leões, tarde pra ursos, noite pra lobos) é alavanca de produtividade pessoal subestimada."
       }
     }
-  ]
+  ],
+  "order": 171
 }

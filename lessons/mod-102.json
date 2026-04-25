@@ -13,7 +13,12 @@
       "xp": 20,
       "quiz": {
         "q": "Em que instância da Justiça do Trabalho começa a ação de um empregado que quer cobrar direitos?",
-        "o": ["TST", "TRT", "Vara do Trabalho", "STF"],
+        "o": [
+          "TST",
+          "TRT",
+          "Vara do Trabalho",
+          "STF"
+        ],
         "c": 2,
         "exp": "A ação começa na Vara do Trabalho (primeira instância). Lá o juiz instrui o processo, ouve testemunhas e profere sentença. Recursos vão depois para TRT (segunda instância) e TST (terceira)."
       }
@@ -25,7 +30,12 @@
       "xp": 20,
       "quiz": {
         "q": "Trabalhador saiu da empresa em janeiro de 2025. Até quando ele pode entrar com ação na Justiça do Trabalho?",
-        "o": ["6 meses depois (julho de 2025)", "1 ano depois (janeiro de 2026)", "2 anos depois (janeiro de 2027)", "5 anos depois (janeiro de 2030)"],
+        "o": [
+          "6 meses depois (julho de 2025)",
+          "1 ano depois (janeiro de 2026)",
+          "2 anos depois (janeiro de 2027)",
+          "5 anos depois (janeiro de 2030)"
+        ],
         "c": 2,
         "exp": "O Art. 7º, XXIX da Constituição estabelece prazo de 2 anos para entrar com ação após o desligamento. Dentro da ação, pode cobrar direitos dos 5 anos anteriores à demissão. Passados os 2 anos, perde o direito de ação."
       }
@@ -37,7 +47,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual destes documentos é IMPRESCINDÍVEL juntar à ação trabalhista?",
-        "o": ["Boletim de ocorrência", "Carteira de Trabalho (CTPS) e holerites", "Certidão negativa do INSS", "Atestado de bons antecedentes"],
+        "o": [
+          "Boletim de ocorrência",
+          "Carteira de Trabalho (CTPS) e holerites",
+          "Certidão negativa do INSS",
+          "Atestado de bons antecedentes"
+        ],
         "c": 1,
         "exp": "CTPS e holerites são fundamentais — comprovam vínculo, função, salário e período. Sem eles, a ação fica vulnerável. Outros documentos como controle de ponto, e-mails e contratos fortalecem o caso conforme o pedido."
       }
@@ -49,7 +64,12 @@
       "xp": 20,
       "quiz": {
         "q": "O que acontece se o reclamante (trabalhador) não comparecer à audiência sem justificativa?",
-        "o": ["O processo continua normalmente", "Arquivamento da ação e custas", "A empresa é condenada à revelia", "Adia a audiência por 30 dias"],
+        "o": [
+          "O processo continua normalmente",
+          "Arquivamento da ação e custas",
+          "A empresa é condenada à revelia",
+          "Adia a audiência por 30 dias"
+        ],
         "c": 1,
         "exp": "Ausência injustificada do reclamante leva ao ARQUIVAMENTO da ação (extinção sem julgamento de mérito) + condenação ao pagamento de custas. Já a ausência da reclamada gera revelia — presunção de verdade do alegado pelo trabalhador."
       }
@@ -61,7 +81,12 @@
       "xp": 20,
       "quiz": {
         "q": "Em ação trabalhista, quem precisa provar a jornada de trabalho quando a empresa tem mais de 20 empregados?",
-        "o": ["O trabalhador, sempre", "A empresa, que precisa apresentar controle de ponto", "Cada um prova sua versão", "Não precisa provar — basta a palavra"],
+        "o": [
+          "O trabalhador, sempre",
+          "A empresa, que precisa apresentar controle de ponto",
+          "Cada um prova sua versão",
+          "Não precisa provar — basta a palavra"
+        ],
         "c": 1,
         "exp": "Súmula 338 do TST: empresa com mais de 20 empregados é obrigada a manter controle de jornada. Sem ele, ocorre inversão do ônus da prova: presume-se verdadeira a jornada alegada pelo trabalhador. A empresa precisa apresentar para se defender."
       }
@@ -73,7 +98,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é o prazo para apresentar Recurso Ordinário contra a sentença da Vara do Trabalho?",
-        "o": ["3 dias úteis", "8 dias úteis", "15 dias úteis", "30 dias úteis"],
+        "o": [
+          "3 dias úteis",
+          "8 dias úteis",
+          "15 dias úteis",
+          "30 dias úteis"
+        ],
         "c": 1,
         "exp": "O prazo para Recurso Ordinário (e para a maioria dos recursos trabalhistas) é de 8 dias úteis após a intimação. Embargos de Declaração têm prazo menor (5 dias). Perder o prazo significa trânsito em julgado da sentença."
       }
@@ -85,7 +115,12 @@
       "xp": 20,
       "quiz": {
         "q": "Após sentença com trânsito em julgado, qual o prazo legal para a empresa pagar voluntariamente antes de penhora?",
-        "o": ["24 horas", "48 horas", "8 dias", "30 dias"],
+        "o": [
+          "24 horas",
+          "48 horas",
+          "8 dias",
+          "30 dias"
+        ],
         "c": 1,
         "exp": "O Art. 880 da CLT estabelece prazo de 48 horas após a citação para pagamento. Não pagando, segue-se imediatamente penhora de bens — começando geralmente por bloqueio online via Bacenjud (Sisbajud)."
       }
@@ -97,7 +132,12 @@
       "xp": 20,
       "quiz": {
         "q": "Para configurar assédio moral indenizável, qual destas características é INDISPENSÁVEL?",
-        "o": ["Episódio isolado de gritaria", "Repetição e prolongamento da conduta abusiva", "Apenas testemunhas", "Demissão imediata"],
+        "o": [
+          "Episódio isolado de gritaria",
+          "Repetição e prolongamento da conduta abusiva",
+          "Apenas testemunhas",
+          "Demissão imediata"
+        ],
         "c": 1,
         "exp": "Assédio moral exige conduta abusiva REPETITIVA E PROLONGADA. Episódio isolado, mesmo desagradável, não configura assédio (pode configurar dano moral pontual em casos graves). A sistematização da humilhação é o que define o assédio."
       }
@@ -109,7 +149,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quem retorna ao trabalho após auxílio-doença ACIDENTÁRIO (B91) tem direito a estabilidade por quanto tempo?",
-        "o": ["3 meses", "6 meses", "12 meses", "Não há estabilidade"],
+        "o": [
+          "3 meses",
+          "6 meses",
+          "12 meses",
+          "Não há estabilidade"
+        ],
         "c": 2,
         "exp": "O Art. 118 da Lei 8.213/91 garante 12 meses de estabilidade após retorno do auxílio-doença ACIDENTÁRIO (B91). O auxílio comum (B31) NÃO gera estabilidade. Por isso é importante a CAT correta e o enquadramento certo no INSS."
       }
@@ -121,10 +166,16 @@
       "xp": 20,
       "quiz": {
         "q": "Qual destas práticas MAIS protege o trabalhador desde o primeiro dia de emprego?",
-        "o": ["Reclamar para o sindicato semanalmente", "Guardar cópia de tudo (contrato, holerites, e-mails, mensagens)", "Procurar advogado já no primeiro mês", "Esperar acumular problemas para entrar com ação grande"],
+        "o": [
+          "Reclamar para o sindicato semanalmente",
+          "Guardar cópia de tudo (contrato, holerites, e-mails, mensagens)",
+          "Procurar advogado já no primeiro mês",
+          "Esperar acumular problemas para entrar com ação grande"
+        ],
         "c": 1,
         "exp": "Documentar tudo desde o primeiro dia (contrato, holerites, anotações de jornada, e-mails) é a defesa mais sólida. No conflito, prova documental vence a maioria das discussões. Reclamar sem prova ou esperar acumular problemas enfraquece a posição."
       }
     }
-  ]
+  ],
+  "order": 102
 }

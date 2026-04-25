@@ -13,7 +13,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é a tese central do materialismo histórico de Marx?",
-        "o": ["A história não tem direção", "As ideias movem a história", "As condições materiais de produção determinam a estrutura da sociedade", "Deus dirige os acontecimentos"],
+        "o": [
+          "A história não tem direção",
+          "As ideias movem a história",
+          "As condições materiais de produção determinam a estrutura da sociedade",
+          "Deus dirige os acontecimentos"
+        ],
         "c": 2,
         "exp": "Para Marx, é a base econômica (modos de produção) que determina a superestrutura jurídica, política e ideológica."
       }
@@ -25,7 +30,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é o princípio do dano de Mill?",
-        "o": ["O Estado deve maximizar o bem comum a qualquer custo", "Toda ação que cause prazer é boa", "A liberdade individual só pode ser limitada para impedir dano a terceiros", "A maioria sempre tem razão"],
+        "o": [
+          "O Estado deve maximizar o bem comum a qualquer custo",
+          "Toda ação que cause prazer é boa",
+          "A liberdade individual só pode ser limitada para impedir dano a terceiros",
+          "A maioria sempre tem razão"
+        ],
         "c": 2,
         "exp": "Para Mill, o indivíduo é soberano sobre si mesmo; o poder coercitivo só se justifica para evitar dano a outros."
       }
@@ -37,7 +47,12 @@
       "xp": 35,
       "quiz": {
         "q": "O que Nietzsche quis dizer com \"Deus está morto\"?",
-        "o": ["Defendeu o ateísmo militante", "Diagnosticou que o fundamento religioso da moral europeia entrou em colapso", "Fundou uma nova religião", "Negou que Deus tenha existido"],
+        "o": [
+          "Defendeu o ateísmo militante",
+          "Diagnosticou que o fundamento religioso da moral europeia entrou em colapso",
+          "Fundou uma nova religião",
+          "Negou que Deus tenha existido"
+        ],
         "c": 1,
         "exp": "Não é celebração: é alerta sobre o niilismo que se segue à perda do fundamento religioso da moral ocidental."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "O que significa \"a existência precede a essência\" em Sartre?",
-        "o": ["Existir é mais importante do que ser bom", "O ser humano não tem essência fixa; ele se define pelas suas escolhas", "Os filósofos existem antes dos cientistas", "A matéria precede o espírito"],
+        "o": [
+          "Existir é mais importante do que ser bom",
+          "O ser humano não tem essência fixa; ele se define pelas suas escolhas",
+          "Os filósofos existem antes dos cientistas",
+          "A matéria precede o espírito"
+        ],
         "c": 1,
         "exp": "Não há natureza humana pré-dada: cada pessoa cria-se através de escolhas e ações."
       }
@@ -61,7 +81,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a tese central da segunda fase de Wittgenstein (Investigações Filosóficas)?",
-        "o": ["A linguagem espelha logicamente o mundo", "O significado de uma palavra é seu uso na vida prática", "Apenas o que é verificável tem sentido", "A linguagem é privada"],
+        "o": [
+          "A linguagem espelha logicamente o mundo",
+          "O significado de uma palavra é seu uso na vida prática",
+          "Apenas o que é verificável tem sentido",
+          "A linguagem é privada"
+        ],
         "c": 1,
         "exp": "\"O significado de uma palavra é seu uso na linguagem\" — Wittgenstein abandonou a teoria figurativa do Tractatus."
       }
@@ -73,7 +98,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é a contribuição central de Hayek sobre conhecimento e mercado?",
-        "o": ["O Estado deve planejar a economia centralmente", "O conhecimento relevante é disperso, e preços comunicam essa informação descentralizadamente", "Apenas economistas entendem mercados", "A propriedade privada deve ser abolida"],
+        "o": [
+          "O Estado deve planejar a economia centralmente",
+          "O conhecimento relevante é disperso, e preços comunicam essa informação descentralizadamente",
+          "Apenas economistas entendem mercados",
+          "A propriedade privada deve ser abolida"
+        ],
         "c": 1,
         "exp": "Para Hayek, preços de mercado são um sistema de comunicação que coordena conhecimento disperso entre milhões — algo impossível pelo planejamento central."
       }
@@ -85,7 +115,12 @@
       "xp": 40,
       "quiz": {
         "q": "O que é o \"véu da ignorância\" de Rawls?",
-        "o": ["Falta de educação dos pobres", "Experiência de pensamento: escolher princípios sem saber sua posição futura na sociedade", "Censura de ideias", "Medo da morte"],
+        "o": [
+          "Falta de educação dos pobres",
+          "Experiência de pensamento: escolher princípios sem saber sua posição futura na sociedade",
+          "Censura de ideias",
+          "Medo da morte"
+        ],
         "c": 1,
         "exp": "Sob o véu, você ignora classe, raça, talentos. Para Rawls, princípios escolhidos nessa posição são equitativos por construção."
       }
@@ -97,7 +132,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é o \"problema difícil da consciência\" segundo Chalmers?",
-        "o": ["Como o cérebro armazena memórias", "Por que processamento físico produz experiência subjetiva", "Como medir inteligência", "Como tratar doenças mentais"],
+        "o": [
+          "Como o cérebro armazena memórias",
+          "Por que processamento físico produz experiência subjetiva",
+          "Como medir inteligência",
+          "Como tratar doenças mentais"
+        ],
         "c": 1,
         "exp": "É a pergunta de por que existe \"como é ser algo\" — por que o cérebro não é só máquina sem experiência interna."
       }
@@ -109,7 +149,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é o critério de demarcação científica de Popper?",
-        "o": ["Verificabilidade — só vale o que pode ser provado", "Falsificabilidade — uma teoria é científica se pode ser refutada por evidências", "Consenso — vale o que cientistas concordam", "Utilidade — vale o que funciona"],
+        "o": [
+          "Verificabilidade — só vale o que pode ser provado",
+          "Falsificabilidade — uma teoria é científica se pode ser refutada por evidências",
+          "Consenso — vale o que cientistas concordam",
+          "Utilidade — vale o que funciona"
+        ],
         "c": 1,
         "exp": "Para Popper, ciência se distingue por correr o risco de ser refutada — teorias irrefutáveis são pseudo-ciência."
       }
@@ -121,10 +166,16 @@
       "xp": 45,
       "quiz": {
         "q": "Qual hábito intelectual ajuda a evitar o erro de criticar uma ideia distorcida (espantalho)?",
-        "o": ["Ad hominem", "Steelmanning — formular a posição do oponente do modo mais forte antes de criticar", "Apelo à autoridade", "Generalização apressada"],
+        "o": [
+          "Ad hominem",
+          "Steelmanning — formular a posição do oponente do modo mais forte antes de criticar",
+          "Apelo à autoridade",
+          "Generalização apressada"
+        ],
         "c": 1,
         "exp": "Steelmanning é o oposto do espantalho: você só pode refutar honestamente uma ideia depois de tê-la entendido em sua melhor versão."
       }
     }
-  ]
+  ],
+  "order": 4
 }

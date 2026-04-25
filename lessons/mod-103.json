@@ -13,7 +13,12 @@
       "xp": 20,
       "quiz": {
         "q": "O que os pré-socráticos buscavam encontrar quando perguntavam pela arché?",
-        "o": ["O nome do deus criador", "O princípio fundamental ou substância básica de toda a realidade", "A receita para a felicidade", "O melhor sistema político"],
+        "o": [
+          "O nome do deus criador",
+          "O princípio fundamental ou substância básica de toda a realidade",
+          "A receita para a felicidade",
+          "O melhor sistema político"
+        ],
         "c": 1,
         "exp": "A 'arché' é o princípio originário, a substância fundamental de tudo. Tales dizia água, Anaxímenes ar, Heráclito fogo, Demócrito átomos — diferentes respostas à mesma pergunta racional sobre a estrutura do real."
       }
@@ -25,7 +30,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é a principal técnica do método socrático?",
-        "o": ["Memorização de listas", "Discurso longo e ininterrupto", "Perguntas que levam o interlocutor a examinar suas próprias crenças", "Imposição da verdade pelo professor"],
+        "o": [
+          "Memorização de listas",
+          "Discurso longo e ininterrupto",
+          "Perguntas que levam o interlocutor a examinar suas próprias crenças",
+          "Imposição da verdade pelo professor"
+        ],
         "c": 2,
         "exp": "O método socrático (ironia + maiêutica) usa perguntas para que o próprio interlocutor descubra contradições no que pensava saber, chegando ao conhecimento por dentro, não por imposição."
       }
@@ -37,7 +47,12 @@
       "xp": 20,
       "quiz": {
         "q": "Na alegoria da caverna, o que representa o sol?",
-        "o": ["A natureza física", "A Ideia do Bem", "A morte", "A política"],
+        "o": [
+          "A natureza física",
+          "A Ideia do Bem",
+          "A morte",
+          "A política"
+        ],
         "c": 1,
         "exp": "O sol fora da caverna simboliza a Ideia do Bem — fonte e princípio de todas as outras Ideias, alcançada pelo filósofo após o longo processo da educação."
       }
@@ -49,7 +64,12 @@
       "xp": 20,
       "quiz": {
         "q": "Para Aristóteles, virtude é o que?",
-        "o": ["Obediência absoluta às leis", "Equilíbrio (meio-termo) entre dois extremos", "Renúncia total aos prazeres", "Acúmulo de saber teórico"],
+        "o": [
+          "Obediência absoluta às leis",
+          "Equilíbrio (meio-termo) entre dois extremos",
+          "Renúncia total aos prazeres",
+          "Acúmulo de saber teórico"
+        ],
         "c": 1,
         "exp": "Para Aristóteles, virtude (areté) é o meio-termo entre dois vícios opostos — coragem entre covardia e temeridade, generosidade entre avareza e prodigalidade. A sabedoria prática (phronesis) ajuda a achar esse meio em cada situação."
       }
@@ -61,7 +81,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é a distinção fundamental do estoicismo?",
-        "o": ["Entre rico e pobre", "Entre o que depende de nós e o que não depende", "Entre alma e corpo", "Entre verdade e mentira"],
+        "o": [
+          "Entre rico e pobre",
+          "Entre o que depende de nós e o que não depende",
+          "Entre alma e corpo",
+          "Entre verdade e mentira"
+        ],
         "c": 1,
         "exp": "A dicotomia central — formulada por Epicteto — é entre o que está sob nosso controle (pensamentos, escolhas, ações) e o que não está (corpo, fortuna, opiniões alheias). Sabedoria é dedicar esforço ao primeiro grupo e aceitar o segundo."
       }
@@ -73,7 +98,12 @@
       "xp": 20,
       "quiz": {
         "q": "Para Epicuro, qual destes prazeres deve ser EVITADO?",
-        "o": ["Comer quando se tem fome", "Conversa entre amigos", "Acúmulo de riqueza e luxo", "Dormir quando se tem sono"],
+        "o": [
+          "Comer quando se tem fome",
+          "Conversa entre amigos",
+          "Acúmulo de riqueza e luxo",
+          "Dormir quando se tem sono"
+        ],
         "c": 2,
         "exp": "Epicuro classificou riqueza, fama e luxo como prazeres não naturais e não necessários — geram mais ansiedade e sofrimento que prazer real. O prazer epicurista é simples: comida, água, abrigo, amizade."
       }
@@ -85,7 +115,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é a famosa 'navalha' atribuída a Guilherme de Ockham?",
-        "o": ["Toda alma é imortal", "Entre explicações concorrentes, prefira a mais simples", "A fé nunca pode ser provada", "Deus é um motor imóvel"],
+        "o": [
+          "Toda alma é imortal",
+          "Entre explicações concorrentes, prefira a mais simples",
+          "A fé nunca pode ser provada",
+          "Deus é um motor imóvel"
+        ],
         "c": 1,
         "exp": "A navalha de Ockham é princípio metodológico: entre teorias que explicam o mesmo fenômeno, escolha a com menos suposições. Continua sendo regra de ouro em ciência e investigação."
       }
@@ -97,7 +132,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual destes representa o avanço metodológico mais importante da Revolução Científica?",
-        "o": ["A volta à autoridade de Aristóteles", "A introdução do experimento controlado e da formulação matemática", "A condenação dos textos antigos", "A unificação religiosa da Europa"],
+        "o": [
+          "A volta à autoridade de Aristóteles",
+          "A introdução do experimento controlado e da formulação matemática",
+          "A condenação dos textos antigos",
+          "A unificação religiosa da Europa"
+        ],
         "c": 1,
         "exp": "Os gregos observavam, mas não experimentavam. Galileu, Bacon e Newton introduziram o experimento controlado e a formulação matemática rigorosa — é a base do método científico moderno."
       }
@@ -109,7 +149,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é a Primeira Nobre Verdade do budismo?",
-        "o": ["O sofrimento é castigo divino", "Existe sofrimento (insatisfação) na vida", "Não existe sofrimento, apenas ilusão", "Todo sofrimento é punição por pecado anterior"],
+        "o": [
+          "O sofrimento é castigo divino",
+          "Existe sofrimento (insatisfação) na vida",
+          "Não existe sofrimento, apenas ilusão",
+          "Todo sofrimento é punição por pecado anterior"
+        ],
         "c": 1,
         "exp": "A Primeira Nobre Verdade — Dukkha — afirma que existe sofrimento/insatisfação na vida. As outras três identificam a causa (apego), a possibilidade de cessá-lo, e o caminho (Óctuplo) para alcançar essa cessação."
       }
@@ -121,10 +166,16 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é a melhor estratégia para um iniciante em filosofia?",
-        "o": ["Começar pela Crítica da Razão Pura de Kant", "Começar por panorama acessível e textos curtos como diálogos socráticos", "Ler apenas autores contemporâneos da moda", "Memorizar todos os filósofos em ordem cronológica"],
+        "o": [
+          "Começar pela Crítica da Razão Pura de Kant",
+          "Começar por panorama acessível e textos curtos como diálogos socráticos",
+          "Ler apenas autores contemporâneos da moda",
+          "Memorizar todos os filósofos em ordem cronológica"
+        ],
         "c": 1,
         "exp": "Iniciantes devem começar com panoramas acessíveis (Sofia, Russell, Durant) e diálogos socráticos curtos (Apologia, Críton, Banquete). Tentar Kant, Hegel ou Heidegger sem base é receita para desistir frustrado."
       }
     }
-  ]
+  ],
+  "order": 2
 }

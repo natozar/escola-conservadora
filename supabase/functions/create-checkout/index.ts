@@ -20,6 +20,17 @@ const ALLOWED_ORIGINS = [
   'https://escolaliberal.com.br',
 ]
 
+function isOriginAllowed(req: Request): boolean {
+  const origin = req.headers.get('Origin') || ''
+  const referer = req.headers.get('Referer') || ''
+  if (!origin && !referer) return true
+  if (origin && ALLOWED_ORIGINS.includes(origin)) return true
+  if (referer) {
+    try { const u = new URL(referer); if (ALLOWED_ORIGINS.includes(u.origin)) return true } catch {}
+  }
+  return false
+}
+
 function getCorsHeaders(req: Request) {
   const origin = req.headers.get('Origin') || ''
   const allowedOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
@@ -34,6 +45,12 @@ function getCorsHeaders(req: Request) {
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: getCorsHeaders(req) })
+  }
+
+  if (!isOriginAllowed(req)) {
+    return new Response(JSON.stringify({ error: 'origin_blocked' }), {
+      status: 403, headers: { 'Content-Type': 'application/json' }
+    })
   }
 
   try {

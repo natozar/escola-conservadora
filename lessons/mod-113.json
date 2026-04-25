@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual é a estrutura recomendada para escrita profissional?",
-        "o": ["Introdução longa, depois conclusão", "Pirâmide invertida — conclusão primeiro, detalhes depois", "Cronológica — começo, meio, fim", "Sem estrutura — escrever na ordem que vier"],
+        "o": [
+          "Introdução longa, depois conclusão",
+          "Pirâmide invertida — conclusão primeiro, detalhes depois",
+          "Cronológica — começo, meio, fim",
+          "Sem estrutura — escrever na ordem que vier"
+        ],
         "c": 1,
         "exp": "Pirâmide invertida: conclusão primeiro respeita o tempo do leitor. Quem tem pressa pega o essencial; quem quer mais, lê o detalhe."
       }
@@ -25,7 +30,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é o melhor assunto de e-mail?",
-        "o": ["Importante", "Sobre o projeto", "Projeto X: aprovação de orçamento até 15/05", "Reunião"],
+        "o": [
+          "Importante",
+          "Sobre o projeto",
+          "Projeto X: aprovação de orçamento até 15/05",
+          "Reunião"
+        ],
         "c": 2,
         "exp": "Específico, com ação esperada (aprovação) e prazo (15/05). Os outros são genéricos demais — não dão contexto suficiente para priorização."
       }
@@ -37,7 +47,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é o método SCQA para estruturar relatórios?",
-        "o": ["Situação, Conclusão, Questão, Análise", "Situação, Complicação, Questão, Resposta", "Sumário, Contexto, Quesito, Recomendação", "Solução, Cause, Quando, Resposta"],
+        "o": [
+          "Situação, Conclusão, Questão, Análise",
+          "Situação, Complicação, Questão, Resposta",
+          "Sumário, Contexto, Quesito, Recomendação",
+          "Solução, Cause, Quando, Resposta"
+        ],
         "c": 1,
         "exp": "SCQA (Barbara Minto): Situação (contexto), Complicação (o que mudou), Questão (pergunta), Resposta (recomendação). Estrutura clássica de consultoria."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é o melhor bullet de experiência?",
-        "o": ["Trabalhei com vendas", "Responsável por vendas", "Aumentei vendas em 35% (R$ 12 mi → R$ 16,2 mi) em 18 meses", "Atuei na área comercial"],
+        "o": [
+          "Trabalhei com vendas",
+          "Responsável por vendas",
+          "Aumentei vendas em 35% (R$ 12 mi → R$ 16,2 mi) em 18 meses",
+          "Atuei na área comercial"
+        ],
         "c": 2,
         "exp": "Verbo de ação (\"aumentei\") + resultado quantificado (35%, valores) + tempo (18 meses). Os outros são genéricos e não diferenciam você."
       }
@@ -61,7 +81,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é o tamanho ideal de carta de apresentação?",
-        "o": ["50-80 palavras", "200-300 palavras", "500-800 palavras", "Mais de 1.000 palavras"],
+        "o": [
+          "50-80 palavras",
+          "200-300 palavras",
+          "500-800 palavras",
+          "Mais de 1.000 palavras"
+        ],
         "c": 1,
         "exp": "200-300 palavras: específico o suficiente para diferenciar, curto o bastante para ser lido. 4 parágrafos cabem nesse tamanho."
       }
@@ -73,7 +98,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual é a melhor abertura de mensagem profissional via WhatsApp?",
-        "o": ["Oi", "Olá, como vai?", "Oi João, te chamei pra falar sobre projeto X. Pode agora?", "Bom dia! Tudo bem? Você tem um minuto?"],
+        "o": [
+          "Oi",
+          "Olá, como vai?",
+          "Oi João, te chamei pra falar sobre projeto X. Pode agora?",
+          "Bom dia! Tudo bem? Você tem um minuto?"
+        ],
         "c": 2,
         "exp": "Saudação + nome + contexto + pedido específico em uma só mensagem economiza tempo de todos. As outras criam ping-pong sem motivo."
       }
@@ -85,7 +115,12 @@
       "xp": 30,
       "quiz": {
         "q": "O que uma boa ata de reunião deve registrar prioritariamente?",
-        "o": ["Tudo que cada participante falou", "Decisões tomadas, próximos passos e responsáveis", "Atmosfera e clima do encontro", "Histórico completo do projeto"],
+        "o": [
+          "Tudo que cada participante falou",
+          "Decisões tomadas, próximos passos e responsáveis",
+          "Atmosfera e clima do encontro",
+          "Histórico completo do projeto"
+        ],
         "c": 1,
         "exp": "Ata foca em decisões + ações + responsáveis + prazos. Não é transcrição. Discussões só registram quando relevantes para entender a decisão."
       }
@@ -97,7 +132,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a regra prática para limitar texto em slides?",
-        "o": ["Sem limite — quanto mais texto, mais informação", "Regra 6×6 — máximo 6 bullets de 6 palavras", "Sempre 1 frase só por slide", "Texto deve preencher 80% do slide"],
+        "o": [
+          "Sem limite — quanto mais texto, mais informação",
+          "Regra 6×6 — máximo 6 bullets de 6 palavras",
+          "Sempre 1 frase só por slide",
+          "Texto deve preencher 80% do slide"
+        ],
         "c": 1,
         "exp": "Regra 6×6 (ou 5×5) força síntese. Slide é apoio à fala, não substituto. Detalhe vai na boca do apresentador ou em handout separado."
       }
@@ -109,7 +149,12 @@
       "xp": 35,
       "quiz": {
         "q": "Quais são os 3 pilares aristotélicos da persuasão?",
-        "o": ["Estrutura, evidência, conclusão", "Ethos (credibilidade), pathos (emoção), logos (lógica)", "Tese, antítese, síntese", "Início, meio, fim"],
+        "o": [
+          "Estrutura, evidência, conclusão",
+          "Ethos (credibilidade), pathos (emoção), logos (lógica)",
+          "Tese, antítese, síntese",
+          "Início, meio, fim"
+        ],
         "c": 1,
         "exp": "Aristóteles em Retórica formulou: ethos (autoridade do orador), pathos (emoção do ouvinte), logos (argumento lógico). Texto persuasivo equilibra os três."
       }
@@ -121,10 +166,16 @@
       "xp": 45,
       "quiz": {
         "q": "Qual é o melhor método para revisar um texto profissional importante?",
-        "o": ["Ler uma vez rápido antes de enviar", "Confiar no corretor automático", "3 passes — sentido, gramática, corte 30%", "Mandar para revisor terceirizado sempre"],
+        "o": [
+          "Ler uma vez rápido antes de enviar",
+          "Confiar no corretor automático",
+          "3 passes — sentido, gramática, corte 30%",
+          "Mandar para revisor terceirizado sempre"
+        ],
         "c": 2,
         "exp": "Método dos 3 passes (sentido → gramática → corte) é eficaz e rápido. Cada passe foca em uma camada diferente, evitando que se perca um detalhe."
       }
     }
-  ]
+  ],
+  "order": 113
 }

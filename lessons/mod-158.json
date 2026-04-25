@@ -176,5 +176,6 @@
         "exp": "SQL profissional combina sintaxe + segurança (prepared statements, hash) + performance (índices, EXPLAIN) + integridade (transações, FK) + operação (backup, migrations, princípio do menor privilégio)."
       }
     }
-  ]
+  ],
+  "order": 158
 }

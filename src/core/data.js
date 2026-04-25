@@ -7,9 +7,18 @@ const _modCache = {};
 
 async function loadLessons(){
   try{
+    // Carrega manifesto de integridade (uma unica vez por sessao)
+    if(typeof window.loadIntegrityManifest==='function'){
+      try{await window.loadIntegrityManifest()}catch(_){}
+    }
     const r=await fetch('./lessons/index.json');
     if(!r.ok)throw new Error(r.status);
-    const data=await r.json();
+    const text=await r.text();
+    if(typeof window.verifyContent==='function'){
+      const ok=await window.verifyContent('index.json',text);
+      if(!ok)throw new Error('integrity_failed:index.json');
+    }
+    const data=JSON.parse(text);
     window.M.length=0; data.forEach(m=>window.M.push(m));
     window.M.forEach(m=>{m._loaded=false});
   }catch(e){
@@ -50,12 +59,20 @@ async function loadFullModule(i){
   try{
     const r=await fetch('./lessons/mod-'+i+'.json');
     if(!r.ok)throw new Error(r.status);
-    const full=await r.json();
+    const text=await r.text();
+    if(typeof window.verifyContent==='function'){
+      const ok=await window.verifyContent('mod-'+i+'.json',text);
+      if(!ok)throw new Error('integrity_failed:mod-'+i);
+    }
+    const full=JSON.parse(text);
     full._loaded=true;
     M[i]=full;
     _modCache[i]=full;
     return true;
   }catch(e){
+    if(e && e.message && e.message.startsWith('integrity_failed') && typeof window.reportError==='function'){
+      window.reportError('integrity_failure_local',{message:e.message,details:{module:i}});
+    }
     console.warn('[Lessons] Module '+i+' fetch failed, trying cache...',e.message);
     try{
       const c=await caches.match('./lessons/mod-'+i+'.json');

@@ -2,7 +2,7 @@
   "id": 172,
   "title": "Hábitos e Rotina",
   "icon": "🔁",
-  "color":"lavender",
+  "color": "lavender",
   "desc": "A ciência do hábito segundo Duhigg e Clear, loop gatilho-rotina-recompensa, hábitos atômicos, identidade e quando hábitos falham.",
   "discipline": "produtividade",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "Pesquisa de Polivy mostra o \"what the hell effect\" — 1 deslize gera espiral de abandono se interpretado como falha total. Antídoto é separar ato (\"perdi treino segunda\") de identidade (\"sou alguém que treina\"). Maioria dos votos vence: errou 1, retoma amanhã. Hábitos duráveis são feitos de retomadas, não de perfeição contínua."
       }
     }
-  ]
+  ],
+  "order": 172
 }

@@ -2,7 +2,7 @@
   "id": 173,
   "title": "Produtividade Digital",
   "icon": "💻",
-  "color":"lavender",
+  "color": "lavender",
   "desc": "Ferramentas, apps e estratégias para usar a tecnologia a seu favor — sem virar refém dela.",
   "discipline": "produtividade",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "IA acelera tarefas estruturadas (rascunho, pesquisa, revisão), mas o humano mantém julgamento, contexto e decisão final. Quem trata IA como piloto, gera bobagem. Quem ignora, fica para trás."
       }
     }
-  ]
+  ],
+  "order": 173
 }

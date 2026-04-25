@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Segundo Erikson, qual a tarefa psicossocial central da adultez média (40-65)?",
-        "o": ["Intimidade vs isolamento", "Generatividade vs estagnação", "Identidade vs confusão", "Integridade vs desespero"],
+        "o": [
+          "Intimidade vs isolamento",
+          "Generatividade vs estagnação",
+          "Identidade vs confusão",
+          "Integridade vs desespero"
+        ],
         "c": 1,
         "exp": "Generatividade = contribuir para gerações futuras (filhos, mentoria, obra). Estagnação = focar só em si. Tarefa central da meia-idade."
       }
@@ -25,7 +30,12 @@
       "xp": 30,
       "quiz": {
         "q": "Segundo Meg Jay, qual a tese central sobre os 20 anos?",
-        "o": ["São fase de transição sem importância", "São a década que define grande parte da vida — usar bem é decisivo", "Devem ser usados só para diversão", "Profissionalmente são irrelevantes"],
+        "o": [
+          "São fase de transição sem importância",
+          "São a década que define grande parte da vida — usar bem é decisivo",
+          "Devem ser usados só para diversão",
+          "Profissionalmente são irrelevantes"
+        ],
         "c": 1,
         "exp": "Jay argumenta que escolhas dessa década (parceiro, carreira, cidade, hábitos) têm efeito desproporcional. Não é \"nova adolescência\" — é período crítico."
       }
@@ -37,7 +47,12 @@
       "xp": 30,
       "quiz": {
         "q": "Por que pesquisas mostram que casamentos estáveis correlacionam com melhor saúde e longevidade?",
-        "o": ["Magia social do anel", "Apoio emocional, regulação emocional, segurança financeira partilhada, hábitos saudáveis mútuos", "Pressão fiscal", "Status social"],
+        "o": [
+          "Magia social do anel",
+          "Apoio emocional, regulação emocional, segurança financeira partilhada, hábitos saudáveis mútuos",
+          "Pressão fiscal",
+          "Status social"
+        ],
         "c": 1,
         "exp": "Não é o status civil em si — é o conjunto de fatores: apoio diário, parceiro que regula emoções, dois rendimentos, hábitos partilhados. Casamento ruim não tem esses benefícios."
       }
@@ -49,7 +64,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual o padrão do \"U da felicidade\" descoberto em estudos longitudinais?",
-        "o": ["Felicidade declina sempre com a idade", "Felicidade alta jovem, cai até ~46-50, sobe na segunda metade da vida", "Felicidade aumenta sempre", "Não há padrão"],
+        "o": [
+          "Felicidade declina sempre com a idade",
+          "Felicidade alta jovem, cai até ~46-50, sobe na segunda metade da vida",
+          "Felicidade aumenta sempre",
+          "Não há padrão"
+        ],
         "c": 1,
         "exp": "Padrão U: ponto baixo na meia-idade, depois sobe. Saber que existe ajuda a atravessar — \"vou melhorar\". Fenômeno transcultural."
       }
@@ -61,7 +81,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual a tarefa especial dos 50, segundo a tradição de Erikson e pesquisa em sabedoria?",
-        "o": ["Maximizar consumo", "Mentoria — passar adiante experiência e formar próxima geração", "Aposentar-se completamente", "Renunciar a projetos"],
+        "o": [
+          "Maximizar consumo",
+          "Mentoria — passar adiante experiência e formar próxima geração",
+          "Aposentar-se completamente",
+          "Renunciar a projetos"
+        ],
         "c": 1,
         "exp": "Generatividade tardia se concretiza em mentoria. Sua experiência beneficia jovens; ensinar consolida e dá sentido à sua trajetória."
       }
@@ -73,7 +98,12 @@
       "xp": 30,
       "quiz": {
         "q": "Por que aposentadoria abrupta (\"cliff\") tem maior risco psicológico?",
-        "o": ["Pelas finanças", "Pela perda súbita de estrutura, identidade, vínculos e propósito sem substituto preparado", "Pela burocracia", "Por preconceito da sociedade"],
+        "o": [
+          "Pelas finanças",
+          "Pela perda súbita de estrutura, identidade, vínculos e propósito sem substituto preparado",
+          "Pela burocracia",
+          "Por preconceito da sociedade"
+        ],
         "c": 1,
         "exp": "Cortar tudo de uma vez sem ter substituto para identidade, rotina e vínculos é fórmula para depressão e declínio. Transição gradual ou reinvenção previne."
       }
@@ -85,7 +115,12 @@
       "xp": 30,
       "quiz": {
         "q": "Quais são os 4 pilares convergentes do envelhecimento saudável segundo pesquisa em zonas azuis?",
-        "o": ["Genética, dinheiro, sorte, dieta", "Movimento natural, dieta moderada, vínculos sociais, propósito", "Medicina, suplementos, exercício extremo, jejum", "Trabalhar até morrer"],
+        "o": [
+          "Genética, dinheiro, sorte, dieta",
+          "Movimento natural, dieta moderada, vínculos sociais, propósito",
+          "Medicina, suplementos, exercício extremo, jejum",
+          "Trabalhar até morrer"
+        ],
         "c": 1,
         "exp": "Pesquisa convergente: movimento integrado ao dia, comida simples, comunidade real, razão de viver. Não é genética nem milagre — é estilo de vida sustentado por décadas."
       }
@@ -97,7 +132,12 @@
       "xp": 30,
       "quiz": {
         "q": "O que NÃO se deve dizer a alguém em luto?",
-        "o": ["\"Sinto muito pela sua perda\"", "\"Já passou — você precisa superar\"", "\"Estou aqui se precisar\"", "\"Lembre-se quando precisar de ajuda\""],
+        "o": [
+          "\"Sinto muito pela sua perda\"",
+          "\"Já passou — você precisa superar\"",
+          "\"Estou aqui se precisar\"",
+          "\"Lembre-se quando precisar de ajuda\""
+        ],
         "c": 1,
         "exp": "Frases que minimizam ou apressam a dor (\"já passou\", \"tem que ser forte\") são prejudiciais. Luto tem tempo de quem perdeu — não dos outros."
       }
@@ -109,7 +149,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual a definição de maturidade real, segundo a aula?",
-        "o": ["Ausência de emoções fortes", "Apatia diante da vida", "Coração engajado + cabeça lúcida + responsabilidade + humildade", "Idade cronológica avançada"],
+        "o": [
+          "Ausência de emoções fortes",
+          "Apatia diante da vida",
+          "Coração engajado + cabeça lúcida + responsabilidade + humildade",
+          "Idade cronológica avançada"
+        ],
         "c": 2,
         "exp": "Maturidade não é apagar paixão (apatia falsa). É integrar emoção, razão e responsabilidade — agir bem em situação real, com humildade sobre os próprios limites."
       }
@@ -121,10 +166,16 @@
       "xp": 40,
       "quiz": {
         "q": "Qual o princípio que conecta todos os 10 universais da vida adulta?",
-        "o": ["Maximização de prazer", "Acúmulo de bens", "Cultivo intencional do que sustenta vida boa em qualquer fase — e ação para fazê-lo agora", "Esperar o melhor momento"],
+        "o": [
+          "Maximização de prazer",
+          "Acúmulo de bens",
+          "Cultivo intencional do que sustenta vida boa em qualquer fase — e ação para fazê-lo agora",
+          "Esperar o melhor momento"
+        ],
         "c": 2,
         "exp": "Os 10 princípios são cultivos — práticas que se sustentam por décadas. Não há \"melhor momento\" — há este momento, agora, com o que você tem."
       }
     }
-  ]
+  ],
+  "order": 111
 }

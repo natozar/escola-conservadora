@@ -13,7 +13,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quantas horas por ano, em média, uma empresa brasileira gastava cumprindo obrigações tributárias antes da reforma?",
-        "o": ["159 horas", "500 horas", "1.501 horas", "3.000 horas"],
+        "o": [
+          "159 horas",
+          "500 horas",
+          "1.501 horas",
+          "3.000 horas"
+        ],
         "c": 2,
         "exp": "Pesquisa do Banco Mundial mostrava que empresas brasileiras gastavam 1.501 horas/ano em obrigações tributárias — quase 10x a média da OCDE. Esse é um dos motivos centrais da reforma."
       }
@@ -25,7 +30,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quais tributos serão substituídos pelo IBS no novo sistema?",
-        "o": ["PIS e COFINS", "ICMS e ISS", "IRPJ e CSLL", "IPI e IOF"],
+        "o": [
+          "PIS e COFINS",
+          "ICMS e ISS",
+          "IRPJ e CSLL",
+          "IPI e IOF"
+        ],
         "c": 1,
         "exp": "O IBS substitui o ICMS (estadual) e o ISS (municipal). É administrado por um Comitê Gestor compartilhado entre estados e municípios, com alíquota nacional única."
       }
@@ -37,7 +47,12 @@
       "xp": 20,
       "quiz": {
         "q": "Em que ano o sistema tributário novo (CBS+IBS+IS) estará plenamente em vigor com extinção total de ICMS, ISS, PIS, COFINS e IPI?",
-        "o": ["2026", "2028", "2030", "2033"],
+        "o": [
+          "2026",
+          "2028",
+          "2030",
+          "2033"
+        ],
         "c": 3,
         "exp": "A transição ocorre entre 2026 e 2032. Em 2033, o sistema novo está pleno e os antigos extintos. O fundo de compensação para estados continua até 2078."
       }
@@ -49,7 +64,12 @@
       "xp": 20,
       "quiz": {
         "q": "Por que setores B2B (empresa para empresa) tendem a sentir menos o aumento de alíquota com a reforma?",
-        "o": ["B2B é isento de IBS e CBS", "O cliente empresa pode tomar crédito do imposto, neutralizando o impacto na cadeia", "B2B paga só ISS, que continua igual", "Não há diferença entre B2B e B2C"],
+        "o": [
+          "B2B é isento de IBS e CBS",
+          "O cliente empresa pode tomar crédito do imposto, neutralizando o impacto na cadeia",
+          "B2B paga só ISS, que continua igual",
+          "Não há diferença entre B2B e B2C"
+        ],
         "c": 1,
         "exp": "Em operações B2B, o cliente empresarial toma crédito do CBS+IBS pago, abatendo dos próprios débitos. O imposto é \"transparente\" na cadeia, só onerando o consumidor final."
       }
@@ -61,7 +81,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual o principal benefício da reforma para indústrias com longa cadeia produtiva?",
-        "o": ["Alíquota menor que a atual", "Fim da cumulatividade — todo imposto pago vira crédito integral na etapa seguinte", "Isenção total de tributos", "Cobrança apenas no destino final"],
+        "o": [
+          "Alíquota menor que a atual",
+          "Fim da cumulatividade — todo imposto pago vira crédito integral na etapa seguinte",
+          "Isenção total de tributos",
+          "Cobrança apenas no destino final"
+        ],
         "c": 1,
         "exp": "O fim da cumulatividade é o ganho técnico mais relevante. Crédito integral em toda a cadeia evita imposto sobre imposto e desfaz a distorção que premiava verticalização ineficiente."
       }
@@ -73,7 +98,12 @@
       "xp": 20,
       "quiz": {
         "q": "Como a tributação de dividendos a partir de 2026 afeta o planejamento tributário do sócio?",
-        "o": ["Não muda nada — dividendos continuam totalmente isentos", "Acima do limite mensal de isenção, dividendos passam a ter retenção de 15% na fonte", "Sócios pagam 50% sobre dividendos", "Apenas empresas no Lucro Real são afetadas"],
+        "o": [
+          "Não muda nada — dividendos continuam totalmente isentos",
+          "Acima do limite mensal de isenção, dividendos passam a ter retenção de 15% na fonte",
+          "Sócios pagam 50% sobre dividendos",
+          "Apenas empresas no Lucro Real são afetadas"
+        ],
         "c": 1,
         "exp": "A reforma prevê IRRF de 15% sobre dividendos acima do limite mensal de isenção. Reduz a vantagem do esquema \"pró-labore mínimo + distribuição alta\", mas não a elimina."
       }
@@ -85,7 +115,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual a principal mudança proposta para a faixa de isenção do IRPF?",
-        "o": ["Manter R$ 2.259/mês", "Ampliar para até R$ 5.000/mês", "Reduzir para R$ 1.500/mês", "Eliminar isenção total"],
+        "o": [
+          "Manter R$ 2.259/mês",
+          "Ampliar para até R$ 5.000/mês",
+          "Reduzir para R$ 1.500/mês",
+          "Eliminar isenção total"
+        ],
         "c": 1,
         "exp": "A proposta amplia a isenção para até R$ 5.000/mês, atualizando a tabela após décadas de defasagem real. Compensa-se via tributação de dividendos altos e alíquota mínima sobre super-rendas."
       }
@@ -97,7 +132,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual o mecanismo criado para reduzir o impacto regressivo do imposto sobre consumo nas famílias de baixa renda?",
-        "o": ["Isenção total para todos abaixo de 1 salário mínimo", "Cashback para famílias do CadÚnico em despesas como energia, gás, água e telecomunicações", "Subsídio direto pago em dinheiro", "Cesta básica gratuita"],
+        "o": [
+          "Isenção total para todos abaixo de 1 salário mínimo",
+          "Cashback para famílias do CadÚnico em despesas como energia, gás, água e telecomunicações",
+          "Subsídio direto pago em dinheiro",
+          "Cesta básica gratuita"
+        ],
         "c": 1,
         "exp": "O cashback devolve parte do imposto pago em despesas essenciais por famílias inscritas no CadÚnico com renda per capita baixa. Corrige regressividade sem precisar de mil alíquotas reduzidas."
       }
@@ -109,7 +149,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual a primeira ação prática que um empresário deve fazer em 2025 para se preparar para a reforma?",
-        "o": ["Mudar de regime tributário imediatamente", "Pedir ao contador uma simulação detalhada do impacto da reforma na empresa", "Comprar imóveis em estados de alíquota baixa", "Suspender investimentos até 2033"],
+        "o": [
+          "Mudar de regime tributário imediatamente",
+          "Pedir ao contador uma simulação detalhada do impacto da reforma na empresa",
+          "Comprar imóveis em estados de alíquota baixa",
+          "Suspender investimentos até 2033"
+        ],
         "c": 1,
         "exp": "Simulação detalhada do impacto é o ponto de partida. Sem saber onde a empresa ganha e onde perde, decisões posteriores ficam no escuro. Contador estratégico é fundamental aqui."
       }
@@ -121,10 +166,16 @@
       "xp": 25,
       "quiz": {
         "q": "Qual é a expectativa principal da reforma tributária para o crescimento econômico do Brasil em 10-15 anos?",
-        "o": ["Crescimento de 50% do PIB", "Adição estimada entre 4% e 12% ao PIB pelo ganho de eficiência", "Estagnação econômica", "Não há expectativa de impacto"],
+        "o": [
+          "Crescimento de 50% do PIB",
+          "Adição estimada entre 4% e 12% ao PIB pelo ganho de eficiência",
+          "Estagnação econômica",
+          "Não há expectativa de impacto"
+        ],
         "c": 1,
         "exp": "Estudos do BNDES e FGV estimam adição de 4% a 12% ao PIB em 10-15 anos pelo ganho de eficiência. É expectativa otimista mas plausível, comparável a reformas similares em outros países (Espanha, Chile, Estônia)."
       }
     }
-  ]
+  ],
+  "order": 98
 }

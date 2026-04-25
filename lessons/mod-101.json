@@ -13,7 +13,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual destas alterações foi trazida pela Reforma Trabalhista de 2017?",
-        "o": ["Aumento da multa do FGTS para 50%", "Eliminação do 13º salário", "Trabalho intermitente regulamentado", "Fim das férias remuneradas"],
+        "o": [
+          "Aumento da multa do FGTS para 50%",
+          "Eliminação do 13º salário",
+          "Trabalho intermitente regulamentado",
+          "Fim das férias remuneradas"
+        ],
         "c": 2,
         "exp": "A Lei 13.467/2017 criou o contrato intermitente (jornada flexível com pagamento por hora trabalhada). 13º, FGTS e férias permanecem inalterados — são direitos constitucionais."
       }
@@ -25,7 +30,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é o principal risco para a empresa que contrata PJ com características de empregado CLT?",
-        "o": ["Multa fixa de R$ 5.000 da fiscalização", "Reconhecimento judicial de vínculo e pagamento retroativo de todos os direitos CLT", "Perda do CNPJ do prestador", "Suspensão por 30 dias do funcionamento"],
+        "o": [
+          "Multa fixa de R$ 5.000 da fiscalização",
+          "Reconhecimento judicial de vínculo e pagamento retroativo de todos os direitos CLT",
+          "Perda do CNPJ do prestador",
+          "Suspensão por 30 dias do funcionamento"
+        ],
         "c": 1,
         "exp": "A Justiça do Trabalho aplica o princípio da primazia da realidade: se o PJ atua como empregado (subordinação, pessoalidade, habitualidade), reconhece-se vínculo CLT e a empresa paga retroativamente FGTS, 13º, férias, multa rescisória — chega a R$ 80-300 mil."
       }
@@ -37,7 +47,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é o limite de faturamento anual do MEI em 2026?",
-        "o": ["R$ 60.000", "R$ 81.000", "R$ 120.000", "R$ 360.000"],
+        "o": [
+          "R$ 60.000",
+          "R$ 81.000",
+          "R$ 120.000",
+          "R$ 360.000"
+        ],
         "c": 1,
         "exp": "O limite é R$ 81.000/ano (média de R$ 6.750/mês). Acima disso até R$ 97.200, paga DAS normal mais excedente. Acima de R$ 97.200, é desenquadrado e vira ME no Simples Nacional."
       }
@@ -49,7 +64,12 @@
       "xp": 20,
       "quiz": {
         "q": "Em RPA (autônomo sem CNPJ), quem paga os 20% de INSS empregador?",
-        "o": ["O autônomo, descontado do recibo", "A empresa contratante, além do valor pago ao autônomo", "É dividido 50%/50%", "Não há essa contribuição em RPA"],
+        "o": [
+          "O autônomo, descontado do recibo",
+          "A empresa contratante, além do valor pago ao autônomo",
+          "É dividido 50%/50%",
+          "Não há essa contribuição em RPA"
+        ],
         "c": 1,
         "exp": "Os 20% de INSS empregador são pagos pela empresa contratante POR CIMA do valor pago ao autônomo. Por isso contratar autônomo via RPA fica mais caro para a empresa do que via MEI."
       }
@@ -61,7 +81,12 @@
       "xp": 20,
       "quiz": {
         "q": "Se a empresa prestadora deixa de pagar os direitos trabalhistas, qual a responsabilidade da tomadora?",
-        "o": ["Nenhuma — é problema da prestadora", "Solidária — paga junto desde o início", "Subsidiária — paga se a prestadora não pagar", "Pessoal — só responde com bens dos sócios"],
+        "o": [
+          "Nenhuma — é problema da prestadora",
+          "Solidária — paga junto desde o início",
+          "Subsidiária — paga se a prestadora não pagar",
+          "Pessoal — só responde com bens dos sócios"
+        ],
         "c": 2,
         "exp": "A tomadora tem responsabilidade subsidiária: o trabalhador cobra primeiro da prestadora; se ela não paga ou não tem patrimônio, o juiz manda a tomadora pagar. Por isso tomadoras exigem certidões da prestadora regularmente."
       }
@@ -73,7 +98,12 @@
       "xp": 20,
       "quiz": {
         "q": "No contrato intermitente, com quantos dias de antecedência o empregador deve convocar o trabalhador?",
-        "o": ["1 dia útil", "3 dias úteis", "7 dias úteis", "30 dias"],
+        "o": [
+          "1 dia útil",
+          "3 dias úteis",
+          "7 dias úteis",
+          "30 dias"
+        ],
         "c": 1,
         "exp": "A CLT (Art. 452-A) determina convocação com 3 dias úteis de antecedência. O trabalhador tem 1 dia útil para responder — silêncio é considerado recusa."
       }
@@ -85,7 +115,12 @@
       "xp": 20,
       "quiz": {
         "q": "Empregado em home office com controle de jornada tem direito a horas extras?",
-        "o": ["Não, teletrabalho nunca tem horas extras", "Sim, conforme a Lei 14.442/2022", "Só nos primeiros 6 meses", "Apenas para mulheres"],
+        "o": [
+          "Não, teletrabalho nunca tem horas extras",
+          "Sim, conforme a Lei 14.442/2022",
+          "Só nos primeiros 6 meses",
+          "Apenas para mulheres"
+        ],
         "c": 1,
         "exp": "A Lei 14.442/2022 estabeleceu que teletrabalho COM controle de jornada (horário definido, registro de ponto) gera direito a horas extras. Já o teletrabalho por produção/tarefa (sem controle) permanece isento."
       }
@@ -97,7 +132,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual é o limite máximo de jornada diária de estagiário?",
-        "o": ["4 horas", "6 horas", "8 horas", "10 horas"],
+        "o": [
+          "4 horas",
+          "6 horas",
+          "8 horas",
+          "10 horas"
+        ],
         "c": 1,
         "exp": "A Lei 11.788/2008 fixa jornada máxima de 6 horas/dia e 30 horas/semana para estagiários (4h/20h apenas para ensino fundamental especial). Empresas que exigem 8h fraudam a lei e arriscam reconhecimento de vínculo CLT."
       }
@@ -109,7 +149,12 @@
       "xp": 20,
       "quiz": {
         "q": "Empregada doméstica que trabalha 5 dias por semana na mesma residência tem direito a FGTS?",
-        "o": ["Não, doméstica não tem FGTS", "Sim, desde a LC 150/2015 é obrigatório", "Só se a família contribuir voluntariamente", "Apenas após 5 anos de serviço"],
+        "o": [
+          "Não, doméstica não tem FGTS",
+          "Sim, desde a LC 150/2015 é obrigatório",
+          "Só se a família contribuir voluntariamente",
+          "Apenas após 5 anos de serviço"
+        ],
         "c": 1,
         "exp": "A LC 150/2015 (regulamentação da PEC das Domésticas) tornou o FGTS obrigatório para empregadas domésticas. O empregador também recolhe 3,2% antecipados como multa rescisória depositada em fundo separado."
       }
@@ -121,10 +166,16 @@
       "xp": 20,
       "quiz": {
         "q": "Aproximadamente quanto a mais (em percentual) o profissional precisa receber como PJ para igualar o ganho real de um CLT bruto, considerando todos os encargos e benefícios?",
-        "o": ["10% a 20%", "30% a 40%", "55% a 65%", "100% a mais"],
+        "o": [
+          "10% a 20%",
+          "30% a 40%",
+          "55% a 65%",
+          "100% a mais"
+        ],
         "c": 2,
         "exp": "Considerando 13º (8,3%), férias+1/3 (11,1%), FGTS (8%), tributos PJ (~10%), contador, reserva e perda de seguro-desemprego, o PJ precisa ganhar cerca de 55% a 65% acima do bruto CLT para igualar o valor real recebido. Empresas costumam oferecer 30-40% — fica abaixo de CLT."
       }
     }
-  ]
+  ],
+  "order": 101
 }

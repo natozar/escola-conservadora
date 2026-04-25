@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual frase está correta?",
-        "o": ["Fazem cinco anos que ele saiu", "Faz cinco anos que ele saiu", "Fazem cinco anos que eles saíram", "Fizeram cinco anos que ele saiu"],
+        "o": [
+          "Fazem cinco anos que ele saiu",
+          "Faz cinco anos que ele saiu",
+          "Fazem cinco anos que eles saíram",
+          "Fizeram cinco anos que ele saiu"
+        ],
         "c": 1,
         "exp": "\"Fazer\" indicando tempo é impessoal — fica sempre no singular, independentemente do que vier depois."
       }
@@ -25,7 +30,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual está correta?",
-        "o": ["Ela está meia cansada", "Ela está meio cansada", "Elas estão meias cansadas", "Ela está bastantes cansada"],
+        "o": [
+          "Ela está meia cansada",
+          "Ela está meio cansada",
+          "Elas estão meias cansadas",
+          "Ela está bastantes cansada"
+        ],
         "c": 1,
         "exp": "\"Meio\" como advérbio (= um pouco) é invariável. \"Meio cansada\", \"meio triste\", \"meio distraída\"."
       }
@@ -37,7 +47,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual frase está em norma culta?",
-        "o": ["Prefiro chá do que café", "Prefiro chá a café", "Prefiro mais chá que café", "Prefiro chá ao invés de café"],
+        "o": [
+          "Prefiro chá do que café",
+          "Prefiro chá a café",
+          "Prefiro mais chá que café",
+          "Prefiro chá ao invés de café"
+        ],
         "c": 1,
         "exp": "\"Preferir A a B\" é a regência culta. Sem \"do que\", sem \"mais\", sem \"ao invés de\" misturado."
       }
@@ -49,7 +64,12 @@
       "xp": 40,
       "quiz": {
         "q": "Em qual alternativa o uso da crase está correto?",
-        "o": ["Vou à pé até a padaria", "Refiro-me à aquele caso", "Cheguei à praia às oito horas", "Falei à você ontem"],
+        "o": [
+          "Vou à pé até a padaria",
+          "Refiro-me à aquele caso",
+          "Cheguei à praia às oito horas",
+          "Falei à você ontem"
+        ],
         "c": 2,
         "exp": "\"Cheguei à praia\" (preposição + artigo feminino) e \"às oito horas\" (locução de tempo). \"À pé\", \"à aquele\" e \"à você\" são erros."
       }
@@ -61,7 +81,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual frase tem pontuação correta?",
-        "o": ["O João, comprou pão", "João, vem cá", "Os livros, que comprei estão na mesa", "Ontem, fui, ao mercado"],
+        "o": [
+          "O João, comprou pão",
+          "João, vem cá",
+          "Os livros, que comprei estão na mesa",
+          "Ontem, fui, ao mercado"
+        ],
         "c": 1,
         "exp": "Vocativo \"João\" entre vírgulas. As outras: erram entre sujeito-verbo, omitem segunda vírgula da explicativa, ou separam adjunto curto sem necessidade."
       }
@@ -73,7 +98,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual está grafada conforme o Acordo Ortográfico vigente?",
-        "o": ["Idéia", "Frequência", "Vôo", "Auto-escola"],
+        "o": [
+          "Idéia",
+          "Frequência",
+          "Vôo",
+          "Auto-escola"
+        ],
         "c": 1,
         "exp": "Frequência (sem trema). As outras: ideia, voo, autoescola — todas atualizadas pelo Acordo de 1990 vigente desde 2009."
       }
@@ -85,7 +115,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual frase está em norma culta?",
-        "o": ["Me diga a verdade", "Não diga-me a verdade", "Diga-me a verdade", "Não dir-te-ei a verdade"],
+        "o": [
+          "Me diga a verdade",
+          "Não diga-me a verdade",
+          "Diga-me a verdade",
+          "Não dir-te-ei a verdade"
+        ],
         "c": 2,
         "exp": "\"Diga-me\" — verbo no início da frase exige ênclise. \"Me diga\" é coloquial. \"Não diga-me\" e \"não dir-te-ei\" violam regra de palavra atrativa (negação)."
       }
@@ -97,7 +132,12 @@
       "xp": 40,
       "quiz": {
         "q": "Qual frase está em norma culta?",
-        "o": ["Se eu ver ele, aviso", "Se eu vir ele, aviso", "Se eu vejo ele, aviso", "Se eu visse ele, aviso"],
+        "o": [
+          "Se eu ver ele, aviso",
+          "Se eu vir ele, aviso",
+          "Se eu vejo ele, aviso",
+          "Se eu visse ele, aviso"
+        ],
         "c": 1,
         "exp": "Futuro do subjuntivo de \"ver\" é \"vir\". \"Se eu vir\" (futuro do subjuntivo) + \"aviso\" (presente como futuro)."
       }
@@ -109,7 +149,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual frase é gerundismo (vício a evitar)?",
-        "o": ["Estou estudando agora", "Vou estudar amanhã", "Vou estar estudando amanhã", "Estudo todo dia"],
+        "o": [
+          "Estou estudando agora",
+          "Vou estudar amanhã",
+          "Vou estar estudando amanhã",
+          "Estudo todo dia"
+        ],
         "c": 2,
         "exp": "\"Vou estar estudando\" é gerundismo — gerúndio composto desnecessário. Prefira \"vou estudar\" ou \"estudarei\"."
       }
@@ -121,10 +166,16 @@
       "xp": 45,
       "quiz": {
         "q": "Qual é a melhor estratégia para escrever bem na norma culta?",
-        "o": ["Decorar gramática inteira", "Aplicar checklist e revisar em 3 passes", "Confiar no corretor automático", "Evitar palavras difíceis"],
+        "o": [
+          "Decorar gramática inteira",
+          "Aplicar checklist e revisar em 3 passes",
+          "Confiar no corretor automático",
+          "Evitar palavras difíceis"
+        ],
         "c": 1,
         "exp": "Método (checklist + revisão em 3 passes: sentido, gramática, voz alta) é mais eficaz que decorar regras isoladas ou confiar em automação."
       }
     }
-  ]
+  ],
+  "order": 112
 }

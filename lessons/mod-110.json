@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual o antídoto principal contra groupthink?",
-        "o": ["Tornar grupo mais coeso", "Estimular dissenso e perspectivas externas", "Aumentar pressão por consenso", "Reduzir tempo de discussão"],
+        "o": [
+          "Tornar grupo mais coeso",
+          "Estimular dissenso e perspectivas externas",
+          "Aumentar pressão por consenso",
+          "Reduzir tempo de discussão"
+        ],
         "c": 1,
         "exp": "Groupthink alimenta-se da coesão excessiva. Trazer dissenso (advogado do diabo) e opiniões de fora rompe a ilusão de unanimidade."
       }
@@ -25,7 +30,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual o efeito de ter 1 só dissidente sobre a pressão de conformidade?",
-        "o": ["Aumenta pressão", "Reduz conformidade dramaticamente — de ~75% para 5-10%", "Não muda nada", "Depende do grupo"],
+        "o": [
+          "Aumenta pressão",
+          "Reduz conformidade dramaticamente — de ~75% para 5-10%",
+          "Não muda nada",
+          "Depende do grupo"
+        ],
         "c": 1,
         "exp": "Asch mostrou: basta um aliado para a conformidade colapsar. Por isso solidariedade entre dissidentes é tão valiosa em qualquer contexto."
       }
@@ -37,7 +47,12 @@
       "xp": 30,
       "quiz": {
         "q": "O que Hannah Arendt chamou de \"banalidade do mal\"?",
-        "o": ["Mal sem consequências", "O mal extraordinário pode ser feito por pessoas ordinárias seguindo ordens sem refletir", "Pequenos atos cotidianos imorais", "Maldade infantil"],
+        "o": [
+          "Mal sem consequências",
+          "O mal extraordinário pode ser feito por pessoas ordinárias seguindo ordens sem refletir",
+          "Pequenos atos cotidianos imorais",
+          "Maldade infantil"
+        ],
         "c": 1,
         "exp": "Arendt observou em Eichmann: não monstro patológico, mas burocrata sem reflexão moral. O mal sistêmico opera frequentemente assim — pessoas comuns cumprindo ordens."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual a melhor defesa contra a tática \"foot-in-the-door\" (pedido pequeno → grande)?",
-        "o": ["Recusar sempre o primeiro pedido", "Reconhecer que o primeiro sim não obriga ao segundo — avalie cada pedido em seu mérito", "Aumentar o pedido inicial", "Não conversar com vendedores"],
+        "o": [
+          "Recusar sempre o primeiro pedido",
+          "Reconhecer que o primeiro sim não obriga ao segundo — avalie cada pedido em seu mérito",
+          "Aumentar o pedido inicial",
+          "Não conversar com vendedores"
+        ],
         "c": 1,
         "exp": "Coerência interna nos faz cumprir o segundo pedido por já termos dito sim ao primeiro. A defesa é desativar essa pressão e avaliar isoladamente."
       }
@@ -61,7 +81,12 @@
       "xp": 30,
       "quiz": {
         "q": "Segundo a Hipótese do Contato de Allport, contato entre grupos reduz preconceito quando há:",
-        "o": ["Apenas convivência forçada", "Status igual, objetivos comuns, cooperação e apoio social", "Apenas educação formal", "Separação respeitosa"],
+        "o": [
+          "Apenas convivência forçada",
+          "Status igual, objetivos comuns, cooperação e apoio social",
+          "Apenas educação formal",
+          "Separação respeitosa"
+        ],
         "c": 1,
         "exp": "Allport identificou as 4 condições. Sem elas, contato pode até piorar (gera atrito). Com elas, reduz preconceito significativamente."
       }
@@ -73,7 +98,12 @@
       "xp": 30,
       "quiz": {
         "q": "Como combater a difusão de responsabilidade em emergência pública?",
-        "o": ["Gritar mais alto", "Olhar para uma pessoa específica e designar responsabilidade clara", "Esperar autoridade", "Filmar primeiro"],
+        "o": [
+          "Gritar mais alto",
+          "Olhar para uma pessoa específica e designar responsabilidade clara",
+          "Esperar autoridade",
+          "Filmar primeiro"
+        ],
         "c": 1,
         "exp": "Apontar para 1 pessoa concreta com pedido específico (\"você, de camisa azul, chame SAMU\") quebra a difusão — alguém é responsabilizado por nome."
       }
@@ -85,7 +115,12 @@
       "xp": 30,
       "quiz": {
         "q": "Segundo Gottman, quais 4 padrões prevêem divórcio com alta acurácia?",
-        "o": ["Diferenças religiosas, financeiras, culturais, sexuais", "Crítica, desprezo, defensividade, bloqueio", "Brigas, ciúmes, insegurança, infidelidade", "Falta de paixão, dinheiro, tempo, comunicação"],
+        "o": [
+          "Diferenças religiosas, financeiras, culturais, sexuais",
+          "Crítica, desprezo, defensividade, bloqueio",
+          "Brigas, ciúmes, insegurança, infidelidade",
+          "Falta de paixão, dinheiro, tempo, comunicação"
+        ],
         "c": 1,
         "exp": "Os 4 cavaleiros: crítica (atacar caráter), desprezo (rebaixar), defensividade (vitimar) e bloqueio (calar/sair). Padrões repetidos prevêem fim com 90% de precisão."
       }
@@ -97,7 +132,12 @@
       "xp": 25,
       "quiz": {
         "q": "Por que estudo do \"bom samaritano\" mostrou que seminaristas com pressa não pararam para ajudar pessoa caída?",
-        "o": ["Egoísmo religioso", "Pressa reduz disposição para ajudar mesmo em pessoas com valores altos", "Não viram a pessoa", "Eram impostores"],
+        "o": [
+          "Egoísmo religioso",
+          "Pressa reduz disposição para ajudar mesmo em pessoas com valores altos",
+          "Não viram a pessoa",
+          "Eram impostores"
+        ],
         "c": 1,
         "exp": "Pressão de tempo é um dos fatores que mais reduz comportamento pró-social. Mostra que situação modula valores — mesmo em pessoas comprometidas com ajudar."
       }
@@ -109,7 +149,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual o principal mecanismo do \"efeito de verdade ilusória\"?",
-        "o": ["Argumentos lógicos fortes", "Repetição da afirmação ao longo do tempo", "Autoridade da fonte", "Beleza estética"],
+        "o": [
+          "Argumentos lógicos fortes",
+          "Repetição da afirmação ao longo do tempo",
+          "Autoridade da fonte",
+          "Beleza estética"
+        ],
         "c": 1,
         "exp": "Hasher e Goldstein mostraram: repetição faz afirmações parecerem verdadeiras, mesmo quando se sabe serem falsas. Por isso slogans e propaganda funcionam."
       }
@@ -121,10 +166,16 @@
       "xp": 40,
       "quiz": {
         "q": "Por que sociedades livres precisam de pessoas capazes de discordar publicamente?",
-        "o": ["Para gerar mais conflito", "Porque conformidade silenciosa permite que erros (e injustiças) se perpetuem sem freio", "Para mostrar superioridade intelectual", "Para vencer eleições"],
+        "o": [
+          "Para gerar mais conflito",
+          "Porque conformidade silenciosa permite que erros (e injustiças) se perpetuem sem freio",
+          "Para mostrar superioridade intelectual",
+          "Para vencer eleições"
+        ],
         "c": 1,
         "exp": "Sem dissenso, autoridade ilegítima e ideias erradas avançam sem questionamento. Discordância respeitosa é função cívica essencial."
       }
     }
-  ]
+  ],
+  "order": 110
 }

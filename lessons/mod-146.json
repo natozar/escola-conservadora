@@ -1,9 +1,9 @@
 {
-  "id": 146,
-  "title": "Falácias e Manipulação Argumentativa",
+  "id": "argumentacao-defesa-logica",
+  "title": "Argumentação e Defesa Lógica",
   "icon": "⚠️",
   "color": "rose",
-  "desc": "Catálogo das principais falácias formais e informais — com exemplos modernos. Como detectar e responder.",
+  "desc": "Síntese: como construir argumentos sólidos e se defender de manipulações no dia a dia.",
   "discipline": "logica",
   "lessons": [
     {
@@ -176,5 +176,6 @@
         "exp": "Lógica é higiene mental para você primeiro. Em debate, perguntar \"você quis dizer X?\" é mais útil que rotular o outro."
       }
     }
-  ]
+  ],
+  "order": 4
 }

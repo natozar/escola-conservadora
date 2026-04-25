@@ -2,7 +2,7 @@
   "id": 166,
   "title": "Criptoativos",
   "icon": "₿",
-  "color":"mint",
+  "color": "mint",
   "desc": "Bitcoin, Ethereum, blockchain, stablecoins, segurança, tributação no Brasil e a tese austríaca sobre dinheiro descentralizado. Entender antes de comprar — ou criticar.",
   "discipline": "investimentos",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "Mises e Hayek argumentaram que monopólio estatal sobre moeda gera incentivo permanente para inflação: governo financia gastos imprimindo, em vez de aumentar imposto explícito (impopular). Resultado é transferência silenciosa de riqueza de poupadores (perdem poder de compra) para devedores (incluindo o Estado). Bitcoin, na visão austríaca, é primeira tentativa moderna de quebrar esse monopólio com base tecnológica."
       }
     }
-  ]
+  ],
+  "order": 166
 }

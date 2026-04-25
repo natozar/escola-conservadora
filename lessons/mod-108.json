@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual o conceito que Kristin Neff propõe como mais saudável que \"autoestima alta\"?",
-        "o": ["Autoconfiança absoluta", "Autocompaixão", "Autocrítica produtiva", "Autoexigência"],
+        "o": [
+          "Autoconfiança absoluta",
+          "Autocompaixão",
+          "Autocrítica produtiva",
+          "Autoexigência"
+        ],
         "c": 1,
         "exp": "Autocompaixão (tratar-se com gentileza na falha) é mais estável que autoestima inflada, que é frágil quando ameaçada."
       }
@@ -25,7 +30,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual a diferença essencial entre valor e meta?",
-        "o": ["Valor é mais difícil de atingir", "Meta tem fim; valor é direção contínua", "Valor é interno; meta é externa", "São sinônimos"],
+        "o": [
+          "Valor é mais difícil de atingir",
+          "Meta tem fim; valor é direção contínua",
+          "Valor é interno; meta é externa",
+          "São sinônimos"
+        ],
         "c": 1,
         "exp": "Meta tem ponto final mensurável (\"correr 10km\"). Valor é direção que orienta a vida toda (\"cuidar da saúde\")."
       }
@@ -37,7 +47,12 @@
       "xp": 35,
       "quiz": {
         "q": "Segundo Viktor Frankl, o que sustenta a pessoa em momentos de extrema dificuldade?",
-        "o": ["Resistência física", "Otimismo natural", "Ter um \"porquê\" — sentido", "Apoio externo constante"],
+        "o": [
+          "Resistência física",
+          "Otimismo natural",
+          "Ter um \"porquê\" — sentido",
+          "Apoio externo constante"
+        ],
         "c": 2,
         "exp": "Frankl, sobrevivente de campo de concentração, formulou: \"quem tem um porquê, suporta quase qualquer como\". Sentido é o que sustenta."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "Segundo Jeff Bezos, qual a diferença entre \"portas de uma mão\" e \"de duas mãos\"?",
-        "o": ["Custo financeiro", "Reversibilidade — uma é irreversível, a outra reversível", "Quem decide", "Importância pessoal"],
+        "o": [
+          "Custo financeiro",
+          "Reversibilidade — uma é irreversível, a outra reversível",
+          "Quem decide",
+          "Importância pessoal"
+        ],
         "c": 1,
         "exp": "Decisões reversíveis (porta de duas mãos) podem ser rápidas. Irreversíveis (uma mão) exigem mais cuidado e informação."
       }
@@ -61,7 +81,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual o uso mais saudável da inveja, segundo a aula?",
-        "o": ["Combustível para superar o invejado", "Sinal sobre o que você valoriza e ainda não tem", "Algo que deve ser eliminado completamente", "Fraqueza moral a ser corrigida"],
+        "o": [
+          "Combustível para superar o invejado",
+          "Sinal sobre o que você valoriza e ainda não tem",
+          "Algo que deve ser eliminado completamente",
+          "Fraqueza moral a ser corrigida"
+        ],
         "c": 1,
         "exp": "Inveja específica é informação: aponta o valor que você ainda não está honrando. Use como bússola, não como ressentimento."
       }
@@ -73,7 +98,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual a diferença entre mindset fixo e de crescimento, segundo Carol Dweck?",
-        "o": ["Idade do indivíduo", "Capacidades inatas vs. capacidades desenvolvidas com esforço", "Inteligência emocional", "Origem socioeconômica"],
+        "o": [
+          "Idade do indivíduo",
+          "Capacidades inatas vs. capacidades desenvolvidas com esforço",
+          "Inteligência emocional",
+          "Origem socioeconômica"
+        ],
         "c": 1,
         "exp": "Mindset fixo vê habilidades como dom inato; de crescimento vê como desenvolvíveis. O segundo busca desafios e aprende com erro."
       }
@@ -85,7 +115,12 @@
       "xp": 35,
       "quiz": {
         "q": "Segundo Aristóteles, como se adquire virtude?",
-        "o": ["Por inspiração divina", "Pela prática repetida (hábito)", "Por estudo teórico apenas", "Por bons sentimentos"],
+        "o": [
+          "Por inspiração divina",
+          "Pela prática repetida (hábito)",
+          "Por estudo teórico apenas",
+          "Por bons sentimentos"
+        ],
         "c": 1,
         "exp": "Aristóteles é claro: \"tornamo-nos justos praticando atos justos\". Virtude é hábito formado, não dom inato nem teoria."
       }
@@ -97,7 +132,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual a diferença entre revisão saudável e ruminação?",
-        "o": ["Tempo gasto", "Revisão é orientada à ação; ruminação é repetição estéril", "Quem orienta", "Local em que se faz"],
+        "o": [
+          "Tempo gasto",
+          "Revisão é orientada à ação; ruminação é repetição estéril",
+          "Quem orienta",
+          "Local em que se faz"
+        ],
         "c": 1,
         "exp": "Revisão termina em decisão concreta (\"farei X\"). Ruminação volta repetidamente sobre os mesmos pensamentos sem agir."
       }
@@ -109,7 +149,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual o sentido da prática de \"memento mori\" para os estoicos?",
-        "o": ["Cultivar tristeza", "Lembrar da finitude para clarear prioridades e cultivar gratidão", "Preparar-se para o pós-vida", "Diminuir apego à família"],
+        "o": [
+          "Cultivar tristeza",
+          "Lembrar da finitude para clarear prioridades e cultivar gratidão",
+          "Preparar-se para o pós-vida",
+          "Diminuir apego à família"
+        ],
         "c": 1,
         "exp": "Pensar na morte regularmente produz clareza sobre o que importa, gratidão pelo presente e coragem para agir agora — não morbidez."
       }
@@ -121,10 +166,16 @@
       "xp": 40,
       "quiz": {
         "q": "Segundo a aula, qual é o erro mais comum em planos de mudança pessoal?",
-        "o": ["Falta de motivação", "Começar pelos hábitos sem alinhar com identidade, valores e propósito", "Excesso de planejamento", "Falta de talento"],
+        "o": [
+          "Falta de motivação",
+          "Começar pelos hábitos sem alinhar com identidade, valores e propósito",
+          "Excesso de planejamento",
+          "Falta de talento"
+        ],
         "c": 1,
         "exp": "Hábitos isolados não pegam. Mudança real começa em identidade → valores → propósito → metas → hábitos. Sem por quê, o hábito morre."
       }
     }
-  ]
+  ],
+  "order": 108
 }

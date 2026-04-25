@@ -6,6 +6,17 @@ const ALLOWED_ORIGINS = [
   "https://natozar.github.io",
 ];
 
+function isOriginAllowed(req: Request): boolean {
+  const origin = req.headers.get("origin") || "";
+  const referer = req.headers.get("referer") || "";
+  if (!origin && !referer) return true;
+  if (origin && ALLOWED_ORIGINS.includes(origin)) return true;
+  if (referer) {
+    try { const u = new URL(referer); if (ALLOWED_ORIGINS.includes(u.origin)) return true; } catch {}
+  }
+  return false;
+}
+
 function cors(req: Request) {
   const origin = req.headers.get("origin") || "";
   const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -19,6 +30,12 @@ function cors(req: Request) {
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: cors(req) });
+  }
+
+  if (!isOriginAllowed(req)) {
+    return new Response(JSON.stringify({ error: "origin_blocked" }), {
+      status: 403, headers: { "Content-Type": "application/json" }
+    });
   }
 
   try {

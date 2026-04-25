@@ -2,7 +2,7 @@
   "id": 165,
   "title": "ETFs e Fundos",
   "icon": "🔄",
-  "color":"mint",
+  "color": "mint",
   "desc": "BOVA11, IVVB11, ETFs internacionais, fundos multimercado, taxas, come-cotas, diversificação geográfica e a discussão entre gestão ativa e passiva.",
   "discipline": "investimentos",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "ETFs brasileiros geralmente reinvestem os dividendos das ações que compõem a carteira. O retorno do dividendo aparece embutido na valorização da cota, em vez de ser distribuído em dinheiro. Isso simplifica a gestão e amplifica o efeito dos juros compostos. Em ETFs estrangeiros, alguns distribuem dividendos trimestralmente."
       }
     }
-  ]
+  ],
+  "order": 165
 }

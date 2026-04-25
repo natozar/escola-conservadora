@@ -13,7 +13,12 @@
       "xp": 20,
       "quiz": {
         "q": "Em 2026 (ano-base 2025), qual o limite de rendimentos tributáveis que obriga a declarar IR?",
-        "o": ["R$ 28.559,70", "R$ 30.639,90", "R$ 33.888,00", "R$ 40.000,00"],
+        "o": [
+          "R$ 28.559,70",
+          "R$ 30.639,90",
+          "R$ 33.888,00",
+          "R$ 40.000,00"
+        ],
         "c": 2,
         "exp": "A partir de 2026, rendimentos tributáveis acima de R$ 33.888,00 no ano obrigam à declaração, refletindo a atualização da tabela do IR."
       }
@@ -25,7 +30,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quando vale a pena escolher o modelo completo em vez do simplificado?",
-        "o": ["Sempre que tiver dependentes", "Quando as deduções reais somarem mais que R$ 16.754,34", "Apenas se for autônomo", "Quando ganhar acima de R$ 100 mil/ano"],
+        "o": [
+          "Sempre que tiver dependentes",
+          "Quando as deduções reais somarem mais que R$ 16.754,34",
+          "Apenas se for autônomo",
+          "Quando ganhar acima de R$ 100 mil/ano"
+        ],
         "c": 1,
         "exp": "O modelo completo compensa quando a soma das deduções reais (dependentes, saúde, educação, previdência) supera o teto do desconto simplificado. Abaixo disso, o simplificado é melhor."
       }
@@ -37,7 +47,12 @@
       "xp": 20,
       "quiz": {
         "q": "Um filho universitário de 23 anos que trabalhou e recebeu R$ 20.000 em 2025. Vale a pena incluir como dependente?",
-        "o": ["Sim, sempre. Garante R$ 2.275 de dedução", "Não necessariamente. Os R$ 20.000 entrariam na base do declarante e podem aumentar o IR total", "Só se ele for menor de 21 anos", "Só se ele estudar em escola pública"],
+        "o": [
+          "Sim, sempre. Garante R$ 2.275 de dedução",
+          "Não necessariamente. Os R$ 20.000 entrariam na base do declarante e podem aumentar o IR total",
+          "Só se ele for menor de 21 anos",
+          "Só se ele estudar em escola pública"
+        ],
         "c": 1,
         "exp": "Incluir dependente com renda significativa faz os rendimentos dele somarem à sua base. Em muitos casos, o imposto extra supera a economia. Fazer a conta é essencial."
       }
@@ -49,7 +64,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual dessas despesas NÃO pode ser deduzida no IR?",
-        "o": ["Plano de saúde familiar", "Mensalidade de faculdade do filho", "Curso de inglês", "Contribuição ao PGBL (até 12% da renda)"],
+        "o": [
+          "Plano de saúde familiar",
+          "Mensalidade de faculdade do filho",
+          "Curso de inglês",
+          "Contribuição ao PGBL (até 12% da renda)"
+        ],
         "c": 2,
         "exp": "Cursos livres como inglês, música e informática não são dedutíveis. A lei só permite deduzir educação formal (infantil, fundamental, médio, técnico, superior)."
       }
@@ -61,7 +81,12 @@
       "xp": 20,
       "quiz": {
         "q": "Quem recebe aluguel de pessoa física acima de R$ 2.259,20/mês deve:",
-        "o": ["Declarar apenas no IR anual em abril", "Pagar mensalmente o Carnê-Leão e depois declarar no anual", "Nada, aluguel é isento", "Apenas preencher DIRPF e esquecer"],
+        "o": [
+          "Declarar apenas no IR anual em abril",
+          "Pagar mensalmente o Carnê-Leão e depois declarar no anual",
+          "Nada, aluguel é isento",
+          "Apenas preencher DIRPF e esquecer"
+        ],
         "c": 1,
         "exp": "Aluguel recebido de pessoa física acima do limite de isenção mensal exige pagamento mensal via Carnê-Leão. Deixar para a declaração anual gera multa e juros."
       }
@@ -73,7 +98,12 @@
       "xp": 20,
       "quiz": {
         "q": "Você comprou um imóvel em 2018 por R$ 300.000. Hoje ele vale R$ 500.000 no mercado. Qual valor entra na ficha de Bens e Direitos?",
-        "o": ["R$ 500.000 (valor de mercado)", "R$ 400.000 (média)", "R$ 300.000 (valor de aquisição)", "O valor do IPTU"],
+        "o": [
+          "R$ 500.000 (valor de mercado)",
+          "R$ 400.000 (média)",
+          "R$ 300.000 (valor de aquisição)",
+          "O valor do IPTU"
+        ],
         "c": 2,
         "exp": "A ficha de Bens e Direitos registra o valor de aquisição, não o de mercado. Valorização só afeta cálculo no momento da venda (ganho de capital)."
       }
@@ -85,7 +115,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual a alíquota de IR sobre ganho de capital na venda de imóveis (fora das isenções)?",
-        "o": ["5%", "10%", "15%", "22,5%"],
+        "o": [
+          "5%",
+          "10%",
+          "15%",
+          "22,5%"
+        ],
         "c": 2,
         "exp": "A alíquota base é 15% sobre o ganho (lucro). Há alíquotas progressivas maiores para ganhos muito altos, mas 15% é a regra para a maioria."
       }
@@ -97,7 +132,12 @@
       "xp": 20,
       "quiz": {
         "q": "Você caiu na malha fina por esquecer de declarar um freela de R$ 5.000. Qual a melhor ação?",
-        "o": ["Ignorar e torcer para não chegar intimação", "Retificar a declaração espontaneamente incluindo o valor", "Esperar a Receita entrar em contato para decidir", "Contestar dizendo que não recebeu"],
+        "o": [
+          "Ignorar e torcer para não chegar intimação",
+          "Retificar a declaração espontaneamente incluindo o valor",
+          "Esperar a Receita entrar em contato para decidir",
+          "Contestar dizendo que não recebeu"
+        ],
         "c": 1,
         "exp": "Retificadora espontânea evita multa de ofício de 75% sobre o imposto. Você paga apenas a diferença de IR com juros e multa pequena. É sempre mais barato corrigir antes da Receita autuar."
       }
@@ -109,7 +149,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual estratégia pode adiantar sua restituição em até 3 meses?",
-        "o": ["Declarar no último dia do prazo", "Entregar cedo usando a pré-preenchida e escolhendo Pix", "Pedir parcelamento", "Não declarar dependentes"],
+        "o": [
+          "Declarar no último dia do prazo",
+          "Entregar cedo usando a pré-preenchida e escolhendo Pix",
+          "Pedir parcelamento",
+          "Não declarar dependentes"
+        ],
         "c": 1,
         "exp": "Prioridade legal para quem usa pré-preenchida e recebe via Pix, somada à entrega cedo, pode colocar o contribuinte no primeiro lote (maio) em vez do último (setembro)."
       }
@@ -121,10 +166,16 @@
       "xp": 25,
       "quiz": {
         "q": "Qual é o principal benefício de montar uma pasta do IR em janeiro e alimentá-la durante o ano?",
-        "o": ["Receber restituição maior automaticamente", "Evitar correria em março, reduzir erros e garantir todas as deduções legítimas", "Isenção de imposto", "Descontos no valor do IR a pagar"],
+        "o": [
+          "Receber restituição maior automaticamente",
+          "Evitar correria em março, reduzir erros e garantir todas as deduções legítimas",
+          "Isenção de imposto",
+          "Descontos no valor do IR a pagar"
+        ],
         "c": 1,
         "exp": "Organizar durante o ano não muda a lei, mas garante que nenhuma dedução legítima seja perdida, reduz erros na digitação e elimina o estresse da temporada."
       }
     }
-  ]
+  ],
+  "order": 96
 }

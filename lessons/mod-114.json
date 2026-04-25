@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Qual o tipo predominante em uma redação de vestibular sobre desigualdade social?",
-        "o": ["Narrativo", "Descritivo", "Dissertativo-argumentativo", "Injuntivo"],
+        "o": [
+          "Narrativo",
+          "Descritivo",
+          "Dissertativo-argumentativo",
+          "Injuntivo"
+        ],
         "c": 2,
         "exp": "Redação de vestibular pede tese + argumentos + evidências + conclusão. Tipo dissertativo-argumentativo, gênero redação acadêmica."
       }
@@ -25,7 +30,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a diferença entre tese e argumento?",
-        "o": ["São sinônimos", "Tese é a afirmação central; argumento é a razão que a sustenta", "Argumento é a afirmação central; tese é a evidência", "Tese vem depois do argumento sempre"],
+        "o": [
+          "São sinônimos",
+          "Tese é a afirmação central; argumento é a razão que a sustenta",
+          "Argumento é a afirmação central; tese é a evidência",
+          "Tese vem depois do argumento sempre"
+        ],
         "c": 1,
         "exp": "Tese é a afirmação central que o autor defende. Argumento é cada razão oferecida para sustentar a tese. Evidência é a prova que sustenta cada argumento."
       }
@@ -37,7 +47,12 @@
       "xp": 35,
       "quiz": {
         "q": "Em \"Maria parou de fumar\", o que é pressuposto?",
-        "o": ["Maria está com saúde melhor", "Maria fumava antes", "Maria nunca fumou", "Maria recomenda parar de fumar"],
+        "o": [
+          "Maria está com saúde melhor",
+          "Maria fumava antes",
+          "Maria nunca fumou",
+          "Maria recomenda parar de fumar"
+        ],
         "c": 1,
         "exp": "\"Parar de\" pressupõe que a ação acontecia antes. \"Maria parou de fumar\" pressupõe \"Maria fumava\" — pressuposto resiste mesmo na negação."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "Em \"Você não pode criticar a economia, você não é economista\", qual falácia foi cometida?",
-        "o": ["Espantalho", "Ad hominem", "Apelo à autoridade falsa", "Falsa dicotomia"],
+        "o": [
+          "Espantalho",
+          "Ad hominem",
+          "Apelo à autoridade falsa",
+          "Falsa dicotomia"
+        ],
         "c": 1,
         "exp": "Ad hominem — ataca a pessoa (não-economista) em vez de responder ao argumento. Argumento sobre economia pode ser válido independentemente da formação."
       }
@@ -61,7 +81,12 @@
       "xp": 35,
       "quiz": {
         "q": "Em análise de discurso, qual é a importância de identificar o veículo onde o texto foi publicado?",
-        "o": ["Para invalidar o texto se for veículo viesado", "Para considerar revisão editorial, tradição e viés ao avaliar credibilidade", "Para definir se gostamos do autor", "Não tem importância — só conteúdo importa"],
+        "o": [
+          "Para invalidar o texto se for veículo viesado",
+          "Para considerar revisão editorial, tradição e viés ao avaliar credibilidade",
+          "Para definir se gostamos do autor",
+          "Não tem importância — só conteúdo importa"
+        ],
         "c": 1,
         "exp": "Veículo informa contexto: revisão editorial, tradição de qualidade, viés conhecido. Não invalida automaticamente, mas calibra o cuidado da leitura."
       }
@@ -73,7 +98,12 @@
       "xp": 40,
       "quiz": {
         "q": "O que é \"enquadramento\" (framing) em comunicação?",
-        "o": ["Editar a foto para aparecer melhor", "O ângulo escolhido para apresentar um fato, que muda como é percebido", "Tipo de gráfico em estatística", "Estrutura de parágrafo argumentativo"],
+        "o": [
+          "Editar a foto para aparecer melhor",
+          "O ângulo escolhido para apresentar um fato, que muda como é percebido",
+          "Tipo de gráfico em estatística",
+          "Estrutura de parágrafo argumentativo"
+        ],
         "c": 1,
         "exp": "Enquadramento (Goffman, Lakoff) é a forma de apresentar fato. Mesmos dados em enquadramentos diferentes geram reações diferentes — sem alterar a verdade dos números."
       }
@@ -85,7 +115,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a função principal de um resumo?",
-        "o": ["Apresentar opinião do leitor sobre o texto", "Comprimir o conteúdo essencial do original com fidelidade", "Copiar as melhores frases do autor", "Discutir as fraquezas do texto"],
+        "o": [
+          "Apresentar opinião do leitor sobre o texto",
+          "Comprimir o conteúdo essencial do original com fidelidade",
+          "Copiar as melhores frases do autor",
+          "Discutir as fraquezas do texto"
+        ],
         "c": 1,
         "exp": "Resumo é fidelidade ao original em forma condensada (10-25% do tamanho). Opinião pessoal vai na resenha, não no resumo."
       }
@@ -97,7 +132,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é o principal erro ao tomar notas durante leitura?",
-        "o": ["Usar caneta colorida demais", "Copiar trechos inteiros sem processar", "Anotar em margens do livro", "Usar abreviações"],
+        "o": [
+          "Usar caneta colorida demais",
+          "Copiar trechos inteiros sem processar",
+          "Anotar em margens do livro",
+          "Usar abreviações"
+        ],
         "c": 1,
         "exp": "Cópia sem síntese é tempo gasto sem aprender. Boa anotação reescreve com palavras próprias, força compressão e entendimento."
       }
@@ -109,7 +149,12 @@
       "xp": 35,
       "quiz": {
         "q": "Quais são as 4 perguntas de Adler para fazer após ler um livro?",
-        "o": ["Quando, onde, como, por quê", "Qual o tema, o que o autor diz, é verdadeiro, qual a importância", "O que aprendi, o que esquecerei, o que adoro, o que odeio", "Vale o preço, vale o tempo, vale a recomendação, vale a estante"],
+        "o": [
+          "Quando, onde, como, por quê",
+          "Qual o tema, o que o autor diz, é verdadeiro, qual a importância",
+          "O que aprendi, o que esquecerei, o que adoro, o que odeio",
+          "Vale o preço, vale o tempo, vale a recomendação, vale a estante"
+        ],
         "c": 1,
         "exp": "Adler em How to Read a Book: tema geral, conteúdo detalhado, verdade da tese, importância prática. Sem responder, não absorveu."
       }
@@ -121,10 +166,16 @@
       "xp": 45,
       "quiz": {
         "q": "Em país onde a média de leitura é 5 livros por ano, quem lê 30+ livros com método anual está entre quantos % mais lidos?",
-        "o": ["50%", "20%", "5%", "Menos de 1%"],
+        "o": [
+          "50%",
+          "20%",
+          "5%",
+          "Menos de 1%"
+        ],
         "c": 2,
         "exp": "Aproximadamente 5% segundo Retratos da Leitura no Brasil. Leitura crítica é diferenciador raro com retorno composto: profissional, social e cognitivo."
       }
     }
-  ]
+  ],
+  "order": 114
 }

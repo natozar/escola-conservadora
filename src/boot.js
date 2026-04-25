@@ -12,7 +12,7 @@ const OFFLINE_MODE = false;
 window.OFFLINE_MODE = OFFLINE_MODE;
 
 // DEMO_MODE: app abre sem exigir login. Paywall desabilitado.
-const DEMO_MODE = true;
+const DEMO_MODE = false;
 window.DEMO_MODE = DEMO_MODE;
 
 // ============================================================
@@ -92,10 +92,19 @@ function enforceAgeGate(){
   if(S.birthYear){
     var today=new Date();
     var age=today.getFullYear()-S.birthYear;
-    if(age<18){S.ageGroup='blocked';window.save()}
+    if(age<18){
+      var wasAdult=S.ageGroup==='adult';
+      S.ageGroup='blocked';window.save();
+      if(wasAdult&&typeof window.reportError==='function'){
+        window.reportError('age_tamper',{message:'birthYear<18 mas ageGroup=adult',details:{birthYear:S.birthYear,age:age}});
+      }
+    }
   }
   // Anti-tamper: if CPF-verified as blocked, prevent any override
   if(S.verificationMethod==='cpf_serpro'&&S.ageGroup==='blocked'){
+    if(typeof window.reportError==='function'){
+      window.reportError('age_tamper',{message:'CPF Serpro blocked — tentativa de override',details:{verificationMethod:S.verificationMethod}});
+    }
     _showAgeBlockScreen();
     return true;
   }

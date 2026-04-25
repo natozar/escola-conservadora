@@ -5,8 +5,11 @@
 
 // Phase 0: Safe DOM proxy (must run first — patches document.getElementById)
 import './core/dom.js';
+import './core/domain-guard.js';   // verifica hostname autorizado (anti-cloning)
+import './core/error-reporter.js'; // reportError, flushErrorQueue → window + handlers globais
 
 // Phase 1: Core data structures
+import './core/integrity.js';   // verifyContent, loadIntegrityManifest → window (must precede data.js)
 import './core/state.js';       // S, SK, def, load, save → window
 import './core/data.js';        // M, loadLessons, loadFullModule, preloadModules → window
 import './core/disciplines.js'; // DISCIPLINES, colors, accents → window

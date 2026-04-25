@@ -2,7 +2,7 @@
   "id": 168,
   "title": "Princípios da Produtividade",
   "icon": "⚡",
-  "color":"lavender",
+  "color": "lavender",
   "desc": "Os fundamentos que separam quem produz de quem só fica ocupado. Pareto, Parkinson, Eisenhower, fadiga decisória e a diferença entre eficiência e eficácia.",
   "discipline": "produtividade",
   "lessons": [
@@ -176,5 +176,6 @@
         "exp": "Horas, emails e reuniões medem ocupação, não entrega. O que importa é o que existe ao final do período que não existia antes: textos escritos, problemas resolvidos, decisões tomadas, projetos avançados. Drucker e a Lei de Goodhart deixam claro: medir mal piora o que se mede."
       }
     }
-  ]
+  ],
+  "order": 168
 }

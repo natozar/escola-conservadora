@@ -13,7 +13,12 @@
       "xp": 20,
       "quiz": {
         "q": "Em qual modalidade o empregado pode sacar 80% do FGTS e receber 50% do aviso prévio?",
-        "o": ["Demissão sem justa causa", "Pedido de demissão", "Rescisão por acordo (Lei 13.467/2017)", "Justa causa"],
+        "o": [
+          "Demissão sem justa causa",
+          "Pedido de demissão",
+          "Rescisão por acordo (Lei 13.467/2017)",
+          "Justa causa"
+        ],
         "c": 2,
         "exp": "A rescisão por acordo (criada pela reforma de 2017) permite saque de 80% do FGTS, multa de 20% e aviso prévio reduzido pela metade. Mas não dá direito ao seguro-desemprego."
       }
@@ -25,7 +30,12 @@
       "xp": 20,
       "quiz": {
         "q": "Empregado com 6 anos completos de empresa é demitido sem justa causa. Quantos dias de aviso prévio ele tem direito?",
-        "o": ["30 dias", "33 dias", "48 dias", "60 dias"],
+        "o": [
+          "30 dias",
+          "33 dias",
+          "48 dias",
+          "60 dias"
+        ],
         "c": 2,
         "exp": "30 dias + (3 × 6 anos completos) = 48 dias. A regra de 3 dias por ano completo de empresa, até o limite de 90 dias, vale desde a Lei 12.506/2011."
       }
@@ -37,7 +47,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual desses elementos é essencial para validar uma demissão por justa causa?",
-        "o": ["Apenas a vontade do empregador", "Imediatidade entre a falta e a aplicação da punição", "Decisão da diretoria", "Aprovação do RH"],
+        "o": [
+          "Apenas a vontade do empregador",
+          "Imediatidade entre a falta e a aplicação da punição",
+          "Decisão da diretoria",
+          "Aprovação do RH"
+        ],
         "c": 1,
         "exp": "A imediatidade é requisito essencial. Empresa que demora a aplicar justa causa após descobrir a falta perde o direito por \"perdão tácito\". Outros requisitos: tipicidade, proporcionalidade, prova concreta."
       }
@@ -49,7 +64,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual o impacto do aviso prévio indenizado no cálculo do 13º proporcional?",
-        "o": ["Não tem impacto", "Adiciona meses ao cálculo do 13º conforme o aviso projetar a data de saída", "Reduz pela metade", "Anula o 13º"],
+        "o": [
+          "Não tem impacto",
+          "Adiciona meses ao cálculo do 13º conforme o aviso projetar a data de saída",
+          "Reduz pela metade",
+          "Anula o 13º"
+        ],
         "c": 1,
         "exp": "O aviso prévio indenizado projeta a data de término do contrato. Cada mês de aviso projetado adiciona 1/12 ao 13º proporcional. Erro comum: empresas calculam só pelos meses efetivos, sem o aviso."
       }
@@ -61,7 +81,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual o prazo máximo para solicitar o seguro-desemprego após a demissão?",
-        "o": ["30 dias", "60 dias", "120 dias", "180 dias"],
+        "o": [
+          "30 dias",
+          "60 dias",
+          "120 dias",
+          "180 dias"
+        ],
         "c": 2,
         "exp": "O prazo é de 7 a 120 dias após a demissão. Antes de 7 não é aceito, depois de 120 perde o direito. Solicitação pode ser feita online via Portal Emprega Brasil ou app."
       }
@@ -73,7 +98,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual a principal perda do empregado na rescisão por acordo em relação à demissão sem justa causa?",
-        "o": ["Não recebe 13º proporcional", "Perde direito ao seguro-desemprego e a 20% do FGTS", "Não pode sacar nada do FGTS", "Não recebe férias proporcionais"],
+        "o": [
+          "Não recebe 13º proporcional",
+          "Perde direito ao seguro-desemprego e a 20% do FGTS",
+          "Não pode sacar nada do FGTS",
+          "Não recebe férias proporcionais"
+        ],
         "c": 1,
         "exp": "Na rescisão por acordo: aviso reduzido para 50%, multa do FGTS reduzida para 20%, saque do FGTS limitado a 80% e perde direito ao seguro-desemprego. Saldo, 13º e férias proporcionais são integrais."
       }
@@ -85,7 +115,12 @@
       "xp": 20,
       "quiz": {
         "q": "Qual situação caracteriza rescisão indireta clássica?",
-        "o": ["Discussão pontual com gerente", "Atraso reiterado de salário e FGTS por longo período", "Mudança de horário por dia", "Aumento de carga de trabalho temporário"],
+        "o": [
+          "Discussão pontual com gerente",
+          "Atraso reiterado de salário e FGTS por longo período",
+          "Mudança de horário por dia",
+          "Aumento de carga de trabalho temporário"
+        ],
         "c": 1,
         "exp": "Atraso reiterado de salário e FGTS configura descumprimento de obrigação contratual grave, hipótese clara da letra \"d\" do Art. 483 CLT. Pode levar à rescisão indireta com pagamento integral de verbas."
       }
@@ -97,7 +132,12 @@
       "xp": 20,
       "quiz": {
         "q": "Empregada gestante demitida sem justa causa no segundo mês de gravidez. Quanto tempo de estabilidade ela tem ao todo?",
-        "o": ["Apenas até o parto", "Da confirmação da gravidez até 5 meses após o parto", "30 dias", "1 ano após o parto"],
+        "o": [
+          "Apenas até o parto",
+          "Da confirmação da gravidez até 5 meses após o parto",
+          "30 dias",
+          "1 ano após o parto"
+        ],
         "c": 1,
         "exp": "Estabilidade da gestante vai da confirmação da gravidez até 5 meses após o parto (Art. 10, II, b ADCT). Demissão nesse período é nula — reintegração ou indenização pelo período total."
       }
@@ -109,7 +149,12 @@
       "xp": 20,
       "quiz": {
         "q": "Em uma negociação de acordo trabalhista, qual deve ser o primeiro passo do empregado?",
-        "o": ["Aceitar a primeira oferta da empresa", "Calcular o valor real dos seus direitos com precisão antes de negociar", "Pedir 5x mais que o devido", "Recusar qualquer acordo e ir direto ao processo"],
+        "o": [
+          "Aceitar a primeira oferta da empresa",
+          "Calcular o valor real dos seus direitos com precisão antes de negociar",
+          "Pedir 5x mais que o devido",
+          "Recusar qualquer acordo e ir direto ao processo"
+        ],
         "c": 1,
         "exp": "Sem saber o valor real dos seus direitos, qualquer negociação é no escuro. Cálculo trabalhista preciso (sindicato, contador, advogado) é o ponto de partida para definir piso e teto da negociação."
       }
@@ -121,10 +166,16 @@
       "xp": 25,
       "quiz": {
         "q": "Qual a multa que a empresa paga ao empregado por atraso no pagamento das verbas rescisórias?",
-        "o": ["10% do salário", "Multa de um salário (Art. 477 §8º CLT)", "Não há multa", "5% sobre o valor das verbas"],
+        "o": [
+          "10% do salário",
+          "Multa de um salário (Art. 477 §8º CLT)",
+          "Não há multa",
+          "5% sobre o valor das verbas"
+        ],
         "c": 1,
         "exp": "Art. 477 §8º da CLT determina multa equivalente a um salário do empregado quando a empresa atrasa o pagamento das verbas rescisórias. Cobrável em ação trabalhista."
       }
     }
-  ]
+  ],
+  "order": 100
 }

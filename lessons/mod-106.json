@@ -13,7 +13,12 @@
       "xp": 25,
       "quiz": {
         "q": "Quais são os três componentes de uma emoção?",
-        "o": ["Pensamento, fala, escrita", "Sensação corporal, pensamento, impulso de ação", "Passado, presente, futuro", "Eu, ele, nós"],
+        "o": [
+          "Pensamento, fala, escrita",
+          "Sensação corporal, pensamento, impulso de ação",
+          "Passado, presente, futuro",
+          "Eu, ele, nós"
+        ],
         "c": 1,
         "exp": "Toda emoção combina algo no corpo, algo na mente e um impulso para agir."
       }
@@ -25,7 +30,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é o ponto mais poderoso de intervenção no ciclo da raiva?",
-        "o": ["A consequência", "A interpretação que damos ao gatilho", "A sensação corporal", "O impulso"],
+        "o": [
+          "A consequência",
+          "A interpretação que damos ao gatilho",
+          "A sensação corporal",
+          "O impulso"
+        ],
         "c": 1,
         "exp": "A interpretação (passo 2) determina toda a sequência. Mudar a leitura muda a emoção e a ação."
       }
@@ -37,7 +47,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual a diferença entre medo e ansiedade?",
-        "o": ["Não há diferença", "Medo responde a ameaça real e presente; ansiedade a ameaça imaginada ou futura", "Medo é dos homens; ansiedade das mulheres", "Medo é racional; ansiedade é emocional"],
+        "o": [
+          "Não há diferença",
+          "Medo responde a ameaça real e presente; ansiedade a ameaça imaginada ou futura",
+          "Medo é dos homens; ansiedade das mulheres",
+          "Medo é racional; ansiedade é emocional"
+        ],
         "c": 1,
         "exp": "Medo é resposta adaptativa a perigo concreto. Ansiedade frequentemente reage a cenários imaginados."
       }
@@ -49,7 +64,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual o critério principal que separa tristeza saudável de depressão clínica?",
-        "o": ["Intensidade do choro", "Duração persistente (2+ semanas) com prejuízo funcional", "Idade da pessoa", "Causa externa"],
+        "o": [
+          "Intensidade do choro",
+          "Duração persistente (2+ semanas) com prejuízo funcional",
+          "Idade da pessoa",
+          "Causa externa"
+        ],
         "c": 1,
         "exp": "Tristeza tem causa, é proporcional e passa. Depressão persiste por semanas, sem causa proporcional, e prejudica funcionamento."
       }
@@ -61,7 +81,12 @@
       "xp": 35,
       "quiz": {
         "q": "Em que consiste a distorção cognitiva chamada \"raciocínio emocional\"?",
-        "o": ["Pensar com frieza", "Tratar o que se sente como evidência factual (\"sinto que sou inútil, então sou inútil\")", "Reprimir emoções", "Pensar e sentir ao mesmo tempo"],
+        "o": [
+          "Pensar com frieza",
+          "Tratar o que se sente como evidência factual (\"sinto que sou inútil, então sou inútil\")",
+          "Reprimir emoções",
+          "Pensar e sentir ao mesmo tempo"
+        ],
         "c": 1,
         "exp": "Raciocínio emocional confunde sentimento com fato. Sentir algo não prova que seja verdadeiro."
       }
@@ -73,7 +98,12 @@
       "xp": 30,
       "quiz": {
         "q": "Qual é a atitude correta quando, durante a prática de mindfulness, a mente vaga?",
-        "o": ["Forçar a mente a parar de vagar", "Considerar que a prática falhou", "Notar suavemente e trazer a atenção de volta, sem julgar", "Mudar de técnica imediatamente"],
+        "o": [
+          "Forçar a mente a parar de vagar",
+          "Considerar que a prática falhou",
+          "Notar suavemente e trazer a atenção de volta, sem julgar",
+          "Mudar de técnica imediatamente"
+        ],
         "c": 2,
         "exp": "O \"vagar e voltar\" é a prática. Notar e voltar com gentileza é o que treina o foco e a regulação emocional."
       }
@@ -85,7 +115,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é a essência da dicotomia do controle de Epicteto?",
-        "o": ["Tudo é controlado pelo destino", "Distinguir o que depende de nós (opiniões, ações) do que não depende (eventos externos), e focar onde podemos agir", "Controlar todos os outros", "Não se importar com nada"],
+        "o": [
+          "Tudo é controlado pelo destino",
+          "Distinguir o que depende de nós (opiniões, ações) do que não depende (eventos externos), e focar onde podemos agir",
+          "Controlar todos os outros",
+          "Não se importar com nada"
+        ],
         "c": 1,
         "exp": "A liberdade interior estoica vem de focar energia onde se pode agir e aceitar com serenidade o que está fora de controle."
       }
@@ -97,7 +132,12 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é a tese central da logoterapia de Viktor Frankl?",
-        "o": ["Felicidade é o objetivo último da vida", "A motivação humana mais profunda é a busca de sentido, mesmo em meio ao sofrimento", "Todo sofrimento é evitável", "A vida é determinada pela infância"],
+        "o": [
+          "Felicidade é o objetivo último da vida",
+          "A motivação humana mais profunda é a busca de sentido, mesmo em meio ao sofrimento",
+          "Todo sofrimento é evitável",
+          "A vida é determinada pela infância"
+        ],
         "c": 1,
         "exp": "Para Frankl, ter um \"para quê\" suporta quase qualquer \"como\". Sentido é mais fundamental que prazer ou poder."
       }
@@ -109,7 +149,12 @@
       "xp": 35,
       "quiz": {
         "q": "Segundo o Estudo de Harvard sobre Desenvolvimento Adulto, qual é o melhor preditor de saúde mental e física na velhice?",
-        "o": ["Renda alta", "Relacionamentos de qualidade", "Genética", "Fama"],
+        "o": [
+          "Renda alta",
+          "Relacionamentos de qualidade",
+          "Genética",
+          "Fama"
+        ],
         "c": 1,
         "exp": "O estudo mais longo já feito sobre felicidade humana mostra que conexão social profunda é mais preditiva do que dinheiro, fama ou herança genética."
       }
@@ -121,10 +166,16 @@
       "xp": 35,
       "quiz": {
         "q": "Qual é o telefone gratuito 24h para apoio emocional e prevenção do suicídio no Brasil?",
-        "o": ["192", "190", "188 (CVV)", "100"],
+        "o": [
+          "192",
+          "190",
+          "188 (CVV)",
+          "100"
+        ],
         "c": 2,
         "exp": "CVV — Centro de Valorização da Vida — atende pelo 188, gratuito, sigiloso, 24 horas."
       }
     }
-  ]
+  ],
+  "order": 106
 }
